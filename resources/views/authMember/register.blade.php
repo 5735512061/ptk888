@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('ลงทะเบียนสมาชิก') }}</div>
 
                 <div class="card-body">
-                    <form action="{{url('/member/register-member')}}" enctype="multipart/form-data" method="post">@csrf
+                    <form action="{{url('/register-member')}}" enctype="multipart/form-data" method="post">@csrf
                         @csrf
 
                         <div class="form-group row">
@@ -88,11 +88,10 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-                        <input type="hidden" name="admin_id" value="{{Auth::guard('admin')->id()}}">
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('ลงทะเบียนสมาชิกร้านค้า') }}
+                                    {{ __('ลงทะเบียนสมาชิก') }}
                                 </button>
                             </div>
                         </div>

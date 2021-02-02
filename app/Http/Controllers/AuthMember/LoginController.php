@@ -16,17 +16,17 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-          'username' => 'required',
+          'member_id' => 'required',
           'password' => 'required|min:6'
         ],[
-          'username.required' => "กรุณากรอกชื่อผู้ใช้",
+          'member_id.required' => "กรุณากรอกชื่อผู้ใช้",
           'password.required' => "กรุณากรอกรหัสผ่าน",
           'password.min' => "กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร",
         ]);
 
 
         $credential = [
-          'username' => $request->username,
+          'member_id' => $request->member_id,
           'password' =>$request->password
         ];
 
@@ -34,7 +34,7 @@ class LoginController extends Controller
          return redirect()->intended(route('member.home'));
        }
        
-       return redirect()->back()->withInput($request->only('username','remember'));
+       return redirect()->back()->withInput($request->only('member_id','remember'));
     }
 
     protected function validateLogin(Request $request)

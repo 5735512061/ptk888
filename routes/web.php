@@ -11,6 +11,11 @@ Route::get('/clear-cache', function() {
 Route::get('/register','Auth\RegisterController@ShowRegisterForm');
 Route::post('/register','Auth\RegisterController@register');
 
+// ลงทะเบียนสมาชิก
+Route::get('/register-member','AuthMember\RegisterController@ShowRegisterFormMember');
+Route::post('/register-member','AuthMember\RegisterController@registerMember');
+
+// เว็บไซต์ www.ptk888.com
 Route::group(['prefix' => 'ptk888'], function(){
     Route::get('/', 'Frontend\PtkController@index');
 });
