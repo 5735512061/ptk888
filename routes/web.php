@@ -50,3 +50,13 @@ Route::group(['prefix' => 'store'], function(){
 
     Route::get('/', 'Backend\StoreController@index')->name('store.home');
 });
+
+// ลูกค้า
+Route::group(['prefix' => 'member'], function(){
+    // เข้าสู่ระบบสมาชิกร้านค้า
+    Route::get('/login','AuthMember\LoginController@ShowLoginForm')->name('member.login');
+    Route::post('/login','AuthMember\LoginController@login')->name('member.login.submit');
+    Route::post('/logout', 'AuthMember\LoginController@logout')->name('member.logout');
+
+    Route::get('/', 'Frontend\MemberController@index')->name('member.home');
+});
