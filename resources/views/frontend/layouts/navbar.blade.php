@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-</div> tetttt
+</div>
 <!-- Top bar End -->
 
 <!-- Nav Bar Start -->
