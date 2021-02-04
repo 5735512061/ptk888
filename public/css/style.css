@@ -3,7 +3,7 @@
 /**********************************/
 body {
     color: #353535;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Mitr';
     font-weight: 400;
     background: #f3f6ff;
 }
@@ -21,12 +21,12 @@ a:focus {
 }
 
 h1 {
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Mitr';
     font-weight: 900;
 }
 
 h2 {
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Mitr';
     font-weight: 700;
 }
 
@@ -165,7 +165,7 @@ h2 {
 
 .normal-slider .slick-prev::before,
 .normal-slider .slick-next::before {
-    font-family: "Font Awesome 5 Free";
+    font-family: 'Mitr';
     font-weight: 900;
     font-size: 30px;
     color: #ffffff;
@@ -201,10 +201,10 @@ h2 {
 /********** Top Bar CSS ***********/
 /**********************************/
 .top-bar {
-    padding: 3px 0;
-    font-size: 14px;
+    padding: 20px 0;
+    font-size: 18px;
     color: #FF6F61;
-    background: #000000;
+    background: #fff;
 }
 
 .top-bar i {
@@ -247,7 +247,7 @@ h2 {
 
 .nav .navbar {
     height: 100%;
-    padding: 0;
+    padding: 20px;
 }
 
 .nav .dropdown-menu {
@@ -265,7 +265,7 @@ h2 {
 @media (min-width: 768px) {
     .nav,
     .nav .navbar {
-        background: #FF6F61 !important;
+        background: #008cff !important;
     }
     
     .nav .navbar-brand {
@@ -274,7 +274,7 @@ h2 {
     
     .nav .navbar-dark a.nav-link {
         color: #ffffff;
-        font-size: 14px;
+        font-size: 16px;
         text-transform: uppercase;
     }
     
@@ -482,7 +482,7 @@ h2 {
     text-align: center;
     color: #ffffff;
     font-size: 22px;
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Mitr';
     font-weight: 700;
 }
 
@@ -885,7 +885,7 @@ h2 {
 
 .product .slick-prev::before,
 .product .slick-next::before {
-    font-family: "Font Awesome 5 Free";
+    font-family: 'Mitr';
     font-size: 18px;
     font-weight: 900;
     color: #FF6F61;
@@ -1212,7 +1212,7 @@ h2 {
 
 .product-detail .tab-content ul li::before {
     content: '\f061';
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Mitr';
     font-weight: 900;
     padding-right: 5px;
 }
@@ -1365,7 +1365,7 @@ h2 {
 
 .sidebar-widget.brands ul li a::before {
     content: '\f105';
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Mitr';
     font-weight: 900;
     padding-right: 5px;
 }
@@ -1376,7 +1376,7 @@ h2 {
 
 .sidebar-widget.brands ul li a:hover::before {
     content: '\f101';
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Mitr';
     font-weight: 900;
 }
 
@@ -1453,7 +1453,7 @@ h2 {
 }
 
 .cart-page .table .thead-dark th {
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Mitr';
     font-size: 18px;
     font-weight: 700;
     color: #353535;
@@ -1644,7 +1644,7 @@ h2 {
 }
 
 .wishlist-page .table .thead-dark th {
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Mitr';
     font-size: 18px;
     font-weight: 700;
     color: #353535;
@@ -1793,7 +1793,7 @@ h2 {
     width: 100%;
     height: 50px;
     padding: 2px 10px;
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Mitr';
     font-weight: 700;
     font-size: 25px;
     text-align: center;
@@ -2041,7 +2041,7 @@ h2 {
 
 .brand .slick-prev::before,
 .brand .slick-next::before {
-    font-family: "Font Awesome 5 Free";
+    font-family: 'Mitr';
     font-weight: 900;
     font-size: 30px;
     color: #000000;
@@ -2254,7 +2254,7 @@ h2 {
 
 .footer .footer-widget ul li a::before {
     content: '\f105';
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Mitr';
     font-weight: 900;
     padding-right: 5px;
 }
@@ -2265,7 +2265,7 @@ h2 {
 
 .footer .footer-widget ul li a:hover::before {
     content: '\f101';
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Mitr';
     font-weight: 900;
 }
 

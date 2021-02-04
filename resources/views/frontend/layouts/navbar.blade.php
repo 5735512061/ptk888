@@ -2,13 +2,9 @@
 <div class="top-bar">
     <div class="container-fluid">
         <div class="row">
+            <div class="col-sm-6"></div>
             <div class="col-sm-6">
-                <i class="fa fa-envelope"></i>
-                support@email.com
-            </div>
-            <div class="col-sm-6">
-                <i class="fa fa-phone-alt"></i>
-                +012-345-6789
+                <a href="">สมัครสมาชิก</a> / <a href="">เข้าสู่ระบบ</a>
             </div>
         </div>
     </div>
@@ -26,14 +22,18 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="product-list.html" class="nav-item nav-link">Products</a>
-                    <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>
-                    <a href="cart.html" class="nav-item nav-link">Cart</a>
-                    <a href="checkout.html" class="nav-item nav-link">Checkout</a>
-                    <a href="my-account.html" class="nav-item nav-link">My Account</a>
+                    <a href="index.html" class="nav-item nav-link active">หน้าหลัก</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ผลิตภัณฑ์</a>
+                        <div class="dropdown-menu">
+                            <a href="wishlist.html" class="dropdown-item">Wishlist</a>
+                            <a href="login.html" class="dropdown-item">Login & Register</a>
+                            <a href="contact.html" class="dropdown-item">Contact Us</a>
+                        </div>
+                    </div>
+                    <a href="product-detail.html" class="nav-item nav-link">ตัวแทนจำหน่าย</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ศูนย์ช่วยเหลือ</a>
                         <div class="dropdown-menu">
                             <a href="wishlist.html" class="dropdown-item">Wishlist</a>
                             <a href="login.html" class="dropdown-item">Login & Register</a>
@@ -41,15 +41,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="navbar-nav ml-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Login</a>
-                            <a href="#" class="dropdown-item">Register</a>
-                        </div>
-                    </div>
-                </div>
+                <a href="index.html" class="nav-item nav-link">ลงทะเบียนรับประกันฟิล์ม</a>
             </div>
         </nav>
     </div>
