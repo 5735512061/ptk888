@@ -22,7 +22,7 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="index.html" class="nav-item nav-link active">หน้าหลัก</a>
+                    <a href="{{url('/ptk888')}}" class="nav-item nav-link active">หน้าหลัก</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ผลิตภัณฑ์</a>
                         <div class="dropdown-menu">
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="index.html" class="nav-item nav-link">ลงทะเบียนรับประกันฟิล์ม</a>
+                <a href="{{url('/ptk888')}}" class="nav-item nav-link">ลงทะเบียนรับประกันฟิล์ม</a>
             </div>
         </nav>
     </div>
@@ -54,7 +54,7 @@
         <div class="row align-items-center">
             <div class="col-md-3">
                 <div class="logo">
-                    <a href="index.html">
+                    <a href="{{url('/ptk888')}}">
                         <img src="img/logo.png" alt="Logo">
                     </a>
                 </div>

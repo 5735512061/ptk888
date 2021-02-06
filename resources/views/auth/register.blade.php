@@ -15,7 +15,7 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('รหัสแอดมิน') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control{{ $errors->has('admin_id') ? ' is-invalid' : '' }}" name="admin_id" value="{{ old('admin_id') }}" required autofocus>
+                                <input type="text" class="form-control{{ $errors->has('code') ? ' is-invalid' : '' }}" name="admin_id" value="{{ old('admin_id') }}" required autofocus>
 
                                 @if ($errors->has('admin_id'))
                                     <span class="invalid-feedback" role="alert">

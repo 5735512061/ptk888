@@ -64,4 +64,6 @@ Route::group(['prefix' => 'member'], function(){
     Route::post('/logout', 'AuthMember\LoginController@logout')->name('member.logout');
 
     Route::get('/', 'Frontend\MemberController@index')->name('member.home');
+    // ลงทะเบียนรับประกันฟิล์ม
+    Route::get('/register', 'Backend\MemberController@register');
 });
