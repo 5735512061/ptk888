@@ -16,8 +16,14 @@ Route::get('/register-member','AuthMember\RegisterController@ShowRegisterFormMem
 Route::post('/register-member','AuthMember\RegisterController@registerMember');
 
 // เว็บไซต์ www.ptk888.com
-Route::group(['prefix' => 'ptk888'], function(){
+Route::group(['prefix' => '/'], function(){
     Route::get('/', 'Frontend\PtkController@index');
+    Route::get('/contact-us', 'Frontend\PtkController@contactUs');
+    Route::get('/about-us', 'Frontend\PtkController@aboutUs');
+    Route::get('/faq', 'Frontend\PtkController@faq');
+    Route::get('/howto-install', 'Frontend\PtkController@howtoInstall');
+    Route::get('/warranty-information', 'Frontend\PtkController@warrantyInformation');
+    Route::get('/dealer-shop', 'Frontend\PtkController@dealerShop');
 });
 
 // แอดมิน
@@ -65,5 +71,5 @@ Route::group(['prefix' => 'member'], function(){
 
     Route::get('/', 'Frontend\MemberController@index')->name('member.home');
     // ลงทะเบียนรับประกันฟิล์ม
-    Route::get('/register', 'Backend\MemberController@register');
+    Route::get('/register-warranty', 'Backend\MemberController@registerWarranty');
 });

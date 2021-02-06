@@ -10,4 +10,28 @@ class PtkController extends Controller
     public function index() {
         return view('frontend/index');
     }
+
+    public function contactUs() {
+        return view('frontend/company/contact-us');
+    }
+
+    public function aboutUs() {
+        return view('frontend/company/about-us');
+    }
+
+    public function faq() {
+        return view('frontend/help-center/faq');
+    }
+
+    public function howtoInstall() {
+        return view('frontend/help-center/howto-install');
+    }
+
+    public function warrantyInformation() {
+        return view('frontend/help-center/warranty-information');
+    }
+
+    public function dealerShop() {
+        return view('frontend/company/dealer-shop');
+    }
 }

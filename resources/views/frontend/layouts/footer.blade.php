@@ -3,69 +3,58 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 col-md-6">
-                <div class="footer-widget">
-                    <h2>Get in Touch</h2>
-                    <div class="contact-info">
-                        <p><i class="fa fa-map-marker"></i>123 E Store, Los Angeles, USA</p>
-                        <p><i class="fa fa-envelope"></i>email@example.com</p>
-                        <p><i class="fa fa-phone"></i>+123-456-7890</p>
-                    </div>
+                <div class="logo">
+                    <a href="{{url('/')}}">
+                        <img src="img/logo.png" alt="Logo">
+                    </a>
                 </div>
             </div>
-            
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
-                    <h2>Follow Us</h2>
-                    <div class="contact-info">
-                        <div class="social">
-                            <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="footer-widget">
-                    <h2>Company Info</h2>
+                    <h2>ศูนย์ช่วยเหลือ</h2>
                     <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Condition</a></li>
+                        <li><a href="{{url('/warranty-information')}}">ข้อมูลการรับประกัน</a></li>
+                        <li><a href="{{url('/howto-install')}}">วิธีติดตั้ง</a></li>
+                        <li><a href="{{url('/faq')}}">FAQ</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
-                    <h2>Purchase Info</h2>
+                    <h2>ผลิตภัณฑ์</h2>
                     <ul>
-                        <li><a href="#">Pyament Policy</a></li>
-                        <li><a href="#">Shipping Policy</a></li>
-                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">ฟิล์มมือถือ</a></li>
+                        <li><a href="#">ฟิล์มโน๊ตบุ๊ค</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget">
+                    <h2>ตัวแทนจำหน่าย</h2>
+                    <ul>
+                        <li><a href="{{url('/dealer-shop')}}">ค้นหาร้านค้าตัวแทนจำหน่าย</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         
         <div class="row payment align-items-center">
+            <div class="col-md-4"></div>
             <div class="col-md-6">
                 <div class="payment-method">
-                    <h2>We Accept:</h2>
-                    <img src="img/payment-method.png"/>
+                    <h2>ติดต่อเรา</h2>
+                    <div class="social">
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-line"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa fa-envelope"></i></a>
+                        <a href=""><i class="fab fa fa-phone"></i></a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="payment-security">
-                    <h2>Secured By:</h2>
-                    <img src="img/godaddy.svg"/>
-                    <img src="img/norton.svg"/>
-                    <img src="img/ssl.svg"/>
-                </div>
-            </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 </div>

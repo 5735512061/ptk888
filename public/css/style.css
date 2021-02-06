@@ -201,7 +201,7 @@ h2 {
 /********** Top Bar CSS ***********/
 /**********************************/
 .top-bar {
-    padding: 20px 0;
+    padding: 20px 17px;
     font-size: 18px;
     color: #FF6F61;
     background: #fff;
@@ -247,7 +247,7 @@ h2 {
 
 .nav .navbar {
     height: 100%;
-    padding: 20px;
+    padding: 10px;
 }
 
 .nav .dropdown-menu {
@@ -310,7 +310,7 @@ h2 {
 .bottom-bar {
     padding: 15px 0;
     background: #ffffff;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
 }
 
 .bottom-bar .logo {

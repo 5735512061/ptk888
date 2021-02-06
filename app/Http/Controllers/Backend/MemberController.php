@@ -7,11 +7,11 @@ use App\Http\Controllers\Controller;
 
 class MemberController extends Controller
 {
-    public function __construct(){
-        $this->middleware('auth:member');
-    }
+    // public function __construct(){
+    //     $this->middleware('auth:member');
+    // }
 
-    public function register() {
-        return view();
+    public function registerWarranty() {
+        return view('backend/customer/register-warranty');
     }
 }
