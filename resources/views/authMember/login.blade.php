@@ -1,13 +1,13 @@
 @extends("/frontend/layouts/template")
 
 @section('content')
-<div class="container" style="margin-top: 3rem; margin-bottom: 3rem;">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
+<!-- Login Start -->
+<div class="login">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="login-form">
+                    <h3>เข้าสู่ระบบสมาชิก</h3><hr>
                     <form action="{{url('/member/login')}}" enctype="multipart/form-data" method="post">@csrf
                         @csrf
 
@@ -41,7 +41,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn">
                                     {{ __('เข้าสู่ระบบสมาชิก') }}
                                 </button>
                             </div>
@@ -52,4 +52,5 @@
         </div>
     </div>
 </div>
+<!-- Login End -->
 @endsection

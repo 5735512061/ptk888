@@ -14,9 +14,9 @@
 		@include("/backend/layouts/css")
 	</head>
 	<body>
-		@include("/frontend/layouts/navbar/navbar-seller")
+		@include("/backend/layouts/navbar/navbar-seller")
         @yield("content")
-        @include("/frontend/layouts/footer/footer-seller")
+        @include("/backend/layouts/footer/footer-seller")
 		@include("/backend/layouts/js")
 	</body>
 </html>

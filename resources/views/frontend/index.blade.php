@@ -1,38 +1,38 @@
-@extends("/frontend/layouts/template")
+@extends("/frontend/layouts/template/template-index")
 
 @section("content")
-        <!-- Main Slider Start -->
+        <!-- Main Slider Start --><div class="container-fluid">
         <div class="header" style="background-color: #fff;">
-            <div class="container-fluid">
+            
                 <div class="row">
                     <div class="col-md-12">
                         <div class="header-slider normal-slider">
                             <div class="header-slider-item">
-                                <img src="img/slider-1.jpg" alt="Slider Image" />
+                                <img src="{{url('img/slider-1.jpg')}}"/>
                             </div>
                             <div class="header-slider-item">
-                                <img src="img/slider-2.jpg" alt="Slider Image" />
+                                <img src="{{url('img/slider-2.jpg')}}" alt="Slider Image" />
                             </div>
                             <div class="header-slider-item">
-                                <img src="img/slider-3.jpg" alt="Slider Image" />
+                                <img src="{{url('img/slider-3.jpg')}}" alt="Slider Image" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div><br><br>
+        </div>
         <!-- Main Slider End -->      
         
         <!-- Brand Start -->
-        <div class="brand">
-            <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="brand">
                 <div class="brand-slider">
-                    <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-3.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-4.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-5.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
+                    <div class="brand-item"><img src="{{url('img/brand-1.png')}}" alt=""></div>
+                    <div class="brand-item"><img src="{{url('img/brand-2.png')}}" alt=""></div>
+                    <div class="brand-item"><img src="{{url('img/brand-3.png')}}" alt=""></div>
+                    <div class="brand-item"><img src="{{url('img/brand-4.png')}}" alt=""></div>
+                    <div class="brand-item"><img src="{{url('img/brand-5.png')}}" alt=""></div>
+                    <div class="brand-item"><img src="{{url('img/brand-6.png')}}" alt=""></div>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="product-image">
                                 <a href="product-detail.html">
-                                    <img src="img/product-1.jpg" alt="Product Image">
+                                    <img src="{{url('img/product-1.jpg')}}" alt="Product Image">
                                 </a>
                             </div>
                             <div class="product-price">
@@ -166,8 +166,8 @@
         <!-- Featured Product End -->       
         
         <!-- Newsletter Start -->
-        <div class="newsletter">
-            <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="newsletter">
                 <div class="row">
                     <div class="col-md-12">
                         <center><h1>ลงทะเบียนรับประกันฟิล์ม</h1></center>

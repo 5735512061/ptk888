@@ -1,5 +1,5 @@
 <!-- Footer Start -->
-<div class="footer">
+<div class="footer" style="color: #fff;">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 col-md-6">
@@ -62,7 +62,7 @@
 
 <!-- Footer Bottom Start -->
 <div class="footer-bottom">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 copyright">
                 <p>Copyright &copy; All Rights Reserved</p>

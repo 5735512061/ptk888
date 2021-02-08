@@ -11,12 +11,12 @@
 		<style>
 			@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200&display=swap');
 		</style>
-		@include("/backend/layouts/css")
+		@include("/frontend/layouts/css")
 	</head>
 	<body>
-		@include("/backend/layouts/navbar/navbar-admin")
+		@include("/frontend/layouts/navbar/navbar")
         @yield("content")
-        @include("/backend/layouts/footer/footer-admin")
-		@include("/backend/layouts/js")
+        @include("/frontend/layouts/footer")
+		@include("/frontend/layouts/js")
 	</body>
 </html>

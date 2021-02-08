@@ -1,4 +1,4 @@
-@extends("/frontend/layouts/template")
+@extends("/frontend/layouts/template/template")
 
 @section("content")
 

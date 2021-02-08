@@ -50,8 +50,8 @@
 <!-- Nav Bar End -->      
 
 <!-- Bottom Bar Start -->
-<div class="bottom-bar">
-    <div class="container-fluid">
+<div class="container-fluid">
+    <div class="bottom-bar">
         <div class="row align-items-center">
             <div class="col-md-3">
                 <div class="logo">
@@ -66,8 +66,12 @@
                     <button><i class="fa fa-search"></i></button>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="user">
+                    <a href="wishlist.html" class="btn wishlist">
+                        <i class="fa fa-heart"></i>
+                        <span>(0)</span>
+                    </a>
                     <a href="cart.html" class="btn cart">
                         <i class="fa fa-shopping-cart"></i>
                         <span>(0)</span>
