@@ -16,7 +16,6 @@
 	<body>
 		@include("/backend/layouts/navbar/navbar-admin")
         @yield("content")
-        @include("/backend/layouts/footer/footer-admin")
 		@include("/backend/layouts/js")
 	</body>
 </html>
