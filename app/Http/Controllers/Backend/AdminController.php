@@ -11,7 +11,11 @@ class AdminController extends Controller
         $this->middleware('auth:admin');
     } 
 
-    public function index() {
+    public function index(){
         return view('backend/admin/index');
+    }
+
+    public function manageImageWebsite(){
+        return view('backend/admin/manageImageWebsite/manage-image-website');
     }
 }

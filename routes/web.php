@@ -40,6 +40,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/register-store','AuthStore\RegisterController@registerStore');
 
     Route::get('/home', 'Backend\AdminController@index')->name('admin.home');
+    Route::get('/manage-image-website', 'Backend\AdminController@manageImageWebsite');
+    Route::post('/upload-image-website', 'Backend\AdminController@UpdateImageWebsite');
 });
 
 // พนักงานขาย
