@@ -11,10 +11,10 @@
 		<style>
 			@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200&display=swap');
 		</style>
-		@include("/backend/layouts/css")
+		@include("/backend/layouts/css/css-login")
 	</head>
 	<body>
         @yield("content")
-		@include("/backend/layouts/js")
+		@include("/backend/layouts/js/js-login")
 	</body>
 </html>

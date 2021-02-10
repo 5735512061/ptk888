@@ -39,7 +39,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/register-store','AuthStore\RegisterController@ShowRegisterFormStore');
     Route::post('/register-store','AuthStore\RegisterController@registerStore');
 
-    Route::get('/', 'Backend\AdminController@index')->name('admin.home');
+    Route::get('/home', 'Backend\AdminController@index')->name('admin.home');
 });
 
 // พนักงานขาย
