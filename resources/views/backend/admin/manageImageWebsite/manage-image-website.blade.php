@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Basic Form Inputs</h5>
+                            <h5>อัพโหลดรูปภาพหน้าเว็บไซต์</h5>
                             <div class="card-header-right">
                                 <ul class="list-unstyled card-option">
                                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -20,39 +20,38 @@
                             </div>
                         </div>
                         <div class="card-block">
-                            <form action="">
+                            <form action="{{url('/admin/upload-image-website')}}" enctype="multipart/form-data" method="post">@csrf
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Simple Input</label>
+                                    <label class="col-sm-2 col-form-label">ประเภทรูปภาพ</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Select Box</label>
-                                    <div class="col-sm-10">
-                                        <select name="select" class="form-control">
-                                            <option value="opt1">Select One Value Only</option>
-                                            <option value="opt2">Type 2</option>
-                                            <option value="opt3">Type 3</option>
-                                            <option value="opt4">Type 4</option>
-                                            <option value="opt5">Type 5</option>
-                                            <option value="opt6">Type 6</option>
-                                            <option value="opt7">Type 7</option>
-                                            <option value="opt8">Type 8</option>
+                                        <select name="image_type" class="form-control">
+                                            <option value="logo">รูปภาพโลโก้</option>
+                                            <option value="slide_main">รูปภาพสไลด์หลัก หน้าแรก</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Upload File</label>
+                                    <label class="col-sm-2 col-form-label">อัพโหลดรูปภาพ</label>
                                     <div class="col-sm-10">
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" name="image">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Textarea</label>
+                                    <label class="col-sm-2 col-form-label">หัวข้อคำอธิบาย</label>
                                     <div class="col-sm-10">
-                                        <textarea rows="5" cols="5" class="form-control"
-                                        placeholder="Default textarea"></textarea>
+                                        <input type="text" class="form-control" placeholder="หัวข้อคำอธิบาย (ถ้ามี)" name="heading_detail">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">รายละเอียดเพิ่มเติม</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="detail" rows="5" cols="5" class="form-control"
+                                        placeholder="รายละเอียดเพิ่มเติม (ถ้ามี)"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-0">
+                                    <div class="col-md-4 offset-md-2">
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพโหลดรูปภาพ</button>
                                     </div>
                                 </div>
                             </form>
@@ -63,7 +62,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5>Hover Table</h5>
+                    <h5>รายละเอียดรูปภาพหน้าเว็บไซต์</h5>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -80,31 +79,31 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
+                                    <th>รูปภาพ</th>
+                                    <th>ประเภทรูปภาพ</th>
+                                    <th>หัวข้อคำอธิบาย</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                @foreach ($images as $image => $value)
+                                    <tr>
+                                        <th scope="row">{{$NUM_PAGE*($page-1) + $image+1}}</th>
+                                        <td><img src="{{url('/image_upload/image_website')}}/{{$value->image}}" class="img-responsive" height="50px;"></td>
+                                        <td>{{$value->image_type}}</td>
+                                        <td>{{$value->heading_detail}}</td>
+                                        <td>       
+                                            <a href="{{url('/admin/edit-image')}}/{{$value->id}}">
+                                                <i class="fa fa-pencil-square-o" style="color:blue;"></i>
+                                            </a>        
+                                            <a href="{{url('/admin/delete-image/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
+                                                <i class="fa fa-trash" style="color:red;"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
+                            {{$images->links()}}
                         </table>
                     </div>
                 </div>

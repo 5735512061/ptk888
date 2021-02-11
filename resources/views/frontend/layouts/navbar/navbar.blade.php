@@ -39,6 +39,7 @@
                             <a href="{{url('/faq')}}" class="dropdown-item">FAQ</a>
                         </div>
                     </div>
+                    <a href="{{url('#')}}" class="nav-item nav-link">โปรโมชั่น</a>
                     <a href="{{url('/about-us')}}" class="nav-item nav-link">เกี่ยวกับเรา</a>
                     <a href="{{url('/contact-us')}}" class="nav-item nav-link">ติดต่อเรา</a>
                 </div>

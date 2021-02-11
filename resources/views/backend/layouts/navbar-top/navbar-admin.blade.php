@@ -55,7 +55,7 @@
                             <div class="media">
                                 <img class="d-flex align-self-center img-radius" src="{{ asset('/admin/assets/images/avatar-2.jpg')}}" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="notification-user">John Doe</h5>
+                                    <h5 class="notification-user">{{Auth::guard('admin')->user()->name}}</h5>
                                     <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
                                     <span class="notification-time">30 minutes ago</span>
                                 </div>
@@ -86,33 +86,28 @@
                 <li class="user-profile header-notification">
                     <a href="#!" class="waves-effect waves-light">
                         <img src="{{ asset('/admin/assets/images/avatar-4.jpg')}}" class="img-radius" alt="User-Profile-Image">
-                        <span>John Doe</span>
+                        <span>{{Auth::guard('admin')->user()->name}} {{Auth::guard('admin')->user()->surname}}</span>
                         <i class="ti-angle-down"></i>
                     </a>
                     <ul class="show-notification profile-notification">
                         <li class="waves-effect waves-light">
                             <a href="#!">
-                                <i class="ti-settings"></i> Settings
+                                <i class="ti-settings"></i> ตั้งค่า
                             </a>
                         </li>
                         <li class="waves-effect waves-light">
                             <a href="user-profile.html">
-                                <i class="ti-user"></i> Profile
+                                <i class="ti-user"></i> ข้อมูลส่วนตัว
                             </a>
                         </li>
                         <li class="waves-effect waves-light">
                             <a href="email-inbox.html">
-                                <i class="ti-email"></i> My Messages
-                            </a>
-                        </li>
-                        <li class="waves-effect waves-light">
-                            <a href="auth-lock-screen.html">
-                                <i class="ti-lock"></i> Lock Screen
+                                <i class="ti-email"></i> ข้อความแจ้งเตือน
                             </a>
                         </li>
                         <li class="waves-effect waves-light">
                             <a href="auth-normal-sign-in.html">
-                                <i class="ti-layout-sidebar-left"></i> Logout
+                                <i class="ti-layout-sidebar-left"></i> ออกจากระบบ
                             </a>
                         </li>
                     </ul>

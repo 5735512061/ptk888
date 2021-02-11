@@ -3,19 +3,14 @@
 @section("content")
         <!-- Main Slider Start --><div class="container-fluid">
         <div class="header" style="background-color: #fff;">
-            
                 <div class="row">
                     <div class="col-md-12">
                         <div class="header-slider normal-slider">
-                            <div class="header-slider-item">
-                                <img src="{{url('img/slider-1.jpg')}}"/>
-                            </div>
-                            <div class="header-slider-item">
-                                <img src="{{url('img/slider-2.jpg')}}" alt="Slider Image" />
-                            </div>
-                            <div class="header-slider-item">
-                                <img src="{{url('img/slider-3.jpg')}}" alt="Slider Image" />
-                            </div>
+                            @foreach ($images as $image => $value)
+                                <div class="header-slider-item">
+                                    <img src="{{url('/image_upload/image_website')}}/{{$value->image}}" class="img-responsive" width="100%"/>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

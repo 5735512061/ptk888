@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\model\ImageWebsite;
 
 class PtkController extends Controller
 {
     public function index() {
-        return view('frontend/index');
+        $images = ImageWebsite::get();
+        return view('frontend/index')->with('images',$images);
     }
 
     public function contactUs() {
