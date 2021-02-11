@@ -19,15 +19,17 @@
         <!-- Main Slider End -->      
         
         <!-- Brand Start -->
+        @php
+            $brands = DB::table('brands')->get();
+        @endphp
         <div class="container-fluid">
             <div class="brand">
                 <div class="brand-slider">
-                    <div class="brand-item"><img src="{{url('img/brand-1.png')}}" alt=""></div>
-                    <div class="brand-item"><img src="{{url('img/brand-2.png')}}" alt=""></div>
-                    <div class="brand-item"><img src="{{url('img/brand-3.png')}}" alt=""></div>
-                    <div class="brand-item"><img src="{{url('img/brand-4.png')}}" alt=""></div>
-                    <div class="brand-item"><img src="{{url('img/brand-5.png')}}" alt=""></div>
-                    <div class="brand-item"><img src="{{url('img/brand-6.png')}}" alt=""></div>
+                    @foreach ($brands as $brand => $value)
+                        <div class="brand-item">
+                            <img src="{{url('/image_upload/image_brand')}}/{{$value->image}}" class="img-responsive" width="10%">
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

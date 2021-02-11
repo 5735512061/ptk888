@@ -24,6 +24,7 @@ Route::group(['prefix' => '/'], function(){
     Route::get('/howto-install', 'Frontend\PtkController@howtoInstall');
     Route::get('/warranty-information', 'Frontend\PtkController@warrantyInformation');
     Route::get('/dealer-shop', 'Frontend\PtkController@dealerShop');
+    Route::get('/category/{category}','Frontend\PtkController@category');
 });
 
 // แอดมิน
@@ -32,16 +33,24 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/login','Auth\LoginController@ShowLoginForm')->name('admin.login');
     Route::post('/login','Auth\LoginController@login')->name('admin.login.submit');
     Route::post('/logout', 'Auth\LoginController@logout')->name('admin.logout');
+    // หน้าเว็บหลักของแอดมิน
+    Route::get('/home', 'Backend\AdminController@index')->name('admin.home');
     // ลงทะเบียนพนักงานขาย
     Route::get('/register-seller','AuthSeller\RegisterController@ShowRegisterFormSeller');
     Route::post('/register-seller','AuthSeller\RegisterController@registerSeller');
     // ลงทะเบียนสมาชิกร้านค้า
     Route::get('/register-store','AuthStore\RegisterController@ShowRegisterFormStore');
     Route::post('/register-store','AuthStore\RegisterController@registerStore');
-
-    Route::get('/home', 'Backend\AdminController@index')->name('admin.home');
+    // จัดการรุปภาพหน้าเว็บไซต์
     Route::get('/manage-image-website', 'Backend\AdminController@manageImageWebsite');
-    Route::post('/upload-image-website', 'Backend\AdminController@UpdateImageWebsite');
+    Route::post('/upload-image-website', 'Backend\AdminController@UploadImageWebsite');
+    // จัดการประเภทผลิตภัณฑ์
+    Route::get('/manage-category', 'Backend\AdminController@manageCategory');
+    Route::post('/upload-category', 'Backend\AdminController@UploadCategory');
+    // จัดการยี่ห้อผลิตภัณฑ์
+    Route::get('/manage-brand', 'Backend\AdminController@manageBrand');
+    Route::post('/upload-brand', 'Backend\AdminController@UploadBrand');
+
 });
 
 // พนักงานขาย

@@ -19,27 +19,15 @@
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            @php
-                $categorys = DB::table('categorys')->get();
-                $brands = DB::table('brands')->get();
-            @endphp
+
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
                     <a href="{{url('/')}}" class="nav-item nav-link active">หน้าหลัก</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ผลิตภัณฑ์</a>
                         <div class="dropdown-menu">
-                            @foreach ($categorys as $category => $value)
-                                <a href="{{url('/category')}}/{{$value->category_eng}}" class="dropdown-item">{{$value->category}}</a>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ยี่ห้อสินค้า</a>
-                        <div class="dropdown-menu">
-                            @foreach ($brands as $brand => $value)
-                                <a href="{{url('/category')}}/{{$value->brand_eng}}" class="dropdown-item">{{$value->brand_eng}}</a>
-                            @endforeach
+                            <a href="{{url('/product/dealer-shop')}}" class="dropdown-item">ฟิล์มมือถือ</a>
+                            <a href="{{url('/product/dealer-shop')}}" class="dropdown-item">ฟิล์มโน๊ตบุ๊ค</a>
                         </div>
                     </div>
                     <a href="{{url('/dealer-shop')}}" class="nav-item nav-link">ตัวแทนจำหน่าย</a>
@@ -60,39 +48,4 @@
         </nav>
     </div>
 </div>
-<!-- Nav Bar End -->      
-
-<!-- Bottom Bar Start -->
-
-<div class="bottom-bar">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-md-3">
-                <div class="logo">
-                    <a href="{{url('/')}}">
-                        <img src="img/logo.png" alt="Logo">
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="search">
-                    <input type="text" placeholder="Search">
-                    <button><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="user">
-                    <a href="wishlist.html" class="btn wishlist">
-                        <i class="fa fa-heart"></i>
-                        <span>(0)</span>
-                    </a>
-                    <a href="cart.html" class="btn cart">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span>(0)</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Bottom Bar End -->    
+<!-- Nav Bar End -->       

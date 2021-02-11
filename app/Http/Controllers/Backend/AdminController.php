@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\model\ImageWebsite;
+use App\model\Category;
+use App\model\Brand;
 
 class AdminController extends Controller
 {
@@ -26,7 +28,7 @@ class AdminController extends Controller
                                                                             ->with('images',$images);
     }
 
-    public function updateImageWebsite(Request $request){
+    public function uploadImageWebsite(Request $request){
         $imageUpload = $request->all();
         $imageUpload = ImageWebsite::create($imageUpload);
         if($request->hasFile('image')){
@@ -34,6 +36,46 @@ class AdminController extends Controller
             $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
             $image->move('image_upload/image_website/', $filename);
             $path = 'image_upload/image_website/'.$filename;
+            $imageUpload->image = $filename;
+            $imageUpload->save();
+        }
+        return back();
+    }
+
+    public function manageCategory(Request $request){
+        $NUM_PAGE = 10;
+        $categorys = Category::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageCategory/manage-category')->with('NUM_PAGE',$NUM_PAGE)
+                                                                   ->with('page',$page)
+                                                                   ->with('categorys',$categorys);
+    }
+
+    public function uploadCategory(Request $request){
+        $category = $request->all();
+        $category = Category::create($category);
+        return back();
+    }
+
+    public function manageBrand(Request $request){
+        $NUM_PAGE = 10;
+        $brands = Brand::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageBrand/manage-brand')->with('NUM_PAGE',$NUM_PAGE)
+                                                             ->with('page',$page)
+                                                             ->with('brands',$brands);
+    }
+
+    public function uploadBrand(Request $request){
+        $imageUpload = $request->all();
+        $imageUpload = Brand::create($imageUpload);
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+            $image->move('image_upload/image_brand/', $filename);
+            $path = 'image_upload/image_brand/'.$filename;
             $imageUpload->image = $filename;
             $imageUpload->save();
         }

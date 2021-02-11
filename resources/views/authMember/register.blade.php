@@ -1,4 +1,4 @@
-@extends("/frontend/layouts/template")
+@extends("/frontend/layouts/template/template-login")
 
 @section('content')
 <!-- Login Start -->
