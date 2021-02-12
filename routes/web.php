@@ -51,6 +51,10 @@ Route::group(['prefix' => 'admin'], function(){
     // จัดการยี่ห้อผลิตภัณฑ์
     Route::get('/manage-brand', 'Backend\AdminController@manageBrand');
     Route::post('/upload-brand', 'Backend\AdminController@UploadBrand');
+    // จัดการคลังสินค้า
+    Route::get('/upload-product-form', 'Backend\AdminController@uploadProductForm');
+    Route::post('/upload-product', 'Backend\AdminController@uploadProduct');
+    Route::get('/list-product', 'Backend\AdminController@listProduct');
 
 });
 

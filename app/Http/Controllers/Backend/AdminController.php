@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\model\ImageWebsite;
 use App\model\Category;
 use App\model\Brand;
+use App\model\Product;
+use App\model\ImageProduct;
+
 use App\Member;
 
 class AdminController extends Controller
@@ -87,5 +91,53 @@ class AdminController extends Controller
             $imageUpload->save();
         }
         return back();
+    }
+
+    public function uploadProductForm(Request $request){
+        $NUM_PAGE = 10;
+        $products = Product::paginate($NUM_PAGE);
+        $categorys = Category::get();
+        $brands = Brand::get();
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageProduct/upload-product-form')->with('NUM_PAGE',$NUM_PAGE)
+                                                                      ->with('page',$page)
+                                                                      ->with('products',$products)
+                                                                      ->with('categorys',$categorys)
+                                                                      ->with('brands',$brands);
+    }
+
+    public function uploadProduct(Request $request){
+        $product = $request->all();
+        $product = Product::create($product);
+        $product_id = Product::orderBy('id','desc')->value('id');
+        $image=array();
+        if($files=$request->file('image')){
+            foreach($files as $file){
+                $filename = md5(($file->getClientOriginalName(). time()) . time()) . "_o." . $file->getClientOriginalExtension();
+                $file->move('image_upload/image_product/', $filename);
+                $path = 'image_upload/image_product/'.$filename;
+                $image[]=$filename;
+            }
+        }
+
+        for ($i=0; $i < count($image) ; $i++) { 
+            $imageUpload = new ImageProduct;
+            $imageUpload->product_id = $product_id;
+            $imageUpload->image = $image[$i];
+            $imageUpload->save();
+        }
+
+        return redirect()->action('Backend\\AdminController@listProduct');
+    }
+
+    public function listProduct(Request $request){
+        $NUM_PAGE = 10;
+        $products = Product::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageProduct/list-product')->with('NUM_PAGE',$NUM_PAGE)
+                                                               ->with('page',$page)
+                                                               ->with('products',$products);
     }
 }

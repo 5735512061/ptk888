@@ -96,20 +96,28 @@
                             </a>
                         </li>
                         <li class="waves-effect waves-light">
-                            <a href="user-profile.html">
+                            <a href="#">
                                 <i class="ti-user"></i> ข้อมูลส่วนตัว
                             </a>
                         </li>
                         <li class="waves-effect waves-light">
-                            <a href="email-inbox.html">
-                                <i class="ti-email"></i> ข้อความแจ้งเตือน
+                            <a href="#">
+                                <i class="ti-bell"></i> ข้อความแจ้งเตือน
                             </a>
                         </li>
-                        <li class="waves-effect waves-light">
-                            <a href="auth-normal-sign-in.html">
-                                <i class="ti-layout-sidebar-left"></i> ออกจากระบบ
-                            </a>
-                        </li>
+                        @auth
+                            <li class="waves-effect waves-light">
+                                <a href="{{ route('admin.logout') }}" 
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    <i class="ti-lock"></i>
+                                    ออกจากระบบ
+                                </a>
+                                <form id="logout-form" action="{{ 'App\Admin' == Auth::getProvider()->getModel() ? route('admin.logout') : route('admin.logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        @endauth
                     </ul>
                 </li>
             </ul>
