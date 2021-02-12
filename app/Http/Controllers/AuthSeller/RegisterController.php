@@ -9,8 +9,14 @@ use App\Seller;
 
 class RegisterController extends Controller
 {
-    public function ShowRegisterFormSeller(){
-        return view('authSeller/register');
+    public function manageSeller(Request $request){
+        $NUM_PAGE = 10;
+        $sellers = Seller::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('authSeller/register')->with('NUM_PAGE',$NUM_PAGE)
+                                          ->with('page',$page)
+                                          ->with('sellers',$sellers);
     }
 
     public function registerSeller(Request $request) {

@@ -4,8 +4,7 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="page-header-title" style="text-align: center;">
-                    <h5 class="m-b-10">เข้าสู่ระบบในสถานะผู้ดูแลระบบ</h5>
-                    <p class="m-b-0">PTK888</p>
+                    <h1>PTK888</h1>
                 </div>
             </div>
         </div>

@@ -147,7 +147,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5>Hover Table</h5>
+                    <h5>ข้อมูลสมาชิกร้านค้า</h5>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -164,32 +164,40 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
+                                    <th>รหัสสมาชิก</th>
+                                    <th>ชื่อร้านค้า</th>
+                                    <th>เบอร์โทรศัพท์</th>
+                                    <th>บทบาท</th>
+                                    <th>สถานะ</th>
+                                    <th>ชื่อเข้าใช้งาน</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                @foreach ($members as $member => $value)
+                                    <tr>
+                                        <th scope="row">{{$NUM_PAGE*($page-1) + $member+1}}</th>
+                                        <td>{{$value->store_id}}</td>
+                                        <td>{{$value->name}}</td>
+                                        <td>{{$value->phone}}</td>
+                                        <td>{{$value->role}}</td>
+                                        <td>{{$value->status}}</td>
+                                        <td>{{$value->username}}</td>
+                                        <td>       
+                                            <a href="{{url('/admin/edit-image')}}/{{$value->id}}">
+                                                <i class="fa fa-pencil-square-o" style="color:blue;"></i>
+                                            </a>        
+                                            <a href="{{url('/admin/delete-image/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
+                                                <i class="fa fa-trash" style="color:red;"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        <div class="text-right m-r-20">
+                            {{$members->links()}}
+                        </div>
                     </div>
                 </div>
             </div>

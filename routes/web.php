@@ -34,12 +34,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/login','Auth\LoginController@login')->name('admin.login.submit');
     Route::post('/logout', 'Auth\LoginController@logout')->name('admin.logout');
     // หน้าเว็บหลักของแอดมิน
-    Route::get('/home', 'Backend\AdminController@index')->name('admin.home');
+    Route::get('/data-of-customer', 'Backend\AdminController@dataOfCustomer')->name('admin.home');
     // ลงทะเบียนพนักงานขาย
-    Route::get('/register-seller','AuthSeller\RegisterController@ShowRegisterFormSeller');
+    Route::get('/manage-seller','AuthSeller\RegisterController@manageSeller');
     Route::post('/register-seller','AuthSeller\RegisterController@registerSeller');
     // ลงทะเบียนสมาชิกร้านค้า
-    Route::get('/register-store','AuthStore\RegisterController@ShowRegisterFormStore');
+    Route::get('/manage-member-store','AuthStore\RegisterController@manageMemberStore');
     Route::post('/register-store','AuthStore\RegisterController@registerStore');
     // จัดการรุปภาพหน้าเว็บไซต์
     Route::get('/manage-image-website', 'Backend\AdminController@manageImageWebsite');

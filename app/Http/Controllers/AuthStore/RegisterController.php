@@ -9,8 +9,14 @@ use App\Store;
 
 class RegisterController extends Controller
 {
-    public function ShowRegisterFormStore(){
-        return view('authStore/register');
+    public function manageMemberStore(Request $request){
+        $NUM_PAGE = 10;
+        $members = Store::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('authStore/register')->with('NUM_PAGE',$NUM_PAGE)
+                                         ->with('page',$page)
+                                         ->with('members',$members);
     }
 
     public function registerStore(Request $request) {

@@ -6686,11 +6686,11 @@ table tbody .border-bottom-info td {
     text-align: left;
     padding: 8.7px 10px; }
 .pcoded[theme-layout="vertical"][vertical-nav-type="expanded"] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a {
-  padding-left: 15px; }
+  padding-left: 8px; }
 .pcoded[theme-layout="vertical"] .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu {
   width: 80%;
   list-style: outside none none;
-  margin: 15px auto;
+  margin: 5px auto;
   opacity: 0;
   visibility: hidden;
   position: absolute; }

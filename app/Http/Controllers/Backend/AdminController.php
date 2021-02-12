@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\model\ImageWebsite;
 use App\model\Category;
 use App\model\Brand;
+use App\Member;
 
 class AdminController extends Controller
 {
@@ -14,8 +15,14 @@ class AdminController extends Controller
         $this->middleware('auth:admin');
     } 
 
-    public function index(){
-        return view('backend/admin/index');
+    public function dataOfCustomer(Request $request){
+        $NUM_PAGE = 10;
+        $customers = Member::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/index')->with('NUM_PAGE',$NUM_PAGE)
+                                          ->with('page',$page)
+                                          ->with('customers',$customers);
     }
 
     public function manageImageWebsite(Request $request){
