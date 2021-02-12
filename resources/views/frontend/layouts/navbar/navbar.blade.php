@@ -38,7 +38,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ยี่ห้อสินค้า</a>
                         <div class="dropdown-menu">
                             @foreach ($brands as $brand => $value)
-                                <a href="{{url('/category')}}/{{$value->brand_eng}}" class="dropdown-item">{{$value->brand_eng}}</a>
+                                <a href="{{url('/brand')}}/{{$value->brand_eng}}" class="dropdown-item">{{$value->brand_eng}}</a>
                             @endforeach
                         </div>
                     </div>

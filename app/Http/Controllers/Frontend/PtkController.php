@@ -42,4 +42,8 @@ class PtkController extends Controller
     public function category() {
         return view('frontend/category/category-product');
     }
+
+    public function brand() {
+        return view('frontend/brand/brand-product');
+    }
 }

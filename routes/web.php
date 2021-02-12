@@ -25,6 +25,7 @@ Route::group(['prefix' => '/'], function(){
     Route::get('/warranty-information', 'Frontend\PtkController@warrantyInformation');
     Route::get('/dealer-shop', 'Frontend\PtkController@dealerShop');
     Route::get('/category/{category}','Frontend\PtkController@category');
+    Route::get('/brand/{brand}','Frontend\PtkController@brand');
 });
 
 // แอดมิน

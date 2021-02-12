@@ -26,9 +26,11 @@
             <div class="brand">
                 <div class="brand-slider">
                     @foreach ($brands as $brand => $value)
+                    <a href="{{url('/brand')}}/{{$value->brand_eng}}">
                         <div class="brand-item">
                             <img src="{{url('/image_upload/image_brand')}}/{{$value->image}}" class="img-responsive" width="10%">
                         </div>
+                    </a>
                     @endforeach
                 </div>
             </div>
