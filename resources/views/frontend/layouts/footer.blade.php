@@ -19,13 +19,16 @@
                     </ul>
                 </div>
             </div>
-
+            @php
+                $categorys = DB::table('categorys')->get();
+            @endphp
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
                     <h2>ผลิตภัณฑ์</h2>
                     <ul>
-                        <li><a href="#">ฟิล์มมือถือ</a></li>
-                        <li><a href="#">ฟิล์มโน๊ตบุ๊ค</a></li>
+                        @foreach ($categorys as $category => $value)
+                            <li><a href="{{url('/category')}}/{{$value->category_eng}}">{{$value->category}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

@@ -55,7 +55,7 @@
                     <a href="{{url('/about-us')}}" class="nav-item nav-link">เกี่ยวกับเรา</a>
                     <a href="{{url('/contact-us')}}" class="nav-item nav-link">ติดต่อเรา</a>
                 </div>
-                <a href="{{url('/member/register-warranty')}}" class="nav-item nav-link">ลงทะเบียนรับประกันฟิล์ม</a>
+                <a href="{{url('/member/register-warranty')}}" class="nav-item nav-link" style="background-color: #21bdff;">ลงทะเบียนรับประกันฟิล์ม</a>
             </div>
         </nav>
     </div>
@@ -82,11 +82,11 @@
             </div>
             <div class="col-md-3">
                 <div class="user">
-                    <a href="wishlist.html" class="btn wishlist">
+                    <a href="#" class="btn wishlist">
                         <i class="fa fa-heart"></i>
                         <span>(0)</span>
                     </a>
-                    <a href="cart.html" class="btn cart">
+                    <a href="#" class="btn cart">
                         <i class="fa fa-shopping-cart"></i>
                         <span>(0)</span>
                     </a>
