@@ -29,7 +29,7 @@
                     <a href="{{url('/brand')}}/{{$value->brand_eng}}">
                         <div class="brand-item">
                             <img src="{{url('/image_upload/image_brand')}}/{{$value->image}}" class="img-responsive" width="10%">
-                            <h2>{{$value->brand}}</h2>
+                            <h2 style="font-size: 1.5rem;">{{$value->brand}}</h2>
                         </div>
                     </a>
                     @endforeach
@@ -37,14 +37,31 @@
             </div>
         </div>
         <!-- Brand End -->       
+
+        <!-- Newsletter Start -->
+        <div class="container-fluid">
+            <div class="newsletter">
+                <div class="row">
+                    <div class="col-md-12">
+                        <center><h1>ลงทะเบียนรับประกันฟิล์ม</h1></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Newsletter End -->   
         
         <!-- Featured Product Start -->
         <div class="featured-product product">
             <div class="container-fluid">
-                <div class="section-header">
-                    <h1>Product Recommended</h1>
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class=" col-md-2 col-12 section-header" style="text-align: center;">
+                        <h2>สินค้าแนะนำ<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
+                    </div>
+                    <div class="col-md-5"></div>
                 </div>
-                <div class="row align-items-center product-slider product-slider-4">
+                
+                <div class="row align-items-center product-slider product-slider-4" style="margin-top: 2rem;">
                     <div class="col-lg-3">
                         <div class="product-item">
                             <div class="product-title">
@@ -63,8 +80,6 @@
                                 </a>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -86,8 +101,6 @@
                                 </a>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -109,8 +122,6 @@
                                 </a>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -132,8 +143,6 @@
                                 </a>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -155,33 +164,23 @@
                                 </a>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Featured Product End -->       
-        
-        <!-- Newsletter Start -->
-        <div class="container-fluid">
-            <div class="newsletter">
-                <div class="row">
-                    <div class="col-md-12">
-                        <center><h1>ลงทะเบียนรับประกันฟิล์ม</h1></center>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Newsletter End -->        
+        <!-- Featured Product End -->            
         
         <!-- Recent Product Start -->
         <div class="recent-product product">
             <div class="container-fluid">
-                <div class="section-header">
-                    <h1>Recent Product</h1>
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class=" col-md-2 col-12 section-header" style="text-align: center;">
+                        <h2>สินค้าใหม่<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
+                    </div>
+                    <div class="col-md-5"></div>
                 </div>
                 <div class="row align-items-center product-slider product-slider-4">
                     <div class="col-lg-3">
@@ -202,8 +201,6 @@
                                 </a>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -225,8 +222,6 @@
                                 </a>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -248,8 +243,6 @@
                                 </a>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -271,8 +264,6 @@
                                 </a>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -294,8 +285,6 @@
                                 </a>
                             </div>
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
