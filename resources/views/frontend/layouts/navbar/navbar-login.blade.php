@@ -19,20 +19,31 @@
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+            @php
+                $categorys = DB::table('categorys')->get();
+                $brands = DB::table('brands')->get();
+            @endphp
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="{{url('/')}}" class="nav-item nav-link active">หน้าหลัก</a>
+                    <a href="{{url('/')}}" class="nav-item nav-link">หน้าหลัก</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ผลิตภัณฑ์</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">ผลิตภัณฑ์</a>
                         <div class="dropdown-menu">
                             <a href="{{url('/product/dealer-shop')}}" class="dropdown-item">ฟิล์มมือถือ</a>
                             <a href="{{url('/product/dealer-shop')}}" class="dropdown-item">ฟิล์มโน๊ตบุ๊ค</a>
                         </div>
                     </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">ยี่ห้อสินค้า</a>
+                        <div class="dropdown-menu">
+                            @foreach ($brands as $brand => $value)
+                                <a href="{{url('/brand')}}/{{$value->brand_eng}}" class="dropdown-item">{{$value->brand_eng}}</a>
+                            @endforeach
+                        </div>
+                    </div>
                     <a href="{{url('/dealer-shop')}}" class="nav-item nav-link">ตัวแทนจำหน่าย</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ศูนย์ช่วยเหลือ</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">ศูนย์ช่วยเหลือ</a>
                         <div class="dropdown-menu">
                             <a href="{{url('/warranty-information')}}" class="dropdown-item">ข้อมูลการรับประกัน</a>
                             <a href="{{url('/howto-install')}}" class="dropdown-item">วิธีติดตั้ง</a>
@@ -47,5 +58,5 @@
             </div>
         </nav>
     </div>
-</div>
+</div><hr>
 <!-- Nav Bar End -->       

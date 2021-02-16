@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-</div>
+</div><hr style="margin-top: 0px; margin-bottom: 0px;">
 <!-- Top bar End -->
 
 <!-- Nav Bar Start -->
@@ -25,9 +25,9 @@
             @endphp
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="{{url('/')}}" class="nav-item nav-link active">หน้าหลัก</a>
+                    <a href="{{url('/')}}" class="nav-item nav-link">หน้าหลัก</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ผลิตภัณฑ์</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">ผลิตภัณฑ์</a>
                         <div class="dropdown-menu">
                             @foreach ($categorys as $category => $value)
                                 <a href="{{url('/category')}}/{{$value->category_eng}}" class="dropdown-item">{{$value->category}}</a>
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ยี่ห้อสินค้า</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">ยี่ห้อสินค้า</a>
                         <div class="dropdown-menu">
                             @foreach ($brands as $brand => $value)
                                 <a href="{{url('/brand')}}/{{$value->brand_eng}}" class="dropdown-item">{{$value->brand_eng}}</a>
@@ -44,7 +44,7 @@
                     </div>
                     <a href="{{url('/dealer-shop')}}" class="nav-item nav-link">ตัวแทนจำหน่าย</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ศูนย์ช่วยเหลือ</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">ศูนย์ช่วยเหลือ</a>
                         <div class="dropdown-menu">
                             <a href="{{url('/warranty-information')}}" class="dropdown-item">ข้อมูลการรับประกัน</a>
                             <a href="{{url('/howto-install')}}" class="dropdown-item">วิธีติดตั้ง</a>
@@ -59,7 +59,7 @@
             </div>
         </nav>
     </div>
-</div>
+</div><hr style="margin-top: 0px; margin-bottom: 0px;">
 <!-- Nav Bar End -->      
 
 <!-- Bottom Bar Start -->

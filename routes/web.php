@@ -34,6 +34,10 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/login','Auth\LoginController@ShowLoginForm')->name('admin.login');
     Route::post('/login','Auth\LoginController@login')->name('admin.login.submit');
     Route::post('/logout', 'Auth\LoginController@logout')->name('admin.logout');
+    // ตรวจสอบการลงทะเบียนของลูกค้า
+    Route::get('/member-check','Backend\AdminController@memberCheck');
+    Route::get('/manage-member-customer/{id}','Backend\AdminController@manageMemberCustomer');
+    Route::post('/member-customer-confirm','Backend\AdminController@memberCustomerComfirm');
     // หน้าเว็บหลักของแอดมิน
     Route::get('/data-of-customer', 'Backend\AdminController@dataOfCustomer')->name('admin.home');
     // ลงทะเบียนพนักงานขาย

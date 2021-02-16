@@ -23,6 +23,14 @@ class RegisterController extends Controller
         $store = $request->all();
         $store['password'] = bcrypt($store['password']);
         $store = Store::create($store);
+        if($request->hasFile('image_logo')){
+            $image = $request->file('image_logo');
+            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+            $image->move('image_upload/image_logo_store/', $filename);
+            $path = 'image_upload/image_logo_store/'.$filename;
+            $store->image_logo = $filename;
+            $store->save();
+        }
         return back();
     }
 }

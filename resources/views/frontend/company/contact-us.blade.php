@@ -8,7 +8,8 @@
             <div class="col-lg-4">
                 <div class="contact-info">
                     <h2>ติดต่อเรา</h2>
-                    <h3><i class="fa fa-map-marker"></i>123 Office, Los Angeles, CA, USA</h3>
+                    <h3><i class="fa fa-map-marker"></i>169/24 หมู่ที่ 3 ตำบลคูคต อำเภอลำลูกกา จังหวัดปทุมธานี 12130
+                    </h3>
                 </div>
             </div>
             <div class="col-lg-4">

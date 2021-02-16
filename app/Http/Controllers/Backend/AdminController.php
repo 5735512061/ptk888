@@ -29,6 +29,28 @@ class AdminController extends Controller
                                           ->with('customers',$customers);
     }
 
+    public function memberCheck(Request $request){
+        $NUM_PAGE = 10;
+        $customers = Member::where('member_id',NULL)->paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageCustomer/member-check')->with('NUM_PAGE',$NUM_PAGE)
+                                                                ->with('page',$page)
+                                                                ->with('customers',$customers);
+    }
+
+    public function manageMemberCustomer($id){
+        $member = Member::findOrFail($id);
+        return view('backend/admin/manageCustomer/manage-member-customer')->with('member',$member);
+    }
+
+    public function memberCustomerComfirm(Request $request) {
+        $id = $request->get('id');
+        $customer = Member::findOrFail($id);
+        $customer->update($request->all());
+        return redirect()->action('Backend\\AdminController@dataOfCustomer');
+    }
+
     public function manageImageWebsite(Request $request){
         $NUM_PAGE = 10;
         $images = ImageWebsite::orderByRaw('FIELD(image_type,"logo","slide_main")')->paginate($NUM_PAGE);

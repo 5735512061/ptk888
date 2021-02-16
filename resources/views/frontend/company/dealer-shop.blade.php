@@ -1,73 +1,26 @@
 @extends("/frontend/layouts/template/template")
-
+<link rel="stylesheet" type="text/css" href="{{ asset('css/dealer-shop  .css')}}">
 @section("content")
-<div class="review">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-md-6 review">
-                <div class="review-slider-item">
-                    <div class="review-img">
-                        <img src="img/review-1.jpg" alt="Image">
-                    </div>
-                    <div class="review-text">
-                        <h2>Customer Name</h2>
-                        <h3>Profession</h3>
-                        <div class="ratting">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+<div class="container">
+    @foreach ($stores as $store => $value)
+    <div class="card" style="margin-bottom: 2rem;">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="preview col-md-6">
+                    <div class="preview-pic tab-content">
+                        <div class="tab-pane active">
+                            <img src="{{url('/image_upload/image_logo_store')}}/{{$value->image_logo}}" class="img-responsive" width="100%"/>
                         </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae nunc eget leo finibus luctus et vitae lorem
-                        </p>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="review-slider-item">
-                    <div class="review-img">
-                        <img src="img/review-2.jpg" alt="Image">
-                    </div>
-                    <div class="review-text">
-                        <h2>Customer Name</h2>
-                        <h3>Profession</h3>
-                        <div class="ratting">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae nunc eget leo finibus luctus et vitae lorem
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="review-slider-item">
-                    <div class="review-img">
-                        <img src="img/review-3.jpg" alt="Image">
-                    </div>
-                    <div class="review-text">
-                        <h2>Customer Name</h2>
-                        <h3>Profession</h3>
-                        <div class="ratting">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae nunc eget leo finibus luctus et vitae lorem
-                        </p>
-                    </div>
+                <div class="details col-md-6">
+                    <h4 class="product-title">ตัวแทนจำหน่าย {{$value->name}}</h4>
+                    <p><strong>ที่อยู่</strong> {{$value->address}}</p>
+                    <p><strong>เบอร์โทรศัพท์</strong> {{$value->phone}}</p>
                 </div>
             </div>
         </div>
     </div>
+    @endforeach
 </div>
 @endsection

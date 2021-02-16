@@ -21,17 +21,25 @@
                         </div>
                         <div class="card-block">
                             <form action="{{url('/admin/register-store')}}" enctype="multipart/form-data" method="post">@csrf
+                                @php
+                                    $random = rand(111111,999999);  
+                                    $random_format = wordwrap($random , 4 , '-' , true );
+                                    $id = 'PTK-S-'.$random_format;
+                                    
+                                    $store_id = DB::table('stores')->where('store_id',$id)->value('store_id');
+                                        if($store_id == null) {
+                                            $id_gen = $id;
+                                        } else {
+                                            $random = rand(111111,999999);  
+                                            $random_format = wordwrap($random , 4 , '-' , true );
+                                            $id_gen = 'PTK-S-'.$random_format;
+                                        }
+                                @endphp
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">{{ __('รหัสสมาชิกร้านค้า') }}</label>
         
                                     <div class="col-md-6">
-                                        <input type="sm" class="form-control{{ $errors->has('store_id') ? ' is-invalid' : '' }}" name="store_id" value="{{ old('store_id') }}" required autofocus>
-        
-                                        @if ($errors->has('store_id'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('store_id') }}</strong>
-                                            </span>
-                                        @endif
+                                        <input type="text" class="form-control" name="store_id" value="{{$id_gen}}" readonly>
                                     </div>
                                 </div>
 
@@ -58,6 +66,20 @@
                                         @if ($errors->has('phone'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('phone') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">{{ __('ที่อยู่ตัวแทนจำหน่าย') }}</label>
+        
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" value="{{ old('address') }}" required autofocus>
+        
+                                        @if ($errors->has('address'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('address') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -93,6 +115,13 @@
                                                 <strong>{{ $errors->first('status') }}</strong>
                                             </span>
                                         @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">อัพโหลดรูปภาพโลโก้ร้านค้า (ถ้ามี)</label>
+                                    <div class="col-sm-6">
+                                        <input type="file" class="form-control" name="image_logo">
                                     </div>
                                 </div>
 

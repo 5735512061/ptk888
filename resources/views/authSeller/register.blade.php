@@ -21,17 +21,25 @@
                         </div>
                         <div class="card-block">
                             <form action="{{url('/admin/register-seller')}}" enctype="multipart/form-data" method="post">@csrf
+                                @php
+                                    $random = rand(111111,999999);  
+                                    $random_format = wordwrap($random , 4 , '-' , true );
+                                    $id = 'PTK-L-'.$random_format;
+                                    
+                                    $seller_id = DB::table('sellers')->where('seller_id',$id)->value('seller_id');
+                                        if($seller_id == null) {
+                                            $id_gen = $id;
+                                        } else {
+                                            $random = rand(111111,999999);  
+                                            $random_format = wordwrap($random , 4 , '-' , true );
+                                            $id_gen = 'PTK-L-'.$random_format;
+                                        }
+                                @endphp
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">{{ __('รหัสพนักงานขาย') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control{{ $errors->has('seller_id') ? ' is-invalid' : '' }}" name="seller_id" value="{{ old('seller_id') }}" required autofocus>
-        
-                                        @if ($errors->has('seller_id'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('seller_id') }}</strong>
-                                            </span>
-                                        @endif
+                                        <input type="text" class="form-control{{ $errors->has('seller_id') ? ' is-invalid' : '' }}" name="seller_id" value="{{$id_gen}}" readonly>
                                     </div>
                                 </div>
 

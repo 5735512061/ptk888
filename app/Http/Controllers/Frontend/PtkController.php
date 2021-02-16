@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\model\ImageWebsite;
 use App\model\Category;
 use App\model\Brand;
+use App\Store;
 
 class PtkController extends Controller
 {
@@ -36,7 +37,8 @@ class PtkController extends Controller
     }
 
     public function dealerShop() {
-        return view('frontend/company/dealer-shop');
+        $stores = Store::get();
+        return view('frontend/company/dealer-shop')->with('stores',$stores);
     }
 
     public function category() {
