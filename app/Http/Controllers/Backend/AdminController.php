@@ -12,6 +12,8 @@ use App\model\Product;
 use App\model\ImageProduct;
 
 use App\Member;
+use App\Store;
+use App\Seller;
 
 class AdminController extends Controller
 {
@@ -24,9 +26,9 @@ class AdminController extends Controller
         $customers = Member::paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
-        return view('backend/admin/index')->with('NUM_PAGE',$NUM_PAGE)
-                                          ->with('page',$page)
-                                          ->with('customers',$customers);
+        return view('backend/admin/manageCustomer/data-of-customer')->with('NUM_PAGE',$NUM_PAGE)
+                                                                    ->with('page',$page)
+                                                                    ->with('customers',$customers);
     }
 
     public function memberCheck(Request $request){
@@ -49,6 +51,74 @@ class AdminController extends Controller
         $customer = Member::findOrFail($id);
         $customer->update($request->all());
         return redirect()->action('Backend\\AdminController@dataOfCustomer');
+    }
+
+    public function deleteMemberCustomer($id){
+        $customer = Member::findOrFail($id);
+        $customer->delete();
+        return back();
+    }
+
+    public function editMemberCustomer($id){
+        $member = Member::findOrFail($id);
+        return view('backend/admin/manageCustomer/edit-member-customer')->with('member',$member);
+    }
+
+    public function updateMemberCustomer(Request $request){
+        $id = $request->get('id');
+        $member = Member::findOrFail($id);
+        $member->update($request->all());
+        return redirect()->action('Backend\\AdminController@dataOfCustomer');
+    }
+
+    public function deleteMemberStore($id){
+        $store = Store::findOrFail($id);
+        $store->delete();
+        return back();
+    }
+
+    public function editMemberStore(Request $request, $id){
+        $NUM_PAGE = 10;
+        $store = Store::findOrFail($id);
+        $members = Store::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageStore/edit-member-store')->with('NUM_PAGE',$NUM_PAGE)
+                                                                  ->with('page',$page)
+                                                                  ->with('store',$store)
+                                                                  ->with('members',$members);
+    }
+
+    public function updateMemberStore(Request $request){
+        $id = $request->get('id');
+        $store = Store::findOrFail($id);
+        $store->update($request->all());
+        return redirect()->action('AuthStore\RegisterController@manageMemberStore');
+    }
+
+    public function deleteSeller($id){
+        $seller = Seller::findOrFail($id);
+        $seller->delete();
+        return back();
+    }
+
+    public function editSeller(Request $request, $id){
+        $NUM_PAGE = 10;
+        $seller = Seller::findOrFail($id);
+        $sellers = Seller::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageSeller/edit-seller')->with('NUM_PAGE',$NUM_PAGE)
+                                                             ->with('page',$page)
+                                                             ->with('seller',$seller)
+                                                             ->with('sellers',$sellers);
+    }
+
+    public function updateSeller(Request $request){
+        $id = $request->get('id');
+        $seller = Seller::findOrFail($id);
+        $seller->update($request->all());
+        return redirect()->action('AuthSeller\RegisterController@manageSeller');
     }
 
     public function manageImageWebsite(Request $request){
@@ -162,4 +232,58 @@ class AdminController extends Controller
                                                                ->with('page',$page)
                                                                ->with('products',$products);
     }
+
+    public function deleteProduct($id){
+        $product = Product::findOrFail($id);
+
+        $images =  ImageProduct::where('product_id',$product->id)->get();
+            foreach($images as $image => $value) {
+                $image_product = ImageProduct::where('product_id',$value->product_id)->delete();
+            }
+
+        $product->delete();
+        return back();
+    }
+
+    public function editProduct(Request $request, $id){
+        $product = Product::findOrFail($id);
+        $categorys = Category::get();
+        $brands = Brand::get();
+        return view('backend/admin/manageProduct/edit-product')->with('product',$product)
+                                                               ->with('categorys',$categorys)
+                                                               ->with('brands',$brands);
+    }
+
+    public function updateProduct(Request $request){
+        $id = $request->get('id');
+        $product = Product::findOrFail($id);
+        $product->update($request->all());
+        return redirect()->action('Backend\AdminController@listProduct');
+    }
+
+    public function deleteImageWebsite($id){
+        $image_website = ImageWebsite::findOrFail($id);
+        $image_website->delete();
+        return back();
+    }
+
+    public function editImageWebsite(Request $request, $id){
+        $NUM_PAGE = 10;
+        $image_website = ImageWebsite::findOrFail($id);
+        $images = ImageWebsite::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageImageWebsite/edit-image-website')->with('NUM_PAGE',$NUM_PAGE)
+                                                                          ->with('page',$page)
+                                                                          ->with('image_website',$image_website)
+                                                                          ->with('images',$images);
+    }
+
+    public function updateImageWebsite(Request $request){
+        $id = $request->get('id');
+        $image_website = ImageWebsite::findOrFail($id);
+        $image_website->update($request->all());
+        return redirect()->action('Backend\AdminController@manageImageWebsite');
+    }
+    
 }

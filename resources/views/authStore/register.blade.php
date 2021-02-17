@@ -213,10 +213,10 @@
                                         <td>{{$value->status}}</td>
                                         <td>{{$value->username}}</td>
                                         <td>       
-                                            <a href="{{url('/admin/edit-image')}}/{{$value->id}}">
+                                            <a href="{{url('/admin/edit-member-store')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>
                                             </a>        
-                                            <a href="{{url('/admin/delete-image/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
+                                            <a href="{{url('/admin/delete-member-store/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                 <i class="fa fa-trash" style="color:red;"></i>
                                             </a>
                                         </td>

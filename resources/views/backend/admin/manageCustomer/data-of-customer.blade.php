@@ -45,10 +45,10 @@
                                                 <td>{{$value->name}} {{$value->surname}}</td>
                                                 <td>{{$value->phone}}</td>
                                                 <td>       
-                                                    <a href="{{url('/admin/edit-image')}}/{{$value->id}}">
+                                                    <a href="{{url('/admin/edit-member-customer')}}/{{$value->id}}">
                                                         <i class="fa fa-pencil-square-o" style="color:blue;"></i>
                                                     </a>        
-                                                    <a href="{{url('/admin/delete-image/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
+                                                    <a href="{{url('/admin/delete-member-customer/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                         <i class="fa fa-trash" style="color:red;"></i>
                                                     </a>
                                                 </td>

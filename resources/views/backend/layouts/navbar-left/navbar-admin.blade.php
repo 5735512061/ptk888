@@ -230,14 +230,14 @@
         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">การติดต่อสอบถาม</div>
         <ul class="pcoded-item pcoded-left-item">
             <li>
-                <a href="form-elements-component.html" class="waves-effect waves-dark">
+                <a href="#" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-email"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">การสอบถามของลูกค้า</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li>
-                <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                <a href="#" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-email"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">การสอบถามของร้านค้า</span>
                     <span class="pcoded-mcaret"></span>

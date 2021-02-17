@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>อัพโหลดรูปภาพหน้าเว็บไซต์</h5>
+                            <h5>แก้ไขรูปภาพหน้าเว็บไซต์</h5>
                             <div class="card-header-right">
                                 <ul class="list-unstyled card-option">
                                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <div class="card-block">
-                            <form action="{{url('/admin/upload-image-website')}}" enctype="multipart/form-data" method="post">@csrf
+                            <form action="{{url('/admin/update-image-website')}}" enctype="multipart/form-data" method="post">@csrf
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ประเภทรูปภาพ</label>
                                     <div class="col-sm-10">
@@ -51,7 +51,8 @@
                                 </div>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-4 offset-md-2">
-                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพโหลดรูปภาพ</button>
+                                        <input type="hidden" name="id" value="{{$image_website->id}}">
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">บันทึกรูปภาพ</button>
                                     </div>
                                 </div>
                             </form>

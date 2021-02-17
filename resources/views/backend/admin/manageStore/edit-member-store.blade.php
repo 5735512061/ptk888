@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>ลงทะเบียนพนักงานขาย</h5>
+                            <h5>แก้ไขข้อมูลสมาชิกร้านค้า</h5>
                             <div class="card-header-right">
                                 <ul class="list-unstyled card-option">
                                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -20,34 +20,20 @@
                             </div>
                         </div>
                         <div class="card-block">
-                            <form action="{{url('/admin/register-seller')}}" enctype="multipart/form-data" method="post">@csrf
-                                @php
-                                    $random = rand(111111,999999);  
-                                    $random_format = wordwrap($random , 4 , '-' , true );
-                                    $id = 'PTK-L-'.$random_format;
-                                    
-                                    $seller_id = DB::table('sellers')->where('seller_id',$id)->value('seller_id');
-                                        if($seller_id == null) {
-                                            $id_gen = $id;
-                                        } else {
-                                            $random = rand(111111,999999);  
-                                            $random_format = wordwrap($random , 4 , '-' , true );
-                                            $id_gen = 'PTK-L-'.$random_format;
-                                        }
-                                @endphp
+                            <form action="{{url('/admin/update-member-store')}}" enctype="multipart/form-data" method="post">@csrf
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">{{ __('รหัสพนักงานขาย') }}</label>
+                                    <label class="col-sm-2 col-form-label">{{ __('รหัสสมาชิกร้านค้า') }}</label>
         
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control{{ $errors->has('seller_id') ? ' is-invalid' : '' }}" name="seller_id" value="{{$id_gen}}" readonly>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="store_id" value="{{$store->store_id}}" readonly>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">{{ __('ชื่อ') }}</label>
+                                    <label class="col-sm-2 col-form-label">{{ __('ชื่อร้านค้า') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                        <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{$store->name}}" required autofocus>
         
                                         @if ($errors->has('name'))
                                             <span class="invalid-feedback" role="alert">
@@ -58,24 +44,10 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">{{ __('นามสกุล') }}</label>
-        
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" value="{{ old('surname') }}" required autofocus>
-        
-                                        @if ($errors->has('surname'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('surname') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">{{ __('เบอร์โทรศัพท์') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required autofocus>
+                                        <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{$store->phone}}" required autofocus>
         
                                         @if ($errors->has('phone'))
                                             <span class="invalid-feedback" role="alert">
@@ -86,11 +58,26 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">{{ __('ที่อยู่ตัวแทนจำหน่าย') }}</label>
+        
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" value="{{$store->address}}" required autofocus>
+        
+                                        @if ($errors->has('address'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('address') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">{{ __('บทบาท') }}</label>
         
                                     <div class="col-sm-6">
                                         <select name="role" class="form-control">
-                                            <option value="seller">พนักงานขาย</option>
+                                            <option value="{{$store->role}}">{{$store->role}}</option>
+                                            <option value="member_store">สมาชิกร้านค้า</option>
                                         </select>
         
                                         @if ($errors->has('role'))
@@ -106,6 +93,7 @@
         
                                     <div class="col-sm-6">
                                         <select name="status" class="form-control">
+                                            <option value="{{$store->status}}">{{$store->status}}</option>
                                             <option value="ใช้งานได้">ใช้งานได้</option>
                                             <option value="ปิดการใช้งาน">ปิดการใช้งาน</option>
                                         </select>
@@ -119,10 +107,17 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">อัพโหลดรูปภาพโลโก้ร้านค้า (ถ้ามี)</label>
+                                    <div class="col-sm-6">
+                                        <input type="file" class="form-control" name="image_logo">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">{{ __('ชื่อเข้าใช้งาน') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required>
+                                        <input type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{$store->username}}" required>
         
                                         @if ($errors->has('username'))
                                             <span class="invalid-feedback" role="alert">
@@ -132,32 +127,12 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="password" class="col-sm-2 col-form-label">{{ __('รหัสผ่าน') }}</label>
-        
-                                    <div class="col-sm-6">
-                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-        
-                                        @if ($errors->has('password'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('password') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="password-confirm" class="col-sm-2 col-form-label">{{ __('ยืนยันรหัสผ่าน') }}</label>
-        
-                                    <div class="col-sm-6">
-                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="admin_id" value="{{Auth::guard('admin')->id()}}">
+                                <input type="hidden" name="id" value="{{$store->id}}">
+                                
                                 <div class="form-group row mb-0">
                                     <div class="col-md-4 offset-md-2">
                                         <button type="submit" class="btn btn-primary">
-                                            {{ __('ลงทะเบียนพนักงานขาย') }}
+                                            {{ __('บันทึกข้อมูลสมาชิกร้านค้า') }}
                                         </button>
                                     </div>
                                 </div>
@@ -169,7 +144,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5>ข้อมูลพนักงานขาย</h5>
+                    <h5>ข้อมูลสมาชิกร้านค้า</h5>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -186,8 +161,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>รหัสพนักงาน</th>
-                                    <th>ชื่อ นามสกุล</th>
+                                    <th>รหัสสมาชิก</th>
+                                    <th>ชื่อร้านค้า</th>
                                     <th>เบอร์โทรศัพท์</th>
                                     <th>บทบาท</th>
                                     <th>สถานะ</th>
@@ -196,20 +171,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($sellers as $seller => $value)
+                                @foreach ($members as $member => $value)
                                     <tr>
-                                        <th scope="row">{{$NUM_PAGE*($page-1) + $seller+1}}</th>
-                                        <td>{{$value->seller_id}}</td>
-                                        <td>{{$value->name}} {{$value->surname}}</td>
+                                        <th scope="row">{{$NUM_PAGE*($page-1) + $member+1}}</th>
+                                        <td>{{$value->store_id}}</td>
+                                        <td>{{$value->name}}</td>
                                         <td>{{$value->phone}}</td>
                                         <td>{{$value->role}}</td>
                                         <td>{{$value->status}}</td>
                                         <td>{{$value->username}}</td>
                                         <td>       
-                                            <a href="{{url('/admin/edit-seller')}}/{{$value->id}}">
+                                            <a href="{{url('/admin/edit-image')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>
                                             </a>        
-                                            <a href="{{url('/admin/delete-seller/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
+                                            <a href="{{url('/admin/delete-image/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                 <i class="fa fa-trash" style="color:red;"></i>
                                             </a>
                                         </td>
@@ -218,7 +193,7 @@
                             </tbody>
                         </table>
                         <div class="text-right m-r-20">
-                            {{$sellers->links()}}
+                            {{$members->links()}}
                         </div>
                     </div>
                 </div>

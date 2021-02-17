@@ -34,21 +34,32 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/login','Auth\LoginController@ShowLoginForm')->name('admin.login');
     Route::post('/login','Auth\LoginController@login')->name('admin.login.submit');
     Route::post('/logout', 'Auth\LoginController@logout')->name('admin.logout');
-    // ตรวจสอบการลงทะเบียนของลูกค้า
+    // ตรวจสอบการลงทะเบียนของลูกค้า และจัดการข้อมูลลูกค้า
     Route::get('/member-check','Backend\AdminController@memberCheck');
     Route::get('/manage-member-customer/{id}','Backend\AdminController@manageMemberCustomer');
     Route::post('/member-customer-confirm','Backend\AdminController@memberCustomerComfirm');
-    // หน้าเว็บหลักของแอดมิน
     Route::get('/data-of-customer', 'Backend\AdminController@dataOfCustomer')->name('admin.home');
-    // ลงทะเบียนพนักงานขาย
+    Route::get('/delete-member-customer/{id}', 'Backend\AdminController@deleteMemberCustomer');
+    Route::get('/edit-member-customer/{id}', 'Backend\AdminController@editMemberCustomer');
+    Route::post('/update-member-customer', 'Backend\AdminController@updateMemberCustomer');
+    // ลงทะเบียนพนักงานขาย และจัดการข้อมูลพนักงานขาย
     Route::get('/manage-seller','AuthSeller\RegisterController@manageSeller');
     Route::post('/register-seller','AuthSeller\RegisterController@registerSeller');
-    // ลงทะเบียนสมาชิกร้านค้า
+    Route::get('/delete-seller/{id}', 'Backend\AdminController@deleteSeller');
+    Route::get('/edit-seller/{id}', 'Backend\AdminController@editSeller');
+    Route::post('/update-seller', 'Backend\AdminController@updateSeller');
+    // ลงทะเบียนสมาชิกร้านค้า และจัดการข้อมูลสมาชิกร้านค้า
     Route::get('/manage-member-store','AuthStore\RegisterController@manageMemberStore');
     Route::post('/register-store','AuthStore\RegisterController@registerStore');
-    // จัดการรุปภาพหน้าเว็บไซต์
+    Route::get('/delete-member-store/{id}', 'Backend\AdminController@deleteMemberStore');
+    Route::get('/edit-member-store/{id}', 'Backend\AdminController@editMemberStore');
+    Route::post('/update-member-store', 'Backend\AdminController@updateMemberStore');
+    // จัดการรูปภาพหน้าเว็บไซต์ และจัดการข้อมูลรูปภาพ
     Route::get('/manage-image-website', 'Backend\AdminController@manageImageWebsite');
     Route::post('/upload-image-website', 'Backend\AdminController@UploadImageWebsite');
+    Route::get('/delete-image-website/{id}', 'Backend\AdminController@deleteImageWebsite');
+    Route::get('/edit-image-website/{id}', 'Backend\AdminController@editImageWebsite');
+    Route::post('/update-image-website', 'Backend\AdminController@updateImagewebsite');
     // จัดการประเภทผลิตภัณฑ์
     Route::get('/manage-category', 'Backend\AdminController@manageCategory');
     Route::post('/upload-category', 'Backend\AdminController@UploadCategory');
@@ -59,6 +70,9 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/upload-product-form', 'Backend\AdminController@uploadProductForm');
     Route::post('/upload-product', 'Backend\AdminController@uploadProduct');
     Route::get('/list-product', 'Backend\AdminController@listProduct');
+    Route::get('/delete-product/{id}', 'Backend\AdminController@deleteProduct');
+    Route::get('/edit-product/{id}', 'Backend\AdminController@editProduct');
+    Route::post('/update-product', 'Backend\AdminController@updateProduct');
 
 });
 

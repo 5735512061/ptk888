@@ -47,10 +47,10 @@
                                         <td>{{$value->product_name}}</td>
                                         <td>{{$value->status}}</td>
                                         <td>       
-                                            <a href="{{url('/admin/edit-image')}}/{{$value->id}}">
+                                            <a href="{{url('/admin/edit-product')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>
                                             </a>        
-                                            <a href="{{url('/admin/delete-image/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
+                                            <a href="{{url('/admin/delete-product/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                 <i class="fa fa-trash" style="color:red;"></i>
                                             </a>
                                         </td>
