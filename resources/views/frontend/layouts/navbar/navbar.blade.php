@@ -70,15 +70,15 @@
             <div class="col-md-3">
                 <div class="logo">
                     <a href="{{url('/')}}">
-                        <img src="img/logo.png" alt="Logo">
+                        <img src="{{url('img/logo-ptk.jpg')}}" alt="Logo" width="100%">
                     </a>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="search">
+                {{-- <div class="search">
                     <input type="text" placeholder="Search">
                     <button><i class="fa fa-search"></i></button>
-                </div>
+                </div> --}}
             </div>
             <div class="col-md-3">
                 <div class="user">

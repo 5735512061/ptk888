@@ -5,7 +5,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="logo">
                     <a href="{{url('/')}}">
-                        <img src="img/logo.png" alt="Logo">
+                        <img src="{{url('img/logo-ptk.jpg')}}" alt="Logo" width="100%">
                     </a>
                 </div>
             </div>

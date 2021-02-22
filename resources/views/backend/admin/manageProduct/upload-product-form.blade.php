@@ -19,6 +19,20 @@
                                 </ul>
                             </div>
                         </div>
+                        @php
+                            $random = rand(111111,999999);  
+                            $random_format = wordwrap($random , 4 , '-' , true );
+                            $id = 'PTK-P-'.$random_format;
+                            
+                            $store_id = DB::table('stores')->where('store_id',$id)->value('store_id');
+                                if($store_id == null) {
+                                    $id_gen = $id;
+                                } else {
+                                    $random = rand(111111,999999);  
+                                    $random_format = wordwrap($random , 4 , '-' , true );
+                                    $id_gen = 'PTK-P-'.$random_format;
+                                }
+                        @endphp
                         <div class="card-block">
                             <form action="{{url('/admin/upload-product')}}" enctype="multipart/form-data" method="post">@csrf
                                 <div class="form-group row">
@@ -35,6 +49,7 @@
                                     <label class="col-sm-2 col-form-label">ยี่ห้อผลิตภัณฑ์</label>
                                     <div class="col-sm-10">
                                         <select name="brand_id" class="form-control">
+                                            <option value="ไม่มียี่ห้อของสินค้า">ไม่มียี่ห้อของสินค้า</option>
                                             @foreach ($brands as $brand => $value)
                                                 <option value="{{$value->id}}">{{$value->brand}}</option>
                                             @endforeach
@@ -44,19 +59,19 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">รหัสสินค้า</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="product_code">
+                                        <input type="text" class="form-control" name="product_code" value="{{$id_gen}}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ประเภทของสินค้า</label>
                                     <div class="col-sm-10">
                                         <select name="product_type" class="form-control">
-                                                <option value="NULL">ไม่มีประเภทของสินค้า</option>
-                                                <option value="ฟิล์มกันรอย">ฟิล์มกันรอย</option>
-                                                <option value="ฟิล์มกาวเต็ม">ฟิล์มกาวเต็ม</option>
+                                                <option value="ไม่มีประเภทของสินค้า">ไม่มีประเภทของสินค้า</option>
+                                                <option value="ฟิล์ม wolverine">ฟิล์ม wolverine</option>
+                                                <option value="ฟิล์มกันมอง">ฟิล์มกันมอง</option>
                                                 <option value="ฟิล์มใส">ฟิล์มใส</option>
                                                 <option value="ฟิล์มด้าน">ฟิล์มด้าน</option>
-                                                <option value="ฟิล์ม UV">ฟิล์ม UV</option>
+                                                <option value="ฟิล์มถนอมสายตา">ฟิล์มถนอมสายตา</option>
                                         </select>
                                     </div>
                                 </div>

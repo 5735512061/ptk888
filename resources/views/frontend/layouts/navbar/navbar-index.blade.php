@@ -21,7 +21,7 @@
             </button>
             @php
                 $categorys = DB::table('categorys')->get();
-                $brands = DB::table('brands')->get();
+                $brands = DB::table('brands')->paginate('7');
             @endphp
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">ยี่ห้อสินค้า</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">สินค้าตามรุ่นมือถือ</a>
                         <div class="dropdown-menu">
                             @foreach ($brands as $brand => $value)
                                 <a href="{{url('/brand')}}/{{$value->brand_eng}}" class="dropdown-item">{{$value->brand_eng}}</a>
@@ -56,6 +56,11 @@
                     <a href="{{url('/about-us')}}" class="nav-item nav-link">เกี่ยวกับเรา</a>
                     <a href="{{url('/contact-us')}}" class="nav-item nav-link">ติดต่อเรา</a>
                 </div>
+                    <div class="bottom-bar">
+                        <div class="search">
+                            <input type="text" placeholder="Search">
+                        </div>
+                    </div>
                 <a href="{{url('/member/register-warranty')}}" class="nav-item nav-link" style="background-color: #21bdff;">ลงทะเบียนรับประกันฟิล์ม</a>
             </div>
         </nav>
@@ -70,15 +75,17 @@
             <div class="col-md-3">
                 <div class="logo">
                     <a href="{{url('/')}}">
-                        <img src="img/logo.png" alt="Logo">
+                        <img src="{{url('img/logo-ptk.jpg')}}" alt="Logo" width="100%">
                     </a>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="search">
-                    <input type="text" placeholder="Search">
-                    <button><i class="fa fa-search"></i></button>
+                <div class="bottom-bar">
+                    <div class="search">
+                        <input type="text" placeholder="Search">
+                    </div>
                 </div>
+            <a href="{{url('/member/register-warranty')}}" class="nav-item nav-link" style="background-color: #ffffff;">ลงทะเบียนรับประกันฟิล์ม</a>
             </div>
             <div class="col-md-3">
                 <div class="user">

@@ -303,7 +303,7 @@ h2 {
     
     .nav,
     .nav .navbar {
-        background: #000000 !important;
+        background: #62beff !important;
     }
     
     .nav a.nav-link {
@@ -312,6 +312,13 @@ h2 {
     
     .nav .dropdown-menu {
         box-shadow: none;
+    }
+    .navbar-dark .navbar-toggler {
+        color: #fff !important;
+        border-color: #fff !important;
+    }
+    .navbar-dark .navbar-nav .nav-link {
+        color: #000 !important;
     }
 }
 
