@@ -12,7 +12,7 @@ use App\Store;
 class PtkController extends Controller
 {
     public function index() {
-        $images = ImageWebsite::get();
+        $images = ImageWebsite::where('image_type','slide_main')->get();
         return view('frontend/index')->with('images',$images);
     }
 
@@ -47,5 +47,9 @@ class PtkController extends Controller
 
     public function brand() {
         return view('frontend/brand/brand-product');
+    }
+
+    public function promotion() {
+        return view('frontend/promotion/promotion');
     }
 }

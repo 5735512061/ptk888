@@ -1,6 +1,13 @@
 /**********************************/
 /********** General CSS ***********/
 /**********************************/
+.btn-warranty{
+    background-color: #21bdff;
+    color: #000;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+}
+
 body {
     color: #353535;
     font-family: 'Mitr';
@@ -319,6 +326,7 @@ h2 {
     }
     .navbar-dark .navbar-nav .nav-link {
         color: #000 !important;
+        font-weight: bold;
     }
 }
 
@@ -335,10 +343,11 @@ h2 {
 .bottom-bar .logo {
     text-align: left;
     overflow: hidden;
+    margin-top: -50px;
 }
 
 .bottom-bar .logo a img {
-    max-height: 60px;
+    max-height: 160px;
 }
 
 .bottom-bar .search {
@@ -869,9 +878,9 @@ h2 {
 }
 
 .product .section-header {
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     padding: 20px 30px 15px 30px;
-    color: #62beff;
+    color: #212121;
     background: #ffffff;
 }
 

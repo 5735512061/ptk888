@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div><br>
         <!-- Main Slider End -->      
         
         <!-- Brand Start -->
@@ -26,10 +26,9 @@
             <div class="brand">
                 <div class="brand-slider">
                     @foreach ($brands as $brand => $value)
-                    <a href="{{url('/brand')}}/{{$value->brand_eng}}">
+                    <a href="{{url('/brand')}}/{{$value->brand_eng}}" style="border-right: 2px solid rgba(0,0,0,36%)">
                         <div class="brand-item">
-                            <img src="{{url('/image_upload/image_brand')}}/{{$value->image}}" class="img-responsive" width="10%">
-                            <h2 style="font-size: 1.5rem;">{{$value->brand}}</h2>
+                            <img src="{{url('/image_upload/image_brand')}}/{{$value->image}}" class="img-responsive" width="50%">
                         </div>
                     </a>
                     @endforeach
@@ -54,8 +53,7 @@
         <div class="featured-product product">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-5"></div>
-                    <div class=" col-md-2 col-12 section-header" style="text-align: center;">
+                    <div class="col-md-2 col-12 section-header" style="text-align: center;">
                         <h2>สินค้าแนะนำ<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
                     </div>
                     <div class="col-md-5"></div>
@@ -176,7 +174,6 @@
         <div class="recent-product product">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-5"></div>
                     <div class=" col-md-2 col-12 section-header" style="text-align: center;">
                         <h2>สินค้าใหม่<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
                     </div>

@@ -26,6 +26,7 @@ Route::group(['prefix' => '/'], function(){
     Route::get('/dealer-shop', 'Frontend\PtkController@dealerShop');
     Route::get('/category/{category}','Frontend\PtkController@category');
     Route::get('/brand/{brand}','Frontend\PtkController@brand');
+    Route::get('/promotion','Frontend\PtkController@promotion');
 });
 
 // แอดมิน

@@ -1,3 +1,13 @@
+<style>
+@media only screen and (max-width: 768px) {
+    #mobile {
+      display: inline !important;
+    }
+    #desktop {
+      display: none;
+    }
+}
+</style>
 <!-- Top bar Start -->
 <div class="top-bar">
     <div class="container-fluid">
@@ -52,16 +62,11 @@
                             <a href="{{url('/faq')}}" class="dropdown-item">FAQ</a>
                         </div>
                     </div>
-                    <a href="{{url('#')}}" class="nav-item nav-link">โปรโมชั่น</a>
+                    <a href="{{url('/promotion')}}" class="nav-item nav-link">โปรโมชั่น</a>
                     <a href="{{url('/about-us')}}" class="nav-item nav-link">เกี่ยวกับเรา</a>
                     <a href="{{url('/contact-us')}}" class="nav-item nav-link">ติดต่อเรา</a>
                 </div>
-                    <div class="bottom-bar">
-                        <div class="search">
-                            <input type="text" placeholder="Search">
-                        </div>
-                    </div>
-                <a href="{{url('/member/register-warranty')}}" class="nav-item nav-link" style="background-color: #21bdff;">ลงทะเบียนรับประกันฟิล์ม</a>
+                <a id="desktop" href="{{url('/member/register-warranty')}}" class="nav-item nav-link" style="background-color: #21bdff;">ลงทะเบียนรับประกันฟิล์ม</a>
             </div>
         </nav>
     </div>
@@ -71,23 +76,21 @@
 <!-- Bottom Bar Start -->
 <div class="container-fluid">
     <div class="bottom-bar">
-        <div class="row align-items-center">
-            <div class="col-md-3">
+        <div class="row">
+            <div class="col-md-3 col-12">
                 <div class="logo">
                     <a href="{{url('/')}}">
-                        <img src="{{url('img/logo-ptk.jpg')}}" alt="Logo" width="100%">
+                        @php
+                            $image = DB::table('image_websites')->where('image_type','logo')->value('image');
+                        @endphp
+                        <img src="{{url('/image_upload/image_website')}}/{{$image}}" class="img-responsive" alt="Logo">
                     </a>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="bottom-bar">
-                    <div class="search">
-                        <input type="text" placeholder="Search">
-                    </div>
-                </div>
-            <a href="{{url('/member/register-warranty')}}" class="nav-item nav-link" style="background-color: #ffffff;">ลงทะเบียนรับประกันฟิล์ม</a>
+            <div class="col-md-6 col-12">
+                <center><a id="mobile" style="display: none;" class="btn-warranty" href="{{url('/member/register-warranty')}}">ลงทะเบียนรับประกันฟิล์ม</a><center><br>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-12">
                 <div class="user">
                     <a href="#" class="btn wishlist">
                         <i class="fa fa-heart"></i>

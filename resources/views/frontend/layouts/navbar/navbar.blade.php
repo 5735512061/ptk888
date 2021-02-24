@@ -1,3 +1,13 @@
+<style>
+    @media only screen and (max-width: 768px) {
+        #mobile {
+          display: inline !important;
+        }
+        #desktop {
+          display: none;
+        }
+    }
+    </style>
 <!-- Top bar Start -->
 <div class="top-bar">
     <div class="container-fluid">
@@ -51,11 +61,11 @@
                             <a href="{{url('/faq')}}" class="dropdown-item">FAQ</a>
                         </div>
                     </div>
-                    <a href="{{url('#')}}" class="nav-item nav-link">โปรโมชั่น</a>
+                    <a href="{{url('/promotion')}}" class="nav-item nav-link">โปรโมชั่น</a>
                     <a href="{{url('/about-us')}}" class="nav-item nav-link">เกี่ยวกับเรา</a>
                     <a href="{{url('/contact-us')}}" class="nav-item nav-link">ติดต่อเรา</a>
                 </div>
-                <a href="{{url('/member/register-warranty')}}" class="nav-item nav-link" style="background-color: #21bdff;">ลงทะเบียนรับประกันฟิล์ม</a>
+                <a id="desktop" href="{{url('/member/register-warranty')}}" class="nav-item nav-link" style="background-color: #21bdff;">ลงทะเบียนรับประกันฟิล์ม</a>
             </div>
         </nav>
     </div>
@@ -70,15 +80,15 @@
             <div class="col-md-3">
                 <div class="logo">
                     <a href="{{url('/')}}">
-                        <img src="{{url('img/logo-ptk.jpg')}}" alt="Logo" width="100%">
+                        @php
+                            $image = DB::table('image_websites')->where('image_type','logo')->value('image');
+                        @endphp
+                        <img src="{{url('/image_upload/image_website')}}/{{$image}}" class="img-responsive" alt="Logo" width="50%">
                     </a>
                 </div>
             </div>
             <div class="col-md-6">
-                {{-- <div class="search">
-                    <input type="text" placeholder="Search">
-                    <button><i class="fa fa-search"></i></button>
-                </div> --}}
+                <center><a id="mobile" style="display: none;" class="btn-warranty" href="{{url('/member/register-warranty')}}">ลงทะเบียนรับประกันฟิล์ม</a><center><br>
             </div>
             <div class="col-md-3">
                 <div class="user">

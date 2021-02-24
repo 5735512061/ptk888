@@ -5,7 +5,10 @@
             <div class="col-lg-3 col-md-6">
                 <div class="logo">
                     <a href="{{url('/')}}">
-                        <img src="{{url('img/logo-ptk.jpg')}}" alt="Logo" width="100%">
+                        @php
+                            $image = DB::table('image_websites')->where('image_type','logo')->value('image');
+                        @endphp
+                        <img src="{{url('/image_upload/image_website')}}/{{$image}}" alt="Logo" width="50%" class="img-responsive"> 
                     </a>
                 </div>
             </div>
