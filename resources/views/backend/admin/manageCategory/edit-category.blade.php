@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>อัพโหลดยี่ห้อผลิตภัณฑ์</h5>
+                            <h5>แก้ไขประเภทผลิตภัณฑ์</h5>
                             <div class="card-header-right">
                                 <ul class="list-unstyled card-option">
                                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -20,28 +20,23 @@
                             </div>
                         </div>
                         <div class="card-block">
-                            <form action="{{url('/admin/upload-brand')}}" enctype="multipart/form-data" method="post">@csrf
+                            <form action="{{url('/admin/update-category')}}" enctype="multipart/form-data" method="post">@csrf
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ยี่ห้อผลิตภัณฑ์</label>
+                                    <label class="col-sm-2 col-form-label">ประเภทผลิตภัณฑ์</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกยี่ห้อผลิตภัณฑ์" name="brand">
+                                        <input type="text" class="form-control" name="category" value="{{$category->category}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ยี่ห้อผลิตภัณฑ์ภาษาอังกฤษ</label>
+                                    <label class="col-sm-2 col-form-label">ประเภทผลิตภัณฑ์ภาษาอังกฤษ</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกยี่ห้อผลิตภัณฑ์เป็นภาษาอังกฤษ เท่านั้น" name="brand_eng">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">อัพโหลดรูปภาพโลโก้ยี่ห้อ</label>
-                                    <div class="col-sm-10">
-                                        <input type="file" class="form-control" name="image">
+                                        <input type="text" class="form-control" name="category_eng" value="{{$category->category_eng}}">
                                     </div>
                                 </div>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-4 offset-md-2">
-                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพโหลดยี่ห้อผลิตภัณฑ์</button>
+                                        <input type="hidden" name="id" value="{{$category->id}}">
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพเดตประเภทผลิตภัณฑ์</button>
                                     </div>
                                 </div>
                             </form>
@@ -52,7 +47,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5>รายละเอียดยี่ห้อผลิตภัณฑ์</h5>
+                    <h5>รายละเอียดประเภทผลิตภัณฑ์</h5>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -69,31 +64,29 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>รูปภาพ</th>
-                                    <th>ยี่ห้อผลิตภัณฑ์</th>
-                                    <th>ยี่ห้อผลิตภัณฑ์ (ภาษาอังกฤษ)</th>
+                                    <th>ประเภทผลิตภัณฑ์</th>
+                                    <th>ประเภทผลิตภัณฑ์ (ภาษาอังกฤษ)</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($brands as $brand => $value)
+                                @foreach ($categorys as $category => $value)
                                     <tr>
-                                        <th scope="row">{{$NUM_PAGE*($page-1) + $brand+1}}</th>
-                                        <td><img src="{{url('/image_upload/image_brand')}}/{{$value->image}}" class="img-responsive" height="50px;"></td>
-                                        <td>{{$value->brand}}</td>
-                                        <td>{{$value->brand_eng}}</td>
+                                        <th scope="row">{{$NUM_PAGE*($page-1) + $category+1}}</th>
+                                        <td>{{$value->category}}</td>
+                                        <td>{{$value->category_eng}}</td>
                                         <td>       
-                                            <a href="{{url('/admin/edit-brand')}}/{{$value->id}}">
+                                            <a href="{{url('/admin/edit-category')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>
                                             </a>        
-                                            <a href="{{url('/admin/delete-brand/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
+                                            <a href="{{url('/admin/delete-category/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                 <i class="fa fa-trash" style="color:red;"></i>
                                             </a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
-                            {{$brands->links()}}
+                            {{$categorys->links()}}
                         </table>
                     </div>
                 </div>

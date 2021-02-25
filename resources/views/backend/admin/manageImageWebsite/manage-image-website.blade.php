@@ -25,8 +25,8 @@
                                     <label class="col-sm-2 col-form-label">ประเภทรูปภาพ</label>
                                     <div class="col-sm-10">
                                         <select name="image_type" class="form-control">
-                                            <option value="logo">รูปภาพโลโก้</option>
-                                            <option value="slide_main">รูปภาพสไลด์หลัก หน้าแรก</option>
+                                            <option value="รูปภาพโลโก้">รูปภาพโลโก้</option>
+                                            <option value="รูปภาพสไลด์หลัก หน้าแรก">รูปภาพสไลด์หลัก หน้าแรก</option>
                                         </select>
                                     </div>
                                 </div>

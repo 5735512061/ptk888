@@ -10,6 +10,7 @@ use App\model\Category;
 use App\model\Brand;
 use App\model\Product;
 use App\model\ImageProduct;
+use App\model\Promotion;
 
 use App\Member;
 use App\Store;
@@ -123,7 +124,7 @@ class AdminController extends Controller
 
     public function manageImageWebsite(Request $request){
         $NUM_PAGE = 10;
-        $images = ImageWebsite::orderByRaw('FIELD(image_type,"logo","slide_main")')->paginate($NUM_PAGE);
+        $images = ImageWebsite::orderByRaw('FIELD(image_type,"รูปภาพโลโก้","รูปภาพสไลด์หลัก หน้าแรก")')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageImageWebsite/manage-image-website')->with('NUM_PAGE',$NUM_PAGE)
@@ -161,6 +162,31 @@ class AdminController extends Controller
         return back();
     }
 
+    public function deleteCategory($id){
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return back();
+    }
+
+    public function editCategory(Request $request, $id){
+        $NUM_PAGE = 10;
+        $category = Category::findOrFail($id);
+        $categorys = Category::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageCategory/edit-category')->with('NUM_PAGE',$NUM_PAGE)
+                                                                 ->with('page',$page)
+                                                                 ->with('category',$category)
+                                                                 ->with('categorys',$categorys);
+    }
+
+    public function updateCategory(Request $request){
+        $id = $request->get('id');
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
+        return redirect()->action('Backend\AdminController@manageCategory');
+    }
+
     public function manageBrand(Request $request){
         $NUM_PAGE = 10;
         $brands = Brand::paginate($NUM_PAGE);
@@ -183,6 +209,40 @@ class AdminController extends Controller
             $imageUpload->save();
         }
         return back();
+    }
+
+    public function deleteBrand($id){
+        $brand = Brand::findOrFail($id);
+        $brand->delete();
+        return back();
+    }
+
+    public function editBrand(Request $request, $id){
+        $NUM_PAGE = 10;
+        $brand = Brand::findOrFail($id);
+        $brands = Brand::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageBrand/edit-brand')->with('NUM_PAGE',$NUM_PAGE)
+                                                           ->with('page',$page)
+                                                           ->with('brand',$brand)
+                                                           ->with('brands',$brands);
+    }
+
+    public function updateBrand(Request $request){
+        $id = $request->get('id');
+        $brand = Brand::findOrFail($id);
+        $brand->update($request->all());
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+            $image->move('image_upload/image_brand/', $filename);
+            $path = 'image_upload/image_brand/'.$filename;
+            $brand = Brand::findOrFail($id);
+            $brand->image = $filename;
+            $brand->save();
+        }
+        return redirect()->action('Backend\AdminController@manageBrand');
     }
 
     public function uploadProductForm(Request $request){
@@ -270,7 +330,7 @@ class AdminController extends Controller
     public function editImageWebsite(Request $request, $id){
         $NUM_PAGE = 10;
         $image_website = ImageWebsite::findOrFail($id);
-        $images = ImageWebsite::paginate($NUM_PAGE);
+        $images = ImageWebsite::orderByRaw('FIELD(image_type,"รูปภาพโลโก้","รูปภาพสไลด์หลัก หน้าแรก")')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageImageWebsite/edit-image-website')->with('NUM_PAGE',$NUM_PAGE)
@@ -283,7 +343,40 @@ class AdminController extends Controller
         $id = $request->get('id');
         $image_website = ImageWebsite::findOrFail($id);
         $image_website->update($request->all());
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+            $image->move('image_upload/image_website/', $filename);
+            $path = 'image_upload/image_website/'.$filename;
+            $image_website = ImageWebsite::findOrFail($id);
+            $image_website->image = $filename;
+            $image_website->save();
+        }
         return redirect()->action('Backend\AdminController@manageImageWebsite');
+    }
+
+    public function managePromotion(Request $request){
+        $NUM_PAGE = 10;
+        $promotions = Promotion::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageImageWebsite/manage-promotion')->with('NUM_PAGE',$NUM_PAGE)
+                                                                        ->with('page',$page)
+                                                                        ->with('promotions',$promotions);
+    }
+
+    public function uploadPromotion(Request $request){
+        $promotion = $request->all();
+        $promotion = Promotion::create($promotion);
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+            $image->move('image_upload/image_promotion/', $filename);
+            $path = 'image_upload/image_promotion/'.$filename;
+            $promotion->image = $filename;
+            $promotion->save();
+        }
+        return back();
     }
     
 }

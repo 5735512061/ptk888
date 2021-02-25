@@ -1,8 +1,9 @@
 @extends("/frontend/layouts/template/template-index")
 
 @section("content")
-        <!-- Main Slider Start --><div class="container-fluid">
-        <div class="header" style="background-color: #fff;">
+        <!-- Main Slider Start -->
+        <div class="container-fluid">
+            <div class="header" style="background-color: #fff;">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="header-slider normal-slider">
@@ -179,18 +180,11 @@
                     </div>
                     <div class="col-md-5"></div>
                 </div>
-                <div class="row align-items-center product-slider product-slider-4">
-                    <div class="col-lg-3">
+                <div class="row align-items-center">
+                    <div class="col-lg-4">
                         <div class="product-item">
                             <div class="product-title">
                                 <a href="#">Product Name</a>
-                                <div class="ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
                             </div>
                             <div class="product-image">
                                 <a href="product-detail.html">
@@ -201,17 +195,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="product-item">
                             <div class="product-title">
                                 <a href="#">Product Name</a>
-                                <div class="ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
                             </div>
                             <div class="product-image">
                                 <a href="product-detail.html">
@@ -222,63 +209,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="product-item">
                             <div class="product-title">
                                 <a href="#">Product Name</a>
-                                <div class="ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
                             </div>
                             <div class="product-image">
                                 <a href="product-detail.html">
                                     <img src="img/product-8.jpg" alt="Product Image">
-                                </a>
-                            </div>
-                            <div class="product-price">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product-item">
-                            <div class="product-title">
-                                <a href="#">Product Name</a>
-                                <div class="ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="product-image">
-                                <a href="product-detail.html">
-                                    <img src="img/product-9.jpg" alt="Product Image">
-                                </a>
-                            </div>
-                            <div class="product-price">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product-item">
-                            <div class="product-title">
-                                <a href="#">Product Name</a>
-                                <div class="ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="product-image">
-                                <a href="product-detail.html">
-                                    <img src="img/product-10.jpg" alt="Product Image">
                                 </a>
                             </div>
                             <div class="product-price">

@@ -75,10 +75,10 @@
                                         <td>{{$value->category}}</td>
                                         <td>{{$value->category_eng}}</td>
                                         <td>       
-                                            <a href="{{url('/admin/edit-image')}}/{{$value->id}}">
+                                            <a href="{{url('/admin/edit-category')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>
                                             </a>        
-                                            <a href="{{url('/admin/delete-image/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
+                                            <a href="{{url('/admin/delete-category/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                 <i class="fa fa-trash" style="color:red;"></i>
                                             </a>
                                         </td>

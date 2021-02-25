@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>อัพโหลดยี่ห้อผลิตภัณฑ์</h5>
+                            <h5>แก้ไขยี่ห้อผลิตภัณฑ์</h5>
                             <div class="card-header-right">
                                 <ul class="list-unstyled card-option">
                                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -20,17 +20,17 @@
                             </div>
                         </div>
                         <div class="card-block">
-                            <form action="{{url('/admin/upload-brand')}}" enctype="multipart/form-data" method="post">@csrf
+                            <form action="{{url('/admin/update-brand')}}" enctype="multipart/form-data" method="post">@csrf
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ยี่ห้อผลิตภัณฑ์</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกยี่ห้อผลิตภัณฑ์" name="brand">
+                                        <input type="text" class="form-control" name="brand" value="{{$brand->brand}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ยี่ห้อผลิตภัณฑ์ภาษาอังกฤษ</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกยี่ห้อผลิตภัณฑ์เป็นภาษาอังกฤษ เท่านั้น" name="brand_eng">
+                                        <input type="text" class="form-control" name="brand_eng" value="{{$brand->brand_eng}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -41,7 +41,8 @@
                                 </div>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-4 offset-md-2">
-                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพโหลดยี่ห้อผลิตภัณฑ์</button>
+                                        <input type="hidden" name="id" value="{{$brand->id}}">
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพเดตยี่ห้อผลิตภัณฑ์</button>
                                     </div>
                                 </div>
                             </form>

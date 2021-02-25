@@ -55,18 +55,29 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-member-store/{id}', 'Backend\AdminController@deleteMemberStore');
     Route::get('/edit-member-store/{id}', 'Backend\AdminController@editMemberStore');
     Route::post('/update-member-store', 'Backend\AdminController@updateMemberStore');
-    // จัดการรูปภาพหน้าเว็บไซต์ และจัดการข้อมูลรูปภาพ
+    // จัดการรูปภาพหน้าเว็บไซต์ โปรโมชั่น และจัดการข้อมูลรูปภาพ
     Route::get('/manage-image-website', 'Backend\AdminController@manageImageWebsite');
     Route::post('/upload-image-website', 'Backend\AdminController@UploadImageWebsite');
     Route::get('/delete-image-website/{id}', 'Backend\AdminController@deleteImageWebsite');
     Route::get('/edit-image-website/{id}', 'Backend\AdminController@editImageWebsite');
     Route::post('/update-image-website', 'Backend\AdminController@updateImagewebsite');
+    Route::get('/manage-promotion', 'Backend\AdminController@managePromotion');
+    Route::post('/upload-promotion', 'Backend\AdminController@UploadPromotion');
+    Route::get('/delete-promotion/{id}', 'Backend\AdminController@deletePromotion');
+    Route::get('/edit-promotion/{id}', 'Backend\AdminController@editPromotion');
+    Route::post('/update-promotion', 'Backend\AdminController@updatePromotion');
     // จัดการประเภทผลิตภัณฑ์
     Route::get('/manage-category', 'Backend\AdminController@manageCategory');
     Route::post('/upload-category', 'Backend\AdminController@UploadCategory');
+    Route::get('/delete-category/{id}', 'Backend\AdminController@deleteCategory');
+    Route::get('/edit-category/{id}', 'Backend\AdminController@editCategory');
+    Route::post('/update-category', 'Backend\AdminController@updateCategory');
     // จัดการยี่ห้อผลิตภัณฑ์
     Route::get('/manage-brand', 'Backend\AdminController@manageBrand');
     Route::post('/upload-brand', 'Backend\AdminController@UploadBrand');
+    Route::get('/delete-brand/{id}', 'Backend\AdminController@deleteBrand');
+    Route::get('/edit-brand/{id}', 'Backend\AdminController@editBrand');
+    Route::post('/update-brand', 'Backend\AdminController@updateBrand');
     // จัดการคลังสินค้า
     Route::get('/upload-product-form', 'Backend\AdminController@uploadProductForm');
     Route::post('/upload-product', 'Backend\AdminController@uploadProduct');

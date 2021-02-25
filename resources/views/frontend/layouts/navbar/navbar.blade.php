@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">ยี่ห้อสินค้า</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">สินค้าตามรุ่นมือถือ</a>
                         <div class="dropdown-menu">
                             @foreach ($brands as $brand => $value)
                                 <a href="{{url('/brand')}}/{{$value->brand_eng}}" class="dropdown-item">{{$value->brand_eng}}</a>
@@ -81,7 +81,7 @@
                 <div class="logo">
                     <a href="{{url('/')}}">
                         @php
-                            $image = DB::table('image_websites')->where('image_type','logo')->value('image');
+                            $image = DB::table('image_websites')->where('image_type','รูปภาพโลโก้')->value('image');
                         @endphp
                         <img src="{{url('/image_upload/image_website')}}/{{$image}}" class="img-responsive" alt="Logo" width="50%">
                     </a>

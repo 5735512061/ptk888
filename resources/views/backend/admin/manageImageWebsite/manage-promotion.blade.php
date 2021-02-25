@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>อัพโหลดยี่ห้อผลิตภัณฑ์</h5>
+                            <h5>อัพโหลดโปรโมชั่น</h5>
                             <div class="card-header-right">
                                 <ul class="list-unstyled card-option">
                                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -20,28 +20,38 @@
                             </div>
                         </div>
                         <div class="card-block">
-                            <form action="{{url('/admin/upload-brand')}}" enctype="multipart/form-data" method="post">@csrf
+                            <form action="{{url('/admin/upload-promotion')}}" enctype="multipart/form-data" method="post">@csrf
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ยี่ห้อผลิตภัณฑ์</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกยี่ห้อผลิตภัณฑ์" name="brand">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ยี่ห้อผลิตภัณฑ์ภาษาอังกฤษ</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกยี่ห้อผลิตภัณฑ์เป็นภาษาอังกฤษ เท่านั้น" name="brand_eng">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">อัพโหลดรูปภาพโลโก้ยี่ห้อ</label>
+                                    <label class="col-sm-2 col-form-label">อัพโหลดรูปภาพโปรโมชั่น</label>
                                     <div class="col-sm-10">
                                         <input type="file" class="form-control" name="image">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">หัวข้อคำอธิบาย</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" placeholder="หัวข้อคำอธิบาย (ถ้ามี)" name="heading_detail">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">รายละเอียดเพิ่มเติม</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="detail" rows="5" cols="5" class="form-control"
+                                        placeholder="รายละเอียดเพิ่มเติม (ถ้ามี)"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">สถานะ</label>
+                                    <div class="col-sm-10">
+                                        <select name="image_type" class="form-control">
+                                            <option value="เปิดโปรโมชั่น">เปิดโปรโมชั่น</option>
+                                            <option value="ปิดโปรโมชั่น">ปิดโปรโมชั่น</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-4 offset-md-2">
-                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพโหลดยี่ห้อผลิตภัณฑ์</button>
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพโหลดโปรโมฃั่น</button>
                                     </div>
                                 </div>
                             </form>
@@ -52,7 +62,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5>รายละเอียดยี่ห้อผลิตภัณฑ์</h5>
+                    <h5>รายละเอียดโปรโมชั่น</h5>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -70,30 +80,28 @@
                                 <tr>
                                     <th>#</th>
                                     <th>รูปภาพ</th>
-                                    <th>ยี่ห้อผลิตภัณฑ์</th>
-                                    <th>ยี่ห้อผลิตภัณฑ์ (ภาษาอังกฤษ)</th>
+                                    <th>หัวข้อคำอธิบาย</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($brands as $brand => $value)
+                                @foreach ($promotions as $promotion => $value)
                                     <tr>
-                                        <th scope="row">{{$NUM_PAGE*($page-1) + $brand+1}}</th>
-                                        <td><img src="{{url('/image_upload/image_brand')}}/{{$value->image}}" class="img-responsive" height="50px;"></td>
-                                        <td>{{$value->brand}}</td>
-                                        <td>{{$value->brand_eng}}</td>
+                                        <th scope="row">{{$NUM_PAGE*($page-1) + $promotion+1}}</th>
+                                        <td><img src="{{url('/image_upload/image_promotion')}}/{{$value->image}}" class="img-responsive" height="50px;"></td>
+                                        <td>{{$value->heading_detail}}</td>
                                         <td>       
-                                            <a href="{{url('/admin/edit-brand')}}/{{$value->id}}">
+                                            <a href="{{url('/admin/edit-image-website')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>
                                             </a>        
-                                            <a href="{{url('/admin/delete-brand/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
+                                            <a href="{{url('/admin/delete-image-website/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                 <i class="fa fa-trash" style="color:red;"></i>
                                             </a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
-                            {{$brands->links()}}
+                            {{$promotions->links()}}
                         </table>
                     </div>
                 </div>

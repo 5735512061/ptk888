@@ -219,7 +219,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="waves-effect waves-dark">
+                <a href="{{url('/admin/manage-promotion')}}" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-notepad"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">จัดการโปรโมชั่นสินค้า</span>
                     <span class="pcoded-mcaret"></span>

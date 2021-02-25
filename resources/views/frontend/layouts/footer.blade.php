@@ -6,7 +6,7 @@
                 <div class="logo">
                     <a href="{{url('/')}}">
                         @php
-                            $image = DB::table('image_websites')->where('image_type','logo')->value('image');
+                            $image = DB::table('image_websites')->where('image_type','รูปภาพโลโก้')->value('image');
                         @endphp
                         <img src="{{url('/image_upload/image_website')}}/{{$image}}" alt="Logo" width="50%" class="img-responsive"> 
                     </a>
