@@ -74,6 +74,7 @@
 <!-- Nav Bar End -->      
 
 <!-- Bottom Bar Start -->
+<br>
 <div class="container-fluid">
     <div class="bottom-bar">
         <div class="row">

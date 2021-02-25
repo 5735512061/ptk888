@@ -73,24 +73,24 @@
 <!-- Nav Bar End -->      
 
 <!-- Bottom Bar Start -->
-
-<div class="bottom-bar">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-md-3">
+<br>
+<div class="container-fluid">
+    <div class="bottom-bar">
+        <div class="row">
+            <div class="col-md-3 col-12">
                 <div class="logo">
                     <a href="{{url('/')}}">
                         @php
                             $image = DB::table('image_websites')->where('image_type','รูปภาพโลโก้')->value('image');
                         @endphp
-                        <img src="{{url('/image_upload/image_website')}}/{{$image}}" class="img-responsive" alt="Logo" width="50%">
+                        <img src="{{url('/image_upload/image_website')}}/{{$image}}" class="img-responsive" alt="Logo">
                     </a>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
                 <center><a id="mobile" style="display: none;" class="btn-warranty" href="{{url('/member/register-warranty')}}">ลงทะเบียนรับประกันฟิล์ม</a><center><br>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-12">
                 <div class="user">
                     <a href="#" class="btn wishlist">
                         <i class="fa fa-heart"></i>
