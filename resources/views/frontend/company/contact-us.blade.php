@@ -28,20 +28,20 @@
             </div>
             <div class="col-lg-4">
                 <div class="contact-form">
-                    <form>
+                    <form action="{{url('member/send-message')}}" enctype="multipart/form-data" method="post">@csrf
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="ชื่อ-นานมสกุลผู้ติดต่อ" />
+                                <input type="text" class="form-control" placeholder="ชื่อ-นานมสกุลผู้ติดต่อ" name="name"/>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" />
+                                <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" name="phone"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="หัวข้อเรื่อง" />
+                            <input type="text" class="form-control" placeholder="หัวข้อเรื่อง" name="subject"/>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" rows="5" placeholder="ข้อความที่ต้องการติดต่อ"></textarea>
+                            <textarea class="form-control" rows="5" placeholder="ข้อความที่ต้องการติดต่อ" name="message"></textarea>
                         </div>
                         <div><button class="btn" type="submit">ส่งข้อความติดต่อ</button></div>
                     </form>

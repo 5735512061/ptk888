@@ -211,26 +211,45 @@
 
         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">ตัวจัดการเว็บไซต์</div>
         <ul class="pcoded-item pcoded-left-item">
-            <li>
-                <a href="{{url('/admin/manage-image-website')}}" class="waves-effect waves-dark">
+            <li class="pcoded-hasmenu">
+                <a href="javascript:void(0)" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-image"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">จัดการรูปภาพเว็บไซต์</span>
+                    <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">จัดการรูปภาพเว็บไซต์</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
-            </li>
-            <li>
-                <a href="{{url('/admin/manage-promotion')}}" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-notepad"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">จัดการโปรโมชั่นสินค้า</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
+                <ul class="pcoded-submenu">
+                    <li class=" ">
+                        <a href="{{url('/admin/manage-image-website')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">โลโก้ และสไลด์หลัก</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{url('/admin/manage-promotion')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">โปรโมชั่นสินค้า</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{url('/admin/manage-image-ProductRecommend')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">สินค้าแนะนำ</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{url('/admin/manage-image-ProductNew')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">สินค้าใหม่</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
 
         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">การติดต่อสอบถาม</div>
         <ul class="pcoded-item pcoded-left-item">
             <li>
-                <a href="#" class="waves-effect waves-dark">
+                <a href="{{url('/admin/message-customer')}}" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-email"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">การสอบถามของลูกค้า</span>
                     <span class="pcoded-mcaret"></span>

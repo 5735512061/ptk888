@@ -55,7 +55,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-2 col-12 section-header" style="text-align: center;">
-                        <h2>สินค้าแนะนำ<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
+                        <h2>สินค้าใหม่<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
                     </div>
                     <div class="col-md-5"></div>
                 </div>
@@ -176,7 +176,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class=" col-md-2 col-12 section-header" style="text-align: center;">
-                        <h2>สินค้าใหม่<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
+                        <h2>สินค้าแนะนำ<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
                     </div>
                     <div class="col-md-5"></div>
                 </div>

@@ -11,6 +11,9 @@ use App\model\Brand;
 use App\model\Product;
 use App\model\ImageProduct;
 use App\model\Promotion;
+use App\model\ImageProductRecommend;
+use App\model\ImageProductNew;
+use App\model\MessageCustomer;
 
 use App\Member;
 use App\Store;
@@ -378,5 +381,38 @@ class AdminController extends Controller
         }
         return back();
     }
+
+    public function manageImageProductRecommend(Request $request){
+        $NUM_PAGE = 10;
+        $productRecommends = ImageProductRecommend::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageImageWebsite/manage-image-productRecommend')->with('NUM_PAGE',$NUM_PAGE)
+                                                                                     ->with('page',$page)
+                                                                                     ->with('productRecommends',$productRecommends);
+    }
+
+    public function UploadImageProductRecommend(Request $request){
+        $productRecommend = $request->all();
+        $productRecommend = ImageProductRecommend::create($productRecommend);
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+            $image->move('image_upload/image_product_recommend/', $filename);
+            $path = 'image_upload/image_product_recommend/'.$filename;
+            $productRecommend->image = $filename;
+            $productRecommend->save();
+        }
+        return back();
+    }
     
+    public function MessageCustomer(Request $request){
+        $NUM_PAGE = 10;
+        $messages = MessageCustomer::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/message/message-customer')->with('NUM_PAGE',$NUM_PAGE)
+                                                             ->with('page',$page)
+                                                             ->with('messages',$messages);
+    }
 }

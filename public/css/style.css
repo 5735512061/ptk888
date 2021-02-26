@@ -51,7 +51,7 @@ h2 {
 .back-to-top {
     position: fixed;
     display: none;
-    background: #62beff;
+    background: #ffc107;
     color: #ffffff;
     width: 40px;
     height: 40px;
@@ -1950,7 +1950,7 @@ h2 {
 .newsletter {
     position: relative;
     padding: 30px 0;
-    background: #62beff;
+    background: #ffac3b;
 }
 
 .newsletter h1 {

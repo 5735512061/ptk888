@@ -61,11 +61,18 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-image-website/{id}', 'Backend\AdminController@deleteImageWebsite');
     Route::get('/edit-image-website/{id}', 'Backend\AdminController@editImageWebsite');
     Route::post('/update-image-website', 'Backend\AdminController@updateImagewebsite');
+
     Route::get('/manage-promotion', 'Backend\AdminController@managePromotion');
     Route::post('/upload-promotion', 'Backend\AdminController@UploadPromotion');
     Route::get('/delete-promotion/{id}', 'Backend\AdminController@deletePromotion');
     Route::get('/edit-promotion/{id}', 'Backend\AdminController@editPromotion');
     Route::post('/update-promotion', 'Backend\AdminController@updatePromotion');
+
+    Route::get('/manage-image-ProductRecommend', 'Backend\AdminController@manageImageProductRecommend');
+    Route::post('/upload-image-ProductRecommend', 'Backend\AdminController@UploadImageProductRecommend');
+    Route::get('/delete-image-ProductRecommend/{id}', 'Backend\AdminController@deleteImageProductRecommend');
+    Route::get('/edit-image-ProductRecommend/{id}', 'Backend\AdminController@editImageProductRecommend');
+    Route::post('/update-image-ProductRecommend', 'Backend\AdminController@updateImageProductRecommend');
     // จัดการประเภทผลิตภัณฑ์
     Route::get('/manage-category', 'Backend\AdminController@manageCategory');
     Route::post('/upload-category', 'Backend\AdminController@UploadCategory');
@@ -85,6 +92,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-product/{id}', 'Backend\AdminController@deleteProduct');
     Route::get('/edit-product/{id}', 'Backend\AdminController@editProduct');
     Route::post('/update-product', 'Backend\AdminController@updateProduct');
+    // การสอบถามของลูกค้า
+    Route::get('/message-customer', 'Backend\AdminController@MessageCustomer');
 
 });
 
@@ -118,4 +127,6 @@ Route::group(['prefix' => 'member'], function(){
     Route::get('/', 'Frontend\MemberController@index')->name('member.home');
     // ลงทะเบียนรับประกันฟิล์ม
     Route::get('/register-warranty', 'Backend\MemberController@registerWarranty');
+
+    Route::post('/send-message', 'Backend\MemberController@SendMessage');
 });
