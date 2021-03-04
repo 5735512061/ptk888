@@ -66,7 +66,7 @@
                     <a href="{{url('/about-us')}}" class="nav-item nav-link">เกี่ยวกับเรา</a>
                     <a href="{{url('/contact-us')}}" class="nav-item nav-link">ติดต่อเรา</a>
                 </div>
-                <a id="desktop" href="{{url('/member/register-warranty')}}" class="nav-item nav-link" style="background-color: #21bdff;">ลงทะเบียนรับประกันฟิล์ม</a>
+                <a id="desktop" href="{{url('/member/register-warranty')}}" class="nav-item nav-link" style="background-color: #ff8930; color:#fff;">ลงทะเบียนรับประกันฟิล์ม</a>
             </div>
         </nav>
     </div>
@@ -88,10 +88,20 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-6 col-12">
-                <center><a id="mobile" style="display: none;" class="btn-warranty" href="{{url('/member/register-warranty')}}">ลงทะเบียนรับประกันฟิล์ม</a><center><br>
+            <div class="col-md-12 col-12">
+                <a id="mobile" style="display: none;" class="btn-warranty" href="{{url('/member/register-warranty')}}">ลงทะเบียนรับประกันฟิล์ม</a>
+                    <div class="user" id="mobile" style="display: none;">
+                        <a href="#" class="btn wishlist" style="margin-right:4px !important; margin-bottom:5px !important;">
+                            <i class="fa fa-heart"></i>
+                            <span>(0)</span>
+                        </a>
+                        <a href="#" class="btn cart" style="margin-bottom:5px !important;">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>(0)</span>
+                        </a>
+                    </div>
             </div>
-            <div class="col-md-3 col-12">
+            <div class="col-md-3 col-12" id="desktop">
                 <div class="user">
                     <a href="#" class="btn wishlist">
                         <i class="fa fa-heart"></i>

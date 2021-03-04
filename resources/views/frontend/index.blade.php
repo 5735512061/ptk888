@@ -61,116 +61,33 @@
                 </div>
                 
                 <div class="row align-items-center product-slider product-slider-4" style="margin-top: 2rem;">
-                    <div class="col-lg-3">
-                        <div class="product-item">
-                            <div class="product-title">
-                                <div class="ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                    @foreach ($products as $product => $value)
+                        @php
+                            $image = DB::table('image_products')->where('product_id',$value->id)->value('image');
+                        @endphp
+                        <div class="col-lg-3">
+                            <div class="product-item">
+                                <div class="product-title">
+                                    <div class="ratting">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="product-image">
+                                    <a href="#">
+                                        <img src="{{url('/image_upload/image_product')}}/{{$image}}" width="100%">
+                                    </a>
+                                </div>
+                                <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name}}</h5>
+                                <div class="product-price">
+                                    <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 790 บาท</h5>
                                 </div>
                             </div>
-                            <div class="product-image">
-                                <a href="#">
-                                    <img src="{{url('img/productRecommend/productRecommend1.jpg')}}" alt="Product Image">
-                                </a>
-                            </div>
-                            <h5 style="font-weight: bold; padding:1.5rem;">WOLVERINE Self Repair ซ่อมแซมตัวเองภายใน 24 ชั่วโมง</h5>
-                            <div class="product-price">
-                                <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 790 บาท</h5>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product-item">
-                            <div class="product-title">
-                                <div class="ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="product-image">
-                                <a href="#">
-                                    <img src="{{url('img/productRecommend/productRecommend6.png')}}" alt="Product Image">
-                                </a>
-                            </div>
-                            <h5 style="font-weight: bold; padding:1.5rem;">WOLVERINE Self Repair ซ่อมแซมตัวเองภายใน 24 ชั่วโมง</h5>
-                            <div class="product-price">
-                                <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 790 บาท</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product-item">
-                            <div class="product-title">
-                                <div class="ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="product-image">
-                                <a href="#">
-                                    <img src="{{url('img/productRecommend/productRecommend7.png')}}" alt="Product Image">
-                                </a>
-                            </div>
-                            <h5 style="font-weight: bold; padding:1.5rem;">WOLVERINE Self Repair ซ่อมแซมตัวเองภายใน 24 ชั่วโมง</h5>
-                            <div class="product-price">
-                                <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 790 บาท</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product-item">
-                            <div class="product-title">
-                                <div class="ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="product-image">
-                                <a href="#">
-                                    <img src="{{url('img/productRecommend/productRecommend8.png')}}" alt="Product Image">
-                                </a>
-                            </div>
-                            <h5 style="font-weight: bold; padding:1.5rem;">WOLVERINE Self Repair ซ่อมแซมตัวเองภายใน 24 ชั่วโมง</h5>
-                            <div class="product-price">
-                                <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 790 บาท</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product-item">
-                            <div class="product-title">
-                                <div class="ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="product-image">
-                                <a href="#">
-                                    <img src="{{url('img/productRecommend/productRecommend4.jpg')}}" alt="Product Image">
-                                </a>
-                            </div>
-                            <h5 style="font-weight: bold; padding:1.5rem;">HYDROGEL FILM ชนิดด้าน สำหรับ iPhone 12</h5>
-                            <div class="product-price">
-                                <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 790 บาท</h5>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

@@ -36,6 +36,12 @@
                         <div class="card-block">
                             <form action="{{url('/admin/upload-product')}}" enctype="multipart/form-data" method="post">@csrf
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">รหัสสินค้า</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="product_code" value="{{$id_gen}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ประเภทผลิตภัณฑ์</label>
                                     <div class="col-sm-10">
                                         <select name="category_id" class="form-control">
@@ -46,10 +52,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ยี่ห้อผลิตภัณฑ์</label>
+                                    <label class="col-sm-2 col-form-label">ยี่ห้อฟิล์ม</label>
                                     <div class="col-sm-10">
-                                        <select name="brand_id" class="form-control">
-                                            <option value="ไม่มียี่ห้อของสินค้า">ไม่มียี่ห้อของสินค้า</option>
+                                        <select name="film_model" class="form-control">
+                                            <option value="Madam Film">Madam Film</option>
+                                            <option value="Dora Film">Dora Film</option>
+                                            <option value="Raiguard Film">Raigrad Film</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">ยี่ห้อโทรศัพท์</label>
+                                    <div class="col-sm-10">
+                                        <select name="brand_id" class="form-control" id="brand">
                                             @foreach ($brands as $brand => $value)
                                                 <option value="{{$value->id}}">{{$value->brand}}</option>
                                             @endforeach
@@ -57,9 +72,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">รหัสสินค้า</label>
+                                    <label class="col-sm-2 col-form-label">รุ่นโทรศัพท์</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="product_code" value="{{$id_gen}}" readonly>
+                                        <select name="phone_model_id" class="form-control" id="model">
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -67,7 +83,7 @@
                                     <div class="col-sm-10">
                                         <select name="product_type" class="form-control">
                                                 <option value="ไม่มีประเภทของสินค้า">ไม่มีประเภทของสินค้า</option>
-                                                <option value="ฟิล์ม wolverine">ฟิล์ม wolverine</option>
+                                                <option value="ฟิล์มวูล์ฟเวอรีน">ฟิล์มวูล์ฟเวอรีน</option>
                                                 <option value="ฟิล์มกันมอง">ฟิล์มกันมอง</option>
                                                 <option value="ฟิล์มใส">ฟิล์มใส</option>
                                                 <option value="ฟิล์มด้าน">ฟิล์มด้าน</option>
@@ -97,9 +113,18 @@
                                     <label class="col-sm-2 col-form-label">สถานะ</label>
                                     <div class="col-sm-10">
                                         <select name="status" class="form-control">
-                                            <option value="SHOW">แสดงสินค้า</option>
-                                            <option value="OFF">ซ่อนสินค้า</option>
+                                            <option value="แสดงสินค้า">แสดงสินค้า</option>
+                                            <option value="ซ่อนสินค้า">ซ่อนสินค้า</option>
                                     </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">สินค้าแนะนำ</label>
+                                    <div class="col-sm-10">
+                                        <select name="product_recommend" class="form-control">
+                                            <option value="ไม่ใช่">ไม่ใช่</option>
+                                            <option value="ใช่">ใช่</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -121,4 +146,19 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    $('#brand').on('change',function(e){
+    console.log(e);
+    var brand_id = e.target.value;
+        //ajax
+        $.get('./ajax-brand?cat_id=' + brand_id,function(data){
+            $('#model').empty();
+            $.each(data, function(index, subcatObj){
+                $('#model').append('<option value="'+subcatObj.id+'">'+subcatObj.model+'</option>'); 
+            });
+        });
+    });
+</script>
 @endsection

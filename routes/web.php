@@ -29,8 +29,11 @@ Route::group(['prefix' => '/'], function(){
     Route::get('/promotion','Frontend\PtkController@promotion');
 });
 
+
+
 // แอดมิน
 Route::group(['prefix' => 'admin'], function(){
+    Route::get('/ajax-brand','Backend\AjaxController@ajax_brand');
     // เข้าสู่ระบบแอดมิน
     Route::get('/login','Auth\LoginController@ShowLoginForm')->name('admin.login');
     Route::post('/login','Auth\LoginController@login')->name('admin.login.submit');
@@ -79,12 +82,18 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-category/{id}', 'Backend\AdminController@deleteCategory');
     Route::get('/edit-category/{id}', 'Backend\AdminController@editCategory');
     Route::post('/update-category', 'Backend\AdminController@updateCategory');
-    // จัดการยี่ห้อผลิตภัณฑ์
+    // จัดการยี่ห้อโทรศัพท์ และรุ่นโทรศัพท์
     Route::get('/manage-brand', 'Backend\AdminController@manageBrand');
     Route::post('/upload-brand', 'Backend\AdminController@UploadBrand');
     Route::get('/delete-brand/{id}', 'Backend\AdminController@deleteBrand');
     Route::get('/edit-brand/{id}', 'Backend\AdminController@editBrand');
     Route::post('/update-brand', 'Backend\AdminController@updateBrand');
+
+    Route::get('/manage-phone-model', 'Backend\AdminController@managePhoneModel');
+    Route::post('/upload-phone-model', 'Backend\AdminController@UploadPhoneModel');
+    Route::get('/delete-phone-model/{id}', 'Backend\AdminController@deletePhoneModel');
+    Route::get('/edit-phone-model/{id}', 'Backend\AdminController@editPhoneModel');
+    Route::post('/update-phone-model', 'Backend\AdminController@updatePhoneModel');
     // จัดการคลังสินค้า
     Route::get('/upload-product-form', 'Backend\AdminController@uploadProductForm');
     Route::post('/upload-product', 'Backend\AdminController@uploadProduct');

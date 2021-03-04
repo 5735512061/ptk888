@@ -14,7 +14,6 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request) {
-        dd($request);
         $admin = $request->all();
         $admin['password'] = bcrypt($admin['password']);
         $admin = Admin::create($admin);

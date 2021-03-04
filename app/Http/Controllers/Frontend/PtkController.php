@@ -8,13 +8,16 @@ use App\model\ImageWebsite;
 use App\model\Category;
 use App\model\Brand;
 use App\model\Promotion;
+use App\model\Product;
 use App\Store;
 
 class PtkController extends Controller
 {
     public function index() {
         $images = ImageWebsite::where('image_type','รูปภาพสไลด์หลัก หน้าแรก')->get();
-        return view('frontend/index')->with('images',$images);
+        $products = Product::where('product_recommend','ใช่')->get();
+        return view('frontend/index')->with('images',$images)
+                                     ->with('products',$products);
     }
 
     public function contactUs() {

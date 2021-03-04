@@ -141,7 +141,13 @@
                         </li>
                         <li class=" ">
                             <a href="{{url('/admin/manage-brand')}}" class="waves-effect waves-dark">
-                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">ยี่ห้อผลิตภัณฑ์</span>
+                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">ยี่ห้อโทรศัพท์</span>
+                                <span class="pcoded-mcaret"></span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="{{url('/admin/manage-phone-model')}}" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">รุ่นโทรศัพท์</span>
                                 <span class="pcoded-mcaret"></span>
                             </a>
                         </li>

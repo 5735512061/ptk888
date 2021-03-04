@@ -14,6 +14,7 @@ use App\model\Promotion;
 use App\model\ImageProductRecommend;
 use App\model\ImageProductNew;
 use App\model\MessageCustomer;
+use App\model\PhoneModel;
 
 use App\Member;
 use App\Store;
@@ -248,18 +249,65 @@ class AdminController extends Controller
         return redirect()->action('Backend\AdminController@manageBrand');
     }
 
+    public function managePhoneModel(Request $request){
+        $NUM_PAGE = 10;
+        $phoneModels = PhoneModel::paginate($NUM_PAGE);
+        $brands = Brand::get();
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/managePhoneModel/manage-phone-model')->with('NUM_PAGE',$NUM_PAGE)
+                                                                        ->with('page',$page)
+                                                                        ->with('phoneModels',$phoneModels)
+                                                                        ->with('brands',$brands);
+    }
+
+    public function uploadPhoneModel(Request $request){
+        $phoneModel = $request->all();
+        $phoneModel = PhoneModel::create($phoneModel);
+        return back();
+    }
+
+    public function deletePhoneModel($id){
+        $phoneModel = PhoneModel::findOrFail($id);
+        $phoneModel->delete();
+        return back();
+    }
+
+    public function editPhoneModel(Request $request, $id){
+        $NUM_PAGE = 10;
+        $phoneModel = PhoneModel::findOrFail($id);
+        $phoneModels = PhoneModel::paginate($NUM_PAGE);
+        $brands = Brand::get();
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/managePhoneModel/edit-phone-model')->with('NUM_PAGE',$NUM_PAGE)
+                                                                      ->with('page',$page)
+                                                                      ->with('phoneModel',$phoneModel)
+                                                                      ->with('phoneModels',$phoneModels)
+                                                                      ->with('brands',$brands);
+    }
+
+    public function updatePhoneModel(Request $request){
+        $id = $request->get('id');
+        $phoneModel = PhoneModel::findOrFail($id);
+        $phoneModel->update($request->all());
+        return redirect()->action('Backend\AdminController@managePhoneModel');
+    }
+
     public function uploadProductForm(Request $request){
         $NUM_PAGE = 10;
         $products = Product::paginate($NUM_PAGE);
         $categorys = Category::get();
         $brands = Brand::get();
+        $phone_models = PhoneModel::get();
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageProduct/upload-product-form')->with('NUM_PAGE',$NUM_PAGE)
                                                                       ->with('page',$page)
                                                                       ->with('products',$products)
                                                                       ->with('categorys',$categorys)
-                                                                      ->with('brands',$brands);
+                                                                      ->with('brands',$brands)
+                                                                      ->with('phone_models',$phone_models);
     }
 
     public function uploadProduct(Request $request){
@@ -283,11 +331,11 @@ class AdminController extends Controller
             $imageUpload->save();
         }
 
-        return redirect()->action('Backend\\AdminController@listProduct');
+        return redirect()->action('Backend\\AdminController@uploadProductForm');
     }
 
     public function listProduct(Request $request){
-        $NUM_PAGE = 10;
+        $NUM_PAGE = 20;
         $products = Product::paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -312,9 +360,11 @@ class AdminController extends Controller
         $product = Product::findOrFail($id);
         $categorys = Category::get();
         $brands = Brand::get();
+        $phone_models = PhoneModel::get();
         return view('backend/admin/manageProduct/edit-product')->with('product',$product)
                                                                ->with('categorys',$categorys)
-                                                               ->with('brands',$brands);
+                                                               ->with('brands',$brands)
+                                                               ->with('phone_models',$phone_models);
     }
 
     public function updateProduct(Request $request){

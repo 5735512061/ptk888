@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>อัพโหลดยี่ห้อผลิตภัณฑ์</h5>
+                            <h5>อัพโหลดยี่ห้อโทรศัพท์</h5>
                             <div class="card-header-right">
                                 <ul class="list-unstyled card-option">
                                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -22,15 +22,15 @@
                         <div class="card-block">
                             <form action="{{url('/admin/upload-brand')}}" enctype="multipart/form-data" method="post">@csrf
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ยี่ห้อผลิตภัณฑ์</label>
+                                    <label class="col-sm-2 col-form-label">ยี่ห้อโทรศัพท์</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกยี่ห้อผลิตภัณฑ์" name="brand">
+                                        <input type="text" class="form-control" placeholder="กรุณากรอกยี่ห้อโทรศัพท์" name="brand">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ยี่ห้อผลิตภัณฑ์ภาษาอังกฤษ</label>
+                                    <label class="col-sm-2 col-form-label">ยี่ห้อโทรศัพท์ภาษาอังกฤษ</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกยี่ห้อผลิตภัณฑ์เป็นภาษาอังกฤษ เท่านั้น" name="brand_eng">
+                                        <input type="text" class="form-control" placeholder="กรุณากรอกยี่ห้อโทรศัพท์เป็นภาษาอังกฤษ เท่านั้น" name="brand_eng">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-4 offset-md-2">
-                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพโหลดยี่ห้อผลิตภัณฑ์</button>
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพโหลดยี่ห้อโทรศัพท์</button>
                                     </div>
                                 </div>
                             </form>
@@ -52,7 +52,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5>รายละเอียดยี่ห้อผลิตภัณฑ์</h5>
+                    <h5>รายละเอียดยี่ห้อโทรศัพท์</h5>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -70,8 +70,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>รูปภาพ</th>
-                                    <th>ยี่ห้อผลิตภัณฑ์</th>
-                                    <th>ยี่ห้อผลิตภัณฑ์ (ภาษาอังกฤษ)</th>
+                                    <th>ยี่ห้อโทรศัพท์</th>
+                                    <th>ยี่ห้อโทรศัพท์ (ภาษาอังกฤษ)</th>
                                     <th></th>
                                 </tr>
                             </thead>

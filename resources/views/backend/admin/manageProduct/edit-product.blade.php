@@ -22,6 +22,12 @@
                         <div class="card-block">
                             <form action="{{url('/admin/update-product')}}" enctype="multipart/form-data" method="post">@csrf
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">รหัสสินค้า</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="product_code" value="{{$product->product_code}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ประเภทผลิตภัณฑ์</label>
                                     <div class="col-sm-10">
                                         <select name="category_id" class="form-control">
@@ -32,7 +38,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ยี่ห้อผลิตภัณฑ์</label>
+                                    <label class="col-sm-2 col-form-label">ยี่ห้อฟิล์ม</label>
+                                    <div class="col-sm-10">
+                                        <select name="film_model" class="form-control">
+                                            <option value="Madam Film">Madam Film</option>
+                                            <option value="Dora Film">Dora Film</option>
+                                            <option value="Raiguard Film">Raigrad Film</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">ยี่ห้อโทรศัพท์</label>
                                     <div class="col-sm-10">
                                         <select name="brand_id" class="form-control">
                                             @foreach ($brands as $brand => $value)
@@ -42,22 +58,25 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">รหัสสินค้า</label>
+                                    <label class="col-sm-2 col-form-label">รุ่นโทรศัพท์</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="product_code" value="{{$product->product_code}}">
+                                        <select name="phone_model_id" class="form-control">
+                                            @foreach ($phone_models as $phone_model => $value)
+                                                <option value="{{$value->id}}">{{$value->model}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ประเภทของสินค้า</label>
                                     <div class="col-sm-10">
                                         <select name="product_type" class="form-control">
-                                                <option value="{{$product->product_type}}">{{$product->product_type}}</option>
-                                                <option value="NULL">ไม่มีประเภทของสินค้า</option>
-                                                <option value="ฟิล์มกันรอย">ฟิล์มกันรอย</option>
-                                                <option value="ฟิล์มกาวเต็ม">ฟิล์มกาวเต็ม</option>
+                                                <option value="ไม่มีประเภทของสินค้า">ไม่มีประเภทของสินค้า</option>
+                                                <option value="ฟิล์มวูล์ฟเวอรีน">ฟิล์มวูล์ฟเวอรีน</option>
+                                                <option value="ฟิล์มกันมอง">ฟิล์มกันมอง</option>
                                                 <option value="ฟิล์มใส">ฟิล์มใส</option>
                                                 <option value="ฟิล์มด้าน">ฟิล์มด้าน</option>
-                                                <option value="ฟิล์ม UV">ฟิล์ม UV</option>
+                                                <option value="ฟิล์มถนอมสายตา">ฟิล์มถนอมสายตา</option>
                                         </select>
                                     </div>
                                 </div>
