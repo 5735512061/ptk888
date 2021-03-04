@@ -26,6 +26,8 @@ Route::group(['prefix' => '/'], function(){
     Route::get('/dealer-shop', 'Frontend\PtkController@dealerShop');
     Route::get('/category/{category}','Frontend\PtkController@category');
     Route::get('/brand/{brand}','Frontend\PtkController@brand');
+    Route::get('/product/{brand}/{model}','Frontend\PtkController@productByPhoneModel');
+    Route::get('/product/{brand}/{model}/detail/{id}','Frontend\PtkController@productByPhoneModelDetail');
     Route::get('/promotion','Frontend\PtkController@promotion');
 });
 

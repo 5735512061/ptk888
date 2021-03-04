@@ -1,11 +1,16 @@
 /**********************************/
 /********** General CSS ***********/
 /**********************************/
+
+.description{
+    padding-left: 1.5rem;
+}
+
 .btn-warranty{
     background-color: #ff8930;
     color: #fff;
     font-weight: bold;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.5rem;
 }
 
 body {
@@ -707,6 +712,27 @@ h2 {
 /**********************************/
 /******** Product Item CSS ********/
 /**********************************/
+.text-intro h5 {
+    color:#191919;
+    display: -webkit-box;
+    margin: 0 auto 2px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 19px;
+    line-height: 30px;
+    width: 100%;
+    height: 88px;
+    overflow: hidden;
+    padding-top: 28px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 30px;
+    margin-left: 0px;
+    font-weight: 600;
+}
+
 .product-item {
     position: relative;
     border: 1px solid rgba(0,0,0,.1);
@@ -1068,7 +1094,6 @@ h2 {
 .product-detail {
     position: relative;
     width: 100%;
-    padding: 30px 0;
 }
 
 .product-detail .product-detail-top,
@@ -1199,10 +1224,11 @@ h2 {
     width: 40px;
     height: 30px;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 15px;
     text-align: center;
     background: #000000;
     border: none;
+    padding-bottom: 2px;
 }
 
 .product-detail .product-content .action a:first-child {

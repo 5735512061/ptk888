@@ -88,8 +88,9 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-12 col-12">
-                <a id="mobile" style="display: none;" class="btn-warranty" href="{{url('/member/register-warranty')}}">ลงทะเบียนรับประกันฟิล์ม</a>
+            <div id="mobile" style="display: none;" class="col-md-12 col-12">
+                <div style="text-align: center;">
+                    <a class="btn-warranty" id="mobile" style="display: none;" href="{{url('/member/register-warranty')}}">ลงทะเบียนรับประกันฟิล์ม</a>
                     <div class="user" id="mobile" style="display: none;">
                         <a href="#" class="btn wishlist" style="margin-right:4px !important; margin-bottom:5px !important;">
                             <i class="fa fa-heart"></i>
@@ -100,8 +101,9 @@
                             <span>(0)</span>
                         </a>
                     </div>
+                </div>
             </div>
-            <div class="col-md-3 col-12" id="desktop">
+            <div class="col-md-9 col-12" id="desktop">
                 <div class="user">
                     <a href="#" class="btn wishlist">
                         <i class="fa fa-heart"></i>

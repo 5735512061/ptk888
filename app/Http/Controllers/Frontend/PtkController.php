@@ -9,6 +9,8 @@ use App\model\Category;
 use App\model\Brand;
 use App\model\Promotion;
 use App\model\Product;
+use App\model\PhoneModel;
+
 use App\Store;
 
 class PtkController extends Controller
@@ -49,12 +51,33 @@ class PtkController extends Controller
         return view('frontend/category/category-product');
     }
 
-    public function brand() {
-        return view('frontend/brand/brand-product');
+    public function brand($brand) {
+        $brand_id = Brand::where('brand',$brand)->value('id');
+        $phone_models = PhoneModel::where('brand_id',$brand_id)->get();
+        return view('frontend/brand/brand-product')->with('phone_models',$phone_models);
     }
 
     public function promotion() {
         $promotions = Promotion::get();
         return view('frontend/promotion/promotion')->with('promotions',$promotions);
+    }
+
+    public function productByPhoneModel($brand,$model) {
+        $brand_id = Brand::where('brand',$brand)->value('id');
+        $model_id = PhoneModel::where('model',$model)->value('id');
+        $products = Product::where('brand_id',$brand_id)
+                           ->where('phone_model_id',$model_id)->get();
+        return view('frontend/product/by-phone-model')->with('products',$products);
+    }
+
+    public function productByPhoneModelDetail($brand,$model,$id) {
+        $product = Product::findOrFail($id);
+        $brand_id = Brand::where('brand',$brand)->value('id');
+        $model_id = PhoneModel::where('model',$model)->value('id');
+        $products = Product::where('brand_id',$brand_id)
+                           ->where('phone_model_id',$model_id)
+                           ->where('id',"!=",$product->id)->get();
+        return view('frontend/product/by-phone-model-detail')->with('product',$product)
+                                                             ->with('products',$products);
     }
 }
