@@ -119,42 +119,45 @@
                 </ul>
             </li>
             <li>
-                <a href="#" class="waves-effect waves-dark">
+                <a href="{{url('/admin/manage-film-stock')}}" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-panel"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">ปรับเพิ่ม / ลด สินค้า</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
-            <ul class="pcoded-item pcoded-left-item">
-                <li class="pcoded-hasmenu">
-                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                        <span class="pcoded-micon"><i class="ti-pie-chart"></i></span>
-                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">จัดการผลิตภัณฑ์</span>
-                        <span class="pcoded-mcaret"></span>
-                    </a>
-                    <ul class="pcoded-submenu">
-                        <li class=" ">
-                            <a href="{{url('/admin/manage-category')}}" class="waves-effect waves-dark">
-                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">ประเภทผลิตภัณฑ์</span>
-                                <span class="pcoded-mcaret"></span>
-                            </a>
-                        </li>
-                        <li class=" ">
-                            <a href="{{url('/admin/manage-brand')}}" class="waves-effect waves-dark">
-                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">ยี่ห้อโทรศัพท์</span>
-                                <span class="pcoded-mcaret"></span>
-                            </a>
-                        </li>
-                        <li class=" ">
-                            <a href="{{url('/admin/manage-phone-model')}}" class="waves-effect waves-dark">
-                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">รุ่นโทรศัพท์</span>
-                                <span class="pcoded-mcaret"></span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
+            <li class="pcoded-hasmenu">
+                <a href="javascript:void(0)" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-pie-chart"></i></span>
+                    <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">จัดการผลิตภัณฑ์</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li class=" ">
+                        <a href="{{url('/admin/manage-category')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">ประเภทผลิตภัณฑ์</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{url('/admin/manage-film-type')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">ประเภทฟิล์ม</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{url('/admin/manage-brand')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">ยี่ห้อโทรศัพท์</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{url('/admin/manage-phone-model')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">รุ่นโทรศัพท์</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
         <div class="pcoded-navigation-label" data-i18n="nav.category.other">จัดการ Order การสั่งซื้อ</div>

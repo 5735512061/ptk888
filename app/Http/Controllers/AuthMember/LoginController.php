@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Member;
+
 class LoginController extends Controller
 {
     public function showLoginForm()
@@ -16,25 +18,31 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-          'member_id' => 'required',
+          'username' => 'required',
           'password' => 'required|min:6'
         ],[
-          'member_id.required' => "กรุณากรอกชื่อผู้ใช้",
+          'username.required' => "กรุณากรอกชื่อผู้ใช้",
           'password.required' => "กรุณากรอกรหัสผ่าน",
           'password.min' => "กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร",
         ]);
 
 
         $credential = [
-          'member_id' => $request->member_id,
+          'username' => $request->username,
           'password' =>$request->password
         ];
 
-       if(Auth::guard('member')->attempt($credential, $request->member)){
-         return redirect()->intended(route('member.home'));
-       }
+        $member_id = Member::where('username',$request->username)->value('member_id');
+        
+        if($member_id != null) {
+          if(Auth::guard('member')->attempt($credential, $request->member)){
+            return redirect()->intended(route('member.home'));
+          }
+        } else {
+          $request->session()->flash('alert-danger', 'กรุณารอการยืนยันข้อมูลจากระบบ');
+        }
        
-       return redirect()->back()->withInput($request->only('member_id','remember'));
+       return redirect()->back()->withInput($request->only('username','remember'));
     }
 
     protected function validateLogin(Request $request)

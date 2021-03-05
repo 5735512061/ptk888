@@ -23,12 +23,14 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>ผลิตภัณฑ์</th>
-                                    <th>ยี่ห้อ</th>
                                     <th>รหัสสินค้า</th>
+                                    <th>ผลิตภัณฑ์</th>
+                                    <th>ยี่ห้อโทรศัพท์</th>
+                                    <th>รุ่น</th>
                                     <th>ประเภทสินค้า</th>
                                     <th>ชื่อสินค้า</th>
                                     <th>สถานะ</th>
+                                    <th>แนะนำ</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -39,13 +41,20 @@
                                         @php
                                             $category = DB::table('categorys')->where('id',$value->category_id)->value('category');
                                             $brand = DB::table('brands')->where('id',$value->brand_id)->value('brand');
+                                            $model = DB::table('phone_models')->where('id',$value->phone_model_id)->value('model');
                                         @endphp
+                                        <td>{{$value->product_code}}</td>
                                         <td>{{$category}}</td>
                                         <td>{{$brand}}</td>
-                                        <td>{{$value->product_code}}</td>
+                                        <td>{{$model}}</td>
                                         <td>{{$value->product_type}}</td>
                                         <td>{{$value->product_name}}</td>
                                         <td>{{$value->status}}</td>
+                                        @if($value->product_recommend == 'ใช่')
+                                            <td><i class="fa fa-check" style="color: green !important;"></i></td>
+                                        @else 
+                                            <td><i class="fa fa-times" style="color: red !important;"></i></td>
+                                        @endif
                                         <td>       
                                             <a href="{{url('/admin/edit-product')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>

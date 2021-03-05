@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\model\ImageWebsite;
 use App\model\Category;
+use App\model\FilmType;
 use App\model\Brand;
 use App\model\Product;
 use App\model\ImageProduct;
@@ -15,6 +16,7 @@ use App\model\ImageProductRecommend;
 use App\model\ImageProductNew;
 use App\model\MessageCustomer;
 use App\model\PhoneModel;
+use App\model\StockFilm;
 
 use App\Member;
 use App\Store;
@@ -191,6 +193,55 @@ class AdminController extends Controller
         return redirect()->action('Backend\AdminController@manageCategory');
     }
 
+    public function manageFilmType(Request $request){
+        $NUM_PAGE = 10;
+        $film_types = FilmType::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageFilmType/manage-film-type')->with('NUM_PAGE',$NUM_PAGE)
+                                                                    ->with('page',$page)
+                                                                    ->with('film_types',$film_types);
+    }
+
+    public function uploadFilmType(Request $request){
+        $film_type = $request->all();
+        $film_type = FilmType::create($film_type);
+
+            $film_type = $request->get('film_type');
+            $stock_film_type = new StockFilm;
+            $stock_film_type->film_type = $film_type;
+            $stock_film_type->amount = 0;
+            $stock_film_type->comment = null;
+            $stock_film_type->save();
+
+        return back();
+    }
+
+    public function deleteFilmType($id){
+        $film_type = FilmType::findOrFail($id);
+        $film_type->delete();
+        return back();
+    }
+
+    public function editFilmType(Request $request, $id){
+        $NUM_PAGE = 10;
+        $film_type = FilmType::findOrFail($id);
+        $film_types = FilmType::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageFilmType/edit-film-type')->with('NUM_PAGE',$NUM_PAGE)
+                                                                  ->with('page',$page)
+                                                                  ->with('film_type',$film_type)
+                                                                  ->with('film_types',$film_types);
+    }
+
+    public function updateFilmType(Request $request){
+        $id = $request->get('id');
+        $film_type = FilmType::findOrFail($id);
+        $film_type->update($request->all());
+        return redirect()->action('Backend\AdminController@manageFilmType');
+    }
+
     public function manageBrand(Request $request){
         $NUM_PAGE = 10;
         $brands = Brand::paginate($NUM_PAGE);
@@ -300,6 +351,7 @@ class AdminController extends Controller
         $categorys = Category::get();
         $brands = Brand::get();
         $phone_models = PhoneModel::get();
+        $film_types = FilmType::get();
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageProduct/upload-product-form')->with('NUM_PAGE',$NUM_PAGE)
@@ -307,7 +359,8 @@ class AdminController extends Controller
                                                                       ->with('products',$products)
                                                                       ->with('categorys',$categorys)
                                                                       ->with('brands',$brands)
-                                                                      ->with('phone_models',$phone_models);
+                                                                      ->with('phone_models',$phone_models)
+                                                                      ->with('film_types',$film_types);
     }
 
     public function uploadProduct(Request $request){
@@ -361,10 +414,12 @@ class AdminController extends Controller
         $categorys = Category::get();
         $brands = Brand::get();
         $phone_models = PhoneModel::get();
+        $film_types = FilmType::get();
         return view('backend/admin/manageProduct/edit-product')->with('product',$product)
                                                                ->with('categorys',$categorys)
                                                                ->with('brands',$brands)
-                                                               ->with('phone_models',$phone_models);
+                                                               ->with('phone_models',$phone_models)
+                                                               ->with('film_types',$film_types);
     }
 
     public function updateProduct(Request $request){
@@ -464,5 +519,15 @@ class AdminController extends Controller
         return view('backend/admin/message/message-customer')->with('NUM_PAGE',$NUM_PAGE)
                                                              ->with('page',$page)
                                                              ->with('messages',$messages);
+    }
+
+    public function manageFilmStock(Request $request){
+        $NUM_PAGE = 20;
+        $stock_films = StockFilm::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageStock/film-stock')->with('NUM_PAGE',$NUM_PAGE)
+                                                           ->with('page',$page)
+                                                           ->with('stock_films',$stock_films);
     }
 }

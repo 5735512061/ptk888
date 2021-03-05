@@ -78,18 +78,24 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-image-ProductRecommend/{id}', 'Backend\AdminController@deleteImageProductRecommend');
     Route::get('/edit-image-ProductRecommend/{id}', 'Backend\AdminController@editImageProductRecommend');
     Route::post('/update-image-ProductRecommend', 'Backend\AdminController@updateImageProductRecommend');
-    // จัดการประเภทผลิตภัณฑ์
+    // จัดการประเภทผลิตภัณฑ์ และประเภทฟิล์ม
     Route::get('/manage-category', 'Backend\AdminController@manageCategory');
     Route::post('/upload-category', 'Backend\AdminController@UploadCategory');
     Route::get('/delete-category/{id}', 'Backend\AdminController@deleteCategory');
     Route::get('/edit-category/{id}', 'Backend\AdminController@editCategory');
     Route::post('/update-category', 'Backend\AdminController@updateCategory');
+
+    Route::get('/manage-film-type', 'Backend\AdminController@manageFilmType');
+    Route::post('/upload-film-type', 'Backend\AdminController@UploadFilmType');
+    Route::get('/delete-film-type/{id}', 'Backend\AdminController@deleteFilmType');
+    Route::get('/edit-film-type/{id}', 'Backend\AdminController@editFilmType');
+    Route::post('/update-film-type', 'Backend\AdminController@updateFilmType');
     // จัดการยี่ห้อโทรศัพท์ และรุ่นโทรศัพท์
     Route::get('/manage-brand', 'Backend\AdminController@manageBrand');
     Route::post('/upload-brand', 'Backend\AdminController@UploadBrand');
     Route::get('/delete-brand/{id}', 'Backend\AdminController@deleteBrand');
     Route::get('/edit-brand/{id}', 'Backend\AdminController@editBrand');
-    Route::post('/update-brand', 'Backend\AdminController@updateBrand');
+    Route::post('/update-brand', 'Backend\AdminController@updateBrand');    
 
     Route::get('/manage-phone-model', 'Backend\AdminController@managePhoneModel');
     Route::post('/upload-phone-model', 'Backend\AdminController@UploadPhoneModel');
@@ -103,6 +109,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-product/{id}', 'Backend\AdminController@deleteProduct');
     Route::get('/edit-product/{id}', 'Backend\AdminController@editProduct');
     Route::post('/update-product', 'Backend\AdminController@updateProduct');
+    // จัดการสต๊อกสินค้า
+    Route::get('/manage-film-stock', 'Backend\AdminController@manageFilmStock');
     // การสอบถามของลูกค้า
     Route::get('/message-customer', 'Backend\AdminController@MessageCustomer');
 

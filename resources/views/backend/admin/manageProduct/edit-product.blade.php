@@ -31,6 +31,11 @@
                                     <label class="col-sm-2 col-form-label">ประเภทผลิตภัณฑ์</label>
                                     <div class="col-sm-10">
                                         <select name="category_id" class="form-control">
+                                                @php
+                                                    $category = DB::table('categorys')->where('id',$product->category_id)->value('category');
+                                                    $category_id = DB::table('categorys')->where('id',$product->category_id)->value('id');
+                                                @endphp
+                                                <option value="{{$category_id}}">{{$category}}</option>
                                             @foreach ($categorys as $category => $value)
                                                 <option value="{{$value->id}}">{{$value->category}}</option>
                                             @endforeach
@@ -41,6 +46,7 @@
                                     <label class="col-sm-2 col-form-label">ยี่ห้อฟิล์ม</label>
                                     <div class="col-sm-10">
                                         <select name="film_model" class="form-control">
+                                            <option value="{{$product->film_model}}">{{$product->film_model}}</option>
                                             <option value="Madam Film">Madam Film</option>
                                             <option value="Dora Film">Dora Film</option>
                                             <option value="Raiguard Film">Raigrad Film</option>
@@ -50,7 +56,12 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ยี่ห้อโทรศัพท์</label>
                                     <div class="col-sm-10">
-                                        <select name="brand_id" class="form-control">
+                                        <select name="brand_id" class="form-control" id="brand">
+                                                @php
+                                                    $brand = DB::table('brands')->where('id',$product->brand_id)->value('brand');
+                                                    $brand_id = DB::table('brands')->where('id',$product->brand_id)->value('id');
+                                                @endphp
+                                                <option value="{{$brand_id}}">{{$brand}}</option>
                                             @foreach ($brands as $brand => $value)
                                                 <option value="{{$value->id}}">{{$value->brand}}</option>
                                             @endforeach
@@ -60,23 +71,24 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">รุ่นโทรศัพท์</label>
                                     <div class="col-sm-10">
-                                        <select name="phone_model_id" class="form-control">
-                                            @foreach ($phone_models as $phone_model => $value)
-                                                <option value="{{$value->id}}">{{$value->model}}</option>
-                                            @endforeach
+                                        <select name="phone_model_id" class="form-control" id="model">
+                                            @php
+                                                $model = DB::table('phone_models')->where('id',$product->phone_model_id)->value('model');
+                                                $model_id = DB::table('phone_models')->where('id',$product->phone_model_id)->value('id');
+                                            @endphp
+                                            <option value="{{$model_id}}">{{$model}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ประเภทของสินค้า</label>
+                                    <label class="col-sm-2 col-form-label">ประเภทของฟิล์ม</label>
                                     <div class="col-sm-10">
                                         <select name="product_type" class="form-control">
-                                                <option value="ไม่มีประเภทของสินค้า">ไม่มีประเภทของสินค้า</option>
-                                                <option value="ฟิล์มวูล์ฟเวอรีน">ฟิล์มวูล์ฟเวอรีน</option>
-                                                <option value="ฟิล์มกันมอง">ฟิล์มกันมอง</option>
-                                                <option value="ฟิล์มใส">ฟิล์มใส</option>
-                                                <option value="ฟิล์มด้าน">ฟิล์มด้าน</option>
-                                                <option value="ฟิล์มถนอมสายตา">ฟิล์มถนอมสายตา</option>
+                                            <option value="{{$product->product_type}}">{{$product->product_type}}</option>
+                                            <option value="ไม่มีประเภทของสินค้า">ไม่มีประเภทของสินค้า</option>
+                                            @foreach ($film_types as $film_type => $value)
+                                                <option value="{{$value->film_type}}">{{$value->film_type}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -102,9 +114,20 @@
                                     <label class="col-sm-2 col-form-label">สถานะ</label>
                                     <div class="col-sm-10">
                                         <select name="status" class="form-control">
-                                            <option value="SHOW">แสดงสินค้า</option>
-                                            <option value="OFF">ซ่อนสินค้า</option>
+                                            <option value="{{$product->status}}">{{$product->status}}</option>
+                                            <option value="แสดงสินค้า">แสดงสินค้า</option>
+                                            <option value="ซ่อนสินค้า">ซ่อนสินค้า</option>
                                     </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">สินค้าแนะนำ</label>
+                                    <div class="col-sm-10">
+                                        <select name="product_recommend" class="form-control">
+                                            <option value="{{$product->product_recommend}}">{{$product->product_recommend}}</option>
+                                            <option value="ไม่ใช่">ไม่ใช่</option>
+                                            <option value="ใช่">ใช่</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -127,4 +150,19 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    $('#brand').on('change',function(e){
+    console.log(e);
+    var brand_id = e.target.value;
+        //ajax
+        $.get('../ajax-brand?cat_id=' + brand_id,function(data){
+            $('#model').empty();
+            $.each(data, function(index, subcatObj){
+                $('#model').append('<option value="'+subcatObj.id+'">'+subcatObj.model+'</option>'); 
+            });
+        });
+    });
+</script>
 @endsection

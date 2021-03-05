@@ -79,15 +79,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ประเภทของสินค้า</label>
+                                    <label class="col-sm-2 col-form-label">ประเภทของฟิล์ม</label>
                                     <div class="col-sm-10">
                                         <select name="product_type" class="form-control">
                                                 <option value="ไม่มีประเภทของสินค้า">ไม่มีประเภทของสินค้า</option>
-                                                <option value="ฟิล์มวูล์ฟเวอรีน">ฟิล์มวูล์ฟเวอรีน</option>
-                                                <option value="ฟิล์มกันมอง">ฟิล์มกันมอง</option>
-                                                <option value="ฟิล์มใส">ฟิล์มใส</option>
-                                                <option value="ฟิล์มด้าน">ฟิล์มด้าน</option>
-                                                <option value="ฟิล์มถนอมสายตา">ฟิล์มถนอมสายตา</option>
+                                            @foreach ($film_types as $film_type => $value)
+                                                <option value="{{$value->film_type}}">{{$value->film_type}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
