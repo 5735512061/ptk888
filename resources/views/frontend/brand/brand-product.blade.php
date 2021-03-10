@@ -16,9 +16,11 @@
             @php
             $brand = DB::table('brands')->where('id',$value->brand_id)->value('brand');
             @endphp
-            <div class="col-md-2" style="margin-bottom: 4rem; border-left: 1px #000 solid;">
-                <a style="color: #000;" href="{{url('/product')}}/{{$brand}}/{{$value->model}}">{{$value->model}}</a>   
-            </div>
+            <a class="col-md-2" style="color: #000;" href="{{url('/product')}}/{{$brand}}/{{$value->model}}">
+                <div style="margin-bottom: 2rem; background-color:rgb(177, 177, 177); margin-right:10px; margin-left:10px; height:100px;">
+                    {{$value->model}} 
+                </div>
+            </a>  
         @endforeach
     </div>
 </div>
