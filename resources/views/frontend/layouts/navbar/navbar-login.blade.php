@@ -21,7 +21,7 @@
             </button>
             @php
                 $categorys = DB::table('categorys')->get();
-                $brands = DB::table('brands')->get();
+                $brands = DB::table('brands')->paginate('7');
             @endphp
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
@@ -29,16 +29,18 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">ผลิตภัณฑ์</a>
                         <div class="dropdown-menu">
-                            <a href="{{url('/product/dealer-shop')}}" class="dropdown-item">ฟิล์มมือถือ</a>
-                            <a href="{{url('/product/dealer-shop')}}" class="dropdown-item">ฟิล์มโน๊ตบุ๊ค</a>
+                            @foreach ($categorys as $category => $value)
+                                <a href="{{url('/category')}}/{{$value->category_eng}}" class="dropdown-item">{{$value->category}}</a>
+                            @endforeach
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">ยี่ห้อสินค้า</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">สินค้าตามรุ่นมือถือ</a>
                         <div class="dropdown-menu">
                             @foreach ($brands as $brand => $value)
                                 <a href="{{url('/brand')}}/{{$value->brand_eng}}" class="dropdown-item">{{$value->brand_eng}}</a>
                             @endforeach
+                                <a href="{{url('/brand')}}" class="dropdown-item">All Brand</a>
                         </div>
                     </div>
                     <a href="{{url('/dealer-shop')}}" class="nav-item nav-link">ตัวแทนจำหน่าย</a>
@@ -50,13 +52,13 @@
                             <a href="{{url('/faq')}}" class="dropdown-item">FAQ</a>
                         </div>
                     </div>
-                    <a href="{{url('#')}}" class="nav-item nav-link">โปรโมชั่น</a>
+                    <a href="{{url('/promotion')}}" class="nav-item nav-link">โปรโมชั่น</a>
                     <a href="{{url('/about-us')}}" class="nav-item nav-link">เกี่ยวกับเรา</a>
                     <a href="{{url('/contact-us')}}" class="nav-item nav-link">ติดต่อเรา</a>
                 </div>
-                <a href="{{url('/member/register-warranty')}}" class="nav-item nav-link" style="background-color: #21bdff;">ลงทะเบียนรับประกันฟิล์ม</a>
+                <a id="desktop" href="{{url('/member/register-warranty')}}" class="nav-item nav-link" style="background-color: #ff8930; color:#fff;">ลงทะเบียนรับประกันฟิล์ม</a>
             </div>
         </nav>
     </div>
-</div><hr>
-<!-- Nav Bar End -->       
+</div><hr style="margin-top: 0px; margin-bottom: 0px;">
+<!-- Nav Bar End -->        
