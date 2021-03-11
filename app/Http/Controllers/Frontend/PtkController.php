@@ -10,6 +10,8 @@ use App\model\Brand;
 use App\model\Promotion;
 use App\model\Product;
 use App\model\PhoneModel;
+use App\model\FilmType;
+use App\model\ProductFilmInformation;
 
 use App\Store;
 
@@ -53,7 +55,7 @@ class PtkController extends Controller
 
     public function brand($brand) {
         $brand_id = Brand::where('brand',$brand)->value('id');
-        $phone_models = PhoneModel::where('brand_id',$brand_id)->get();
+        $phone_models = PhoneModel::where('brand_id',$brand_id)->where('status',"เปิด")->get();
         return view('frontend/brand/brand-product')->with('phone_models',$phone_models);
     }
 
@@ -77,7 +79,12 @@ class PtkController extends Controller
         $products = Product::where('brand_id',$brand_id)
                            ->where('phone_model_id',$model_id)
                            ->where('id',"!=",$product->id)->get();
+        $film_type_id = FilmType::where('film_type',$product->product_type)->value('id');
+        $propertys = ProductFilmInformation::where('film_type_id',$film_type_id)->where('type_information',"ข้อมูลและคุณสมบัติสินค้า")->get();
+        $positives = ProductFilmInformation::where('film_type_id',$film_type_id)->where('type_information',"จุดเด่นของสินค้า")->get();
         return view('frontend/product/by-phone-model-detail')->with('product',$product)
-                                                             ->with('products',$products);
+                                                             ->with('products',$products)
+                                                             ->with('propertys',$propertys)
+                                                             ->with('positives',$positives);
     }
 }

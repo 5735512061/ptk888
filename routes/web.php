@@ -32,7 +32,6 @@ Route::group(['prefix' => '/'], function(){
 });
 
 
-
 // แอดมิน
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/ajax-brand','Backend\AjaxController@ajax_brand');
@@ -60,7 +59,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-member-store/{id}', 'Backend\AdminController@deleteMemberStore');
     Route::get('/edit-member-store/{id}', 'Backend\AdminController@editMemberStore');
     Route::post('/update-member-store', 'Backend\AdminController@updateMemberStore');
-    // จัดการรูปภาพหน้าเว็บไซต์ โปรโมชั่น และจัดการข้อมูลรูปภาพ
+    // จัดการรูปภาพหน้าเว็บไซต์ โปรโมชั่น จัดการข้อมูลรูปภาพ และจัดการข้อมูลคุณสมบัติของสินค้า
     Route::get('/manage-image-website', 'Backend\AdminController@manageImageWebsite');
     Route::post('/upload-image-website', 'Backend\AdminController@UploadImageWebsite');
     Route::get('/delete-image-website/{id}', 'Backend\AdminController@deleteImageWebsite');
@@ -73,11 +72,11 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/edit-promotion/{id}', 'Backend\AdminController@editPromotion');
     Route::post('/update-promotion', 'Backend\AdminController@updatePromotion');
 
-    Route::get('/manage-image-ProductRecommend', 'Backend\AdminController@manageImageProductRecommend');
-    Route::post('/upload-image-ProductRecommend', 'Backend\AdminController@UploadImageProductRecommend');
-    Route::get('/delete-image-ProductRecommend/{id}', 'Backend\AdminController@deleteImageProductRecommend');
-    Route::get('/edit-image-ProductRecommend/{id}', 'Backend\AdminController@editImageProductRecommend');
-    Route::post('/update-image-ProductRecommend', 'Backend\AdminController@updateImageProductRecommend');
+    Route::get('/manage-film-information', 'Backend\AdminController@manageFilmInformation');
+    Route::post('/upload-film-information', 'Backend\AdminController@UploadFilmInformation');
+    Route::get('/delete-film-information/{id}', 'Backend\AdminController@deleteFilmInformation');
+    Route::get('/edit-film-information/{id}', 'Backend\AdminController@editFilmInformation');
+    Route::post('/update-film-information', 'Backend\AdminController@updateFilmInformation');
     // จัดการประเภทผลิตภัณฑ์ และประเภทฟิล์ม
     Route::get('/manage-category', 'Backend\AdminController@manageCategory');
     Route::post('/upload-category', 'Backend\AdminController@UploadCategory');

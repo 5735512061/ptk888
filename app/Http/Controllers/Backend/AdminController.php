@@ -12,11 +12,10 @@ use App\model\Brand;
 use App\model\Product;
 use App\model\ImageProduct;
 use App\model\Promotion;
-use App\model\ImageProductRecommend;
-use App\model\ImageProductNew;
 use App\model\MessageCustomer;
 use App\model\PhoneModel;
 use App\model\StockFilm;
+use App\model\ProductFilmInformation;
 
 use App\Member;
 use App\Store;
@@ -486,30 +485,6 @@ class AdminController extends Controller
         }
         return back();
     }
-
-    public function manageImageProductRecommend(Request $request){
-        $NUM_PAGE = 10;
-        $productRecommends = ImageProductRecommend::paginate($NUM_PAGE);
-        $page = $request->input('page');
-        $page = ($page != null)?$page:1;
-        return view('backend/admin/manageImageWebsite/manage-image-productRecommend')->with('NUM_PAGE',$NUM_PAGE)
-                                                                                     ->with('page',$page)
-                                                                                     ->with('productRecommends',$productRecommends);
-    }
-
-    public function UploadImageProductRecommend(Request $request){
-        $productRecommend = $request->all();
-        $productRecommend = ImageProductRecommend::create($productRecommend);
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
-            $image->move('image_upload/image_product_recommend/', $filename);
-            $path = 'image_upload/image_product_recommend/'.$filename;
-            $productRecommend->image = $filename;
-            $productRecommend->save();
-        }
-        return back();
-    }
     
     public function MessageCustomer(Request $request){
         $NUM_PAGE = 10;
@@ -529,5 +504,50 @@ class AdminController extends Controller
         return view('backend/admin/manageStock/film-stock')->with('NUM_PAGE',$NUM_PAGE)
                                                            ->with('page',$page)
                                                            ->with('stock_films',$stock_films);
+    }
+
+    public function manageFilmInformation(Request $request){
+        $NUM_PAGE = 10;
+        $product_film_informations = ProductFilmInformation::paginate($NUM_PAGE);
+        $film_types = FilmType::get();
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageProductFilmInformation/manage-film-information')->with('NUM_PAGE',$NUM_PAGE)
+                                                                                         ->with('page',$page)
+                                                                                         ->with('product_film_informations',$product_film_informations)
+                                                                                         ->with('film_types',$film_types);
+    }
+
+    public function uploadFilmInformation(Request $request){
+        $product_film_information = $request->all();
+        $product_film_information = ProductFilmInformation::create($product_film_information);
+        return back();
+    }
+
+    public function deleteFilmInformation($id){
+        $product_film_information = ProductFilmInformation::findOrFail($id);
+        $product_film_information->delete();
+        return back();
+    }
+
+    public function editFilmInformation(Request $request, $id){
+        $NUM_PAGE = 10;
+        $product_film_information = ProductFilmInformation::findOrFail($id);
+        $product_film_informations = ProductFilmInformation::paginate($NUM_PAGE);
+        $film_types = FilmType::get();
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageProductFilmInformation/edit-film-information')->with('NUM_PAGE',$NUM_PAGE)
+                                                                                       ->with('page',$page)
+                                                                                       ->with('product_film_information',$product_film_information)
+                                                                                       ->with('product_film_informations',$product_film_informations)
+                                                                                       ->with('film_types',$film_types);
+    }
+
+    public function updateFilmInformation(Request $request){
+        $id = $request->get('id');
+        $product_film_information = ProductFilmInformation::findOrFail($id);
+        $product_film_information->update($request->all());
+        return redirect()->action('Backend\AdminController@manageFilmInformation');
     }
 }

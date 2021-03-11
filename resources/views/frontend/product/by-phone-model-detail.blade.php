@@ -30,11 +30,15 @@
                     <div class="description">
                         <h4 style="font-weight: bold;">{{$product->product_name}}</h4>
                         <h4 style="font-weight: bold; color:#FF8930;">ราคา 790 บาท</h4><hr>
-                        <p>คุณสมบัติฟิล์มไฮโดรเจล</p>    
-                        <p>-</p>
-                        <p>-</p>
-                        <p>-</p>
-                        <p>-</p>
+                        <h5>ข้อมูลและคุณสมบัติของ{{$product->product_type}}</h5>    
+                        @foreach ($propertys as $property => $value)
+                            <p style="margin-bottom: 0.3rem; font-size:14px;">- {{$value->film_information}}</p>
+                        @endforeach
+                        <hr>
+                        <h5>จุดเด่นของ{{$product->product_type}}</h5>    
+                        @foreach ($positives as $positive => $value)
+                            <p style="margin-bottom: 0.3rem; font-size:14px;">- {{$value->film_information}}</p>
+                        @endforeach
                         <hr>
                         <div class="product-detail">
                             <div class="product-content">

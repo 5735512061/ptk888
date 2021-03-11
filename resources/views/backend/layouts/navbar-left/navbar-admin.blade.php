@@ -239,19 +239,14 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    <li class=" ">
-                        <a href="{{url('/admin/manage-image-ProductRecommend')}}" class="waves-effect waves-dark">
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">สินค้าแนะนำ</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="{{url('/admin/manage-image-ProductNew')}}" class="waves-effect waves-dark">
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">สินค้าใหม่</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
                 </ul>
+            </li>
+            <li>
+                <a href="{{url('/admin/manage-film-information')}}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="fa fa-folder-open"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">ข้อมูลและคุณสมบัติสินค้า</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
             </li>
         </ul>
 

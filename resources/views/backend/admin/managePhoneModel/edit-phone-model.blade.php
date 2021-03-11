@@ -48,6 +48,16 @@
                                         <input type="text" class="form-control" name="model_eng" value="{{$phoneModel->model_eng}}">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">สถานะ</label>
+                                    <div class="col-sm-10">
+                                        <select name="status" class="form-control">
+                                            <option value="{{$phoneModel->status}}">{{$phoneModel->status}}</option>
+                                            <option value="เปิด">เปิด</option>
+                                            <option value="ปิด">ปิด</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-4 offset-md-2">
                                         <input type="hidden" name="id" value="{{$phoneModel->id}}">
