@@ -96,9 +96,9 @@
                             <i class="fa fa-heart"></i>
                             <span>(0)</span>
                         </a>
-                        <a href="#" class="btn cart" style="margin-bottom:5px !important;">
+                        <a href="{{route('cart.index')}}" class="btn cart" style="margin-bottom:5px !important;">
                             <i class="fa fa-shopping-cart"></i>
-                            <span>(0)</span>
+                            <span>({{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }})</span>
                         </a>
                     </div>
                 </div>
@@ -109,9 +109,9 @@
                         <i class="fa fa-heart"></i>
                         <span>(0)</span>
                     </a>
-                    <a href="#" class="btn cart">
+                    <a href="{{route('cart.index')}}" class="btn cart">
                         <i class="fa fa-shopping-cart"></i>
-                        <span>(0)</span>
+                        <span>({{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }})</span>
                     </a>
                 </div>
             </div>

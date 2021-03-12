@@ -26,10 +26,17 @@
                         </div>
                     </div>
                 </div>
+                @php
+                    $price = DB::table('product_prices')->where('product_id',$product->id)->orderBy('id','desc')->value('price');
+                @endphp
                 <div class="col-lg-7">
                     <div class="description">
                         <h4 style="font-weight: bold;">{{$product->product_name}}</h4>
-                        <h4 style="font-weight: bold; color:#FF8930;">ราคา 790 บาท</h4><hr>
+                        @if($price == null)
+                            <h4 style="font-weight: bold; color:#FF8930;">ราคา 0 บาท</h4><hr>
+                        @else
+                            <h4 style="font-weight: bold; color:#FF8930;">ราคา {{$price}} บาท</h4><hr>
+                        @endif
                         <h5>ข้อมูลและคุณสมบัติของ{{$product->product_type}}</h5>    
                         @foreach ($propertys as $property => $value)
                             <p style="margin-bottom: 0.3rem; font-size:14px;">- {{$value->film_information}}</p>
@@ -46,14 +53,14 @@
                                     <h4>จำนวน :</h4>
                                     <div class="qty">
                                         <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                        <input type="text" value="1">
+                                        <input type="text" value="1" name="qty">
                                         <button class="btn-plus"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
                             </div>   
                         </div>
                         
-                        <a class="btn-warranty" href="{{url('/member/register-warranty')}}">หยิบสินค้าใส่ตะกร้า</a>
+                        <a class="btn-warranty" href="{{ url('/member/addToCart', ['id' => $product->id]) }}">หยิบสินค้าใส่ตะกร้า</a>
                         
                     </div>
                 </div>
@@ -69,6 +76,7 @@
             @foreach ($products as $product => $value)
                 @php
                     $image = DB::table('image_products')->where('product_id',$value->id)->value('image');
+                    $price = DB::table('product_prices')->where('product_id',$value->id)->orderBy('id','desc')->value('price');
                 @endphp
                 <div class="col-lg-3">
                     <div class="product-item">
@@ -90,7 +98,11 @@
                             </div>
                         </a>
                         <div class="product-price">
-                            <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 790 บาท</h5>
+                            @if($price == null)
+                                <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 0 บาท</h5>
+                            @else
+                                <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา {{$price}} บาท</h5>
+                            @endif
                         </div>
                     </div>
                 </div>

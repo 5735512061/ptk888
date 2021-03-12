@@ -16,6 +16,7 @@ use App\model\MessageCustomer;
 use App\model\PhoneModel;
 use App\model\StockFilm;
 use App\model\ProductFilmInformation;
+use App\model\ProductPrice;
 
 use App\Member;
 use App\Store;
@@ -549,5 +550,44 @@ class AdminController extends Controller
         $product_film_information = ProductFilmInformation::findOrFail($id);
         $product_film_information->update($request->all());
         return redirect()->action('Backend\AdminController@manageFilmInformation');
+    }
+
+    public function listProductPrice(Request $request){
+        $NUM_PAGE = 20;
+        $products = Product::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageProductPrice/list-product-price')->with('NUM_PAGE',$NUM_PAGE)
+                                                                          ->with('page',$page)
+                                                                          ->with('products',$products);
+    }
+
+    public function editProductPrice($id){
+        $product = Product::findOrFail($id);
+        return view('backend/admin/manageProductPrice/edit-product-price')->with('product',$product);
+    }
+
+    public function updateProductPrice(Request $request){
+        $price = $request->all();
+        $price = ProductPrice::create($price);
+        return redirect()->action('Backend\AdminController@listProductPrice');
+    }
+
+    public function ProductPriceDetail(Request $request,$id){
+        $NUM_PAGE = 20;
+        $product_prices = ProductPrice::where('product_id',$id)->orderBy('id','asc')->paginate($NUM_PAGE);
+        $product = Product::where('id',$id)->value('product_name');
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageProductPrice/product-price-detail')->with('NUM_PAGE',$NUM_PAGE)
+                                                                            ->with('page',$page)
+                                                                            ->with('product_prices',$product_prices)
+                                                                            ->with('product',$product);
+    }
+
+    public function deleteProductPriceDetail($id){
+        $price = ProductPrice::findOrFail($id);
+        $price->delete();
+        return back();
     }
 }

@@ -33,6 +33,7 @@ Route::group(['prefix' => '/'], function(){
 
 
 // แอดมิน
+
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/ajax-brand','Backend\AjaxController@ajax_brand');
     // เข้าสู่ระบบแอดมิน
@@ -108,6 +109,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-product/{id}', 'Backend\AdminController@deleteProduct');
     Route::get('/edit-product/{id}', 'Backend\AdminController@editProduct');
     Route::post('/update-product', 'Backend\AdminController@updateProduct');
+
+    Route::get('/list-product-price', 'Backend\AdminController@listProductPrice');
+    Route::get('/edit-product-price/{id}', 'Backend\AdminController@editProductPrice');
+    Route::post('/update-product-price', 'Backend\AdminController@updateProductPrice');
+    Route::get('/product-price-detail/{id}', 'Backend\AdminController@ProductPriceDetail');
+    Route::get('/delete-product-price-detail/{id}', 'Backend\AdminController@deleteProductPriceDetail');
     // จัดการสต๊อกสินค้า
     Route::get('/manage-film-stock', 'Backend\AdminController@manageFilmStock');
     // การสอบถามของลูกค้า
@@ -141,10 +148,15 @@ Route::group(['prefix' => 'member'], function(){
     Route::get('/login','AuthMember\LoginController@ShowLoginForm')->name('member.login');
     Route::post('/login','AuthMember\LoginController@login')->name('member.login.submit');
     Route::post('/logout', 'AuthMember\LoginController@logout')->name('member.logout');
-
+    // หน้าหลัก
     Route::get('/', 'Frontend\MemberController@index')->name('member.home');
+    // ตะกร้าสินค้า
+    Route::get('addToCart/{id}','Frontend\\CartController@getAddToCart');
+    Route::get('/shopping-cart','Frontend\\CartController@getCart')->name('cart.index');
+    Route::get('checkout','Frontend\\CartController@getCheckout')->name('checkout');
+    Route::get('remove/{id}','Frontend\\CartController@getRemoveItem')->name('remove');
     // ลงทะเบียนรับประกันฟิล์ม
     Route::get('/register-warranty', 'Backend\MemberController@registerWarranty');
-
+    // ส่งข้อความ
     Route::post('/send-message', 'Backend\MemberController@SendMessage');
 });

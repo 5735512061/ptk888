@@ -116,6 +116,12 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
+                    <li class=" ">
+                        <a href="{{url('/admin/list-product-price')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">จัดการราคาสินค้า</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li>
