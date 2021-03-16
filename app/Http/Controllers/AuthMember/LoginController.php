@@ -32,14 +32,8 @@ class LoginController extends Controller
           'password' =>$request->password
         ];
 
-        $member_id = Member::where('username',$request->username)->value('member_id');
-        
-        if($member_id != null) {
-          if(Auth::guard('member')->attempt($credential, $request->member)){
-            return redirect()->intended(route('member.home'));
-          }
-        } else {
-          $request->session()->flash('alert-danger', 'กรุณารอการยืนยันข้อมูลจากระบบ');
+        if(Auth::guard('member')->attempt($credential, $request->member)){
+          return redirect()->intended(route('member.home'));
         }
        
        return redirect()->back()->withInput($request->only('username','remember'));

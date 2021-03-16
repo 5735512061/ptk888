@@ -18,31 +18,31 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         switch ($guard) {
-            case 'admin':
-              if (Auth::guard($guard)->check()) {
-                return redirect()->route('admin.home');
-              }
-              break;
+          
+          case 'admin':
+            if (Auth::guard($guard)->check()) {
+              return redirect()->route('admin.login');
+            }
+            break;
             
             case 'seller':
               if (Auth::guard($guard)->check()) {
-                return redirect()->route('seller.home');
+                return redirect()->route('seller.login');
               }
               break;
             
             case 'store':
               if (Auth::guard($guard)->check()) {
-                return redirect()->route('store.home');
+                return redirect()->route('store.login');
               }
               break;
 
             case 'member':
                 if (Auth::guard($guard)->check()) {
-                  return redirect()->route('member.home');
+                  return redirect()->route('member.login');
                 }
                 break;
         }
-
         return $next($request);
     }
 }

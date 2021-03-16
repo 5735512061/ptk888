@@ -10,6 +10,10 @@ class Seller extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'sellers';
+
+    protected $guard = 'seller';
+
     protected $fillable = [
         'admin_id', 'seller_id', 'name', 'surname', 'phone', 'username', 'password', 'role', 'status', 
     ];

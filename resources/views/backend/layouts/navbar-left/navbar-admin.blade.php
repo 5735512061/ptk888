@@ -45,12 +45,6 @@
                         </a>
                         <ul class="pcoded-submenu">
                             <li class=" ">
-                                <a href="{{url('/admin/member-check')}}" class="waves-effect waves-dark">
-                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">ตรวจสอบการสมัคร</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class=" ">
                                 <a href="{{url('/admin/data-of-customer')}}" class="waves-effect waves-dark">
                                     <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">ข้อมูลลูกค้า</span>
                                     <span class="pcoded-mcaret"></span>
@@ -163,6 +157,13 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <a href="{{url('/admin/serialnumber')}}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="fa fa-sort-numeric-asc"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">สร้างหมายเลขสินค้า</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
             </li>
         </ul>
 

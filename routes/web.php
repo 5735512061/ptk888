@@ -17,7 +17,7 @@ Route::post('/register-member','AuthMember\RegisterController@registerMember');
 
 // เว็บไซต์ www.ptk888.com
 Route::group(['prefix' => '/'], function(){
-    Route::get('/', 'Frontend\PtkController@index');
+    Route::get('/', 'Frontend\PtkController@index')->name('member.home');
     Route::get('/contact-us', 'Frontend\PtkController@contactUs');
     Route::get('/about-us', 'Frontend\PtkController@aboutUs');
     Route::get('/faq', 'Frontend\PtkController@faq');
@@ -31,9 +31,7 @@ Route::group(['prefix' => '/'], function(){
     Route::get('/promotion','Frontend\PtkController@promotion');
 });
 
-
 // แอดมิน
-
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/ajax-brand','Backend\AjaxController@ajax_brand');
     // เข้าสู่ระบบแอดมิน
@@ -41,9 +39,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/login','Auth\LoginController@login')->name('admin.login.submit');
     Route::post('/logout', 'Auth\LoginController@logout')->name('admin.logout');
     // ตรวจสอบการลงทะเบียนของลูกค้า และจัดการข้อมูลลูกค้า
-    Route::get('/member-check','Backend\AdminController@memberCheck');
-    Route::get('/manage-member-customer/{id}','Backend\AdminController@manageMemberCustomer');
-    Route::post('/member-customer-confirm','Backend\AdminController@memberCustomerComfirm');
     Route::get('/data-of-customer', 'Backend\AdminController@dataOfCustomer')->name('admin.home');
     Route::get('/delete-member-customer/{id}', 'Backend\AdminController@deleteMemberCustomer');
     Route::get('/edit-member-customer/{id}', 'Backend\AdminController@editMemberCustomer');
@@ -119,6 +114,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/manage-film-stock', 'Backend\AdminController@manageFilmStock');
     // การสอบถามของลูกค้า
     Route::get('/message-customer', 'Backend\AdminController@MessageCustomer');
+    //  สร้าง serialnumber บาร์โค้ด
+    Route::get('/serialnumber', 'Backend\AdminController@serialnumber');
+    Route::post('/serialnumber', 'Backend\AdminController@serialnumberPost');
+    Route::get('/delete-serialnumber/{id}', 'Backend\AdminController@deleteSerialnumber');
+    Route::get('/edit-serialnumber/{id}', 'Backend\AdminController@editSerialnumber');
+    Route::post('/update-serialnumber', 'Backend\AdminController@updateSerialnumber');
 
 });
 
@@ -149,7 +150,7 @@ Route::group(['prefix' => 'member'], function(){
     Route::post('/login','AuthMember\LoginController@login')->name('member.login.submit');
     Route::post('/logout', 'AuthMember\LoginController@logout')->name('member.logout');
     // หน้าหลัก
-    Route::get('/', 'Frontend\MemberController@index')->name('member.home');
+    // Route::get('/', 'Frontend\MemberController@index')->name('member.home');
     // ตะกร้าสินค้า
     Route::get('addToCart/{id}','Frontend\\CartController@getAddToCart');
     Route::get('/shopping-cart','Frontend\\CartController@getCart')->name('cart.index');
@@ -157,6 +158,7 @@ Route::group(['prefix' => 'member'], function(){
     Route::get('remove/{id}','Frontend\\CartController@getRemoveItem')->name('remove');
     // ลงทะเบียนรับประกันฟิล์ม
     Route::get('/register-warranty', 'Backend\MemberController@registerWarranty');
+    Route::post('/register-warranty', 'Backend\MemberController@registerWarrantyPost');
     // ส่งข้อความ
     Route::post('/send-message', 'Backend\MemberController@SendMessage');
 });

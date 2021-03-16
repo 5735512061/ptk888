@@ -10,6 +10,10 @@ class Store extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'stores';
+
+    protected $guard = 'store';
+
     protected $fillable = [
         'admin_id', 'store_id', 'name', 'phone', 'username', 'password', 'role', 'status', 'image_logo', 'address'
     ];

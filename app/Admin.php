@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Admin extends Authenticatable
 {
     use Notifiable;
+    protected $table = 'admins';
+
+    protected $guard = 'admin';
 
     protected $fillable = [
         'admin_id', 'name', 'surname', 'phone', 'username', 'password', 'role', 'status', 

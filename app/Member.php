@@ -10,6 +10,10 @@ class Member extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'members';
+
+    protected $guard = 'member';
+
     protected $fillable = [
         'member_id', 'name', 'surname', 'phone', 'username', 'password'
     ];

@@ -17,6 +17,6 @@ class RegisterController extends Controller
         $member = $request->all();
         $member['password'] = bcrypt($member['password']);
         $member = Member::create($member);
-        return back();
+        return redirect()->intended(route('member.home'));
     }
 }

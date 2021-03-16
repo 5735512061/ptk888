@@ -9,6 +9,28 @@
                 <div class="register-form">
                     <h3>ลงทะเบียนสมาชิก</h3><hr>
                     <form action="{{url('/register-member')}}" enctype="multipart/form-data" method="post">@csrf
+                        @php
+                            $random = rand(111111,999999);  
+                            $random_format = wordwrap($random , 4 , '-' , true );
+                            $id = 'PTK-M-'.$random_format;
+                            
+                            $member_id = DB::table('members')->where('member_id',$id)->value('member_id');
+                                if($member_id == null) {
+                                    $id_gen = $id;
+                                } else {
+                                    $random = rand(111111,999999);  
+                                    $random_format = wordwrap($random , 4 , '-' , true );
+                                    $id_gen = 'PTK-M-'.$random_format;
+                                }
+                        @endphp     
+                        <div class="form-group row">
+                            {{-- <label class="col-md-4 col-form-label text-md-right">{{ __('รหัสสมาชิก') }}</label> --}}
+
+                            <div class="col-md-6">
+                                <input type="hidden" class="form-control" name="member_id" value="{{$id_gen}}" readonly>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ชื่อ') }}</label>
 

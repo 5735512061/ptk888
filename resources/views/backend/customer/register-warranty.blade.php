@@ -8,20 +8,14 @@
             <div class="col-lg-6">    
                 <div class="register-form">
                     <h3>ลงทะเบียนรับประกันฟิล์ม</h3><hr>
-                    <form action="{{url('/register-member')}}" enctype="multipart/form-data" method="post">@csrf
+                    <form action="{{url('member/register-warranty')}}" enctype="multipart/form-data" method="post">@csrf
                         @csrf
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ชื่อ') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                             </div>
                         </div>
 
@@ -29,13 +23,7 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('นามสกุล') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" value="{{ old('surname') }}" required autofocus>
-
-                                @if ($errors->has('surname'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('surname') }}</strong>
-                                    </span>
-                                @endif
+                                <input type="text" class="form-control" name="surname" value="{{ old('surname') }}">
                             </div>
                         </div>
 
@@ -43,27 +31,18 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('เบอร์โทรศัพท์') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required autofocus>
-
-                                @if ($errors->has('phone'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                @endif
+                                <input type="text" class="form-control phone_format" name="phone" value="{{ old('phone') }}">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ประเภทฟิล์มของรุ่นที่ลงทะเบียน') }}</label>
-
                             <div class="col-md-6">
-                                <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required autofocus>
-
-                                @if ($errors->has('phone'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                @endif
+                                <select name="film_model" class="form-control">
+                                    <option value="Madam Film">Madam Film</option>
+                                    <option value="Dora Shield">Dora Shield</option>
+                                    <option value="บูธ PTK888">บูธ PTK888</option>
+                                </select>
                             </div>
                         </div>
 
@@ -71,27 +50,15 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('หมายเลขซีเรียล') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required autofocus>
-
-                                @if ($errors->has('phone'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                @endif
+                                <input type="text" id="ssn" maxlength="19" minlength="19" class="form-control" name="serialnumber" value="{{ old('serialnumber') }}">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('รุ่นมือถือ') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('ยี่ห้อ/รุ่นมือถือ') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required autofocus>
-
-                                @if ($errors->has('phone'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                @endif
+                                <input type="text" class="form-control" name="phone_model" value="{{ old('phone_model') }}">
                             </div>
                         </div>
 
@@ -99,15 +66,29 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('วันที่สั่งซื้อ') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required autofocus>
-
-                                @if ($errors->has('phone'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                @endif
+                                <input type="text" class="form-control" name="date_order" value="{{ old('date_order') }}">
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('จุดที่ใช้บริการ') }}</label>
+                            <div class="col-md-6">
+                                <select name="service_point" class="form-control">
+                                    <option value="ตัวแทนจำหน่าย">ตัวแทนจำหน่าย</option>
+                                    <option value="เว็บไซต์ออนไลน์">เว็บไซต์ออนไลน์</option>
+                                    <option value="บูธ PTK888">บูธ PTK888</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('สถานที่จุดบริการ') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="เช่น ร้านติดฟิล์มภูเก็ตหรือร้านค้าออนไลน์" name="address_service" value="{{ old('address_service') }}">
+                            </div>
+                        </div>
+                        <input type="hidden" name="date" id="datepicker">
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -122,12 +103,14 @@
             <div class="col-md-6">
                 <div class="register-form">
                     <h6>เงื่อนไขการรับประกัน</h6><hr>
-                    <p><i class="fa fa-caret-right"></i> สินค้ามีการรับประกันคุณภาพของฟิล์ม 3 เดือน นับจากวันที่ซื้อสินค้า </p> 
+                    <p><i class="fa fa-caret-right"></i> สินค้ายี่ห้อ Madam Film รับประกัน 1 ปี ทุกกรณี นับจากวันที่ซื้อสินค้า</p> 
+                    <p><i class="fa fa-caret-right"></i> สินค้ายี่ห้อ Dora Shield รับประกัน 3 เดือน ทุกกรณี นับจากวันที่ซื้อสินค้า </p> 
                     <p><i class="fa fa-caret-right"></i> รับประกันฟิล์มไฮโดรเจล 1 ชิ้น / ใบรับประกัน เพียง 1 ครั้งเท่านั้น</p>
-                    <p><i class="fa fa-caret-right"></i> กรุณาลงทะเบียนรับประกัน ในกรณีไม่ได้ลงทะเบียนประกัน บริษัทฯ ขอสงวนสิทธิในการเคลมสินค้า</p>
+                    <p><i class="fa fa-caret-right"></i> กรุณาลงทะเบียนรับประกันสินค้า ภายใน 7 วัน นับจากวันที่ซื้อสินค้า</p>
+                    <p><i class="fa fa-caret-right"></i> ในกรณีไม่ได้ลงทะเบียนประกัน บริษัทฯ ขอสงวนสิทธิในการเคลมสินค้า</p>
                     <p><i class="fa fa-caret-right"></i> ไม่สามารถรับคืนหรือเปลี่ยนสินค้าได้ ในกรณีที่เกิดความเสียหายในระหว่างขั้นตอนการติดตั้งที่ไม่ถูกวิธี</p>
                     <br><h6>วิธีการเคลมสินค้า</h6><hr>
-                    <p><i class="fa fa-caret-right"></i> ลงทะเบียนรับประกันฟิล์มออนไลน์ผ่านเว็บไซต์</p>
+                    <p><i class="fa fa-caret-right"></i> ลงทะเบียนรับประกันสินค้าผ่านเว็บไซต์</p>
                     <p><i class="fa fa-caret-right"></i> แจ้งเรื่องผ่านเว็บไซต์ในหัวข้อ <a href="{{url('/contact-us')}}">ใช้สิทธิ์เคลมสินค้า</a></p>
                 </div>
             </div>
@@ -135,4 +118,43 @@
     </div>
 </div>
 <!-- Login End -->
+<script type="text/javascript" src="{{asset('https://code.jquery.com/jquery-3.2.1.min.js')}}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script>
+   // number phone
+   function phoneFormatter() {
+        $('input.phone_format').on('input', function() {
+            var number = $(this).val().replace(/[^\d]/g, '')
+                if (number.length >= 5 && number.length < 10) { number = number.replace(/(\d{3})(\d{2})/, "$1-$2"); } else if (number.length >= 10) {
+                    number = number.replace(/(\d{3})(\d{3})(\d{3})/, "$1-$2-$3"); 
+                }
+            $(this).val(number)
+            $('input.phone_format').attr({ maxLength : 12 });    
+        });
+    };
+    $(phoneFormatter);
+</script>
+<script>
+    // date
+    $('#datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        todayHighlight: true,
+    });
+    $('#datepicker').datepicker("setDate", new Date());
+</script>
+<script>
+    // serial number
+    $('#ssn').keyup(function() {
+        var val = this.value.replace(/\D/g, '');
+        var newVal = '';
+        while (val.length > 4) {
+          newVal += val.substr(0, 4) + ' ';
+          val = val.substr(4);
+        }
+        newVal += val;
+        this.value = newVal;
+    });
+</script>
 @endsection

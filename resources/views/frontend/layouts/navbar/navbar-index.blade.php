@@ -14,7 +14,19 @@
         <div class="row">
             <div class="col-sm-6"></div>
             <div class="col-sm-6">
-                <a href="{{url('/register-member')}}">สมัครสมาชิก</a> / <a href="{{url('/member/login')}}">เข้าสู่ระบบ</a>
+                @if(Auth::guard('member')->user() == NULL)
+                    <a href="{{url('/register-member')}}">สมัครสมาชิก</a> / <a href="{{url('/member/login')}}">เข้าสู่ระบบ</a>
+                @endif
+                @if(Auth::guard('member')->user() != NULL)
+                    <a href="{{ route('member.logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    ออกจากระบบ
+                    </a>
+                    <form id="logout-form" action="{{ 'App\Member' == Auth::getProvider()->getModel() ? route('member.logout') : route('member.logout') }}" method="POST" style="display: none;">
+                    @csrf
+                    </form>
+                @endif
             </div>
         </div>
     </div>

@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
-    ],
+    // 'defaults' => [
+    //     'guard' => 'web',
+    //     'passwords' => 'users',
+    // ],
 
     /*
     |--------------------------------------------------------------------------
@@ -36,15 +36,15 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+        // 'web' => [
+        //     'driver' => 'session',
+        //     'provider' => 'users',
+        // ],
 
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-        ],
+        // 'api' => [
+        //     'driver' => 'token',
+        //     'provider' => 'users',
+        // ],
 
         'admin' => [
             'driver' => 'session',
@@ -152,11 +152,11 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
+        // 'users' => [
+        //     'provider' => 'users',
+        //     'table' => 'password_resets',
+        //     'expire' => 60,
+        // ],
 
         'admins' => [
             'provider' => 'admins',

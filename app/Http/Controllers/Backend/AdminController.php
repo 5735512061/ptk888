@@ -17,6 +17,7 @@ use App\model\PhoneModel;
 use App\model\StockFilm;
 use App\model\ProductFilmInformation;
 use App\model\ProductPrice;
+use App\model\Serialnumber;
 
 use App\Member;
 use App\Store;
@@ -25,8 +26,9 @@ use App\Seller;
 class AdminController extends Controller
 {
     public function __construct(){
+        // dd('test');
         $this->middleware('auth:admin');
-    } 
+    }
 
     public function dataOfCustomer(Request $request){
         $NUM_PAGE = 10;
@@ -36,28 +38,6 @@ class AdminController extends Controller
         return view('backend/admin/manageCustomer/data-of-customer')->with('NUM_PAGE',$NUM_PAGE)
                                                                     ->with('page',$page)
                                                                     ->with('customers',$customers);
-    }
-
-    public function memberCheck(Request $request){
-        $NUM_PAGE = 10;
-        $customers = Member::where('member_id',NULL)->paginate($NUM_PAGE);
-        $page = $request->input('page');
-        $page = ($page != null)?$page:1;
-        return view('backend/admin/manageCustomer/member-check')->with('NUM_PAGE',$NUM_PAGE)
-                                                                ->with('page',$page)
-                                                                ->with('customers',$customers);
-    }
-
-    public function manageMemberCustomer($id){
-        $member = Member::findOrFail($id);
-        return view('backend/admin/manageCustomer/manage-member-customer')->with('member',$member);
-    }
-
-    public function memberCustomerComfirm(Request $request) {
-        $id = $request->get('id');
-        $customer = Member::findOrFail($id);
-        $customer->update($request->all());
-        return redirect()->action('Backend\\AdminController@dataOfCustomer');
     }
 
     public function deleteMemberCustomer($id){
@@ -589,5 +569,46 @@ class AdminController extends Controller
         $price = ProductPrice::findOrFail($id);
         $price->delete();
         return back();
+    }
+
+    public function serialnumber(Request $request){
+        $NUM_PAGE = 20;
+        $serialnumbers = Serialnumber::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageSerialnumber/list-serialnumber')->with('NUM_PAGE',$NUM_PAGE)
+                                                                         ->with('page',$page)
+                                                                         ->with('serialnumbers',$serialnumbers);
+    }
+
+    public function serialnumberPost(Request $request){
+        $serialnumber = $request->all();
+        $serialnumber = Serialnumber::create($serialnumber);
+        return back();
+    }
+
+    public function deleteSerialnumber($id){
+        $serialnumber = Serialnumber::findOrFail($id);
+        $serialnumber->delete();
+        return back();
+    }
+
+    public function editSerialnumber(Request $request, $id){
+        $NUM_PAGE = 20;
+        $serialnumber = Serialnumber::findOrFail($id);
+        $serialnumbers = Serialnumber::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageSerialnumber/edit-serialnumber')->with('NUM_PAGE',$NUM_PAGE)
+                                                                         ->with('page',$page)
+                                                                         ->with('serialnumber',$serialnumber)
+                                                                         ->with('serialnumbers',$serialnumbers);
+    }                                                           
+
+    public function updateSerialnumber(Request $request){
+        $id = $request->get('id');
+        $serialnumber = Serialnumber::findOrFail($id);
+        $serialnumber->update($request->all());
+        return redirect()->action('Backend\AdminController@serialnumber');
     }
 }
