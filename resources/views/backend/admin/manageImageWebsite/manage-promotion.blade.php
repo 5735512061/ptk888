@@ -21,9 +21,17 @@
                         </div>
                         <div class="card-block">
                             <form action="{{url('/admin/upload-promotion')}}" enctype="multipart/form-data" method="post">@csrf
+                                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                                    @if(Session::has('alert-' . $msg))
+                                        <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                    @endif
+                                @endforeach
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">อัพโหลดรูปภาพโปรโมชั่น</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('image'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('image') }})</span>
+                                        @endif
                                         <input type="file" class="form-control" name="image">
                                     </div>
                                 </div>

@@ -92,7 +92,11 @@
                                         <th scope="row">{{$NUM_PAGE*($page-1) + $serialnumber+1}}</th>
                                         <td>{{$value->film_model}}</td>
                                         <td>{{$value->serialnumber}}</td>
-                                        <td>{{$value->status}}</td>
+                                        @if($value->status == 'ใช้งานแล้ว')
+                                            <td style="color:green;">{{$value->status}}</td>
+                                        @else 
+                                            <td style="color:red;">{{$value->status}}</td>
+                                        @endif
                                         <td>       
                                             <a href="{{url('/admin/edit-serialnumber')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>

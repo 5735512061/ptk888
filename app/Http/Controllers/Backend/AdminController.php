@@ -18,18 +18,21 @@ use App\model\StockFilm;
 use App\model\ProductFilmInformation;
 use App\model\ProductPrice;
 use App\model\Serialnumber;
+use App\model\ProductOut;
 
 use App\Member;
 use App\Store;
 use App\Seller;
 
+use Validator;
+
 class AdminController extends Controller
 {
     public function __construct(){
-        // dd('test');
         $this->middleware('auth:admin');
     }
 
+    /////////////////////////////// จัดการข้อมูลลูกค้า ///////////////////////////////
     public function dataOfCustomer(Request $request){
         $NUM_PAGE = 10;
         $customers = Member::paginate($NUM_PAGE);
@@ -58,6 +61,7 @@ class AdminController extends Controller
         return redirect()->action('Backend\\AdminController@dataOfCustomer');
     }
 
+    /////////////////////////////// จัดการข้อมูลสมาชิกร้านค้า ///////////////////////////////
     public function deleteMemberStore($id){
         $store = Store::findOrFail($id);
         $store->delete();
@@ -83,6 +87,7 @@ class AdminController extends Controller
         return redirect()->action('AuthStore\RegisterController@manageMemberStore');
     }
 
+    /////////////////////////////// จัดการข้อมูลพนักงานขาย ///////////////////////////////
     public function deleteSeller($id){
         $seller = Seller::findOrFail($id);
         $seller->delete();
@@ -108,6 +113,7 @@ class AdminController extends Controller
         return redirect()->action('AuthSeller\RegisterController@manageSeller');
     }
 
+    /////////////////////////////// จัดการรูปภาพหน้าเว็บไซต์ โปรโมชั่น จัดการข้อมูลรูปภาพ และจัดการข้อมูลคุณสมบัติของสินค้า ///////////////////////////////
     public function manageImageWebsite(Request $request){
         $NUM_PAGE = 10;
         $images = ImageWebsite::orderByRaw('FIELD(image_type,"รูปภาพโลโก้","รูปภาพสไลด์หลัก หน้าแรก")')->paginate($NUM_PAGE);
@@ -119,19 +125,148 @@ class AdminController extends Controller
     }
 
     public function uploadImageWebsite(Request $request){
-        $imageUpload = $request->all();
-        $imageUpload = ImageWebsite::create($imageUpload);
-        if($request->hasFile('image')){
+        $validator = Validator::make($request->all(), $this->rules_uploadImageWebsite(), $this->messages_uploadImageWebsite());
+        if($validator->passes()) {
+            $imageUpload = $request->all();
+            $imageUpload = ImageWebsite::create($imageUpload);
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+                $image->move('image_upload/image_website/', $filename);
+                $path = 'image_upload/image_website/'.$filename;
+                $imageUpload->image = $filename;
+                $imageUpload->save();
+            }
+            $request->session()->flash('alert-success', 'อัพโหลดรูปภาพสำเร็จ');
+            return back();
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดรูปภาพไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
+    }
+
+    public function deleteImageWebsite($id){
+        $image_website = ImageWebsite::findOrFail($id);
+        $image_website->delete();
+        return back();
+    }
+
+    public function editImageWebsite(Request $request, $id){
+        $NUM_PAGE = 10;
+        $image_website = ImageWebsite::findOrFail($id);
+        $images = ImageWebsite::orderByRaw('FIELD(image_type,"รูปภาพโลโก้","รูปภาพสไลด์หลัก หน้าแรก")')->paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageImageWebsite/edit-image-website')->with('NUM_PAGE',$NUM_PAGE)
+                                                                          ->with('page',$page)
+                                                                          ->with('image_website',$image_website)
+                                                                          ->with('images',$images);
+    }
+
+    public function updateImageWebsite(Request $request){
+        $id = $request->get('id');
+        $image_website = ImageWebsite::findOrFail($id);
+        $image_website->update($request->all());
+        if($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
             $image->move('image_upload/image_website/', $filename);
             $path = 'image_upload/image_website/'.$filename;
-            $imageUpload->image = $filename;
-            $imageUpload->save();
+            $image_website = ImageWebsite::findOrFail($id);
+            $image_website->image = $filename;
+            $image_website->save();
         }
+        return redirect()->action('Backend\AdminController@manageImageWebsite');
+    }
+
+    public function managePromotion(Request $request){
+        $NUM_PAGE = 10;
+        $promotions = Promotion::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageImageWebsite/manage-promotion')->with('NUM_PAGE',$NUM_PAGE)
+                                                                        ->with('page',$page)
+                                                                        ->with('promotions',$promotions);
+    }
+
+    public function uploadPromotion(Request $request){
+        $validator = Validator::make($request->all(), $this->rules_uploadPromotion(), $this->messages_uploadPromotion());
+        if($validator->passes()) {
+            $promotion = $request->all();
+            $promotion = Promotion::create($promotion);
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+                $image->move('image_upload/image_promotion/', $filename);
+                $path = 'image_upload/image_promotion/'.$filename;
+                $promotion->image = $filename;
+                $promotion->save();
+            }
+            $request->session()->flash('alert-success', 'อัพโหลดโปรโมชั่นสำเร็จ');
+            return back();
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดโปรโมชั่นไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
+    }
+
+    public function manageFilmInformation(Request $request){
+        $NUM_PAGE = 10;
+        $product_film_informations = ProductFilmInformation::paginate($NUM_PAGE);
+        $film_types = FilmType::get();
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageProductFilmInformation/manage-film-information')->with('NUM_PAGE',$NUM_PAGE)
+                                                                                         ->with('page',$page)
+                                                                                         ->with('product_film_informations',$product_film_informations)
+                                                                                         ->with('film_types',$film_types);
+    }
+
+    public function uploadFilmInformation(Request $request){
+        $validator = Validator::make($request->all(), $this->rules_uploadFilmInformation(), $this->messages_uploadFilmInformation());
+        if($validator->passes()) {
+            $product_film_information = $request->all();
+            $product_film_information = ProductFilmInformation::create($product_film_information);
+
+            $request->session()->flash('alert-success', 'อัพโหลดข้อมูลและคุณสมบัติสำเร็จ');
+            return back();
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดข้อมูลและคุณสมบัติไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
+    }
+
+    public function deleteFilmInformation($id){
+        $product_film_information = ProductFilmInformation::findOrFail($id);
+        $product_film_information->delete();
         return back();
     }
 
+    public function editFilmInformation(Request $request, $id){
+        $NUM_PAGE = 10;
+        $product_film_information = ProductFilmInformation::findOrFail($id);
+        $product_film_informations = ProductFilmInformation::paginate($NUM_PAGE);
+        $film_types = FilmType::get();
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageProductFilmInformation/edit-film-information')->with('NUM_PAGE',$NUM_PAGE)
+                                                                                       ->with('page',$page)
+                                                                                       ->with('product_film_information',$product_film_information)
+                                                                                       ->with('product_film_informations',$product_film_informations)
+                                                                                       ->with('film_types',$film_types);
+    }
+
+    public function updateFilmInformation(Request $request){
+        $id = $request->get('id');
+        $product_film_information = ProductFilmInformation::findOrFail($id);
+        $product_film_information->update($request->all());
+        return redirect()->action('Backend\AdminController@manageFilmInformation');
+    }
+
+    /////////////////////////////// จัดการประเภทผลิตภัณฑ์ และประเภทฟิล์ม /////////////////////////////// 
     public function manageCategory(Request $request){
         $NUM_PAGE = 10;
         $categorys = Category::paginate($NUM_PAGE);
@@ -143,9 +278,18 @@ class AdminController extends Controller
     }
 
     public function uploadCategory(Request $request){
-        $category = $request->all();
-        $category = Category::create($category);
-        return back();
+        $validator = Validator::make($request->all(), $this->rules_uploadCategory(), $this->messages_uploadCategory());
+        if($validator->passes()) {
+            $category = $request->all();
+            $category = Category::create($category);
+
+            $request->session()->flash('alert-success', 'อัพโหลดประเภทผลิตภัณฑ์สำเร็จ');
+            return back();
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดประเภทผลิตภัณฑ์ไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     public function deleteCategory($id){
@@ -184,17 +328,25 @@ class AdminController extends Controller
     }
 
     public function uploadFilmType(Request $request){
-        $film_type = $request->all();
-        $film_type = FilmType::create($film_type);
+        $validator = Validator::make($request->all(), $this->rules_uploadFilmType(), $this->messages_uploadFilmType());
+        if($validator->passes()) {
+            $film_type = $request->all();
+            $film_type = FilmType::create($film_type);
 
-            $film_type = $request->get('film_type');
-            $stock_film_type = new StockFilm;
-            $stock_film_type->film_type = $film_type;
-            $stock_film_type->amount = 0;
-            $stock_film_type->comment = null;
-            $stock_film_type->save();
+                $film_type = $request->get('film_type');
+                $stock_film_type = new StockFilm;
+                $stock_film_type->film_type = $film_type;
+                $stock_film_type->amount = 0;
+                $stock_film_type->comment = null;
+                $stock_film_type->save();
 
-        return back();
+            $request->session()->flash('alert-success', 'อัพโหลดประเภทฟิล์มสำเร็จ');
+            return back();
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดประเภทฟิล์มไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     public function deleteFilmType($id){
@@ -222,6 +374,7 @@ class AdminController extends Controller
         return redirect()->action('Backend\AdminController@manageFilmType');
     }
 
+    /////////////////////////////// จัดการยี่ห้อโทรศัพท์ และรุ่นโทรศัพท์ ///////////////////////////////
     public function manageBrand(Request $request){
         $NUM_PAGE = 10;
         $brands = Brand::paginate($NUM_PAGE);
@@ -233,17 +386,25 @@ class AdminController extends Controller
     }
 
     public function uploadBrand(Request $request){
-        $imageUpload = $request->all();
-        $imageUpload = Brand::create($imageUpload);
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
-            $image->move('image_upload/image_brand/', $filename);
-            $path = 'image_upload/image_brand/'.$filename;
-            $imageUpload->image = $filename;
-            $imageUpload->save();
+        $validator = Validator::make($request->all(), $this->rules_uploadBrand(), $this->messages_uploadBrand());
+        if($validator->passes()) {
+            $imageUpload = $request->all();
+            $imageUpload = Brand::create($imageUpload);
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+                $image->move('image_upload/image_brand/', $filename);
+                $path = 'image_upload/image_brand/'.$filename;
+                $imageUpload->image = $filename;
+                $imageUpload->save();
+            }
+            $request->session()->flash('alert-success', 'อัพโหลดยี่ห้อโทรศัพท์สำเร็จ');
+            return back();
         }
-        return back();
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดยี่ห้อโทรศัพท์ไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     public function deleteBrand($id){
@@ -293,9 +454,17 @@ class AdminController extends Controller
     }
 
     public function uploadPhoneModel(Request $request){
-        $phoneModel = $request->all();
-        $phoneModel = PhoneModel::create($phoneModel);
-        return back();
+        $validator = Validator::make($request->all(), $this->rules_uploadPhoneModel(), $this->messages_uploadPhoneModel());
+        if($validator->passes()) {
+            $phoneModel = $request->all();
+            $phoneModel = PhoneModel::create($phoneModel);
+            $request->session()->flash('alert-success', 'อัพโหลดรุ่นโทรศัพท์สำเร็จ');
+            return back();
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดรุ่นโทรศัพท์ไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     public function deletePhoneModel($id){
@@ -325,6 +494,7 @@ class AdminController extends Controller
         return redirect()->action('Backend\AdminController@managePhoneModel');
     }
 
+    /////////////////////////////// จัดการคลังสินค้า ///////////////////////////////
     public function uploadProductForm(Request $request){
         $NUM_PAGE = 10;
         $products = Product::paginate($NUM_PAGE);
@@ -344,27 +514,34 @@ class AdminController extends Controller
     }
 
     public function uploadProduct(Request $request){
-        $product = $request->all();
-        $product = Product::create($product);
-        $product_id = Product::orderBy('id','desc')->value('id');
-        $image=array();
-        if($files=$request->file('image')){
-            foreach($files as $file){
-                $filename = md5(($file->getClientOriginalName(). time()) . time()) . "_o." . $file->getClientOriginalExtension();
-                $file->move('image_upload/image_product/', $filename);
-                $path = 'image_upload/image_product/'.$filename;
-                $image[]=$filename;
+        $validator = Validator::make($request->all(), $this->rules_uploadProduct(), $this->messages_uploadProduct());
+        if($validator->passes()) {
+            $product = $request->all();
+            $product = Product::create($product);
+            $product_id = Product::orderBy('id','desc')->value('id');
+            $image=array();
+            if($files=$request->file('image')){
+                foreach($files as $file){
+                    $filename = md5(($file->getClientOriginalName(). time()) . time()) . "_o." . $file->getClientOriginalExtension();
+                    $file->move('image_upload/image_product/', $filename);
+                    $path = 'image_upload/image_product/'.$filename;
+                    $image[]=$filename;
+                }
             }
-        }
 
-        for ($i=0; $i < count($image) ; $i++) { 
-            $imageUpload = new ImageProduct;
-            $imageUpload->product_id = $product_id;
-            $imageUpload->image = $image[$i];
-            $imageUpload->save();
+            for ($i=0; $i < count($image) ; $i++) { 
+                $imageUpload = new ImageProduct;
+                $imageUpload->product_id = $product_id;
+                $imageUpload->image = $image[$i];
+                $imageUpload->save();
+            }
+            $request->session()->flash('alert-success', 'อัพโหลดสินค้าสำเร็จ');
+            return redirect()->action('Backend\\AdminController@uploadProductForm');
         }
-
-        return redirect()->action('Backend\\AdminController@uploadProductForm');
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดสินค้าไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     public function listProduct(Request $request){
@@ -409,129 +586,6 @@ class AdminController extends Controller
         return redirect()->action('Backend\AdminController@listProduct');
     }
 
-    public function deleteImageWebsite($id){
-        $image_website = ImageWebsite::findOrFail($id);
-        $image_website->delete();
-        return back();
-    }
-
-    public function editImageWebsite(Request $request, $id){
-        $NUM_PAGE = 10;
-        $image_website = ImageWebsite::findOrFail($id);
-        $images = ImageWebsite::orderByRaw('FIELD(image_type,"รูปภาพโลโก้","รูปภาพสไลด์หลัก หน้าแรก")')->paginate($NUM_PAGE);
-        $page = $request->input('page');
-        $page = ($page != null)?$page:1;
-        return view('backend/admin/manageImageWebsite/edit-image-website')->with('NUM_PAGE',$NUM_PAGE)
-                                                                          ->with('page',$page)
-                                                                          ->with('image_website',$image_website)
-                                                                          ->with('images',$images);
-    }
-
-    public function updateImageWebsite(Request $request){
-        $id = $request->get('id');
-        $image_website = ImageWebsite::findOrFail($id);
-        $image_website->update($request->all());
-        if($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
-            $image->move('image_upload/image_website/', $filename);
-            $path = 'image_upload/image_website/'.$filename;
-            $image_website = ImageWebsite::findOrFail($id);
-            $image_website->image = $filename;
-            $image_website->save();
-        }
-        return redirect()->action('Backend\AdminController@manageImageWebsite');
-    }
-
-    public function managePromotion(Request $request){
-        $NUM_PAGE = 10;
-        $promotions = Promotion::paginate($NUM_PAGE);
-        $page = $request->input('page');
-        $page = ($page != null)?$page:1;
-        return view('backend/admin/manageImageWebsite/manage-promotion')->with('NUM_PAGE',$NUM_PAGE)
-                                                                        ->with('page',$page)
-                                                                        ->with('promotions',$promotions);
-    }
-
-    public function uploadPromotion(Request $request){
-        $promotion = $request->all();
-        $promotion = Promotion::create($promotion);
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
-            $image->move('image_upload/image_promotion/', $filename);
-            $path = 'image_upload/image_promotion/'.$filename;
-            $promotion->image = $filename;
-            $promotion->save();
-        }
-        return back();
-    }
-    
-    public function MessageCustomer(Request $request){
-        $NUM_PAGE = 10;
-        $messages = MessageCustomer::paginate($NUM_PAGE);
-        $page = $request->input('page');
-        $page = ($page != null)?$page:1;
-        return view('backend/admin/message/message-customer')->with('NUM_PAGE',$NUM_PAGE)
-                                                             ->with('page',$page)
-                                                             ->with('messages',$messages);
-    }
-
-    public function manageFilmStock(Request $request){
-        $NUM_PAGE = 20;
-        $stock_films = StockFilm::paginate($NUM_PAGE);
-        $page = $request->input('page');
-        $page = ($page != null)?$page:1;
-        return view('backend/admin/manageStock/film-stock')->with('NUM_PAGE',$NUM_PAGE)
-                                                           ->with('page',$page)
-                                                           ->with('stock_films',$stock_films);
-    }
-
-    public function manageFilmInformation(Request $request){
-        $NUM_PAGE = 10;
-        $product_film_informations = ProductFilmInformation::paginate($NUM_PAGE);
-        $film_types = FilmType::get();
-        $page = $request->input('page');
-        $page = ($page != null)?$page:1;
-        return view('backend/admin/manageProductFilmInformation/manage-film-information')->with('NUM_PAGE',$NUM_PAGE)
-                                                                                         ->with('page',$page)
-                                                                                         ->with('product_film_informations',$product_film_informations)
-                                                                                         ->with('film_types',$film_types);
-    }
-
-    public function uploadFilmInformation(Request $request){
-        $product_film_information = $request->all();
-        $product_film_information = ProductFilmInformation::create($product_film_information);
-        return back();
-    }
-
-    public function deleteFilmInformation($id){
-        $product_film_information = ProductFilmInformation::findOrFail($id);
-        $product_film_information->delete();
-        return back();
-    }
-
-    public function editFilmInformation(Request $request, $id){
-        $NUM_PAGE = 10;
-        $product_film_information = ProductFilmInformation::findOrFail($id);
-        $product_film_informations = ProductFilmInformation::paginate($NUM_PAGE);
-        $film_types = FilmType::get();
-        $page = $request->input('page');
-        $page = ($page != null)?$page:1;
-        return view('backend/admin/manageProductFilmInformation/edit-film-information')->with('NUM_PAGE',$NUM_PAGE)
-                                                                                       ->with('page',$page)
-                                                                                       ->with('product_film_information',$product_film_information)
-                                                                                       ->with('product_film_informations',$product_film_informations)
-                                                                                       ->with('film_types',$film_types);
-    }
-
-    public function updateFilmInformation(Request $request){
-        $id = $request->get('id');
-        $product_film_information = ProductFilmInformation::findOrFail($id);
-        $product_film_information->update($request->all());
-        return redirect()->action('Backend\AdminController@manageFilmInformation');
-    }
-
     public function listProductPrice(Request $request){
         $NUM_PAGE = 20;
         $products = Product::paginate($NUM_PAGE);
@@ -548,9 +602,17 @@ class AdminController extends Controller
     }
 
     public function updateProductPrice(Request $request){
-        $price = $request->all();
-        $price = ProductPrice::create($price);
-        return redirect()->action('Backend\AdminController@listProductPrice');
+        $validator = Validator::make($request->all(), $this->rules_updateProductPrice(), $this->messages_updateProductPrice());
+        if($validator->passes()) {
+            $price = $request->all();
+            $price = ProductPrice::create($price);
+            $request->session()->flash('alert-success', 'อัพโหลดราคาสำเร็จ');
+            return redirect()->action('Backend\AdminController@listProductPrice');
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดราคาไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     public function ProductPriceDetail(Request $request,$id){
@@ -571,6 +633,29 @@ class AdminController extends Controller
         return back();
     }
 
+    /////////////////////////////// การสอบถามของลูกค้า ///////////////////////////////
+    public function MessageCustomer(Request $request){
+        $NUM_PAGE = 10;
+        $messages = MessageCustomer::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/message/message-customer')->with('NUM_PAGE',$NUM_PAGE)
+                                                             ->with('page',$page)
+                                                             ->with('messages',$messages);
+    }
+
+    /////////////////////////////// จัดการสต๊อกสินค้า ///////////////////////////////
+    public function manageFilmStock(Request $request){
+        $NUM_PAGE = 20;
+        $stock_films = StockFilm::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageStock/film-stock')->with('NUM_PAGE',$NUM_PAGE)
+                                                           ->with('page',$page)
+                                                           ->with('stock_films',$stock_films);
+    }
+
+    /////////////////////////////// สร้าง serialnumber บาร์โค้ด ///////////////////////////////
     public function serialnumber(Request $request){
         $NUM_PAGE = 20;
         $serialnumbers = Serialnumber::paginate($NUM_PAGE);
@@ -610,5 +695,184 @@ class AdminController extends Controller
         $serialnumber = Serialnumber::findOrFail($id);
         $serialnumber->update($request->all());
         return redirect()->action('Backend\AdminController@serialnumber');
+    }
+
+    /////////////////////////////// จัดการออเดอร์ การสั่งซื้อ รายการสินค้าออก ///////////////////////////////
+    public function productOut(Request $request){
+        $NUM_PAGE = 20;
+        $product_outs = ProductOut::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageOrderProduct/product-out')->with('NUM_PAGE',$NUM_PAGE)
+                                                                   ->with('page',$page)
+                                                                   ->with('product_outs',$product_outs);
+    }
+
+    public function productOutPost(Request $request){
+        $validator = Validator::make($request->all(), $this->rules_productOutPost(), $this->messages_productOutPost());
+        if($validator->passes()) {
+            $serialnumber = $request->get('serialnumber');
+            $film_model_id = Serialnumber::where('serialnumber',$serialnumber)->value('id');
+            if($film_model_id == null) {
+                $request->session()->flash('alert-danger', 'หมายเลขซีเรียล 16 หลัก ไม่ถูกต้อง');
+                return back();
+            } else {
+                $product_out = new ProductOut;
+                $product_out->film_model_id = $film_model_id;
+                $product_out->serialnumber = $serialnumber;
+                $product_out->save();
+
+                $serialnumber_status = Serialnumber::findOrFail($film_model_id);
+                $serialnumber_status->status = 'ใช้งานแล้ว';
+                $serialnumber_status->update();
+                $request->session()->flash('alert-success', 'นำสินค้าออกสำเร็จ');
+                return back();
+            }
+        }
+        else {
+            $request->session()->flash('alert-danger', 'นำสินค้าออกไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
+    }
+
+    public function deleteProductOut($id){
+        $product_out = ProductOut::findOrFail($id);
+        $product_out->delete();
+        return back();
+    }
+
+    /////////////////////////////// validate ///////////////////////////////
+    public function rules_uploadImageWebsite() {
+        return [
+            'image' => 'required',
+        ];
+    }
+
+    public function messages_uploadImageWebsite() {
+        return [
+            'image.required' => 'กรุณาเลือกไฟล์รูปภาพ 1 รูป',
+        ];
+    }
+
+    public function rules_uploadPromotion() {
+        return [
+            'image' => 'required',
+        ];
+    }
+
+    public function messages_uploadPromotion() {
+        return [
+            'image.required' => 'กรุณาเลือกไฟล์รูปภาพ 1 รูป',
+        ];
+    }
+
+    public function rules_uploadFilmInformation() {
+        return [
+            'film_information' => 'required',
+        ];
+    }
+
+    public function messages_uploadFilmInformation() {
+        return [
+            'film_information.required' => 'กรุณากรอกรายละเอียด',
+        ];
+    }
+
+    public function rules_uploadCategory() {
+        return [
+            'category' => 'required',
+            'category_eng' => 'required',
+        ];
+    }
+
+    public function messages_uploadCategory() {
+        return [
+            'category.required' => 'กรุณากรอกประเภทผลิตภัณฑ์',
+            'category_eng.required' => 'กรุณากรอกประเภทผลิตภัณฑ์ (ภาษาอังกฤษ)',
+        ];
+    }
+
+    public function rules_uploadFilmType() {
+        return [
+            'film_type' => 'required',
+            'film_type_eng' => 'required',
+        ];
+    }
+
+    public function messages_uploadFilmType() {
+        return [
+            'film_type.required' => 'กรุณากรอกประเภทฟิล์ม',
+            'film_type_eng.required' => 'กรุณากรอกประเภทฟิล์ม (ภาษาอังกฤษ)',
+        ];
+    }
+
+    public function rules_uploadBrand() {
+        return [
+            'brand' => 'required',
+            'brand_eng' => 'required',
+            'image' => 'required',
+        ];
+    }
+
+    public function messages_uploadBrand() {
+        return [
+            'brand.required' => 'กรุณากรอกยี่ห้อโทรศัพท์',
+            'brand_eng.required' => 'กรุณากรอกยี่ห้อโทรศัพท์ (ภาษาอังกฤษ)',
+            'image.required' => 'กรุณาเลือกไฟล์รูปภาพ 1 รูป',
+        ];
+    }
+
+    public function rules_uploadPhoneModel() {
+        return [
+            'model' => 'required',
+            'model_eng' => 'required',
+        ];
+    }
+
+    public function messages_uploadPhoneModel() {
+        return [
+            'model.required' => 'กรุณากรอกรุ่นโทรศัพท์',
+            'model_eng.required' => 'กรุณากรอกรุ่นโทรศัพท์ (ภาษาอังกฤษ)',
+        ];
+    }
+
+    public function rules_uploadProduct() {
+        return [
+            'phone_model_id' => 'required',
+            'product_name' => 'required',
+            'image' => 'required',
+        ];
+    }
+
+    public function messages_uploadProduct() {
+        return [
+            'phone_model_id.required' => 'กรุณากรอกรุ่นโทรศัพท์',
+            'product_name.required' => 'กรุณากรอกชื่อสินค้า',
+            'image.required' => 'กรุณาเลือกไฟล์รูปภาพ 1 รูป',
+        ];
+    }
+
+    public function rules_updateProductPrice() {
+        return [
+            'price' => 'required',
+        ];
+    }
+
+    public function messages_updateProductPrice() {
+        return [
+            'price.required' => 'กรุณากรอกราคาสินค้าปัจจุบัน',
+        ];
+    }
+
+    public function rules_productOutPost() {
+        return [
+            'serialnumber' => 'required',
+        ];
+    }
+
+    public function messages_productOutPost() {
+        return [
+            'serialnumber.required' => 'กรุณากรอกหมายเลขซีเรียล 16 หลัก',
+        ];
     }
 }

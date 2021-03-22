@@ -21,6 +21,11 @@
                         </div>
                         <div class="card-block">
                             <form action="{{url('/admin/upload-film-information')}}" enctype="multipart/form-data" method="post">@csrf
+                                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                                    @if(Session::has('alert-' . $msg))
+                                        <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                    @endif
+                                @endforeach
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ประเภทฟิล์ม</label>
                                     <div class="col-sm-10">
@@ -43,6 +48,9 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">รายละเอียด</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('film_information'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('film_information') }})</span>
+                                        @endif
                                         <input type="text" class="form-control" placeholder="กรุณากรอกรายละเอียด" name="film_information">
                                     </div>
                                 </div>

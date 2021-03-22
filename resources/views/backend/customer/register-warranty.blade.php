@@ -10,11 +10,21 @@
                     <h3>ลงทะเบียนรับประกันฟิล์ม</h3><hr>
                     <form action="{{url('member/register-warranty')}}" enctype="multipart/form-data" method="post">@csrf
                         @csrf
-
+                        <div class="flash-message">
+                            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                                @if(Session::has('alert-' . $msg))
+                                    <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                @endif
+                            @endforeach
+                        </div>
                         <div class="form-group row">
+                            
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ชื่อ') }}</label>
 
                             <div class="col-md-6">
+                                @if ($errors->has('name'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('name') }})</span>
+                                @endif
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                             </div>
                         </div>
@@ -23,6 +33,9 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('นามสกุล') }}</label>
 
                             <div class="col-md-6">
+                                @if ($errors->has('surname'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('surname') }})</span>
+                                @endif
                                 <input type="text" class="form-control" name="surname" value="{{ old('surname') }}">
                             </div>
                         </div>
@@ -31,6 +44,9 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('เบอร์โทรศัพท์') }}</label>
 
                             <div class="col-md-6">
+                                @if ($errors->has('phone'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
+                                @endif
                                 <input type="text" class="form-control phone_format" name="phone" value="{{ old('phone') }}">
                             </div>
                         </div>
@@ -38,6 +54,9 @@
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ประเภทฟิล์มของรุ่นที่ลงทะเบียน') }}</label>
                             <div class="col-md-6">
+                                @if ($errors->has('film_model'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('film_model') }})</span>
+                                @endif
                                 <select name="film_model" class="form-control">
                                     <option value="Madam Film">Madam Film</option>
                                     <option value="Dora Shield">Dora Shield</option>
@@ -47,9 +66,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('หมายเลขซีเรียล') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('หมายเลขซีเรียล 16 หลัก') }}</label>
 
                             <div class="col-md-6">
+                                @if ($errors->has('serialnumber'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('serialnumber') }})</span>
+                                @endif
                                 <input type="text" id="ssn" maxlength="19" minlength="19" class="form-control" name="serialnumber" value="{{ old('serialnumber') }}">
                             </div>
                         </div>
@@ -58,6 +80,9 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ยี่ห้อ/รุ่นมือถือ') }}</label>
 
                             <div class="col-md-6">
+                                @if ($errors->has('phone_model'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone_model') }})</span>
+                                @endif
                                 <input type="text" class="form-control" name="phone_model" value="{{ old('phone_model') }}">
                             </div>
                         </div>
@@ -66,6 +91,9 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('วันที่สั่งซื้อ') }}</label>
 
                             <div class="col-md-6">
+                                @if ($errors->has('date_order'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('date_order') }})</span>
+                                @endif
                                 <input type="text" class="form-control" name="date_order" value="{{ old('date_order') }}">
                             </div>
                         </div>
@@ -73,6 +101,9 @@
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('จุดที่ใช้บริการ') }}</label>
                             <div class="col-md-6">
+                                @if ($errors->has('service_point'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('service_point') }})</span>
+                                @endif
                                 <select name="service_point" class="form-control">
                                     <option value="ตัวแทนจำหน่าย">ตัวแทนจำหน่าย</option>
                                     <option value="เว็บไซต์ออนไลน์">เว็บไซต์ออนไลน์</option>
@@ -85,6 +116,9 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('สถานที่จุดบริการ') }}</label>
 
                             <div class="col-md-6">
+                                @if ($errors->has('address_service'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('address_service') }})</span>
+                                @endif
                                 <input type="text" class="form-control" placeholder="เช่น ร้านติดฟิล์มภูเก็ตหรือร้านค้าออนไลน์" name="address_service" value="{{ old('address_service') }}">
                             </div>
                         </div>

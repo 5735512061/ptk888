@@ -10,7 +10,11 @@ use App\model\Product;
 use Session;
 
 class CartController extends Controller
-{
+{   
+    public function __construct(){
+        $this->middleware('auth:member');
+    }
+    
     public function getAddToCart(Request $request, $id ) {
         $product = Product::findOrFail($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;

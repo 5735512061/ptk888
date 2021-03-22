@@ -105,7 +105,7 @@
                                 <i class="ti-bell"></i> ข้อความแจ้งเตือน
                             </a>
                         </li>
-                        @auth
+                        @if(Auth::guard('admin')->user() != NULL)
                             <li class="waves-effect waves-light">
                                 <a href="{{ route('admin.logout') }}" 
                                     onclick="event.preventDefault();
@@ -117,7 +117,7 @@
                                     @csrf
                                 </form>
                             </li>
-                        @endauth
+                        @endif
                     </ul>
                 </li>
             </ul>

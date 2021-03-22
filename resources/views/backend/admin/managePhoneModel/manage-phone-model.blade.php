@@ -21,6 +21,11 @@
                         </div>
                         <div class="card-block">
                             <form action="{{url('/admin/upload-phone-model')}}" enctype="multipart/form-data" method="post">@csrf
+                                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                                    @if(Session::has('alert-' . $msg))
+                                        <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                    @endif
+                                @endforeach
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ยี่ห้อโทรศัพท์</label>
                                     <div class="col-sm-10">
@@ -34,12 +39,18 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">รุ่นโทรศัพท์</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('model'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('model') }})</span>
+                                        @endif
                                         <input type="text" class="form-control" placeholder="กรุณากรอกรุ่นโทรศัพท์" name="model">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">รุ่นโทรศัพท์ภาษาอังกฤษ</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('model_eng'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('model_eng') }})</span>
+                                        @endif
                                         <input type="text" class="form-control" placeholder="กรุณากรอกรุ่นโทรศัพท์เป็นภาษาอังกฤษ เท่านั้น" name="model_eng">
                                     </div>
                                 </div>

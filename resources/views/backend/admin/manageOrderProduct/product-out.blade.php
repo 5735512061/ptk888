@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>อัพโหลดประเภทฟิล์ม</h5>
+                            <h5>นำสินค้าออก</h5>
                             <div class="card-header-right">
                                 <ul class="list-unstyled card-option">
                                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -20,33 +20,24 @@
                             </div>
                         </div>
                         <div class="card-block">
-                            <form action="{{url('/admin/upload-film-type')}}" enctype="multipart/form-data" method="post">@csrf
+                            <form action="{{url('/admin/product-out')}}" enctype="multipart/form-data" method="post">@csrf
                                 @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                                     @if(Session::has('alert-' . $msg))
                                         <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                                     @endif
                                 @endforeach
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ประเภทฟิล์ม</label>
+                                    <label class="col-sm-2 col-form-label">หมายเลขซีเรียล 16 หลัก</label>
                                     <div class="col-sm-10">
-                                        @if ($errors->has('film_type'))
-                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('film_type') }})</span>
+                                        @if ($errors->has('serialnumber'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('serialnumber') }})</span>
                                         @endif
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกประเภทฟิล์ม" name="film_type">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ประเภทฟิล์มภาษาอังกฤษ</label>
-                                    <div class="col-sm-10">
-                                        @if ($errors->has('film_type_eng'))
-                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('film_type_eng') }})</span>
-                                        @endif
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกประเภทฟิล์มเป็นภาษาอังกฤษ เท่านั้น" name="film_type_eng">
+                                        <input type="text" class="form-control" placeholder="กรุณากรอกหมายเลขซีเรียล 16 หลัก" name="serialnumber">
                                     </div>
                                 </div>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-4 offset-md-2">
-                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพโหลดประเภทฟิล์ม</button>
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">นำสินค้าออก</button>
                                     </div>
                                 </div>
                             </form>
@@ -57,7 +48,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5>รายละเอียดประเภทฟิล์ม</h5>
+                    <h5>รายการสินค้าออก</h5>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -74,29 +65,29 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>ประเภทฟิล์ม</th>
-                                    <th>ประเภทฟิล์ม (ภาษาอังกฤษ)</th>
+                                    <th>ยี่ห้อฟิล์ม</th>
+                                    <th>หมายเลขซีเรียล 16 หลัก</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($film_types as $film_type => $value)
+                                @foreach ($product_outs as $product_out => $value)
                                     <tr>
-                                        <th scope="row">{{$NUM_PAGE*($page-1) + $film_type+1}}</th>
-                                        <td>{{$value->film_type}}</td>
-                                        <td>{{$value->film_type_eng}}</td>
+                                        <th scope="row">{{$NUM_PAGE*($page-1) + $product_out+1}}</th>
+                                        @php
+                                            $film_model = DB::table('serialnumbers')->where('id',$value->film_model_id)->value('film_model');
+                                        @endphp
+                                        <td>{{$film_model}}</td>
+                                        <td>{{$value->serialnumber}}</td>
                                         <td>       
-                                            <a href="{{url('/admin/edit-film-type')}}/{{$value->id}}">
-                                                <i class="fa fa-pencil-square-o" style="color:blue;"></i>
-                                            </a>        
-                                            <a href="{{url('/admin/delete-film-type/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
+                                            <a href="{{url('/admin/delete-product-out/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                 <i class="fa fa-trash" style="color:red;"></i>
                                             </a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
-                            {{$film_types->links()}}
+                            {{$product_outs->links()}}
                         </table>
                     </div>
                 </div>

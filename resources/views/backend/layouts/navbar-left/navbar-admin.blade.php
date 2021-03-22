@@ -15,7 +15,7 @@
                         <a href="#"><i class="ti-settings"></i>ตั้งค่า</a>
                         <a href="#"><i class="ti-user"></i>ข้อมูลส่วนตัว</a>
                         <a href="#"><i class="ti-bell"></i>ข้อความแจ้งเตือน</a>
-                        @auth
+                        @if(Auth::guard('admin')->user() != NULL)
                             <a href="{{ route('admin.logout') }}" 
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
@@ -25,7 +25,7 @@
                             <form id="logout-form" action="{{ 'App\Admin' == Auth::getProvider()->getModel() ? route('admin.logout') : route('admin.logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
-                        @endauth
+                        @endif
                     </li>
                 </ul>
             </div>
@@ -169,6 +169,13 @@
 
         <div class="pcoded-navigation-label" data-i18n="nav.category.other">จัดการ Order การสั่งซื้อ</div>
         <ul class="pcoded-item pcoded-left-item">
+            <li>
+                <a href="{{url('/admin/product-out')}}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="fa fa-sign-out"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">รายการสินค้าออก</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
             <li class="pcoded-hasmenu ">
                 <a href="javascript:void(0)" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-shopping-cart"></i></span>

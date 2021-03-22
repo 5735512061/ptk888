@@ -38,7 +38,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/login','Auth\LoginController@ShowLoginForm')->name('admin.login');
     Route::post('/login','Auth\LoginController@login')->name('admin.login.submit');
     Route::post('/logout', 'Auth\LoginController@logout')->name('admin.logout');
-    // ตรวจสอบการลงทะเบียนของลูกค้า และจัดการข้อมูลลูกค้า
+    // จัดการข้อมูลลูกค้า
     Route::get('/data-of-customer', 'Backend\AdminController@dataOfCustomer')->name('admin.home');
     Route::get('/delete-member-customer/{id}', 'Backend\AdminController@deleteMemberCustomer');
     Route::get('/edit-member-customer/{id}', 'Backend\AdminController@editMemberCustomer');
@@ -64,9 +64,9 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::get('/manage-promotion', 'Backend\AdminController@managePromotion');
     Route::post('/upload-promotion', 'Backend\AdminController@UploadPromotion');
-    Route::get('/delete-promotion/{id}', 'Backend\AdminController@deletePromotion');
-    Route::get('/edit-promotion/{id}', 'Backend\AdminController@editPromotion');
-    Route::post('/update-promotion', 'Backend\AdminController@updatePromotion');
+    // Route::get('/delete-promotion/{id}', 'Backend\AdminController@deletePromotion');
+    // Route::get('/edit-promotion/{id}', 'Backend\AdminController@editPromotion');
+    // Route::post('/update-promotion', 'Backend\AdminController@updatePromotion');
 
     Route::get('/manage-film-information', 'Backend\AdminController@manageFilmInformation');
     Route::post('/upload-film-information', 'Backend\AdminController@UploadFilmInformation');
@@ -120,6 +120,10 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-serialnumber/{id}', 'Backend\AdminController@deleteSerialnumber');
     Route::get('/edit-serialnumber/{id}', 'Backend\AdminController@editSerialnumber');
     Route::post('/update-serialnumber', 'Backend\AdminController@updateSerialnumber');
+    // จัดการออเดอร์ การสั่งซื้อ รายการสินค้าออก
+    Route::get('/product-out', 'Backend\AdminController@productOut');
+    Route::post('/product-out', 'Backend\AdminController@productOutPost');
+    Route::get('/delete-product-out/{id}', 'Backend\AdminController@deleteProductOut');
 
 });
 
@@ -149,8 +153,6 @@ Route::group(['prefix' => 'member'], function(){
     Route::get('/login','AuthMember\LoginController@ShowLoginForm')->name('member.login');
     Route::post('/login','AuthMember\LoginController@login')->name('member.login.submit');
     Route::post('/logout', 'AuthMember\LoginController@logout')->name('member.logout');
-    // หน้าหลัก
-    // Route::get('/', 'Frontend\MemberController@index')->name('member.home');
     // ตะกร้าสินค้า
     Route::get('addToCart/{id}','Frontend\\CartController@getAddToCart');
     Route::get('/shopping-cart','Frontend\\CartController@getCart')->name('cart.index');

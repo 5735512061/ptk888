@@ -23,9 +23,7 @@
                     document.getElementById('logout-form').submit();">
                     ออกจากระบบ
                     </a>
-                    <form id="logout-form" action="{{ 'App\Member' == Auth::getProvider()->getModel() ? route('member.logout') : route('member.logout') }}" method="POST" style="display: none;">
-                    @csrf
-                    </form>
+                    <form id="logout-form" action="{{ 'App\Member' == Auth::getProvider()->getModel() ? route('member.logout') : route('member.logout') }}" method="POST" style="display: none;">@csrf</form>
                 @endif
             </div>
         </div>

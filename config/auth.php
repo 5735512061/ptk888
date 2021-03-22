@@ -13,10 +13,10 @@ return [
     |
     */
 
-    // 'defaults' => [
-    //     'guard' => 'web',
-    //     'passwords' => 'users',
-    // ],
+    'defaults' => [
+        'guard' => 'web',
+        'passwords' => 'users',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -36,15 +36,15 @@ return [
     */
 
     'guards' => [
-        // 'web' => [
-        //     'driver' => 'session',
-        //     'provider' => 'users',
-        // ],
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
 
-        // 'api' => [
-        //     'driver' => 'token',
-        //     'provider' => 'users',
-        // ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+        ],
 
         'admin' => [
             'driver' => 'session',
@@ -54,6 +54,16 @@ return [
         'api-admin' => [
             'driver' => 'token',
             'provider' => 'admins',
+        ],
+
+        'member' => [
+            'driver' => 'session',
+            'provider' => 'members',
+        ],
+
+        'api-member' => [
+            'driver' => 'token',
+            'provider' => 'members',
         ],
 
         'seller' => [
@@ -76,15 +86,6 @@ return [
             'provider' => 'stores',
         ],
 
-        'member' => [
-            'driver' => 'session',
-            'provider' => 'members',
-        ],
-
-        'api-member' => [
-            'driver' => 'token',
-            'provider' => 'members',
-        ],
     ],
 
     /*
@@ -110,14 +111,14 @@ return [
             'model' => App\User::class,
         ],
 
+        'members' => [
+            'driver' => 'eloquent',
+            'model' => App\Member::class,
+        ],
+
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
-        ],
-
-        'sellers' => [
-            'driver' => 'eloquent',
-            'model' => App\Seller::class,
         ],
 
         'stores' => [
@@ -125,9 +126,9 @@ return [
             'model' => App\Store::class,
         ],
 
-        'members' => [
+        'sellers' => [
             'driver' => 'eloquent',
-            'model' => App\Member::class,
+            'model' => App\Seller::class,
         ],
 
         // 'users' => [
@@ -152,14 +153,20 @@ return [
     */
 
     'passwords' => [
-        // 'users' => [
-        //     'provider' => 'users',
-        //     'table' => 'password_resets',
-        //     'expire' => 60,
-        // ],
+        'users' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
 
         'admins' => [
             'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 15,
+        ],
+
+        'members' => [
+            'provider' => 'members',
             'table' => 'password_resets',
             'expire' => 60,
         ],
@@ -175,6 +182,7 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+
     ],
 
 ];
