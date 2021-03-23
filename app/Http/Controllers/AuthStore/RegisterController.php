@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Store;
 
+use Validator;
+
 class RegisterController extends Controller
 {
     public function manageMemberStore(Request $request){
@@ -20,17 +22,41 @@ class RegisterController extends Controller
     }
 
     public function registerStore(Request $request) {
-        $store = $request->all();
-        $store['password'] = bcrypt($store['password']);
-        $store = Store::create($store);
-        if($request->hasFile('image_logo')){
-            $image = $request->file('image_logo');
-            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
-            $image->move('image_upload/image_logo_store/', $filename);
-            $path = 'image_upload/image_logo_store/'.$filename;
-            $store->image_logo = $filename;
-            $store->save();
+        $validator = Validator::make($request->all(), $this->rules_registerStore(), $this->messages_registerStore());
+        if($validator->passes()) {
+            $store = $request->all();
+            $store['password'] = bcrypt($store['password']);
+            $store = Store::create($store);
+            if($request->hasFile('image_logo')){
+                $image = $request->file('image_logo');
+                $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+                $image->move('image_upload/image_logo_store/', $filename);
+                $path = 'image_upload/image_logo_store/'.$filename;
+                $store->image_logo = $filename;
+                $store->save();
+            }
+            $request->session()->flash('alert-success', 'ลงทะเบียนสมาชิกร้านค้าสำเร็จ');
+            return back();
         }
-        return back();
+        else {
+            $request->session()->flash('alert-danger', 'ลงทะเบียนสมาชิกร้านค้าไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
+    }
+
+    public function rules_registerStore() {
+        return [
+            'name' => 'required',
+            'password' => 'required',
+            'address' => 'required',
+        ];
+    }
+
+    public function messages_registerStore() {
+        return [
+            'name.required' => 'กรุณากรอกชื่อร้านค้า',
+            'password.required' => 'กรุณารหัสผ่าน',
+            'address.required' => 'กรุณากรอกที่อยู่ตัวแทนจำหน่าย',
+        ];
     }
 }

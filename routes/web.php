@@ -144,7 +144,8 @@ Route::group(['prefix' => 'store'], function(){
     Route::post('/login','AuthStore\LoginController@login')->name('store.login.submit');
     Route::post('/logout', 'AuthStore\LoginController@logout')->name('store.logout');
 
-    Route::get('/', 'Backend\StoreController@index')->name('store.home');
+    // Route::get('/', 'Backend\StoreController@index')->name('store.home');
+    Route::get('/', 'Frontend\PtkController@index')->name('store.home');
 });
 
 // ลูกค้า

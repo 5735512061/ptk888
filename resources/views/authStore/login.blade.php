@@ -19,11 +19,11 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ชื่อเข้าใช้งาน') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
+                                <input type="text" class="form-control{{ $errors->has('store_id') ? ' is-invalid' : '' }}" name="store_id" value="{{ old('store_id') }}" required autofocus>
 
-                                @if ($errors->has('username'))
+                                @if ($errors->has('store_id'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('username') }}</strong>
+                                        <strong>{{ $errors->first('store_id') }}</strong>
                                     </span>
                                 @endif
                             </div>

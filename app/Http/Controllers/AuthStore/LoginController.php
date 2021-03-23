@@ -16,17 +16,17 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-          'username' => 'required',
+          'store_id' => 'required',
           'password' => 'required|min:6'
         ],[
-          'username.required' => "กรุณากรอกชื่อผู้ใช้",
+          'store_id.required' => "กรุณากรอกชื่อผู้ใช้",
           'password.required' => "กรุณากรอกรหัสผ่าน",
           'password.min' => "กรุณากรอกรหัสผ่านอย่างน้อย 6 ตัวอักษร",
         ]);
 
 
         $credential = [
-          'username' => $request->username,
+          'store_id' => $request->store_id,
           'password' =>$request->password
         ];
 

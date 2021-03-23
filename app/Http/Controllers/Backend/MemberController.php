@@ -26,14 +26,22 @@ class MemberController extends Controller
         if($validator->passes()) {
             $warranty = $request->all();
             $serialnumber = $request->get('serialnumber');
+            $film_model = $request->get('film_model');
             $serialnumber_product = Serialnumber::where('serialnumber',$serialnumber)
+                                                ->where('film_model',$film_model)
                                                 ->where('status','ใช้งานแล้ว')->get();
+            $serialnumber_not_product_out = Serialnumber::where('serialnumber',$serialnumber)
+                                                        ->where('film_model',$film_model)
+                                                        ->where('status','ยังไม่ใช้งาน')->get();
                 if(count($serialnumber_product) != 0) {
                     $warranty = DataWarrantyMember::create($warranty);
                     $request->session()->flash('alert-success', 'ลงทะเบียนรับประกันสินค้าเรียบร้อยค่ะ');
                     return back();
+                } elseif(count($serialnumber_not_product_out) != 0) { 
+                    $request->session()->flash('alert-danger', 'ลงทะเบียนรับประกันสินค้าไม่สำเร็จ หมายเลขซีเรียลยังไม่ถูกลงทะเบียน กรุณาติดต่อจุดบริการ');
+                    return back();
                 }
-                $request->session()->flash('alert-danger', 'ลงทะเบียนรับประกันสินค้าไม่สำเร็จ กรุณาตรวจสอบหมายเลขซีเรียล 16 หลัก');
+                $request->session()->flash('alert-danger', 'ลงทะเบียนรับประกันสินค้าไม่สำเร็จ กรุณาตรวจสอบหมายเลขซีเรียล 16 หลัก และประเภทของฟิล์ม');
                 return back();
         }else{
             $request->session()->flash('alert-danger', 'ลงทะเบียนรับประกันสินค้าไม่สำเร็จ กรุณากรอกข้อมูลให้ถูกต้องครบถ้วน');
