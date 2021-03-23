@@ -75,7 +75,7 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li class=" ">
-                        <a href="#" class="waves-effect waves-dark">
+                        <a href="{{url('/admin/data-warranty')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">ข้อมูลการลงทะเบียน</span>
                             <span class="pcoded-mcaret"></span>
                         </a>

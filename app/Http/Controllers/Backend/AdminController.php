@@ -19,6 +19,8 @@ use App\model\ProductFilmInformation;
 use App\model\ProductPrice;
 use App\model\Serialnumber;
 use App\model\ProductOut;
+use App\model\DataWarrantyMember;
+use App\model\WarrantyConfirm;
 
 use App\Member;
 use App\Store;
@@ -739,6 +741,46 @@ class AdminController extends Controller
         $product_out = ProductOut::findOrFail($id);
         $product_out->delete();
         return back();
+    }
+
+    /////////////////////////////// ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า ///////////////////////////////
+    public function dataWarranty(Request $request){
+        $NUM_PAGE = 20;
+        $data_warrantys = DataWarrantyMember::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/dataWarranty/data-warranty-member')->with('NUM_PAGE',$NUM_PAGE)
+                                                                      ->with('page',$page)
+                                                                      ->with('data_warrantys',$data_warrantys);
+    }
+
+    public function deleteDataWarranty($id){
+        $warranty_confirm = WarrantyConfirm::where('warranty_id',$id)->delete();
+        $data_warranty = DataWarrantyMember::findOrFail($id);
+        $data_warranty->delete();
+        return redirect()->action('Backend\AdminController@dataWarranty');
+    }
+
+    public function editDataWarranty(Request $request, $id){
+        $NUM_PAGE = 20;
+        $data_warranty = DataWarrantyMember::findOrFail($id);
+        $data_warrantys = DataWarrantyMember::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/dataWarranty/edit-data-warranty')->with('NUM_PAGE',$NUM_PAGE)
+                                                                    ->with('page',$page)
+                                                                    ->with('data_warrantys',$data_warrantys)
+                                                                    ->with('data_warranty',$data_warranty);
+    }
+
+    public function updateDataWarranty(Request $request){
+        $warranty_id = $request->get('id');
+        $status = $request->get('status');
+            $warranty = new WarrantyConfirm;
+            $warranty->warranty_id = $warranty_id;
+            $warranty->status = $status;
+            $warranty->save();
+        return redirect()->action('Backend\AdminController@dataWarranty');
     }
 
     /////////////////////////////// validate ///////////////////////////////

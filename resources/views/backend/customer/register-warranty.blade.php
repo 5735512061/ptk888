@@ -25,7 +25,7 @@
                                 @if ($errors->has('name'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('name') }})</span>
                                 @endif
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control" name="name" value="{{auth('member')->user()->name}}" readonly>
                             </div>
                         </div>
 
@@ -36,7 +36,7 @@
                                 @if ($errors->has('surname'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('surname') }})</span>
                                 @endif
-                                <input type="text" class="form-control" name="surname" value="{{ old('surname') }}">
+                                <input type="text" class="form-control" name="surname" value="{{auth('member')->user()->surname}}" readonly>
                             </div>
                         </div>
 
@@ -47,7 +47,7 @@
                                 @if ($errors->has('phone'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
                                 @endif
-                                <input type="text" class="form-control phone_format" name="phone" value="{{ old('phone') }}">
+                                <input type="text" class="form-control phone_format" name="phone" value="{{auth('member')->user()->phone}}" readonly>
                             </div>
                         </div>
 
@@ -123,6 +123,7 @@
                             </div>
                         </div>
                         <input type="hidden" name="date" id="datepicker">
+                        <input type="hidden" name="member_id" value="{{auth('member')->user()->id}}">
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

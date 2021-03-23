@@ -57,9 +57,6 @@ class MemberController extends Controller
 
     public function rules_warranty() {
         return [
-            'name' => 'required',
-            'surname' => 'required',
-            'phone' => 'required',
             'film_model' => 'required',
             'serialnumber' => 'required|unique:data_warranty_members',
             'phone_model' => 'required',
@@ -71,12 +68,9 @@ class MemberController extends Controller
 
     public function messages_warranty() {
         return [
-            'name.required' => 'กรุณากรอกชื่อ',
-            'surname.required' => 'กรุณากรอกนามสกุล',
-            'phone.required' => 'กรุณากรอกเบอร์โทรศัพท์',
             'film_model.required' => 'กรุณาเลือกประเภทฟิล์มของรุ่นที่ลงทะเบียน',
             'serialnumber.required' => 'กรุณากรอกหมายเลขซีเรียล 16 หลัก',
-            'serialnumber.unique' => 'หมายเลขซีเรียลเคยลงทะเบียนประกันสินค้าแล้ว',
+            'serialnumber.unique' => 'หมายเลขนี้เคยลงทะเบียนประกันสินค้าแล้ว',
             'phone_model.required' => 'กรุณากรอกยี่ห้อ/รุ่นโทรศัพท์',
             'date_order.required' => 'กรุณากรอกวันที่สั่งซื้อ',
             'service_point.required' => 'กรุณาเลือกจุดที่ใช้บริการ',

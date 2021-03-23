@@ -18,6 +18,10 @@
                                 <label>เบอร์โทรศัพท์</label>
                                 <input class="form-control" type="text" placeholder="กรุณากรอกเบอร์โทรศัพท์">
                             </div>
+                            <div class="col-md-6">
+                                <label>เบอร์โทรศัพท์ (ถ้ามี)</label>
+                                <input class="form-control" type="text" placeholder="กรอกเบอร์โทรศัพท์ (ถ้ามี)">
+                            </div>
                             <div class="col-md-12">
                                 <label>ที่อยู่</label>
                                 <input class="form-control" type="text" placeholder="กรุณากรอกที่อยู่ หมู่บ้าน ถนน หรือตรอก/ซอย (ถ้ามี)">
