@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Seller;
 
+use Validator;
+
 class RegisterController extends Controller
 {
     public function manageSeller(Request $request){
@@ -20,9 +22,37 @@ class RegisterController extends Controller
     }
 
     public function registerSeller(Request $request) {
-        $seller = $request->all();
-        $seller['password'] = bcrypt($seller['password']);
-        $seller = Seller::create($seller);
-        return back();
+        $validator = Validator::make($request->all(), $this->rules_registerSeller(), $this->messages_registerSeller());
+        if($validator->passes()) {
+            $seller = $request->all();
+            $seller['password'] = bcrypt($seller['password']);
+            $seller = Seller::create($seller);
+            $request->session()->flash('alert-success', 'ลงทะเบียนพนักงานขายสำเร็จ');
+            return back();
+        }
+        else {
+            $request->session()->flash('alert-danger', 'ลงทะเบียนพนักงานขายไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
+    }
+
+    public function rules_registerSeller() {
+        return [
+            'name' => 'required',
+            'surname' => 'required',
+            'phone' => 'required',
+            'password' => 'required',
+            'password_confirmation' => 'required',
+        ];
+    }
+
+    public function messages_registerSeller() {
+        return [
+            'name.required' => 'กรุณากรอกชื่อ',
+            'surname.required' => 'กรุณากรอกนามสกุล',
+            'phone.required' => 'กรุณากรอกเบอร์โทรศัพท์',
+            'password.required' => 'กรุณากรอกรหัสผ่าน',
+            'password_confirmation.required' => 'กรุณายืนยันรหัสผ่าน',
+        ];
     }
 }

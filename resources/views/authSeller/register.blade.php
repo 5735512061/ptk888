@@ -21,6 +21,11 @@
                         </div>
                         <div class="card-block">
                             <form action="{{url('/admin/register-seller')}}" enctype="multipart/form-data" method="post">@csrf
+                                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                                    @if(Session::has('alert-' . $msg))
+                                        <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                    @endif
+                                @endforeach
                                 @php
                                     $random = rand(111111,999999);  
                                     $random_format = wordwrap($random , 4 , '-' , true );
@@ -47,13 +52,10 @@
                                     <label class="col-sm-2 col-form-label">{{ __('ชื่อ') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-        
                                         @if ($errors->has('name'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('name') }}</strong>
-                                            </span>
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('name') }})</span>
                                         @endif
+                                        <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                                     </div>
                                 </div>
 
@@ -61,13 +63,10 @@
                                     <label class="col-sm-2 col-form-label">{{ __('นามสกุล') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" value="{{ old('surname') }}" required autofocus>
-        
                                         @if ($errors->has('surname'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('surname') }}</strong>
-                                            </span>
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('surname') }})</span>
                                         @endif
+                                        <input type="text" class="form-control" name="surname" value="{{ old('surname') }}">
                                     </div>
                                 </div>
 
@@ -75,13 +74,10 @@
                                     <label class="col-sm-2 col-form-label">{{ __('เบอร์โทรศัพท์') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input type="text" class="phone_format form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required autofocus>
-        
                                         @if ($errors->has('phone'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('phone') }}</strong>
-                                            </span>
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
                                         @endif
+                                        <input type="text" class="phone_format form-control" name="phone" value="{{ old('phone') }}">
                                     </div>
                                 </div>
 
@@ -119,30 +115,13 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">{{ __('ชื่อเข้าใช้งาน') }}</label>
-        
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required>
-        
-                                        @if ($errors->has('username'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('username') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label for="password" class="col-sm-2 col-form-label">{{ __('รหัสผ่าน') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-        
                                         @if ($errors->has('password'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('password') }}</strong>
-                                            </span>
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('password') }})</span>
                                         @endif
+                                        <input id="password" type="password" class="form-control" name="password" >
                                     </div>
                                 </div>
 
@@ -150,7 +129,10 @@
                                     <label for="password-confirm" class="col-sm-2 col-form-label">{{ __('ยืนยันรหัสผ่าน') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                        @if ($errors->has('password_confirmation'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('password_confirmation') }})</span>
+                                        @endif
+                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                                     </div>
                                 </div>
                                 <input type="hidden" name="admin_id" value="{{Auth::guard('admin')->id()}}">
@@ -191,7 +173,6 @@
                                     <th>เบอร์โทรศัพท์</th>
                                     <th>บทบาท</th>
                                     <th>สถานะ</th>
-                                    <th>ชื่อเข้าใช้งาน</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -203,7 +184,6 @@
                                         <td>{{$value->name}} {{$value->surname}}</td>
                                         <td>{{$value->phone}}</td>
                                         <td>{{$value->role}}</td>
-                                        <td>{{$value->status}}</td>
                                         <td>{{$value->username}}</td>
                                         <td>       
                                             <a href="{{url('/admin/edit-seller')}}/{{$value->id}}">

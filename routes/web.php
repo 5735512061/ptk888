@@ -134,7 +134,8 @@ Route::group(['prefix' => 'seller'], function(){
     Route::post('/login','AuthSeller\LoginController@login')->name('seller.login.submit');
     Route::post('/logout', 'AuthSeller\LoginController@logout')->name('seller.logout');
 
-    Route::get('/', 'Backend\SellerController@index')->name('seller.home');
+    // Route::get('/', 'Backend\SellerController@index')->name('seller.home');
+    Route::get('/', 'Frontend\PtkController@index')->name('seller.home');
 });
 
 // สมาชิกร้านค้า
