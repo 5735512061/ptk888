@@ -133,7 +133,10 @@
                                     <label for="password-confirm" class="col-sm-2 col-form-label">{{ __('ยืนยันรหัสผ่าน') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                        @if ($errors->has('password_confirmation'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('password_confirmation') }})</span>
+                                        @endif
+                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                                     </div>
                                 </div>
                                 <input type="hidden" name="admin_id" value="{{Auth::guard('admin')->id()}}">

@@ -49,13 +49,15 @@ class RegisterController extends Controller
             'name' => 'required',
             'password' => 'required',
             'address' => 'required',
+            'password_confirmation' => 'required',
         ];
     }
 
     public function messages_registerStore() {
         return [
             'name.required' => 'กรุณากรอกชื่อร้านค้า',
-            'password.required' => 'กรุณารหัสผ่าน',
+            'password.required' => 'กรุณากรอกรหัสผ่าน',
+            'password_confirmation.required' => 'กรุณายืนยันรหัสผ่าน',
             'address.required' => 'กรุณากรอกที่อยู่ตัวแทนจำหน่าย',
         ];
     }
