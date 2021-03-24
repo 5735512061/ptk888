@@ -19,7 +19,7 @@
                 @endif
                 @if(Auth::guard('member')->user() != NULL)
                     สวัสดี! {{Auth::guard('member')->user()->name}} {{Auth::guard('member')->user()->surname}}<br>
-                    <a href="">โปรไฟล์</a> <a style="border-right: 3px solid rgba(0, 0, 0, 0.527) !important; margin-right:5px;"></a> <a href="{{ route('member.logout') }}"
+                    <a href="{{url('/member/profile')}}">บัญชีสมาชิก</a> <a style="border-right: 3px solid rgba(0, 0, 0, 0.527) !important; margin-right:5px;"></a> <a href="{{ route('member.logout') }}"
                     onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                     ออกจากระบบ

@@ -49,8 +49,11 @@ class PtkController extends Controller
         return view('frontend/company/dealer-shop')->with('stores',$stores);
     }
 
-    public function category() {
-        return view('frontend/category/category-product');
+    public function category($category) {
+        $category = Category::where('category_eng',$category)->value('category');
+        $productRecommends = Product::where('product_recommend','ใช่')->get();
+        return view('frontend/category/category-product')->with('category',$category)
+                                                         ->with('productRecommends',$productRecommends);
     }
 
     public function brand($brand) {

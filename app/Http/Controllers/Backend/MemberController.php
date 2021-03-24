@@ -9,6 +9,7 @@ use App\model\MessageCustomer;
 use App\model\DataWarrantyMember;
 use App\model\Serialnumber;
 
+use Auth;
 use Validator;
 
 class MemberController extends Controller
@@ -53,6 +54,11 @@ class MemberController extends Controller
         $message = $request->all();
         $message = MessageCustomer::create($message);
         return back();
+    }
+
+    public function profile(){
+        $member = Auth::guard('member')->user();
+        return view('frontend/account/profile')->with('member',$member);
     }
 
     public function rules_warranty() {

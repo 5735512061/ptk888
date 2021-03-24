@@ -178,7 +178,7 @@ Route::group(['prefix' => 'store'], function(){
 
 // ลูกค้า
 Route::group(['prefix' => 'member'], function(){
-    // เข้าสู่ระบบสมาชิกร้านค้า
+    // เข้าสู่ระบบลูกค้า
     Route::get('/login','AuthMember\LoginController@ShowLoginForm')->name('member.login');
     Route::post('/login','AuthMember\LoginController@login')->name('member.login.submit');
     Route::post('/logout', 'AuthMember\LoginController@logout')->name('member.logout');
@@ -192,4 +192,6 @@ Route::group(['prefix' => 'member'], function(){
     Route::post('/register-warranty', 'Backend\MemberController@registerWarrantyPost');
     // ส่งข้อความ
     Route::post('/send-message', 'Backend\MemberController@SendMessage');
+    // โปรไฟล์ลูกค้า
+    Route::get('/profile', 'Backend\MemberController@profile');
 });
