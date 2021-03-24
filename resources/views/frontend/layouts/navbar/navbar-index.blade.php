@@ -18,7 +18,8 @@
                     <a href="{{url('/register-member')}}">สมัครสมาชิก</a> / <a href="{{url('/member/login')}}">เข้าสู่ระบบ</a>
                 @endif
                 @if(Auth::guard('member')->user() != NULL)
-                    <a href="{{ route('member.logout') }}"
+                    สวัสดี! {{Auth::guard('member')->user()->name}} {{Auth::guard('member')->user()->surname}}<br>
+                    <a href="">โปรไฟล์</a> <a style="border-right: 3px solid rgba(0, 0, 0, 0.527) !important; margin-right:5px;"></a> <a href="{{ route('member.logout') }}"
                     onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                     ออกจากระบบ

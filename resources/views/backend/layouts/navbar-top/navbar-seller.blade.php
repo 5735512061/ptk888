@@ -1,83 +1,126 @@
-<!-- Top bar Start -->
-<div class="top-bar">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6"></div>
-            <div class="col-sm-6">
-                <a href="{{url('/register-member')}}">สมัครสมาชิก</a> / <a href="{{url('/member/login')}}">เข้าสู่ระบบ</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Top bar End -->
-
-<!-- Nav Bar Start -->
-<div class="nav">
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-            <a href="#" class="navbar-brand">MENU</a>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav mr-auto">
-                    <a href="{{url('/')}}" class="nav-item nav-link active">หน้าหลัก</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ผลิตภัณฑ์</a>
-                        <div class="dropdown-menu">
-                            <a href="{{url('/product/dealer-shop')}}" class="dropdown-item">ฟิล์มมือถือ</a>
-                            <a href="{{url('/product/dealer-shop')}}" class="dropdown-item">ฟิล์มโน๊ตบุ๊ค</a>
+<nav class="navbar header-navbar pcoded-header">
+    <div class="navbar-wrapper">
+        <div class="navbar-logo">
+            <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                <i class="ti-menu"></i>
+            </a>
+            <div class="mobile-search waves-effect waves-light">
+                <div class="header-search">
+                    <div class="main-search morphsearch-search">
+                        <div class="input-group">
+                            <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                            <input type="text" class="form-control" placeholder="Enter Keyword">
+                            <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
                         </div>
                     </div>
-                    <a href="{{url('/dealer-shop')}}" class="nav-item nav-link">ตัวแทนจำหน่าย</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ศูนย์ช่วยเหลือ</a>
-                        <div class="dropdown-menu">
-                            <a href="{{url('/warranty-information')}}" class="dropdown-item">ข้อมูลการรับประกัน</a>
-                            <a href="{{url('/howto-install')}}" class="dropdown-item">วิธีติดตั้ง</a>
-                            <a href="{{url('/faq')}}" class="dropdown-item">FAQ</a>
+                </div>
+            </div>
+            <a class="mobile-options waves-effect waves-light">
+                <i class="ti-more"></i>
+            </a>
+        </div>
+      
+        <div class="navbar-container container-fluid">
+            <ul class="nav-left">
+                <li>
+                    <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                </li>
+                <li class="header-search">
+                    <div class="main-search morphsearch-search">
+                        <div class="input-group">
+                            <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                            <input type="text" class="form-control">
+                            <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
                         </div>
                     </div>
-                    <a href="{{url('/about-us')}}" class="nav-item nav-link">เกี่ยวกับเรา</a>
-                    <a href="{{url('/contact-us')}}" class="nav-item nav-link">ติดต่อเรา</a>
-                </div>
-                <a href="{{url('/member/register-warranty')}}" class="nav-item nav-link">ลงทะเบียนรับประกันฟิล์ม</a>
-            </div>
-        </nav>
-    </div>
-</div>
-<!-- Nav Bar End -->      
-
-<!-- Bottom Bar Start -->
-<div class="bottom-bar">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-md-3">
-                <div class="logo">
-                    <a href="{{url('/')}}">
-                        @php
-                            $image = DB::table('image_websites')->where('image_type','รูปภาพโลโก้')->value('image');
-                        @endphp
-                        <img src="{{url('/image_upload/image_website')}}/{{$image}}" class="img-responsive" alt="Logo" width="100%">
+                </li>
+                <li>
+                    <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
+                        <i class="ti-fullscreen"></i>
                     </a>
-                </div>
-            </div>
-            <div class="col-md-6">
-                {{-- <div class="search">
-                    <input type="text" placeholder="Search">
-                    <button><i class="fa fa-search"></i></button>
-                </div> --}}
-            </div>
-            <div class="col-md-2">
-                <div class="user">
-                    <a href="cart.html" class="btn cart">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span>(0)</span>
+                </li>
+            </ul>
+            <ul class="nav-right">
+                <li class="header-notification">
+                    <a href="#!" class="waves-effect waves-light">
+                        <i class="ti-bell"></i>
+                        <span class="badge bg-c-red"></span>
                     </a>
-                </div>
-            </div>
+                    <ul class="show-notification">
+                        <li>
+                            <h6>Notifications</h6>
+                            <label class="label label-danger">New</label>
+                        </li>
+                        <li class="waves-effect waves-light">
+                            <div class="media">
+                                <img class="d-flex align-self-center img-radius" src="{{ asset('/admin/assets/images/avatar-2.jpg')}}" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="notification-user">{{Auth::guard('seller')->user()->name}}</h5>
+                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                    <span class="notification-time">30 minutes ago</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="waves-effect waves-light">
+                            <div class="media">
+                                <img class="d-flex align-self-center img-radius" src="{{ asset('/admin/assets/images/avatar-4.jpg')}}" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="notification-user">Joseph William</h5>
+                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                    <span class="notification-time">30 minutes ago</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="waves-effect waves-light">
+                            <div class="media">
+                                <img class="d-flex align-self-center img-radius" src="{{ asset('/admin/assets/images/avatar-3.jpg')}}" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="notification-user">Sara Soudein</h5>
+                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                    <span class="notification-time">30 minutes ago</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="user-profile header-notification">
+                    <a href="#!" class="waves-effect waves-light">
+                        <img src="{{ asset('/admin/assets/images/avatar-4.jpg')}}" class="img-radius" alt="User-Profile-Image">
+                        <span>{{Auth::guard('seller')->user()->name}} {{Auth::guard('seller')->user()->surname}}</span>
+                        <i class="ti-angle-down"></i>
+                    </a>
+                    <ul class="show-notification profile-notification">
+                        <li class="waves-effect waves-light">
+                            <a href="#!">
+                                <i class="ti-settings"></i> ตั้งค่า
+                            </a>
+                        </li>
+                        <li class="waves-effect waves-light">
+                            <a href="#">
+                                <i class="ti-user"></i> ข้อมูลส่วนตัว
+                            </a>
+                        </li>
+                        <li class="waves-effect waves-light">
+                            <a href="#">
+                                <i class="ti-bell"></i> ข้อความแจ้งเตือน
+                            </a>
+                        </li>
+                        @if(Auth::guard('seller')->user() != NULL)
+                            <li class="waves-effect waves-light">
+                                <a href="{{ route('seller.logout') }}" 
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    <i class="ti-lock"></i>
+                                    ออกจากระบบ
+                                </a>
+                                <form id="logout-form" action="{{ 'App\Seller' == Auth::getProvider()->getModel() ? route('seller.logout') : route('seller.logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
-</div>
-<!-- Bottom Bar End -->    
+</nav>

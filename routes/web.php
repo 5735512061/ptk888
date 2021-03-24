@@ -143,8 +143,26 @@ Route::group(['prefix' => 'seller'], function(){
     Route::post('/login','AuthSeller\LoginController@login')->name('seller.login.submit');
     Route::post('/logout', 'AuthSeller\LoginController@logout')->name('seller.logout');
 
-    // Route::get('/', 'Backend\SellerController@index')->name('seller.home');
-    Route::get('/', 'Frontend\PtkController@index')->name('seller.home');
+    // จัดการคลังสินค้า
+    Route::get('/list-product', 'Backend\SellerController@listProduct')->name('seller.home');
+
+    Route::get('/list-product-price', 'Backend\SellerController@listProductPrice');
+    Route::get('/edit-product-price/{id}', 'Backend\SellerController@editProductPrice');
+    Route::post('/update-product-price', 'Backend\SellerController@updateProductPrice');
+    Route::get('/product-price-detail/{id}', 'Backend\SellerController@ProductPriceDetail');
+    // จัดการสต๊อกสินค้า
+    Route::get('/manage-film-stock', 'Backend\SellerController@manageFilmStock');
+    Route::post('/film-stock-out', 'Backend\SellerController@filmStockOut');
+    Route::post('/film-stock-add', 'Backend\SellerController@filmStockAdd');
+    // จัดการออเดอร์ การสั่งซื้อ รายการสินค้าออก
+    Route::get('/product-out', 'Backend\SellerController@productOut');
+    Route::post('/product-out', 'Backend\SellerController@productOutPost');
+    Route::get('/delete-product-out/{id}', 'Backend\SellerController@deleteProductOut');
+    // ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า
+    Route::get('/data-warranty', 'Backend\SellerController@dataWarranty');
+    Route::get('/delete-data-warranty/{id}', 'Backend\SellerController@deleteDataWarranty');
+    Route::get('/edit-data-warranty/{id}', 'Backend\SellerController@editDataWarranty');
+    Route::post('/update-data-warranty', 'Backend\SellerController@updateDataWarranty');
 });
 
 // สมาชิกร้านค้า
