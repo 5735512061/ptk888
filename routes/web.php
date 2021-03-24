@@ -112,8 +112,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-product-price-detail/{id}', 'Backend\AdminController@deleteProductPriceDetail');
     // จัดการสต๊อกสินค้า
     Route::get('/manage-film-stock', 'Backend\AdminController@manageFilmStock');
+    Route::get('/delete-stock-film/{id}', 'Backend\AdminController@deleteStockFilm');
+    Route::post('/film-stock-out', 'Backend\AdminController@filmStockOut');
+    Route::post('/film-stock-add', 'Backend\AdminController@filmStockAdd');
     // การสอบถามของลูกค้า
     Route::get('/message-customer', 'Backend\AdminController@MessageCustomer');
+    Route::get('/delete-message-customer/{id}', 'Backend\AdminController@deleteMessageCustomer');
     //  สร้าง serialnumber บาร์โค้ด
     Route::get('/serialnumber', 'Backend\AdminController@serialnumber');
     Route::post('/serialnumber', 'Backend\AdminController@serialnumberPost');

@@ -38,11 +38,8 @@
                                         <td>{{$value->phone}}</td>
                                         <td>{{$value->subject}}</td>
                                         <td>{{$value->message}}</td>
-                                        <td>       
-                                            <a href="{{url('/admin/edit-brand')}}/{{$value->id}}">
-                                                <i class="fa fa-pencil-square-o" style="color:blue;"></i>
-                                            </a>        
-                                            <a href="{{url('/admin/delete-brand/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
+                                        <td>         
+                                            <a href="{{url('/admin/delete-message-customer')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                 <i class="fa fa-trash" style="color:red;"></i>
                                             </a>
                                         </td>

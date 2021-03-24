@@ -646,6 +646,12 @@ class AdminController extends Controller
                                                              ->with('messages',$messages);
     }
 
+    public function deleteMessageCustomer($id){
+        $message = MessageCustomer::findOrFail($id);
+        $message->delete();
+        return back();
+    }
+
     /////////////////////////////// จัดการสต๊อกสินค้า ///////////////////////////////
     public function manageFilmStock(Request $request){
         $NUM_PAGE = 20;
@@ -655,6 +661,29 @@ class AdminController extends Controller
         return view('backend/admin/manageStock/film-stock')->with('NUM_PAGE',$NUM_PAGE)
                                                            ->with('page',$page)
                                                            ->with('stock_films',$stock_films);
+    }
+
+    public function filmStockOut(Request $request){
+        $id = $request->get('id');
+        $amount_out = $request->get('amount');
+        $amount = StockFilm::where('id',$id)->value('amount');
+        $amount -= $amount_out;
+        $amount = StockFilm::where('id',$id)->update(['amount' =>  $amount]);
+        return back();
+    }
+
+    public function filmStockAdd(Request $request){
+        $id = $request->get('id');
+        $amount_add = $request->get('amount');
+        $amount = StockFilm::where('id',$id)->value('amount');
+        $amount += $amount_add;
+        $amount = StockFilm::where('id',$id)->update(['amount' =>  $amount]);
+        return back();
+    }
+    public function deleteStockFilm($id){
+        $stock_film = StockFilm::findOrFail($id);
+        $stock_film->delete();
+        return back();
     }
 
     /////////////////////////////// สร้าง serialnumber บาร์โค้ด ///////////////////////////////
