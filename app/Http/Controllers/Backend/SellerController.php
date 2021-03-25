@@ -186,4 +186,28 @@ class SellerController extends Controller
             $warranty->save();
         return redirect()->action('Backend\SellerController@dataWarranty');
     }
+
+    public function rules_updateProductPrice() {
+        return [
+            'price' => 'required',
+        ];
+    }
+
+    public function messages_updateProductPrice() {
+        return [
+            'price.required' => 'กรุณากรอกราคาสินค้าปัจจุบัน',
+        ];
+    }
+
+    public function rules_productOutPost() {
+        return [
+            'serialnumber' => 'required',
+        ];
+    }
+
+    public function messages_productOutPost() {
+        return [
+            'serialnumber.required' => 'กรุณากรอกหมายเลขซีเรียล 16 หลัก',
+        ];
+    }
 }

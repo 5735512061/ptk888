@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 use App\model\MessageCustomer;
 use App\model\DataWarrantyMember;
 use App\model\Serialnumber;
+use App\model\OrderCustomer;
+use App\model\Product;
+
+use App\Member;
 
 use Auth;
 use Validator;
@@ -59,6 +63,26 @@ class MemberController extends Controller
     public function profile(){
         $member = Auth::guard('member')->user();
         return view('frontend/account/profile')->with('member',$member);
+    }
+
+    public function editProfile($id){
+        $member = Member::findOrFail($id);
+        return view('frontend/account/edit-profile')->with('member',$member);
+    }
+
+    public function updateProfile(Request $request){
+        $id = $request->get('id');
+        $member = Member::findOrFail($id);
+        $member->update($request->all());
+        return redirect()->action('Backend\\MemberController@profile');
+    }
+
+    public function orderHistory(){
+        $customer_id = Auth::guard('member')->user()->id;
+        $orders = OrderCustomer::where('customer_id',$customer_id)->get();
+        $productRecommends = Product::where('product_recommend','ใช่')->get();
+        return view('frontend/account/order-history')->with('orders',$orders)
+                                                     ->with('productRecommends',$productRecommends);
     }
 
     public function rules_warranty() {

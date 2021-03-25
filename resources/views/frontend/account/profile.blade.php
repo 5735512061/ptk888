@@ -18,7 +18,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-6" style="text-align: center;">
             <div class="row">
-                <a class="col-md-6" href="">
+                <a class="col-md-6" href="{{url('/member/order-history')}}">
                     <button type="submit" class="btn" style="height: 70px; width: 20em; margin-bottom: 20px;">
                         <h4>ประวัติการสั่งซื้อสินค้า</h4> 
                     </button>
@@ -28,12 +28,12 @@
                         <h4>ตะกร้าสินค้า</h4> 
                     </button>
                 </a>
-                <a class="col-md-6" href="">
+                <a class="col-md-6" href="{{url('/member/edit-profile')}}/{{$member->id}}">
                     <button type="submit" class="btn" style="height: 70px; width: 20em; margin-bottom: 20px;">
                         <h4>แก้ไขข้อมูลส่วนตัว</h4> 
                     </button>
                 </a>
-                <a class="col-md-6" href="">
+                <a class="col-md-6" href="{{url('/member/change-password')}}">
                     <button type="submit" class="btn" style="height: 70px; width: 20em; margin-bottom: 20px;">
                         <h4>เปลี่ยนรหัสผ่าน</h4> 
                     </button>

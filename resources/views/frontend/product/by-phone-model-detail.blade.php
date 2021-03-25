@@ -47,18 +47,18 @@
                             <p style="margin-bottom: 0.3rem; font-size:14px;">- {{$value->film_information}}</p>
                         @endforeach
                         <hr>
-                        <div class="product-detail">
+                        {{-- <div class="product-detail">
                             <div class="product-content">
                                 <div class="quantity">
                                     <h4>จำนวน :</h4>
                                     <div class="qty">
                                         <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                        <input type="text" value="1" name="qty">
+                                        <input type="text" value="1" name="qty" id="qty">
                                         <button class="btn-plus"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
                             </div>   
-                        </div>
+                        </div> --}}
                         
                         <a class="btn-warranty" href="{{ url('/member/addToCart', ['id' => $product->id]) }}">หยิบสินค้าใส่ตะกร้า</a>
                         

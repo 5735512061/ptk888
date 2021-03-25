@@ -182,11 +182,16 @@ Route::group(['prefix' => 'member'], function(){
     Route::get('/login','AuthMember\LoginController@ShowLoginForm')->name('member.login');
     Route::post('/login','AuthMember\LoginController@login')->name('member.login.submit');
     Route::post('/logout', 'AuthMember\LoginController@logout')->name('member.logout');
+    // เปลี่ยนรหัสผ่าน
+    Route::get('/change-password', 'AuthMember\ChangePasswordController@index')->name('password.change');
+    Route::post('/change-password', 'AuthMember\ChangePasswordController@changePassword')->name('password.update');
     // ตะกร้าสินค้า
     Route::get('addToCart/{id}','Frontend\\CartController@getAddToCart');
     Route::get('/shopping-cart','Frontend\\CartController@getCart')->name('cart.index');
     Route::get('checkout','Frontend\\CartController@getCheckout')->name('checkout');
     Route::get('remove/{id}','Frontend\\CartController@getRemoveItem')->name('remove');
+    // การชำระเงิน
+    Route::post('/payment-checkout-customer','Frontend\\CartController@paymentCheckoutCustomer');
     // ลงทะเบียนรับประกันฟิล์ม
     Route::get('/register-warranty', 'Backend\MemberController@registerWarranty');
     Route::post('/register-warranty', 'Backend\MemberController@registerWarrantyPost');
@@ -194,4 +199,9 @@ Route::group(['prefix' => 'member'], function(){
     Route::post('/send-message', 'Backend\MemberController@SendMessage');
     // โปรไฟล์ลูกค้า
     Route::get('/profile', 'Backend\MemberController@profile');
+    Route::get('/edit-profile/{id}', 'Backend\MemberController@editProfile');
+    Route::post('/update-profile', 'Backend\MemberController@updateProfile');
+    // ประวัติการสั่งซื้อสินค้า
+    Route::get('/order-history', 'Backend\MemberController@orderHistory');
+
 });

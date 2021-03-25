@@ -1,34 +1,44 @@
 @extends("/frontend/layouts/template/template")
-
+<style>
+    .table td {
+        padding: 0px !important;
+    }
+</style>
 @section("content")
-
-@if(Session::has('cart'))
+<div class="container-fluid">
+    <center><h2>ประวัติการสั่งซื้อสินค้า<hr width="70px;" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
+</div><br>
+@if(count($orders) != 0)
 <!-- Cart Start -->
 <div class="cart-page">
     <div class="container-fluid">
         <div class="row">
+            <div class="col-md-2"></div>
             <div class="col-lg-8">
                 <div class="cart-page-inner">
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th>วันที่ทำรายการ</th>
                                     <th>สินค้า</th>
                                     <th>ราคาต่อหน่วย</th>
                                     <th>จำนวน</th>
                                     <th>ราคารวม</th>
-                                    <th>ลบสินค้า</th>
                                 </tr>
                             </thead>
                             <tbody class="align-middle">
-                                @foreach($products as $product)
+                                @foreach($orders as $order => $value)
                                 <tr>
                                     @php 
-                                        $id = $product['item'];
-                                        $product_name = DB::table('products')->where('id',$id)->value('product_name'); 
-                                        $product_image = DB::table('image_products')->where('product_id',$id)->value('image'); 
-                                        $product_price = DB::table('product_prices')->where('product_id',$id)->value('price'); 
+                                        $product_id = DB::table('product_cart_customers')->where('id',$value->product_cart_id)->value('product_id'); 
+                                        $product_name = DB::table('products')->where('id',$product_id)->value('product_name');
+                                        $product_image = DB::table('image_products')->where('product_id',$product_id)->value('image'); 
+                                        $product_price = DB::table('product_prices')->where('product_id',$product_id)->value('price'); 
+                                        $qty = DB::table('product_cart_customers')->where('id',$value->product_cart_id)->value('qty');
+                                        $price = DB::table('product_cart_customers')->where('id',$value->product_cart_id)->value('price');
 						            @endphp
+                                    <td>{{$value->date}}</td>
                                     <td style="width: 30rem;">
                                         <div class="img">
                                             <a href="#"><img src="{{url('/image_upload/image_product')}}/{{$product_image}}"></a>
@@ -36,22 +46,11 @@
                                         </div>
                                     </td>
                                     <td>{{$product_price}}.-</td>
-                                    <td>
-                                        {{-- <div class="product-detail">
-                                            <div class="product-content" style="padding: 0px;">
-                                                <div class="quantity" style="margin-bottom:0px;">
-                                                    <div class="qty">
-                                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                                        <input type="text" value="{{ $product['qty'] }}" name="qty">
-                                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>   
-                                        </div> --}}
-                                        {{$product['qty']}}
-                                    </td>
-                                    <td>{{ number_format($product['price']) }}.-</td>
-                                    <td><a href="{{ route('remove', ['id' => $product['item']]) }}" class="btn btn-primary btn-xs"><i class="fa fa-trash"></i></a></td>
+                                    <td>{{$qty}}</td>
+                                    @php
+                                        $totalPrice = number_format($qty * $price);
+                                    @endphp
+                                    <td>{{$totalPrice}}.-</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -59,33 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="cart-page-inner">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="coupon">
-                                <input type="text" placeholder="กรอกโค้ดส่วนลด">
-                                <button>ใช้โค้ดส่วนลด</button>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="cart-summary">
-                                <div class="cart-content">
-                                    <h1>สรุปยอดการสั่งซื้อสินค้า</h1>
-                                    <p>ยอดสินค้า<span>{{ number_format($totalPrice) }} บาท</span></p>
-                                    <p>ค่าจัดส่ง<span>0 บาท</span></p>
-                                    <h2>รวมทั้งสิ้น<span>{{ number_format($totalPrice) }} บาท</span></h2>
-                                </div>
-                                <div class="cart-btn">
-                                    <a style="text-decoration: none;" href="{{ route('checkout') }}">
-                                        <button>ดำเนินการชำระเงิน</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 </div>
@@ -95,11 +68,11 @@
         <div class="container-fluid">
             <!-- Cart item -->
             <h5 class="m-text20 p-b-24" style="text-align: center;">
-                ไม่มีสินค้าอยู่ในตะกร้า! 
+                ไม่มีประวัติการสั่งซื้อสินค้า! 
             </h5><br>
             <center>
                 <a href="{{url('/')}}" class="btn-warranty" style="text-decoration: none;" >
-                    เลือกซื้อสินค้าต่อ
+                    เลือกซื้อสินค้า
                 </a>
             </center>
         </div>

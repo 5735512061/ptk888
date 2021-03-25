@@ -7,7 +7,14 @@ use App\Http\Controllers\Controller;
 
 use App\Cart;
 use App\model\Product;
+use App\model\PaymentCheckoutCustomer;
+use App\model\ShipmentCustomer;
+use App\model\ProductCartCustomer;
+use App\model\OrderCustomer;
+
 use Session;
+use Auth;
+use Carbon\Carbon;
 
 class CartController extends Controller
 {   
@@ -58,7 +65,101 @@ class CartController extends Controller
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         $total = $cart->totalPrice;
-        return view('/frontend/cart/checkout', ['total' => $total]);
+        return view('/frontend/cart/checkout', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice, 'total' => $total]);
+    }
+
+    public function paymentCheckoutCustomer(Request $request){
+        $customer_id = Auth::guard('member')->user()->id;
+
+        $name = $request->get('name');
+        $phone = $request->get('phone');
+        $phone_sec = $request->get('phone_sec');
+        $address = $request->get('address');
+        $district = $request->get('district');
+        $amphoe = $request->get('amphoe');
+        $province = $request->get('province');
+        $zipcode = $request->get('zipcode');
+
+        $product = $request->get('product');
+        $price = $request->get('price');
+        $qty = $request->get('qty');
+        $product_id = $request->get('product_id');
+
+        $payday = $request->get('payday');
+        $time = $request->get('time');
+        $money = $request->get('money');
+        $slip = $request->file('slip');
+
+        $date = Carbon::now()->format('d/m/Y');
+        
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        $charactersLength = strlen($characters);
+        $bill_number = '#';
+        for ($i = 0; $i < 8; $i++) {
+            $bill_number .= $characters[rand(0, $charactersLength - 1)];
+        }
+
+        $payment_checkout_customer = new PaymentCheckoutCustomer;
+        $payment_checkout_customer->customer_id = $customer_id;
+        $payment_checkout_customer->bill_number = $bill_number;
+        $payment_checkout_customer->payday = $payday;
+        $payment_checkout_customer->time = $time;
+        $payment_checkout_customer->money = $money;
+
+        if($request->hasFile('slip')){
+            $slip = $request->file('slip');
+            $filename = md5(($slip->getClientOriginalName(). time()) . time()) . "_o." . $slip->getClientOriginalExtension();
+            $slip->move('image_upload/payment_customer/', $filename);
+            $path = 'image_upload/payment_customer/'.$filename;
+            $payment_checkout_customer->slip = $filename;
+            $payment_checkout_customer->save();
+        }
+
+        $payment_checkout_customer->save();
+
+        $shipment_customer = new ShipmentCustomer;
+        $shipment_customer->customer_id = $customer_id;
+        $shipment_customer->bill_number = $bill_number;
+        $shipment_customer->name = $name;
+        $shipment_customer->phone = $phone;
+        $shipment_customer->phone_sec = $phone_sec;
+        $shipment_customer->address = $address;
+        $shipment_customer->district = $district;
+        $shipment_customer->amphoe = $amphoe;
+        $shipment_customer->province = $province;
+        $shipment_customer->zipcode = $zipcode;
+        $shipment_customer->save();
+
+        for ($i=0; $i < count($product) ; $i++) { 
+            $product_cart_customer = new ProductCartCustomer;
+            $product_cart_customer->customer_id = $customer_id;
+            $product_cart_customer->bill_number = $bill_number;
+            $product_cart_customer->product_id = $product_id[$i];
+            $product_cart_customer->price = $price[$i];
+            $product_cart_customer->qty = $qty[$i];
+            $product_cart_customer->save();
+        }
+
+        $payment_id = PaymentCheckoutCustomer::where('bill_number',$bill_number)->value('id');
+        $shipment_id = ShipmentCustomer::where('bill_number',$bill_number)->value('id');
+        $product_carts = ProductCartCustomer::where('bill_number',$bill_number)->get();
+
+        $date = Carbon::now()->format('d/m/Y');
+
+        foreach($product_carts as $product_cart => $value) {
+            $order_customer = new OrderCustomer;
+            $order_customer->customer_id = $customer_id;
+            $order_customer->bill_number = $bill_number;
+            $order_customer->payment_id = $payment_id;
+            $order_customer->shipment_id = $shipment_id;
+            $order_customer->product_cart_id = $value->id;
+            $order_customer->date = $date;
+            $order_customer->save();
+        }
+
+        Session::forget('cart');
+        $productRecommends = Product::where('product_recommend','ใช่')->get();
+        return view('/frontend/cart/shopping-cart',['products' => 'null','productRecommends' => $productRecommends]);
     }
 
 }
