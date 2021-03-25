@@ -128,12 +128,14 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/product-out', 'Backend\AdminController@productOut');
     Route::post('/product-out', 'Backend\AdminController@productOutPost');
     Route::get('/delete-product-out/{id}', 'Backend\AdminController@deleteProductOut');
+
+    Route::get('/order-customer', 'Backend\AdminController@orderCustomer');
     // ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า
     Route::get('/data-warranty', 'Backend\AdminController@dataWarranty');
     Route::get('/delete-data-warranty/{id}', 'Backend\AdminController@deleteDataWarranty');
     Route::get('/edit-data-warranty/{id}', 'Backend\AdminController@editDataWarranty');
     Route::post('/update-data-warranty', 'Backend\AdminController@updateDataWarranty');
-
+    
 });
 
 // พนักงานขาย

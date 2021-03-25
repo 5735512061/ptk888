@@ -728,7 +728,7 @@ class AdminController extends Controller
         return redirect()->action('Backend\AdminController@serialnumber');
     }
 
-    /////////////////////////////// จัดการออเดอร์ การสั่งซื้อ รายการสินค้าออก ///////////////////////////////
+    /////////////////////////////// จัดการออเดอร์ การสั่งซื้อ รายการสินค้าออก และข้อมูลการชำระเงิน ///////////////////////////////
     public function productOut(Request $request){
         $NUM_PAGE = 20;
         $product_outs = ProductOut::paginate($NUM_PAGE);
@@ -737,6 +737,16 @@ class AdminController extends Controller
         return view('backend/admin/manageOrderProduct/product-out')->with('NUM_PAGE',$NUM_PAGE)
                                                                    ->with('page',$page)
                                                                    ->with('product_outs',$product_outs);
+    }
+
+    public function orderCustomer(){
+        $NUM_PAGE = 20;
+        $orders = OrderCustomer::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageOrderProduct/order-customer')->with('NUM_PAGE',$NUM_PAGE)
+                                                                      ->with('page',$page)
+                                                                      ->with('orders',$orders);
     }
 
     public function productOutPost(Request $request){

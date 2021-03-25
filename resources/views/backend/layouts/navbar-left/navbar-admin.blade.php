@@ -189,9 +189,9 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                         <ul class="pcoded-submenu">
-                            <li class="">
-                                <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                    <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">การสั่งซื้อของลูกค้า</span>
+                            <li class=" ">
+                                <a href="{{url('/admin/order-customer')}}" class="waves-effect waves-dark">
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">การสั่งซื้อของลูกค้า</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
