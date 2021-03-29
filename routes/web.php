@@ -130,6 +130,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-product-out/{id}', 'Backend\AdminController@deleteProductOut');
 
     Route::get('/order-customer', 'Backend\AdminController@orderCustomer');
+    Route::get('/order-customer-detail/{id}', 'Backend\AdminController@orderCustomerDetail');
     // ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า
     Route::get('/data-warranty', 'Backend\AdminController@dataWarranty');
     Route::get('/delete-data-warranty/{id}', 'Backend\AdminController@deleteDataWarranty');
@@ -160,6 +161,9 @@ Route::group(['prefix' => 'seller'], function(){
     Route::get('/product-out', 'Backend\SellerController@productOut');
     Route::post('/product-out', 'Backend\SellerController@productOutPost');
     Route::get('/delete-product-out/{id}', 'Backend\SellerController@deleteProductOut');
+
+    Route::get('/order-customer', 'Backend\SellerController@orderCustomer');
+    Route::get('/order-customer-detail/{id}', 'Backend\SellerController@orderCustomerDetail');
     // ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า
     Route::get('/data-warranty', 'Backend\SellerController@dataWarranty');
     Route::get('/delete-data-warranty/{id}', 'Backend\SellerController@deleteDataWarranty');
@@ -174,8 +178,9 @@ Route::group(['prefix' => 'store'], function(){
     Route::post('/login','AuthStore\LoginController@login')->name('store.login.submit');
     Route::post('/logout', 'AuthStore\LoginController@logout')->name('store.logout');
 
-    // Route::get('/', 'Backend\StoreController@index')->name('store.home');
-    Route::get('/', 'Frontend\PtkController@index')->name('store.home');
+    // รายการสินค้าออก
+    Route::get('/product-out', 'Backend\StoreController@productOut')->name('store.home');
+    Route::post('/product-out', 'Backend\StoreController@productOutPost');
 });
 
 // ลูกค้า
@@ -194,9 +199,12 @@ Route::group(['prefix' => 'member'], function(){
     Route::get('remove/{id}','Frontend\\CartController@getRemoveItem')->name('remove');
     // การชำระเงิน
     Route::post('/payment-checkout-customer','Frontend\\CartController@paymentCheckoutCustomer');
-    // ลงทะเบียนรับประกันฟิล์ม
+    // ลงทะเบียนรับประกันฟิล์ม และเคลมสินค้า
     Route::get('/register-warranty', 'Backend\MemberController@registerWarranty');
     Route::post('/register-warranty', 'Backend\MemberController@registerWarrantyPost');
+
+    Route::get('/claim-product', 'Backend\MemberController@claimProduct');
+    Route::post('/claim-product-confirm', 'Backend\MemberController@claimProductConfirm');
     // ส่งข้อความ
     Route::post('/send-message', 'Backend\MemberController@SendMessage');
     // โปรไฟล์ลูกค้า

@@ -4,7 +4,8 @@
 
 <link rel="stylesheet" type="text/css" href="{{ asset('lib/slick/slick.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('lib/slick/slick-theme.css')}}">
-
+<link rel="stylesheet" type="text/css" href="{{ asset('css/faq-accordion.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/dealer-shop.css')}}">
 <!-- Template Stylesheet -->
 <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}">
 

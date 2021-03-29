@@ -11,12 +11,79 @@
 		<style>
 			@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200&display=swap');
 		</style>
-		@include("/backend/layouts/css")
+		@include("/backend/layouts/css/css")
 	</head>
 	<body>
-		@include("/backend/layouts/navbar/navbar-store")
-        @yield("content")
-        @include("/backend/layouts/footer/footer-store")
-		@include("/backend/layouts/js")
+		<div class="theme-loader">
+			<div class="loader-track">
+				<div class="preloader-wrapper">
+					<div class="spinner-layer spinner-blue">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div>
+						<div class="gap-patch">
+							<div class="circle"></div>
+						</div>
+						<div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+					</div>
+					<div class="spinner-layer spinner-red">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div>
+						<div class="gap-patch">
+							<div class="circle"></div>
+						</div>
+						<div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+					</div>
+				  
+					<div class="spinner-layer spinner-yellow">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div>
+						<div class="gap-patch">
+							<div class="circle"></div>
+						</div>
+						<div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+					</div>
+				  
+					<div class="spinner-layer spinner-green">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div>
+						<div class="gap-patch">
+							<div class="circle"></div>
+						</div>
+						<div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="pcoded" class="pcoded">
+			<div class="pcoded-overlay-box"></div>
+			<div class="pcoded-container navbar-wrapper">
+				@include("/backend/layouts/navbar-top/navbar-store")
+				<div class="pcoded-main-container">
+					<div class="pcoded-wrapper">
+						@include("/backend/layouts/navbar-left/navbar-store")
+						<div class="pcoded-content">
+							@include("/backend/layouts/top-bar/topbar-store")
+							<div class="pcoded-inner-content">
+								@yield("content")
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		@include("/backend/layouts/js/js")
 	</body>
 </html>

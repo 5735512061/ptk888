@@ -1,5 +1,5 @@
 @extends("/frontend/layouts/template/template")
-<link rel="stylesheet" type="text/css" href="{{ asset('css/dealer-shop  .css')}}">
+
 @section("content")
 <div class="container">
     @foreach ($stores as $store => $value)

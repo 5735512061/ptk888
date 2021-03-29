@@ -107,9 +107,9 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                         <ul class="pcoded-submenu">
-                            <li class="">
-                                <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                    <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">การสั่งซื้อของลูกค้า</span>
+                            <li class=" ">
+                                <a href="{{url('/seller/order-customer')}}" class="waves-effect waves-dark">
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">การสั่งซื้อของลูกค้า</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
@@ -123,29 +123,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="pcoded-hasmenu ">
-                        <a href="javascript:void(0)" class="waves-effect waves-dark">
-                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">ข้อมูลการชำระเงิน</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                        <ul class="pcoded-submenu">
-                            <li class="">
-                                <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                    <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">การชำระเงินของลูกค้า</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="pcoded-submenu">
-                            <li class="">
-                                <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                    <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">การชำระเงินของร้านค้า</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
                 </ul>
             </li>
         </ul>

@@ -21,6 +21,7 @@ use App\model\Serialnumber;
 use App\model\ProductOut;
 use App\model\DataWarrantyMember;
 use App\model\WarrantyConfirm;
+use App\model\OrderCustomer;
 
 use App\Member;
 use App\Store;
@@ -739,16 +740,6 @@ class AdminController extends Controller
                                                                    ->with('product_outs',$product_outs);
     }
 
-    public function orderCustomer(){
-        $NUM_PAGE = 20;
-        $orders = OrderCustomer::paginate($NUM_PAGE);
-        $page = $request->input('page');
-        $page = ($page != null)?$page:1;
-        return view('backend/admin/manageOrderProduct/order-customer')->with('NUM_PAGE',$NUM_PAGE)
-                                                                      ->with('page',$page)
-                                                                      ->with('orders',$orders);
-    }
-
     public function productOutPost(Request $request){
         $validator = Validator::make($request->all(), $this->rules_productOutPost(), $this->messages_productOutPost());
         if($validator->passes()) {
@@ -780,6 +771,21 @@ class AdminController extends Controller
         $product_out = ProductOut::findOrFail($id);
         $product_out->delete();
         return back();
+    }
+
+    public function orderCustomer(Request $request){
+        $NUM_PAGE = 20;
+        $orders = OrderCustomer::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageOrderProduct/order-customer')->with('NUM_PAGE',$NUM_PAGE)
+                                                                      ->with('page',$page)
+                                                                      ->with('orders',$orders);
+    }
+
+    public function orderCustomerDetail($id){
+        $order = OrderCustomer::findOrFail($id);
+        return view('backend/admin/manageOrderProduct/order-customer-detail')->with('order',$order);
     }
 
     /////////////////////////////// ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า ///////////////////////////////

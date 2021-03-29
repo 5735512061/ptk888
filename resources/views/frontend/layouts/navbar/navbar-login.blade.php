@@ -59,6 +59,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">ศูนย์ช่วยเหลือ</a>
                         <div class="dropdown-menu">
                             <a href="{{url('/warranty-information')}}" class="dropdown-item">ข้อมูลการรับประกัน</a>
+                            <a href="{{url('/member/claim-product')}}" class="dropdown-item">ใช้สิทธิ์เคลมสินค้า</a>
                             <a href="{{url('/howto-install')}}" class="dropdown-item">วิธีติดตั้ง</a>
                             <a href="{{url('/faq')}}" class="dropdown-item">FAQ</a>
                         </div>

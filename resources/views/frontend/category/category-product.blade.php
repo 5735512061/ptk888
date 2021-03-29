@@ -69,6 +69,93 @@
 <div class="featured-product product">
     <div class="container-fluid">
         <center><h2>ฟิล์มไฮโดรเจล<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h5 style="line-height: 1.7;"><strong>ฟิล์มไฮโดรเจล</strong> เป็นฟิล์มกันรอยรูปแบบใหม่ที่มีจุดเด่นเป็นความบางเฉียบที่แข็งแรงทนทาน ติดเคลือบป้องกันได้ทั้งตัว ติดแน่นหนึบ อีกทั้งยังไม่บดบังความคมชัด 
+                    หรือสีสันของหน้าจอ พร้อมความแข็งแรง ทนทานที่สามารถรับแรงกระแทกได้ในระดับหนึ่ง โดยติดใช้งานได้ไม่ยาก พร้อมไม่ทิ้งฟองอากาศ หรือคราบกาว</h5>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        @php
+            $brands = DB::table('brands')->get();
+        @endphp
+        <div class="brand">
+            <div class="brand-slider">
+                @foreach ($brands as $brand => $value)
+                <a href="{{url('/brand')}}/{{$value->brand_eng}}" style="border-right: 2px solid rgba(0,0,0,36%)">
+                    <div class="brand-item">
+                        <img src="{{url('/image_upload/image_brand')}}/{{$value->image}}" class="img-responsive" width="50%">
+                    </div>
+                </a>
+                @endforeach
+            </div>
+        </div><hr>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-5">
+                        <img src="{{url('img/logo_film/high_clear.jpg')}}" class="img-responsive">
+                    </div>
+                    <div class="col-md-7" style="margin-top: 5em;">
+                        <strong>ฟิล์มไฮโดรเจลวูล์ฟเวอรีน-ฟื้นฟูตัวเอง (Wolverine Self Repair Hydrogel Film)</strong>
+                        <p>ฟิล์มกันกระแทก ที่มีคุณสมบัติพิเศษที่ไม่เหมือนใคร คือการซ่อมแซมตัวเอง หลังจากเกิดรอยขีดข่วนหรือรอยพับ ให้กลับมาใสดังเดิม ภายใน 24 ชั่วโมง</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-5">
+                        <img src="{{url('img/logo_film/high_clear.jpg')}}" class="img-responsive">
+                    </div>
+                    <div class="col-md-7" style="margin-top: 5em;">
+                        <strong>ฟิล์มไฮโดรเจลกันรอยแบบป้องกันความเป็นส่วนตัว (Privacy Screen Hydrogel Film)</strong>
+                        <p>ฟิล์มกันกระแทก ที่มีคุณสมบัติพิเศษคือ ผู้อื่นไม่สามารถมองเห็นหน้าจอของเราได้ ผู้ใช้จะสามารถมองจากมุมด้านหน้าตรง ๆ เท่านั้น เพื่อความเป็นส่วนตัว</p>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-5">
+                        <img src="{{url('img/logo_film/high_clear.jpg')}}" class="img-responsive">
+                    </div>
+                    <div class="col-md-7" style="margin-top: 5em;">
+                        <strong>ฟิล์มไฮโดรเจลกันรอยแบบป้องกันสายตา (Anti-Blue Light Hydrogel Film)</strong>
+                        <p>ฟิล์มกันกระแทก ที่มีคุณสมบัติพิเศษคือป้องกันสายตา ตัดแสงสีฟ้าจากหน้าจอมือถือ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-5">
+                        <img src="{{url('img/logo_film/high_clear.jpg')}}" class="img-responsive">
+                    </div>
+                    <div class="col-md-7" style="margin-top: 5em;">
+                        <strong>ฟิล์มไฮโดรเจลกันรอยแบบด้าน (Hydrogel Matte Film)</strong>
+                        <p>ฟิล์มกันกระแทก ที่มีคุณสมบัติของฟิล์มชนิดนี้คือ ไม่ทิ้งคราบรอยนิ้วมือ และคราบเหงื่อ เหมาะสำหรับผู้ที่ชอบเล่นเกมส์ การสัมผัสหน้าจอและทัชสกรีนลื่นไหล ไม่สะดุด</p>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-5">
+                        <img src="{{url('img/logo_film/high_clear.jpg')}}" class="img-responsive">
+                    </div>
+                    <div class="col-md-7" style="margin-top: 5em;">
+                        <strong>ฟิล์มไฮโดรเจลกันรอยแบบใส (High Clear Hydrogel Film)</strong>
+                        <p>ฟิล์มกันกระแทก ที่มีคุณสมบัติพิเศษคือแสงจอไม่ดรอปลง หน้าจอคงความสดใสได้ดังเดิมเสมือนไม่ได้ติดฟิล์มมาเลยทีเดียว</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endif

@@ -13,6 +13,7 @@ use App\model\Serialnumber;
 use App\model\ProductOut;
 use App\model\DataWarrantyMember;
 use App\model\WarrantyConfirm;
+use App\model\OrderCustomer;
 
 use Validator;
 
@@ -145,6 +146,21 @@ class SellerController extends Controller
         $product_out = ProductOut::findOrFail($id);
         $product_out->delete();
         return back();
+    }
+
+    public function orderCustomer(Request $request){
+        $NUM_PAGE = 20;
+        $orders = OrderCustomer::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/seller/manageOrderProduct/order-customer')->with('NUM_PAGE',$NUM_PAGE)
+                                                                       ->with('page',$page)
+                                                                       ->with('orders',$orders);
+    }
+
+    public function orderCustomerDetail($id){
+        $order = OrderCustomer::findOrFail($id);
+        return view('backend/seller/manageOrderProduct/order-customer-detail')->with('order',$order);
     }
 
     /////////////////////////////// ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า ///////////////////////////////

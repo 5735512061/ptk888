@@ -54,6 +54,17 @@ class MemberController extends Controller
         }
     }
 
+    public function claimProduct(){
+        return view('backend/customer/claim-product');
+    }
+    
+    public function claimProductConfirm(Request $request){
+        $phone = $request->get('phone');
+        $member_id = Member::where('phone',$phone)->value('id');
+        $data_warranty = DataWarrantyMember::where('member_id',$member_id)->get();
+        return back();
+    }
+
     public function sendMessage(Request $request) {
         $message = $request->all();
         $message = MessageCustomer::create($message);

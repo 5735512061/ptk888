@@ -1,5 +1,5 @@
 @extends("/frontend/layouts/template/template")
-<link rel="stylesheet" type="text/css" href="{{ asset('css/faq-accordion.css')}}">
+
 @section("content")
 <div class="container-fluid">
     <center><h2>FAQ<hr width="50px;" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>

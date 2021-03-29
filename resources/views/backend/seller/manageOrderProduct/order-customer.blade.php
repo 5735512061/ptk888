@@ -1,4 +1,4 @@
-@extends("/backend/layouts/template/template-admin")
+@extends("/backend/layouts/template/template-seller")
 
 @section("content")
 <div class="main-body">
@@ -40,13 +40,13 @@
                                             $price = DB::table('product_cart_customers')->where('id',$value->product_cart_id)->value('price');
                                             $totalPrice = number_format($qty * $price);
                                         @endphp
-                                        <td><a href="{{url('/admin/order-customer-detail/')}}/{{$value->id}}" style="color: blue;">{{$value->bill_number}}</a></td>
+                                        <td><a href="{{url('/seller/order-customer-detail/')}}/{{$value->id}}" style="color: blue;">{{$value->bill_number}}</a></td>
                                         <td>{{$value->date}}</td>
                                         <td>{{$qty}}</td>
                                         <td>{{$totalPrice}}.-</td>
                                         <td></td>
                                         <td>       
-                                            <a href="{{url('/admin/edit-product')}}/{{$value->id}}">
+                                            <a href="{{url('/seller/edit-product')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue; font-family: 'Mitr','FontAwesome';"> ตรวจสอบการสั่งซื้อ</i>
                                             </a>
                                         </td>

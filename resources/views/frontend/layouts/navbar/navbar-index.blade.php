@@ -70,6 +70,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">ศูนย์ช่วยเหลือ</a>
                         <div class="dropdown-menu">
                             <a href="{{url('/warranty-information')}}" class="dropdown-item">ข้อมูลการรับประกัน</a>
+                            <a href="{{url('/member/claim-product')}}" class="dropdown-item">ใช้สิทธิ์เคลมสินค้า</a>
                             <a href="{{url('/howto-install')}}" class="dropdown-item">วิธีติดตั้ง</a>
                             <a href="{{url('/faq')}}" class="dropdown-item">FAQ</a>
                         </div>
@@ -105,10 +106,10 @@
                 <div style="text-align: center;">
                     <a class="btn-warranty" id="mobile" style="display: none;" href="{{url('/member/register-warranty')}}">ลงทะเบียนรับประกันฟิล์ม</a>
                     <div class="user" id="mobile" style="display: none;">
-                        <a href="#" class="btn wishlist" style="margin-right:4px !important; margin-bottom:5px !important;">
+                        {{-- <a href="#" class="btn wishlist" style="margin-right:4px !important; margin-bottom:5px !important;">
                             <i class="fa fa-heart"></i>
                             <span>(0)</span>
-                        </a>
+                        </a> --}}
                         <a href="{{route('cart.index')}}" class="btn cart" style="margin-bottom:5px !important;">
                             <i class="fa fa-shopping-cart"></i>
                             <span>({{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }})</span>
@@ -118,10 +119,10 @@
             </div>
             <div class="col-md-9 col-12" id="desktop">
                 <div class="user">
-                    <a href="#" class="btn wishlist">
+                    {{-- <a href="#" class="btn wishlist">
                         <i class="fa fa-heart"></i>
                         <span>(0)</span>
-                    </a>
+                    </a> --}}
                     <a href="{{route('cart.index')}}" class="btn cart">
                         <i class="fa fa-shopping-cart"></i>
                         <span>({{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }})</span>

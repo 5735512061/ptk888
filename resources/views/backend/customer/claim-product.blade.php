@@ -2,15 +2,32 @@
 
 @section("content")
 <div class="container-fluid">
-    <center><h2>ข้อมูลการรับประกัน<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
+    <center><h2>เคลมสินค้า<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
 </div><br>
 <div class="login">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <center><h3>กรุณาลงทะเบียนรับประกันฟิล์ม <strong style="color: #ffc12e;">ภายใน 1-7 วัน</strong> หลังจากที่ซื้อสินค้า กรณีไม่ได้ลงทะเบียนประกัน บริษัทฯ ขอสงวนสิทธิในการเคลมสินค้า</h3></center>
                 <div class="register-form">
+                    <form action="{{url('member/claim-product-confirm')}}" enctype="multipart/form-data" method="post">@csrf
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label"></label>
+
+                            <div class="col-md-6">
+                                @if ($errors->has('phone'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
+                                @endif
+                                <input type="text" class="form-control" name="phone" value="{{ old('phone') }}" placeholder="กรอกเบอร์โทรศัพท์ เพื่อตรวจสอบข้อมูลการลงทะเบียน">
+                            </div>
+
+                            <div class="col-md-3">
+                                <button type="submit" class="btn">
+                                    {{ __('ตรวจสอบข้อมูล') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                     <h4>เงื่อนไขการรับประกัน</h4><hr>
                     <p><i class="fa fa-caret-right"></i> สินค้ายี่ห้อ Madam Film รับประกัน 1 ปี ทุกกรณี นับจากวันที่ซื้อสินค้า</p> 
                     <p><i class="fa fa-caret-right"></i> สินค้ายี่ห้อ Dora Shield รับประกัน 3 เดือน ทุกกรณี นับจากวันที่ซื้อสินค้า </p> 
