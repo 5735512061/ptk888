@@ -13,6 +13,7 @@ use App\model\Product;
 use App\model\ImageProduct;
 use App\model\Promotion;
 use App\model\MessageCustomer;
+use App\model\MessageStore;
 use App\model\PhoneModel;
 use App\model\StockFilm;
 use App\model\ProductFilmInformation;
@@ -647,6 +648,16 @@ class AdminController extends Controller
                                                              ->with('messages',$messages);
     }
 
+    public function MessageStore(Request $request){
+        $NUM_PAGE = 10;
+        $messages = MessageStore::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/message/message-store')->with('NUM_PAGE',$NUM_PAGE)
+                                                          ->with('page',$page)
+                                                          ->with('messages',$messages);
+    }
+
     public function deleteMessageCustomer($id){
         $message = MessageCustomer::findOrFail($id);
         $message->delete();
@@ -819,13 +830,33 @@ class AdminController extends Controller
     }
 
     public function updateDataWarranty(Request $request){
-        $warranty_id = $request->get('id');
-        $status = $request->get('status');
-            $warranty = new WarrantyConfirm;
-            $warranty->warranty_id = $warranty_id;
-            $warranty->status = $status;
-            $warranty->save();
-        return redirect()->action('Backend\AdminController@dataWarranty');
+        $id = $request->get('id');
+        $status = WarrantyConfirm::findOrFail($id);
+        $status->status = 'เคลมแล้ว';
+        $status->update();
+        return redirect()->action('Backend\AdminController@claimProduct');
+    }
+
+    public function claimProduct(Request $request){
+        $NUM_PAGE = 20;
+        $claim_products = WarrantyConfirm::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/dataWarranty/claim-product')->with('NUM_PAGE',$NUM_PAGE)
+                                                               ->with('page',$page)
+                                                               ->with('claim_products',$claim_products);
+    }
+
+    public function editClaimStatus(Request $request, $id){
+        $NUM_PAGE = 20;
+        $claim_products = WarrantyConfirm::paginate($NUM_PAGE);
+        $claim_status = WarrantyConfirm::findOrFail($id);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/dataWarranty/edit-claim-status')->with('NUM_PAGE',$NUM_PAGE)
+                                                                   ->with('page',$page)
+                                                                   ->with('claim_products',$claim_products)
+                                                                   ->with('claim_status',$claim_status);
     }
 
     /////////////////////////////// validate ///////////////////////////////

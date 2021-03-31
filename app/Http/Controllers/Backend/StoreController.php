@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 
 use App\model\Serialnumber;
 use App\model\ProductOut;
+use App\model\MessageStore;
 
 use Validator;
+use Auth;
 
 class StoreController extends Controller
 {
@@ -54,6 +56,35 @@ class StoreController extends Controller
         }
     }
 
+    // ติดต่อสอบถาม
+    public function contactUs(){
+        return view('backend/member-store/contact/contact-us');
+    }
+
+    public function sendMessage(Request $request){
+        $validator = Validator::make($request->all(), $this->rules_sendMessage(), $this->messages_sendMessage());
+        if($validator->passes()) {
+            $message = $request->all();
+            $message = MessageStore::create($message);
+            $request->session()->flash('alert-success', 'ส่งข้อความติดต่อสำเร็จ รอการติดต่อกลับ');
+            return back();
+        }
+        else {
+            $request->session()->flash('alert-danger', 'ส่งข้อความติดต่อไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
+    }
+
+    public function messageHistory(Request $request){
+        $NUM_PAGE = 20;
+        $messages = MessageStore::where('store_id',Auth::guard('store')->user()->id)->paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/member-store/contact/message-history')->with('NUM_PAGE',$NUM_PAGE)
+                                                                   ->with('page',$page)
+                                                                   ->with('messages',$messages);
+    }
+
     public function rules_productOutPost() {
         return [
             'serialnumber' => 'required',
@@ -63,6 +94,20 @@ class StoreController extends Controller
     public function messages_productOutPost() {
         return [
             'serialnumber.required' => 'กรุณากรอกหมายเลขซีเรียล 16 หลัก',
+        ];
+    }
+
+    public function rules_sendMessage() {
+        return [
+            'subject' => 'required',
+            'message' => 'required',
+        ];
+    }
+
+    public function messages_sendMessage() {
+        return [
+            'subject.required' => 'กรุณากรอกหัวข้อเรื่อง',
+            'message.required' => 'กรุณากรอกข้อความที่ต้องการส่ง',
         ];
     }
 }

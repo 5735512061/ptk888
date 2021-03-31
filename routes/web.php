@@ -115,9 +115,11 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-stock-film/{id}', 'Backend\AdminController@deleteStockFilm');
     Route::post('/film-stock-out', 'Backend\AdminController@filmStockOut');
     Route::post('/film-stock-add', 'Backend\AdminController@filmStockAdd');
-    // การสอบถามของลูกค้า
+    // การสอบถามของลูกค้า และร้านค้า
     Route::get('/message-customer', 'Backend\AdminController@MessageCustomer');
     Route::get('/delete-message-customer/{id}', 'Backend\AdminController@deleteMessageCustomer');
+
+    Route::get('/message-store', 'Backend\AdminController@MessageStore');
     //  สร้าง serialnumber บาร์โค้ด
     Route::get('/serialnumber', 'Backend\AdminController@serialnumber');
     Route::post('/serialnumber', 'Backend\AdminController@serialnumberPost');
@@ -136,7 +138,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-data-warranty/{id}', 'Backend\AdminController@deleteDataWarranty');
     Route::get('/edit-data-warranty/{id}', 'Backend\AdminController@editDataWarranty');
     Route::post('/update-data-warranty', 'Backend\AdminController@updateDataWarranty');
-    
+    Route::get('/claim-product', 'Backend\AdminController@claimProduct');
+    Route::get('/edit-claim-status/{id}', 'Backend\AdminController@editClaimStatus');
 });
 
 // พนักงานขาย
@@ -177,10 +180,13 @@ Route::group(['prefix' => 'store'], function(){
     Route::get('/login','AuthStore\LoginController@ShowLoginForm')->name('store.login');
     Route::post('/login','AuthStore\LoginController@login')->name('store.login.submit');
     Route::post('/logout', 'AuthStore\LoginController@logout')->name('store.logout');
-
     // รายการสินค้าออก
     Route::get('/product-out', 'Backend\StoreController@productOut')->name('store.home');
     Route::post('/product-out', 'Backend\StoreController@productOutPost');
+    // ติดต่อสอบถาม
+    Route::get('/contact-us', 'Backend\StoreController@contactUs');
+    Route::post('/send-message', 'Backend\StoreController@sendMessage');
+    Route::get('/message-history', 'Backend\StoreController@messageHistory');
 });
 
 // ลูกค้า
@@ -205,6 +211,8 @@ Route::group(['prefix' => 'member'], function(){
 
     Route::get('/claim-product', 'Backend\MemberController@claimProduct');
     Route::post('/claim-product-confirm', 'Backend\MemberController@claimProductConfirm');
+    Route::get('/claim-product-form/{id}', 'Backend\MemberController@claimProductForm');
+    Route::post('/claim-product', 'Backend\MemberController@claimProductPost');
     // ส่งข้อความ
     Route::post('/send-message', 'Backend\MemberController@SendMessage');
     // โปรไฟล์ลูกค้า

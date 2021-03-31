@@ -11,6 +11,11 @@
             <div class="col-md-8">
                 <div class="register-form">
                     <form action="{{url('member/claim-product-confirm')}}" enctype="multipart/form-data" method="post">@csrf
+                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                            @if(Session::has('alert-' . $msg))
+                                <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                            @endif
+                        @endforeach
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label"></label>
 

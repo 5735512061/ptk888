@@ -9,7 +9,7 @@ class WarrantyConfirm extends Model
 	protected $table = 'warranty_confirms';
 
 	protected $fillable = [
-    	'warranty_id', 'status'
+    	'warranty_id', 'member_id', 'reason', 'date', 'status', 'address', 'image'
     ];
 
     protected $primaryKey = 'id';

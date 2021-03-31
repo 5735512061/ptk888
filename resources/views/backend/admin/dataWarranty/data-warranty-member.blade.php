@@ -53,15 +53,16 @@
                                         <td>{{$value->date_order}}</td>
                                         <td>{{$value->service_point}}</td>
                                         <td>{{$value->address_service}}</td>
-                                        @if($status == "เคลมแล้ว")
-                                            <td style="color:green;">{{$status}}</td>
-                                        @elseif($status == null)
-                                            <td style="color:red;">ยังไม่เคลม</td>
-                                        @endif
-                                        <td>       
-                                            <a href="{{url('/admin/edit-data-warranty')}}/{{$value->id}}">
-                                                <i class="fa fa-pencil-square-o" style="color:blue;"></i>
-                                            </a>        
+                                        <td>
+                                            @if($status == null || $status == "ยังไม่เคลม")
+                                            <p style="color:red; font-size:15px;">ยังไม่เคลม</p> 
+                                            @elseif($status == "รอยืนยัน")
+                                                <p style="color:blue; font-size:15px;">รอยืนยัน</p>
+                                            @elseif($status == "เคลมแล้ว")
+                                                <p style="color:green; font-size:15px;">เคลมสินค้าแล้ว</p>
+                                            @endif
+                                        </td>
+                                        <td>           
                                             <a href="{{url('/admin/delete-data-warranty/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                 <i class="fa fa-trash" style="color:red;"></i>
                                             </a>

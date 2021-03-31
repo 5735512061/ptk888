@@ -32,7 +32,7 @@
                                     <div class="col-sm-10">
                                         <select name="status" class="form-control">
                                             <option value="{{$serialnumber->status}}">{{$serialnumber->status}}</option>
-                                            <option value="ใช้งานแล้ว">ใช้งานแล้ว</option>
+                                            <option value="พร้อมใช้งาน">พร้อมใช้งาน</option>
                                             <option value="ยังไม่ใช้งาน">ยังไม่ใช้งาน</option>
                                         </select>
                                     </div>
@@ -80,7 +80,9 @@
                                         <th scope="row">{{$NUM_PAGE*($page-1) + $serialnumber+1}}</th>
                                         <td>{{$value->film_model}}</td>
                                         <td>{{$value->serialnumber}}</td>
-                                        @if($value->status == 'ใช้งานแล้ว')
+                                        @if($value->status == 'พร้อมใช้งาน')
+                                            <td style="color:blue;">{{$value->status}}</td>
+                                        @elseif($value->status == 'ใช้งานแล้ว')
                                             <td style="color:green;">{{$value->status}}</td>
                                         @else 
                                             <td style="color:red;">{{$value->status}}</td>

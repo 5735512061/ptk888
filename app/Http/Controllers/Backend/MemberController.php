@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\model\MessageCustomer;
 use App\model\DataWarrantyMember;
+use App\model\WarrantyConfirm;
 use App\model\Serialnumber;
 use App\model\OrderCustomer;
 use App\model\Product;
@@ -22,6 +23,7 @@ class MemberController extends Controller
         $this->middleware('auth:member');
     }
 
+    // ลงทะเบียนรับประกันฟิล์ม และเคลมสินค้า
     public function registerWarranty() {
         return view('backend/customer/register-warranty');
     }
@@ -34,12 +36,16 @@ class MemberController extends Controller
             $film_model = $request->get('film_model');
             $serialnumber_product = Serialnumber::where('serialnumber',$serialnumber)
                                                 ->where('film_model',$film_model)
-                                                ->where('status','ใช้งานแล้ว')->get();
+                                                ->where('status','พร้อมใช้งาน')->get();
             $serialnumber_not_product_out = Serialnumber::where('serialnumber',$serialnumber)
                                                         ->where('film_model',$film_model)
                                                         ->where('status','ยังไม่ใช้งาน')->get();
                 if(count($serialnumber_product) != 0) {
                     $warranty = DataWarrantyMember::create($warranty);
+                    $serialnumber_id = Serialnumber::where('serialnumber',$serialnumber)->value('id');
+                    $serialnumber = Serialnumber::findOrFail($serialnumber_id);
+                    $serialnumber->status = 'ใช้งานแล้ว';
+                    $serialnumber->update();
                     $request->session()->flash('alert-success', 'ลงทะเบียนรับประกันสินค้าเรียบร้อยค่ะ');
                     return back();
                 } elseif(count($serialnumber_not_product_out) != 0) { 
@@ -61,16 +67,56 @@ class MemberController extends Controller
     public function claimProductConfirm(Request $request){
         $phone = $request->get('phone');
         $member_id = Member::where('phone',$phone)->value('id');
-        $data_warranty = DataWarrantyMember::where('member_id',$member_id)->get();
-        return back();
+        $NUM_PAGE = 20;
+        $data_warrantys = DataWarrantyMember::where('member_id',$member_id)->paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        
+            if(count($data_warrantys) == 0) {
+                $request->session()->flash('alert-danger', 'ยังไม่เคยลงทะเบียนรับประกันสินค้า');
+                return back();
+            }
+            else {
+                return view('backend/customer/claim-product-confirm')->with('NUM_PAGE',$NUM_PAGE)
+                                                                     ->with('page',$page)
+                                                                     ->with('data_warrantys',$data_warrantys);
+            }
     }
 
+    public function claimProductForm($id){
+        $claim_product = DataWarrantyMember::findOrFail($id);
+        return view('backend/customer/claim-product-form')->with('claim_product',$claim_product);
+    }
+
+    public function claimProductPost(Request $request){
+        $validator = Validator::make($request->all(), $this->rules_warranty(), $this->messages_warranty());
+        if($validator->passes()) {
+            $claim_product = $request->all();
+            $claim_product = WarrantyConfirm::create($claim_product);
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+                $image->move('image_upload/image_claim_product/', $filename);
+                $path = 'image_upload/image_claim_product/'.$filename;
+                $claim_product->image = $filename;
+                $claim_product->save();
+            }
+            $request->session()->flash('alert-success', 'บันทึกข้อมูลสำเร็จ กรุณารอการยืนยันจากระบบ');
+            return back();
+        } else {
+            $request->session()->flash('alert-danger', 'เคลมสินค้าไม่สำเร็จ กรุณากรอกข้อมูลให้ถูกต้องครบถ้วน');
+            return back()->withErrors($validator)->withInput();   
+        }
+    }
+
+    // ติดต่อสอบถาม
     public function sendMessage(Request $request) {
         $message = $request->all();
         $message = MessageCustomer::create($message);
         return back();
     }
 
+    // account
     public function profile(){
         $member = Auth::guard('member')->user();
         return view('frontend/account/profile')->with('member',$member);
@@ -96,6 +142,7 @@ class MemberController extends Controller
                                                      ->with('productRecommends',$productRecommends);
     }
 
+    // validate
     public function rules_warranty() {
         return [
             'film_model' => 'required',
@@ -116,6 +163,22 @@ class MemberController extends Controller
             'date_order.required' => 'กรุณากรอกวันที่สั่งซื้อ',
             'service_point.required' => 'กรุณาเลือกจุดที่ใช้บริการ',
             'address_service.required' => 'กรุณากรอกสถานที่ของจุดบริการ',
+        ];
+    }
+    
+    public function rules_claimProductPost() {
+        return [
+            'reason' => 'required',
+            'image' => 'required',
+            'address' => 'required',
+        ];
+    }
+
+    public function messages_claimProductPost() {
+        return [
+            'reason.required' => 'กรุณากรอกสาเหตุการเคลมสินค้า',
+            'image.required' => 'กรุณาเลือกไฟล์รูปภาพ 1 รูป',
+            'address.required' => 'กรุณากรอกที่อยู่จัดส่งสินค้า',
         ];
     }   
 }

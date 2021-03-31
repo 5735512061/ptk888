@@ -28,6 +28,7 @@
                                             <option value="Madam Film">Madam Film</option>
                                             <option value="Dora Shield">Dora Shield</option>
                                             <option value="Raiguard Film">Raiguard Film</option>
+                                            <option value="บูธ PTK888">บูธ PTK888</option>
                                         </select>
                                     </div>
                                 </div>
@@ -92,7 +93,9 @@
                                         <th scope="row">{{$NUM_PAGE*($page-1) + $serialnumber+1}}</th>
                                         <td>{{$value->film_model}}</td>
                                         <td>{{$value->serialnumber}}</td>
-                                        @if($value->status == 'ใช้งานแล้ว')
+                                        @if($value->status == 'พร้อมใช้งาน')
+                                            <td style="color:blue;">{{$value->status}}</td>
+                                        @elseif($value->status == 'ใช้งานแล้ว')
                                             <td style="color:green;">{{$value->status}}</td>
                                         @else 
                                             <td style="color:red;">{{$value->status}}</td>

@@ -81,7 +81,7 @@
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="#" class="waves-effect waves-dark">
+                        <a href="{{url('/admin/claim-product')}}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">ข้อมูลการเคลมสินค้า</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
