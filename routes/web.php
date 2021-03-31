@@ -133,6 +133,7 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::get('/order-customer', 'Backend\AdminController@orderCustomer');
     Route::get('/order-customer-detail/{id}', 'Backend\AdminController@orderCustomerDetail');
+    Route::post('/update-order-customer-status', 'Backend\AdminController@updateOrderCustomerStatus');
     // ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า
     Route::get('/data-warranty', 'Backend\AdminController@dataWarranty');
     Route::get('/delete-data-warranty/{id}', 'Backend\AdminController@deleteDataWarranty');
@@ -167,11 +168,14 @@ Route::group(['prefix' => 'seller'], function(){
 
     Route::get('/order-customer', 'Backend\SellerController@orderCustomer');
     Route::get('/order-customer-detail/{id}', 'Backend\SellerController@orderCustomerDetail');
+    Route::post('/update-order-customer-status', 'Backend\SellerController@updateOrderCustomerStatus');
     // ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า
     Route::get('/data-warranty', 'Backend\SellerController@dataWarranty');
     Route::get('/delete-data-warranty/{id}', 'Backend\SellerController@deleteDataWarranty');
     Route::get('/edit-data-warranty/{id}', 'Backend\SellerController@editDataWarranty');
     Route::post('/update-data-warranty', 'Backend\SellerController@updateDataWarranty');
+    Route::get('/claim-product', 'Backend\SellerController@claimProduct');
+    Route::get('/edit-claim-status/{id}', 'Backend\SellerController@editClaimStatus');
 });
 
 // สมาชิกร้านค้า

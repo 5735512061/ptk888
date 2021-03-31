@@ -23,6 +23,7 @@ use App\model\ProductOut;
 use App\model\DataWarrantyMember;
 use App\model\WarrantyConfirm;
 use App\model\OrderCustomer;
+use App\model\OrderCustomerConfirm;
 
 use App\Member;
 use App\Store;
@@ -786,7 +787,7 @@ class AdminController extends Controller
 
     public function orderCustomer(Request $request){
         $NUM_PAGE = 20;
-        $orders = OrderCustomer::paginate($NUM_PAGE);
+        $orders = OrderCustomer::groupBy('bill_number')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageOrderProduct/order-customer')->with('NUM_PAGE',$NUM_PAGE)
@@ -797,6 +798,12 @@ class AdminController extends Controller
     public function orderCustomerDetail($id){
         $order = OrderCustomer::findOrFail($id);
         return view('backend/admin/manageOrderProduct/order-customer-detail')->with('order',$order);
+    }
+
+    public function updateOrderCustomerStatus(Request $request) {
+        $status = $request->all();
+        $status = OrderCustomerConfirm::create($status);
+        return back();
     }
 
     /////////////////////////////// ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า ///////////////////////////////

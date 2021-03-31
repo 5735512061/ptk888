@@ -36,18 +36,30 @@
                                     <tr>
                                         <th scope="row">{{$NUM_PAGE*($page-1) + $order+1}}</th>
                                         @php
-                                            $qty = DB::table('product_cart_customers')->where('id',$value->product_cart_id)->value('qty');
-                                            $price = DB::table('product_cart_customers')->where('id',$value->product_cart_id)->value('price');
-                                            $totalPrice = number_format($qty * $price);
+                                            $qty = DB::table('product_cart_customers')->groupBy('bill_number')->sum('qty');
+                                            $totalPrice = DB::table('product_cart_customers')->where('bill_number',$value->bill_number)
+                                                                                             ->sum(DB::raw('price * qty'));
+                                            $totalPrice = number_format($totalPrice);
                                         @endphp
                                         <td><a href="{{url('/admin/order-customer-detail/')}}/{{$value->id}}" style="color: blue;">{{$value->bill_number}}</a></td>
                                         <td>{{$value->date}}</td>
                                         <td>{{$qty}}</td>
                                         <td>{{$totalPrice}}.-</td>
-                                        <td></td>
+                                        <td>
+                                            @php
+                                                $status = DB::table('order_customer_confirms')->where('order_id',$value->id)->value('status');
+                                            @endphp
+                                            @if($status == null || $status == 'รอยืนยัน')
+                                                <p style="color: red; font-size:15px;">รอยืนยัน</p>
+                                            @elseif($status == 'กำลังจัดส่ง')
+                                                <p style="color:blue; font-size:15px;">กำลังจัดส่ง</p>
+                                            @else
+                                                <p style="color:green; font-size:15px;">จัดส่งแล้ว</p>
+                                            @endif
+                                        </td>
                                         <td>       
-                                            <a href="{{url('/admin/edit-product')}}/{{$value->id}}">
-                                                <i class="fa fa-pencil-square-o" style="color:blue; font-family: 'Mitr','FontAwesome';"> ตรวจสอบการสั่งซื้อ</i>
+                                            <a href="{{url('/admin/order-customer-detail/')}}/{{$value->id}}" style="color: blue;">
+                                                ตรวจสอบการสั่งซื้อ
                                             </a>
                                         </td>
                                     </tr>

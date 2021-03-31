@@ -1,67 +1,9 @@
-@extends("/backend/layouts/template/template-admin")
+@extends("/backend/layouts/template/template-seller")
 
 @section("content")
 <div class="main-body">
     <div class="page-wrapper">
         <div class="page-body">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>ตรวจสอบสถานะ</h5>
-                            <div class="card-header-right">
-                                <ul class="list-unstyled card-option">
-                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                    <li><i class="fa fa-window-maximize full-card"></i></li>
-                                    <li><i class="fa fa-minus minimize-card"></i></li>
-                                    <li><i class="fa fa-refresh reload-card"></i></li>
-                                    <li><i class="fa fa-trash close-card"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-block">
-                            <form action="{{url('/admin/update-data-warranty')}}" enctype="multipart/form-data" method="post">@csrf
-                                @php
-                                    $film_model = DB::table('data_warranty_members')->where('id',$claim_status->warranty_id)->value('film_model');
-                                    $serialnumber = DB::table('data_warranty_members')->where('id',$claim_status->warranty_id)->value('serialnumber');
-                                @endphp
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ยี่ห้อฟิล์ม</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="film_model" value="{{$film_model}}" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">หมายเลขซีเรียล</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="serialnumber" value="{{$serialnumber}}" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">สถานะ</label>
-                                    <div class="col-sm-10">
-                                        <select name="status" class="form-control">
-                                            @if($claim_status->status == null || $claim_status->status == "ยังไม่เคลม") 
-                                                <option value="ยังไม่เคลม">ยังไม่เคลม</option>
-                                            @else
-                                                <option value="{{$claim_status->status}}">{{$claim_status->status}}</option>
-                                            @endif
-                                            <option value="เคลมแล้ว">เคลมแล้ว</option>
-                                            <option value="ยังไม่เคลม">ยังไม่เคลม</option>
-                                        </select>
-                                    </div> 
-                                </div>
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-4 offset-md-2">
-                                        <input type="hidden" name="id" value="{{$claim_status->id}}">
-                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพเดตสถานะการเคลมสินค้า</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="card">
                 <div class="card-header">
                     <h5>ข้อมูลการเคลมสินค้า</h5>
@@ -144,7 +86,7 @@
                                             @endif
                                         </td>
                                         <td>       
-                                            <a href="{{url('/admin/edit-claim-status')}}/{{$value->id}}">
+                                            <a href="{{url('/seller/edit-claim-status')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>
                                             </a>        
                                         </td>

@@ -34,7 +34,7 @@
                             @php
                                 $payday = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->value('payday');
                                 $time = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->value('time');
-                                $money = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->value('money');
+                                $money = number_format(DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->value('money'));
                                 $slip = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->value('slip');
                             @endphp
                             <p style="font-size: 18px;">วันที่ชำระเงิน : {{$payday}} {{$time}}</p>
@@ -95,13 +95,58 @@
                                         <td>{{$price}}.-</td>
                                         <td>{{$qty}}</td>
                                         <td>{{$totalPrice}}.-</td>
-                                        <td></td>
-                                        <td>       
-                                            <a href="{{url('/admin/edit-product')}}/{{$value->id}}">
+                                        <td>
+                                            @php
+                                                $order_id = DB::table('order_customers')->where('product_cart_id',$value->id)->value('id');
+                                                $status = DB::table('order_customer_confirms')->where('order_id',$order_id)->orderBy('id','desc')->value('status');
+                                            @endphp
+                                            @if($status == null || $status == 'รอยืนยัน')
+                                                <p style="color: red; font-size:15px;">รอยืนยัน</p>
+                                            @elseif($status == 'กำลังจัดส่ง')
+                                                <p style="color:blue; font-size:15px;">กำลังจัดส่ง</p>
+                                            @else
+                                                <p style="color:green; font-size:15px;">จัดส่งแล้ว</p>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a type="button" data-toggle="modal" data-target="#ModalStatus{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue; font-family: 'Mitr','FontAwesome';"> สถานะการจัดส่ง</i>
                                             </a>
                                         </td>
                                     </tr>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="ModalStatus{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">อัพเดตสถานะการจัดส่ง</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{{url('/admin/update-order-customer-status')}}" enctype="multipart/form-data" method="post">@csrf
+                                                    <div class="modal-body">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-2"></div>
+                                                            <div class="col-md-8">
+                                                                <select name="status" class="form-control">
+                                                                    <option value="รอยืนยัน">รอยืนยัน</option>
+                                                                    <option value="กำลังจัดส่ง">กำลังจัดส่ง</option>
+                                                                    <option value="จัดส่งแล้ว">จัดส่งแล้ว</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-2"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="hidden" name="order_id" value="{{$order_id}}">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                                        <button type="submit" class="btn btn-primary">อัพเดตสถานะการจัดส่ง</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </tbody>
                             {{$product_ids->links()}}

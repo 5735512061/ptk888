@@ -14,6 +14,7 @@ use App\model\ProductOut;
 use App\model\DataWarrantyMember;
 use App\model\WarrantyConfirm;
 use App\model\OrderCustomer;
+use App\model\OrderCustomerConfirm;
 
 use Validator;
 
@@ -150,7 +151,7 @@ class SellerController extends Controller
 
     public function orderCustomer(Request $request){
         $NUM_PAGE = 20;
-        $orders = OrderCustomer::paginate($NUM_PAGE);
+        $orders = OrderCustomer::groupBy('bill_number')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/manageOrderProduct/order-customer')->with('NUM_PAGE',$NUM_PAGE)
@@ -161,6 +162,12 @@ class SellerController extends Controller
     public function orderCustomerDetail($id){
         $order = OrderCustomer::findOrFail($id);
         return view('backend/seller/manageOrderProduct/order-customer-detail')->with('order',$order);
+    }
+
+    public function updateOrderCustomerStatus(Request $request) {
+        $status = $request->all();
+        $status = OrderCustomerConfirm::create($status);
+        return back();
     }
 
     /////////////////////////////// ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า ///////////////////////////////
@@ -201,6 +208,28 @@ class SellerController extends Controller
             $warranty->status = $status;
             $warranty->save();
         return redirect()->action('Backend\SellerController@dataWarranty');
+    }
+
+    public function claimProduct(Request $request){
+        $NUM_PAGE = 20;
+        $claim_products = WarrantyConfirm::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/seller/dataWarranty/claim-product')->with('NUM_PAGE',$NUM_PAGE)
+                                                                ->with('page',$page)
+                                                                ->with('claim_products',$claim_products);
+    }
+
+    public function editClaimStatus(Request $request, $id){
+        $NUM_PAGE = 20;
+        $claim_products = WarrantyConfirm::paginate($NUM_PAGE);
+        $claim_status = WarrantyConfirm::findOrFail($id);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/seller/dataWarranty/edit-claim-status')->with('NUM_PAGE',$NUM_PAGE)
+                                                                    ->with('page',$page)
+                                                                    ->with('claim_products',$claim_products)
+                                                                    ->with('claim_status',$claim_status);
     }
 
     public function rules_updateProductPrice() {

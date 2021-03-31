@@ -1,4 +1,4 @@
-@extends("/backend/layouts/template/template-admin")
+@extends("/backend/layouts/template/template-seller")
 
 @section("content")
 <div class="main-body">
@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <div class="card-block">
-                            <form action="{{url('/admin/update-data-warranty')}}" enctype="multipart/form-data" method="post">@csrf
+                            <form action="{{url('/seller/update-data-warranty')}}" enctype="multipart/form-data" method="post">@csrf
                                 @php
                                     $film_model = DB::table('data_warranty_members')->where('id',$claim_status->warranty_id)->value('film_model');
                                     $serialnumber = DB::table('data_warranty_members')->where('id',$claim_status->warranty_id)->value('serialnumber');

@@ -20,37 +20,38 @@
                         <table class="table table-bordered">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th>บิลเลขที่</th>
                                     <th>วันที่ทำรายการ</th>
-                                    <th>สินค้า</th>
-                                    <th>ราคาต่อหน่วย</th>
                                     <th>จำนวน</th>
                                     <th>ราคารวม</th>
+                                    <th>สถานะ</th>
+                                    <td></td>
                                 </tr>
                             </thead>
                             <tbody class="align-middle">
                                 @foreach($orders as $order => $value)
                                 <tr>
                                     @php 
-                                        $product_id = DB::table('product_cart_customers')->where('id',$value->product_cart_id)->value('product_id'); 
-                                        $product_name = DB::table('products')->where('id',$product_id)->value('product_name');
-                                        $product_image = DB::table('image_products')->where('product_id',$product_id)->value('image'); 
-                                        $product_price = DB::table('product_prices')->where('product_id',$product_id)->value('price'); 
-                                        $qty = DB::table('product_cart_customers')->where('id',$value->product_cart_id)->value('qty');
-                                        $price = DB::table('product_cart_customers')->where('id',$value->product_cart_id)->value('price');
+                                        $qty = DB::table('product_cart_customers')->groupBy('bill_number')->sum('qty');
+                                        $totalPrice = DB::table('product_cart_customers')->where('bill_number',$value->bill_number)
+                                                                                         ->sum(DB::raw('price * qty'));
+                                        $totalPrice = number_format($totalPrice);
 						            @endphp
+                                    <td><a href="{{url('/member/order-customer-detail/')}}/{{$value->id}}" style="color: blue;">{{$value->bill_number}}</a></td>
                                     <td>{{$value->date}}</td>
-                                    <td style="width: 30rem;">
-                                        <div class="img">
-                                            <a href="#"><img src="{{url('/image_upload/image_product')}}/{{$product_image}}"></a>
-                                            <p>{{ $product_name }}</p>
-                                        </div>
-                                    </td>
-                                    <td>{{$product_price}}.-</td>
                                     <td>{{$qty}}</td>
-                                    @php
-                                        $totalPrice = number_format($qty * $price);
-                                    @endphp
                                     <td>{{$totalPrice}}.-</td>
+                                    @php
+                                        $status = DB::table('order_customer_confirms')->where('order_id',$value->id)->value('status');
+                                    @endphp
+                                    @if($status == null || $status == 'รอยืนยัน')
+                                        <td style="color:red; font-size:15px;">รอยืนยัน</td> 
+                                    @elseif($status == 'กำลังจัดส่ง')
+                                        <td style="color:blue; font-size:15px;">กำลังจัดส่ง</td> 
+                                    @else
+                                        <td style="color:green; font-size:15px;">จัดส่งแล้ว</td>
+                                    @endif
+                                    <td><a href="{{url('/member/order-customer-detail/')}}/{{$value->id}}" style="color: blue;">ตรวจสอบการสั่งซื้อ</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
