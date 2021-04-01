@@ -7,8 +7,7 @@
 <div class="login">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="register-form">
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -18,6 +17,8 @@
                                     <th>รุ่นฟิล์ม</th>
                                     <th>รุ่นโทรศัพท์</th>
                                     <th>วันที่ลงทะเบียน</th>
+                                    <th>ระยะเวลาเคลม</th>
+                                    <th>เวลาที่เหลือ</th>
                                     <th>สถานะ</th>
                                     <th></th>
                                 </tr>
@@ -31,7 +32,19 @@
                                         <td>{{$value->date}}</td>
                                         @php
                                             $status = DB::table('warranty_confirms')->where('warranty_id',$value->id)->value('status');
+                                            $warranty_time = DB::table('warranty_times')->where('film_brand',$value->film_model)->value('time');
+                                            $date_warranty = date('d-m-Y', strtotime($value->date. ' + '.$warranty_time.' days'));
+
+                                            $date_warranty_format = date('Y-m-d',strtotime($value->date));
+
+                                            $date_warranty_start = date_create($date_warranty_format);
+                                            $date_now_end = date_create($date_now);
+                                            $diff = date_diff($date_warranty_start,$date_now_end);
+
+                                            $numberDays = $warranty_time - $diff->format("%a");
                                         @endphp
+                                        <td>{{$warranty_time}} วัน</td>
+                                        <td style="color: red;">{{$numberDays}} วัน</td>
                                         <td>
                                             @if($status == null || $status == 'ยังไม่เคลม')
                                                 <p style="color: red;">ยังไม่เคลม</p>
@@ -42,15 +55,19 @@
                                             @endif
                                         </td>
                                         <td>   
-                                            @if($status == null || $status == 'ยังไม่เคลม')
-                                                <a href="{{url('/member/claim-product-form')}}/{{$value->id}}">
-                                                    <p style="color:red; font-family:'Mitr';">กดเคลมสินค้า</p>
-                                                </a> 
-                                            @elseif($status == 'รอยืนยัน')
-                                                <p style="color:blue;">กำลังรอยืนยัน</p>
-                                            @else
-                                                <p style="color:green;">เคลมสินค้าแล้ว</p>
-                                            @endif    
+                                            @if($numberDays != 0)
+                                                @if($status == null || $status == 'ยังไม่เคลม')
+                                                    <a href="{{url('/member/claim-product-form')}}/{{$value->id}}">
+                                                        <p style="color:blue; font-family:'Mitr';">กดเคลมสินค้า</p>
+                                                    </a> 
+                                                @elseif($status == 'รอยืนยัน')
+                                                    <p style="color:blue;">กำลังรอยืนยัน</p>
+                                                @else
+                                                    <p style="color:green;">เคลมสินค้าแล้ว</p>
+                                                @endif
+                                            @elseif($numberDays == 0) 
+                                                <p style="color:red;">หมดเวลาเคลมสินค้า</p>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -65,7 +82,6 @@
                     <p><i class="fa fa-caret-right"></i> ทางบริษัทฯ จัดส่งสินค้าใหม่ให้กับคุณลูกค้า</p>
                 </div>
             </div>
-            <div class="col-md-2"></div>
         </div>
     </div>
 </div>

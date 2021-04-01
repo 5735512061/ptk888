@@ -7,8 +7,8 @@
 
 <div class="container-fluid" style="margin-bottom: 20px;">
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -21,7 +21,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -39,11 +43,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -56,12 +60,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
                         <div class="faq__spoiler js-faq-rotate"><span class="faq__symbol ">+</span></div> 
-                        <span class="faq__text">หลังติดฟิล์มลงไปแล้วเกิดฟองอากาศเล็กๆ ขึ้นและมีรอยขีดตรงกลาง รอยพวกนี้จะหายไปหรือไม่ ?</span>
+                        <span class="faq__text">หลังติดฟิล์แล้วเกิดฟองอากาศเล็กๆขึ้น และมีรอยขีดตรงกลาง รอยพวกนี้จะหายไปหรือไม่ ?</span>
                     </a>
                     <div class="faq__content js-faq-content">
                         หายไปภายใน 24 ชั่วโมงหลังจากติดฟิล์ม
@@ -69,11 +77,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -86,7 +94,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -99,11 +111,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -116,7 +128,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -129,11 +145,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -146,7 +162,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -159,11 +179,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -178,7 +198,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -193,11 +217,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -212,7 +236,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -225,11 +253,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -244,7 +272,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -258,11 +290,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -275,7 +307,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -288,11 +324,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -305,7 +341,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -318,11 +358,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -335,7 +375,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="b-faq">
                 <div class="faq__item">
                     <a href="#" class="faq__title js-faq-title">
@@ -348,7 +392,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
     </div>
 </div>
 	

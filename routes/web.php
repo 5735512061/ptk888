@@ -64,9 +64,9 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::get('/manage-promotion', 'Backend\AdminController@managePromotion');
     Route::post('/upload-promotion', 'Backend\AdminController@UploadPromotion');
-    // Route::get('/delete-promotion/{id}', 'Backend\AdminController@deletePromotion');
-    // Route::get('/edit-promotion/{id}', 'Backend\AdminController@editPromotion');
-    // Route::post('/update-promotion', 'Backend\AdminController@updatePromotion');
+    Route::get('/delete-promotion/{id}', 'Backend\AdminController@deletePromotion');
+    Route::get('/edit-promotion/{id}', 'Backend\AdminController@editPromotion');
+    Route::post('/update-promotion', 'Backend\AdminController@updatePromotion');
 
     Route::get('/manage-film-information', 'Backend\AdminController@manageFilmInformation');
     Route::post('/upload-film-information', 'Backend\AdminController@UploadFilmInformation');
@@ -117,9 +117,10 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/film-stock-add', 'Backend\AdminController@filmStockAdd');
     // การสอบถามของลูกค้า และร้านค้า
     Route::get('/message-customer', 'Backend\AdminController@MessageCustomer');
-    Route::get('/delete-message-customer/{id}', 'Backend\AdminController@deleteMessageCustomer');
+    Route::post('/answer-message-customer', 'Backend\AdminController@answerMessageCustomer');
 
     Route::get('/message-store', 'Backend\AdminController@MessageStore');
+    Route::post('/answer-message-store', 'Backend\AdminController@answerMessageStore');
     //  สร้าง serialnumber บาร์โค้ด
     Route::get('/serialnumber', 'Backend\AdminController@serialnumber');
     Route::post('/serialnumber', 'Backend\AdminController@serialnumberPost');
@@ -203,7 +204,7 @@ Route::group(['prefix' => 'member'], function(){
     Route::get('/change-password', 'AuthMember\ChangePasswordController@index')->name('password.change');
     Route::post('/change-password', 'AuthMember\ChangePasswordController@changePassword')->name('password.update');
     // ตะกร้าสินค้า
-    Route::get('addToCart/{id}','Frontend\\CartController@getAddToCart');
+    Route::get('addToCart/{id}/{qty}','Frontend\\CartController@getAddToCart');
     Route::get('/shopping-cart','Frontend\\CartController@getCart')->name('cart.index');
     Route::get('checkout','Frontend\\CartController@getCheckout')->name('checkout');
     Route::get('remove/{id}','Frontend\\CartController@getRemoveItem')->name('remove');
@@ -217,13 +218,15 @@ Route::group(['prefix' => 'member'], function(){
     Route::post('/claim-product-confirm', 'Backend\MemberController@claimProductConfirm');
     Route::get('/claim-product-form/{id}', 'Backend\MemberController@claimProductForm');
     Route::post('/claim-product', 'Backend\MemberController@claimProductPost');
-    // ส่งข้อความ
-    Route::post('/send-message', 'Backend\MemberController@SendMessage');
+    // ประวัติการติดต่อสอบถาม ส่งข้อความ
+    Route::post('/send-message', 'Backend\MemberController@sendMessage');
+    Route::get('/answer-message', 'Backend\MemberController@answerMessage');
     // โปรไฟล์ลูกค้า
     Route::get('/profile', 'Backend\MemberController@profile');
     Route::get('/edit-profile/{id}', 'Backend\MemberController@editProfile');
     Route::post('/update-profile', 'Backend\MemberController@updateProfile');
     // ประวัติการสั่งซื้อสินค้า
     Route::get('/order-history', 'Backend\MemberController@orderHistory');
+    Route::get('/order-history-detail/{id}', 'Backend\MemberController@orderHistoryDetail');
 
 });

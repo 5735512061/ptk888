@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>อัพโหลดโปรโมชั่น</h5>
+                            <h5>แก้ไขโปรโมชั่น</h5>
                             <div class="card-header-right">
                                 <ul class="list-unstyled card-option">
                                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <div class="card-block">
-                            <form action="{{url('/admin/upload-promotion')}}" enctype="multipart/form-data" method="post">@csrf
+                            <form action="{{url('/admin/update-promotion')}}" enctype="multipart/form-data" method="post">@csrf
                                 @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                                     @if(Session::has('alert-' . $msg))
                                         <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
@@ -38,20 +38,21 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">หัวข้อคำอธิบาย</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="หัวข้อคำอธิบาย (ถ้ามี)" name="heading_detail">
+                                        <input type="text" class="form-control" placeholder="หัวข้อคำอธิบาย (ถ้ามี)" name="heading_detail" value="{{$promotion->heading_detail}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">รายละเอียดเพิ่มเติม</label>
                                     <div class="col-sm-10">
                                         <textarea name="detail" rows="5" cols="5" class="form-control"
-                                        placeholder="รายละเอียดเพิ่มเติม (ถ้ามี)"></textarea>
+                                        placeholder="รายละเอียดเพิ่มเติม (ถ้ามี)">{{$promotion->detail}}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">สถานะ</label>
                                     <div class="col-sm-10">
                                         <select name="image_type" class="form-control">
+                                            <option value="{{$promotion->status}}">{{$promotion->status}}</option>
                                             <option value="เปิดโปรโมชั่น">เปิดโปรโมชั่น</option>
                                             <option value="ปิดโปรโมชั่น">ปิดโปรโมชั่น</option>
                                         </select>
@@ -59,7 +60,8 @@
                                 </div>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-4 offset-md-2">
-                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพโหลดโปรโมฃั่น</button>
+                                        <input type="hidden" name="id" value="{{$promotion->id}}">
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพเดตโปรโมฃั่น</button>
                                     </div>
                                 </div>
                             </form>
@@ -90,7 +92,7 @@
                                     <th>รูปภาพ</th>
                                     <th>หัวข้อคำอธิบาย</th>
                                     <th>รายละเอียดเพิ่มเติม</th>
-                                    <td>สถานะ</td>
+                                    <th>สถานะ</th>
                                     <th></th>
                                 </tr>
                             </thead>

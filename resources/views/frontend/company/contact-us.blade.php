@@ -34,7 +34,7 @@
                                 <input type="text" class="form-control" placeholder="ชื่อ-นานมสกุลผู้ติดต่อ" name="name"/>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" name="phone"/>
+                                <input type="text" class="phone_format form-control" placeholder="เบอร์โทรศัพท์" name="phone"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -43,6 +43,7 @@
                         <div class="form-group">
                             <textarea class="form-control" rows="5" placeholder="ข้อความที่ต้องการติดต่อ" name="message"></textarea>
                         </div>
+                        <input type="hidden" name="customer_id" value="{{Auth::guard('member')->user()->id}}">
                         <div><button class="btn" type="submit">ส่งข้อความติดต่อ</button></div>
                     </form>
                 </div>
@@ -51,4 +52,19 @@
     </div>
 </div>
 <!-- Contact End -->
+<script type="text/javascript" src="{{asset('https://code.jquery.com/jquery-3.2.1.min.js')}}"></script>
+<script>
+   // number phone
+   function phoneFormatter() {
+        $('input.phone_format').on('input', function() {
+            var number = $(this).val().replace(/[^\d]/g, '')
+                if (number.length >= 5 && number.length < 10) { number = number.replace(/(\d{3})(\d{2})/, "$1-$2"); } else if (number.length >= 10) {
+                    number = number.replace(/(\d{3})(\d{3})(\d{3})/, "$1-$2-$3"); 
+                }
+            $(this).val(number)
+            $('input.phone_format').attr({ maxLength : 12 });    
+        });
+    };
+    $(phoneFormatter);
+</script>
 @endsection

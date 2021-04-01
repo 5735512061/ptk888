@@ -23,6 +23,11 @@
                         <h4>ประวัติการสั่งซื้อสินค้า</h4> 
                     </button>
                 </a>
+                <a class="col-md-6" href="{{url('/member/answer-message')}}">
+                    <button type="submit" class="btn" style="height: 70px; width: 20em; margin-bottom: 20px;">
+                        <h4>ประวัติการติดต่อสอบถาม</h4> 
+                    </button>
+                </a>
                 <a class="col-md-6" href="{{url('/member/shopping-cart')}}">
                     <button type="submit" class="btn" style="height: 70px; width: 20em; margin-bottom: 20px;">
                         <h4>ตะกร้าสินค้า</h4> 

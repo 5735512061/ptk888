@@ -217,6 +217,40 @@ class AdminController extends Controller
         }
     }
 
+    public function deletePromotion($id){
+        $promotion = Promotion::findOrFail($id);
+        $promotion->delete();
+        return back();
+    }
+
+    public function editPromotion(Request $request, $id){
+        $NUM_PAGE = 10;
+        $promotion = Promotion::findOrFail($id);
+        $promotions = Promotion::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageImageWebsite/edit-promotion')->with('NUM_PAGE',$NUM_PAGE)
+                                                                      ->with('page',$page)
+                                                                      ->with('promotion',$promotion)
+                                                                      ->with('promotions',$promotions);
+    }
+
+    public function updatePromotion(Request $request){
+        $id = $request->get('id');
+        $promotion = Promotion::findOrFail($id);
+        $promotion->update($request->all());
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+            $image->move('image_upload/image_promotion/', $filename);
+            $path = 'image_upload/image_promotion/'.$filename;
+            $image_website = promotion::findOrFail($id);
+            $image_website->image = $filename;
+            $image_website->save();
+        }
+        return redirect()->action('Backend\AdminController@managePromotion');
+    }
+
     public function manageFilmInformation(Request $request){
         $NUM_PAGE = 10;
         $product_film_informations = ProductFilmInformation::paginate($NUM_PAGE);
@@ -659,9 +693,21 @@ class AdminController extends Controller
                                                           ->with('messages',$messages);
     }
 
-    public function deleteMessageCustomer($id){
+    public function answerMessageCustomer(Request $request){
+        $id = $request->get('id');
+        $answer_message = $request->get('answer_message');
         $message = MessageCustomer::findOrFail($id);
-        $message->delete();
+        $message->answer_message = $answer_message; 
+        $message->update();
+        return back();
+    }
+
+    public function answerMessageStore(Request $request){
+        $id = $request->get('id');
+        $answer_message = $request->get('answer_message');
+        $message = MessageStore::findOrFail($id);
+        $message->answer_message = $answer_message; 
+        $message->update();
         return back();
     }
 

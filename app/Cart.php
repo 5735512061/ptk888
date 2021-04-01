@@ -17,19 +17,19 @@ class Cart
 		}
 	}
 
-	public function add($item, $id) {
+	public function add($item, $id, $qty) {
 		$product_price = DB::table('product_prices')->where('product_id',$item->id)->value('price');
-		$storedItem = ['qty' => 0, 'price' => $product_price, 'item' => $item->id];
+		$storedItem = ['qty' =>$qty, 'price' => $product_price, 'item' => $item->id];
 		if($this->items) {
 			if(array_key_exists($id, $this->items)) {
 				$storedItem = $this->items[$id];
 			}
 		}
-		$storedItem['qty']++;
+		$storedItem['qty'] = $qty;
 		$storedItem['price'] = $product_price * $storedItem['qty'];
 		$this->items[$id] = $storedItem;
-		$this->totalQty++;
-		$this->totalPrice += $product_price;
+		$this->totalQty += $storedItem['qty'];
+		$this->totalPrice += $storedItem['price'];
 	}
 
 	public function removeItem($id) {

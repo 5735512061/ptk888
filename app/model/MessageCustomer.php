@@ -9,7 +9,7 @@ class MessageCustomer extends Model
 	protected $table = 'message_customers';
 
 	protected $fillable = [
-    	'name', 'phone', 'subject', 'message'
+    	'customer_id','name', 'phone', 'subject', 'message', 'answer_message',
     ];
 
     protected $primaryKey = 'id';

@@ -36,7 +36,17 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ข้อความตอบกลับ</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" rows="3"></textarea>
+                                        <textarea class="form-control" rows="3">{{$value->answer_message}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">สถานะ</label>
+                                    <div class="col-sm-10">
+                                        @if($value->answer_message == null)
+                                            <p style="color:red; font-size:15px;">รอการตอบกลับ</p> 
+                                        @else
+                                            <p style="color:green; font-size:15px;">ตอบแล้ว</p>
+                                        @endif 
                                     </div>
                                 </div>
                             </div>

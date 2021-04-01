@@ -14,6 +14,8 @@ use App\model\Product;
 
 use App\Member;
 
+use Carbon\Carbon;
+
 use Auth;
 use Validator;
 
@@ -69,6 +71,7 @@ class MemberController extends Controller
         $member_id = Member::where('phone',$phone)->value('id');
         $NUM_PAGE = 20;
         $data_warrantys = DataWarrantyMember::where('member_id',$member_id)->paginate($NUM_PAGE);
+        $date_now = Carbon::now()->format('Y-m-d');
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         
@@ -79,7 +82,8 @@ class MemberController extends Controller
             else {
                 return view('backend/customer/claim-product-confirm')->with('NUM_PAGE',$NUM_PAGE)
                                                                      ->with('page',$page)
-                                                                     ->with('data_warrantys',$data_warrantys);
+                                                                     ->with('data_warrantys',$data_warrantys)
+                                                                     ->with('date_now',$date_now);
             }
     }
 
@@ -113,7 +117,18 @@ class MemberController extends Controller
     public function sendMessage(Request $request) {
         $message = $request->all();
         $message = MessageCustomer::create($message);
-        return back();
+        return redirect()->action('Backend\\MemberController@answerMessage');
+    }
+
+    public function answerMessage(Request $request){
+        $NUM_PAGE = 10;
+        $customer_id = Auth::guard('member')->user()->id;
+        $answer_messages = MessageCustomer::where('customer_id',$customer_id)->paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('frontend/account/answer-message')->with('NUM_PAGE',$NUM_PAGE)
+                                                      ->with('page',$page)
+                                                      ->with('answer_messages',$answer_messages);
     }
 
     // account
@@ -140,6 +155,11 @@ class MemberController extends Controller
         $productRecommends = Product::where('product_recommend','ใช่')->get();
         return view('frontend/account/order-history')->with('orders',$orders)
                                                      ->with('productRecommends',$productRecommends);
+    }
+
+    public function orderHistoryDetail($id){
+        $order = OrderCustomer::findOrFail($id);
+        return view('frontend/account/order-history-detail')->with('order',$order);
     }
 
     // validate

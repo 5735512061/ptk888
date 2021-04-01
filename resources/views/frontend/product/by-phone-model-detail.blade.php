@@ -52,15 +52,15 @@
                                 <div class="quantity">
                                     <h4>จำนวน :</h4>
                                     <div class="qty">
-                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                        <button class="btn-minus" onclick="minus()"><i class="fa fa-minus"></i></button>
                                         <input type="text" value="1" name="qty" id="qty">
-                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                        <button class="btn-plus" onclick="plus()"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
                             </div>   
                         </div> --}}
-                        
-                        <a class="btn-warranty" href="{{ url('/member/addToCart', ['id' => $product->id]) }}">หยิบสินค้าใส่ตะกร้า</a>
+                        {{-- <p id="demo"></p> --}}
+                        <a class="btn-warranty" href="{{ url('/member/addToCart', ['id' => $product->id,1]) }}">หยิบสินค้าใส่ตะกร้า</a>
                         
                     </div>
                 </div>
@@ -110,4 +110,27 @@
         </div>
     </div>
 </div>  
+<script>
+    var qty = 1;
+    console.log(qty);
+    document.getElementById("demo").innerHTML = qty;
+
+    function plus(){
+        qty++;
+        console.log(qty);
+        document.getElementById("demo").innerHTML = qty;
+    }
+
+    function minus(){
+        if (qty > 1) {
+            qty--;
+            console.log(qty);
+            document.getElementById("demo").innerHTML = qty;
+        } else {
+            qty = 0;
+            console.log(qty);
+            document.getElementById("demo").innerHTML = qty;
+        }
+    }
+</script>
 @endsection

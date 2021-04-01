@@ -32,12 +32,12 @@
                                 @foreach($orders as $order => $value)
                                 <tr>
                                     @php 
-                                        $qty = DB::table('product_cart_customers')->groupBy('bill_number')->sum('qty');
+                                        $qty = DB::table('product_cart_customers')->where('bill_number',$value->bill_number)->sum('qty');
                                         $totalPrice = DB::table('product_cart_customers')->where('bill_number',$value->bill_number)
                                                                                          ->sum(DB::raw('price * qty'));
                                         $totalPrice = number_format($totalPrice);
 						            @endphp
-                                    <td><a href="{{url('/member/order-customer-detail/')}}/{{$value->id}}" style="color: blue;">{{$value->bill_number}}</a></td>
+                                    <td><a href="{{url('/member/order-history-detail/')}}/{{$value->id}}" style="color: blue;">{{$value->bill_number}}</a></td>
                                     <td>{{$value->date}}</td>
                                     <td>{{$qty}}</td>
                                     <td>{{$totalPrice}}.-</td>
@@ -51,7 +51,7 @@
                                     @else
                                         <td style="color:green; font-size:15px;">จัดส่งแล้ว</td>
                                     @endif
-                                    <td><a href="{{url('/member/order-customer-detail/')}}/{{$value->id}}" style="color: blue;">ตรวจสอบการสั่งซื้อ</a></td>
+                                    <td><a href="{{url('/member/order-history-detail/')}}/{{$value->id}}" style="color: blue;">ตรวจสอบการสั่งซื้อ</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -44,9 +44,9 @@
 	transform: rotate(225deg);
 }
 .b-faq .faq__content {
-	padding: 30px;
+	padding: 20px;
 	margin-bottom: 2px;
-	font-size: 14px;
+	font-size: 18px;
 	display: none;
 	background-color: #f3f3f3;
 }

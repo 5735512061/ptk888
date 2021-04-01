@@ -22,11 +22,11 @@ class CartController extends Controller
         $this->middleware('auth:member');
     }
     
-    public function getAddToCart(Request $request, $id ) {
+    public function getAddToCart(Request $request, $id, $qty ) {
         $product = Product::findOrFail($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
-        $cart->add($product, $product->id);
+        $cart->add($product, $product->id, $qty);
         $request->session()->put('cart', $cart);    
 
         return redirect()->route('cart.index', ['id' => $product->id]);
