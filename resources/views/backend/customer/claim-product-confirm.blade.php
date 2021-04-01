@@ -44,7 +44,11 @@
                                             $numberDays = $warranty_time - $diff->format("%a");
                                         @endphp
                                         <td>{{$warranty_time}} วัน</td>
-                                        <td style="color: red;">{{$numberDays}} วัน</td>
+                                        @if($numberDays < 0)
+                                            <td style="color: red;">0 วัน</td>
+                                        @else
+                                            <td style="color: red;">{{$numberDays}} วัน</td>
+                                        @endif
                                         <td>
                                             @if($status == null || $status == 'ยังไม่เคลม')
                                                 <p style="color: red;">ยังไม่เคลม</p>

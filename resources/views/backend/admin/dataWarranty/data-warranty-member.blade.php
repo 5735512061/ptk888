@@ -31,6 +31,8 @@
                                     <th>วันที่สั่งซื้อ</th>
                                     <th>จุดที่ใช้บริการ</th>
                                     <th>สถานที่จุดบริการ</th>
+                                    <th>ระยะเวลาเคลม</th>
+                                    <th>เวลาที่เหลือ</th>
                                     <th>สถานะ</th>
                                     <th></th>
                                 </tr>
@@ -53,6 +55,24 @@
                                         <td>{{$value->date_order}}</td>
                                         <td>{{$value->service_point}}</td>
                                         <td>{{$value->address_service}}</td>
+                                        @php
+                                            $warranty_time = DB::table('warranty_times')->where('film_brand',$value->film_model)->value('time');
+                                            $date_warranty = date('d-m-Y', strtotime($value->date. ' + '.$warranty_time.' days'));
+
+                                            $date_warranty_format = date('Y-m-d',strtotime($value->date));
+
+                                            $date_warranty_start = date_create($date_warranty_format);
+                                            $date_now_end = date_create($date_now);
+                                            $diff = date_diff($date_warranty_start,$date_now_end);
+
+                                            $numberDays = $warranty_time - $diff->format("%a");
+                                        @endphp
+                                        <td>{{$warranty_time}} วัน</td>
+                                        @if($numberDays < 0)
+                                            <td style="color: red;">0 วัน</td>
+                                        @else
+                                            <td style="color: red;">{{$numberDays}} วัน</td>
+                                        @endif
                                         <td>
                                             @if($status == null || $status == "ยังไม่เคลม")
                                             <p style="color:red; font-size:15px;">ยังไม่เคลม</p> 

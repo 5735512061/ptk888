@@ -30,6 +30,7 @@ use App\Store;
 use App\Seller;
 
 use Validator;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -856,11 +857,13 @@ class AdminController extends Controller
     public function dataWarranty(Request $request){
         $NUM_PAGE = 20;
         $data_warrantys = DataWarrantyMember::paginate($NUM_PAGE);
+        $date_now = Carbon::now()->format('Y-m-d');
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/dataWarranty/data-warranty-member')->with('NUM_PAGE',$NUM_PAGE)
                                                                       ->with('page',$page)
-                                                                      ->with('data_warrantys',$data_warrantys);
+                                                                      ->with('data_warrantys',$data_warrantys)
+                                                                      ->with('date_now',$date_now);
     }
 
     public function deleteDataWarranty($id){
