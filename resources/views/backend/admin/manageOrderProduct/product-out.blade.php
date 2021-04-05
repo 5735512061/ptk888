@@ -32,7 +32,7 @@
                                         @if ($errors->has('serialnumber'))
                                             <span class="text-danger" style="font-size: 17px;">({{ $errors->first('serialnumber') }})</span>
                                         @endif
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกหมายเลขซีเรียล 16 หลัก" name="serialnumber">
+                                        <input id="ssn" maxlength="19" minlength="19" type="text" class="form-control" placeholder="กรุณากรอกหมายเลขซีเรียล 16 หลัก" name="serialnumber">
                                     </div>
                                 </div>
                                 <div class="form-group row mb-0">

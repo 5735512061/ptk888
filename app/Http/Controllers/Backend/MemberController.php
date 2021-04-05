@@ -115,9 +115,16 @@ class MemberController extends Controller
 
     // ติดต่อสอบถาม
     public function sendMessage(Request $request) {
-        $message = $request->all();
-        $message = MessageCustomer::create($message);
-        return redirect()->action('Backend\\MemberController@answerMessage');
+        $validator = Validator::make($request->all(), $this->rules_sendMessage(), $this->messages_sendMessage());
+        if($validator->passes()) {
+            $message = $request->all();
+            $message = MessageCustomer::create($message);
+            $request->session()->flash('alert-success', 'ส่งข้อความติดต่อสำเร็จ กรุณารอการตอบกลับจากเจ้าหน้าที่');
+            return redirect()->action('Backend\\MemberController@answerMessage');
+        } else {
+            $request->session()->flash('alert-danger', 'ส่งข้อความติดต่อไม่สำเร็จ กรุณากรอกข้อมูลให้ครบถ้วน');
+            return back()->withErrors($validator)->withInput();   
+        }
     }
 
     public function answerMessage(Request $request){
@@ -143,10 +150,17 @@ class MemberController extends Controller
     }
 
     public function updateProfile(Request $request){
-        $id = $request->get('id');
-        $member = Member::findOrFail($id);
-        $member->update($request->all());
-        return redirect()->action('Backend\\MemberController@profile');
+        $validator = Validator::make($request->all(), $this->rules_updateProfile(), $this->messages_updateProfile());
+        if($validator->passes()) {
+            $id = $request->get('id');
+            $member = Member::findOrFail($id);
+            $member->update($request->all());
+            $request->session()->flash('alert-success', 'แก้ไขข้อมูลส่วนตัวสำเร็จ');
+            return redirect()->action('Backend\\MemberController@profile');
+        } else {
+            $request->session()->flash('alert-danger', 'แก้ไขข้อมูลส่วนตัวไม่สำเร็จ กรุณากรอกข้อมูลให้ครบถ้วน');
+            return back()->withErrors($validator)->withInput();   
+        }
     }
 
     public function orderHistory(){
@@ -200,5 +214,51 @@ class MemberController extends Controller
             'image.required' => 'กรุณาเลือกไฟล์รูปภาพ 1 รูป',
             'address.required' => 'กรุณากรอกที่อยู่จัดส่งสินค้า',
         ];
-    }   
+    }  
+    
+    public function rules_sendMessage() {
+        return [
+            'name' => 'required',
+            'phone' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+        ];
+    }
+
+    public function messages_sendMessage() {
+        return [
+            'name.required' => 'กรุณากรอกขื่อ-นามสกุล',
+            'phone.required' => 'กรุณากรอกเบอร์โทรศัพท์',
+            'subject.required' => 'กรุณากรอกหัวข้อเรื่องที่ต้องการสอบถาม',
+            'message.required' => 'กรุณากรอกข้อความที่ต้องการติดต่อ',
+        ];
+    }
+
+    public function rules_updateProfile() {
+        return [
+            'name' => 'required',
+            'surname' => 'required',
+            'phone' => 'required',
+            'username' => 'required',
+            'address' => 'required',
+            'district' => 'required',
+            'amphoe' => 'required',
+            'province' => 'required',
+            'zipcode' => 'required',
+        ];
+    }
+
+    public function messages_updateProfile() {
+        return [
+            'name.required' => 'กรุณากรอกขื่อ',
+            'surname.required' => 'กรุณากรอกนามสกุล',
+            'phone.required' => 'กรุณากรอกเบอร์โทรศัพท์',
+            'username.required' => 'กรุณากรอกชื่อเข้าใช้งาน (เป็นภาษาอังกฤษ)',
+            'address.required' => 'กรุณากรอกที่อยู่ติดต่อ',
+            'district.required' => 'กรุณากรอกตำบล',
+            'amphoe.required' => 'กรุณากรอกอำเภอ',
+            'province.required' => 'กรุณากรอกจังหวัด',
+            'zipcode.required' => 'กรุณากรอกรหัสไปรษณีย์',
+        ];
+    }
 }

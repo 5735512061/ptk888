@@ -29,18 +29,35 @@
             <div class="col-lg-4">
                 <div class="contact-form">
                     <form action="{{url('member/send-message')}}" enctype="multipart/form-data" method="post">@csrf
+                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                            @if(Session::has('alert-' . $msg))
+                                <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                            @endif
+                        @endforeach
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="ชื่อ-นานมสกุลผู้ติดต่อ" name="name"/>
+                                @if ($errors->has('name'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('name') }})</span>
+                                @endif
+                                <input type="text" class="form-control" placeholder="ชื่อ-นามสกุลผู้ติดต่อ" name="name"/>
                             </div>
                             <div class="col-md-6">
+                                @if ($errors->has('phone'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
+                                @endif
                                 <input type="text" class="phone_format form-control" placeholder="เบอร์โทรศัพท์" name="phone"/>
                             </div>
                         </div>
                         <div class="form-group">
+                            @if ($errors->has('subject'))
+                                <span class="text-danger" style="font-size: 17px;">({{ $errors->first('subject') }})</span>
+                            @endif
                             <input type="text" class="form-control" placeholder="หัวข้อเรื่อง" name="subject"/>
                         </div>
                         <div class="form-group">
+                            @if ($errors->has('message'))
+                                <span class="text-danger" style="font-size: 17px;">({{ $errors->first('message') }})</span>
+                            @endif
                             <textarea class="form-control" rows="5" placeholder="ข้อความที่ต้องการติดต่อ" name="message"></textarea>
                         </div>
                         @if(Auth::guard('member')->user() != NULL)

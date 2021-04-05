@@ -21,6 +21,12 @@ class ChangePasswordController extends Controller
        $this->validate($request, [
             'oldpassword' => 'required',
             'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
+       ],[
+            'oldpassword.required' => "กรุณากรอกรหัสผ่านเก่า",
+            'password.required' => "กรุณากรอกรหัสผ่านใหม่",
+            'password.confirmed' => "รหัสผ่านยืนยันไม่ตรงกับรหัสผ่านใหม่",
+            'password_confirmation.required' => "กรุณายืนยันรหัสผ่าน",
        ]);
 
         $hashedPassword = Auth::guard('member')->user()->password;

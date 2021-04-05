@@ -12,9 +12,9 @@
             <div class="main-menu-content">
                 <ul>
                     <li class="more-details">
-                        <a href="#"><i class="ti-settings"></i>ตั้งค่า</a>
-                        <a href="#"><i class="ti-user"></i>ข้อมูลส่วนตัว</a>
-                        <a href="#"><i class="ti-bell"></i>ข้อความแจ้งเตือน</a>
+                        {{-- <a href="#"><i class="ti-settings"></i>ตั้งค่า</a> --}}
+                        {{-- <a href="#"><i class="ti-user"></i>ข้อมูลส่วนตัว</a> --}}
+                        {{-- <a href="#"><i class="ti-bell"></i>ข้อความแจ้งเตือน</a> --}}
                         @if(Auth::guard('admin')->user() != NULL)
                             <a href="{{ route('admin.logout') }}" 
                                 onclick="event.preventDefault();

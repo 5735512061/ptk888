@@ -47,8 +47,10 @@ class ChangeStatusSerialnumberToExpire extends Command
             $status = DB::table('serialnumbers')->where('id',$value->film_model_id)->value('status');
             $date = $value->date;
             $date_expire = date('Y-m-d', strtotime($value->date. ' + 7 days'));
-                if($date_now > $date_expire && $status == 'พร้อมใช้งาน') {
-                    DB::table('serialnumbers')->where('id',$value->film_model_id)->update(['status' => 'หมายเลขหมดอายุ']);
+                if($date_now > $date_expire) {
+                    if($status == 'พร้อมใช้งาน') {
+                        DB::table('serialnumbers')->where('id',$value->film_model_id)->update(['status' => 'หมายเลขหมดอายุ']);
+                    }
                 }
         }
 

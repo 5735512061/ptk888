@@ -23,7 +23,7 @@
                                 @if ($errors->has('phone'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
                                 @endif
-                                <input type="text" class="form-control" name="phone" value="{{ old('phone') }}" placeholder="กรอกเบอร์โทรศัพท์ เพื่อตรวจสอบข้อมูลการลงทะเบียน">
+                                <input type="text" class="phone_format form-control" name="phone" value="{{ old('phone') }}" placeholder="กรอกเบอร์โทรศัพท์ เพื่อตรวจสอบข้อมูลการลงทะเบียน">
                             </div>
 
                             <div class="col-md-3">
@@ -34,8 +34,8 @@
                         </div>
                     </form>
                     <h4>เงื่อนไขการรับประกัน</h4><hr>
-                    <p><i class="fa fa-caret-right"></i> สินค้ายี่ห้อ Madam Film รับประกัน 1 ปี ทุกกรณี นับจากวันที่ซื้อสินค้า</p> 
-                    <p><i class="fa fa-caret-right"></i> สินค้ายี่ห้อ Dora Shield รับประกัน 3 เดือน ทุกกรณี นับจากวันที่ซื้อสินค้า </p> 
+                    <p><i class="fa fa-caret-right"></i> สินค้ายี่ห้อ Madam Film รับประกัน 365 วัน ทุกกรณี นับจากวันที่ซื้อสินค้า</p> 
+                    <p><i class="fa fa-caret-right"></i> สินค้ายี่ห้อ Dora Shield รับประกัน 90 วัน ทุกกรณี นับจากวันที่ซื้อสินค้า </p> 
                     <p><i class="fa fa-caret-right"></i> รับประกันฟิล์มไฮโดรเจล 1 ชิ้น / ใบรับประกัน เพียง 1 ครั้งเท่านั้น</p>
                     <p><i class="fa fa-caret-right"></i> กรุณาลงทะเบียนรับประกันสินค้า ภายใน 7 วัน นับจากวันที่ซื้อสินค้า</p>
                     <p><i class="fa fa-caret-right"></i> ในกรณีไม่ได้ลงทะเบียนประกัน บริษัทฯ ขอสงวนสิทธิในการเคลมสินค้า</p>
@@ -50,3 +50,18 @@
     </div>
 </div>
 @endsection
+<script type="text/javascript" src="{{asset('https://code.jquery.com/jquery-3.2.1.min.js')}}"></script>
+<script>
+   // number phone
+   function phoneFormatter() {
+        $('input.phone_format').on('input', function() {
+            var number = $(this).val().replace(/[^\d]/g, '')
+                if (number.length >= 5 && number.length < 10) { number = number.replace(/(\d{3})(\d{2})/, "$1-$2"); } else if (number.length >= 10) {
+                    number = number.replace(/(\d{3})(\d{3})(\d{3})/, "$1-$2-$3"); 
+                }
+            $(this).val(number)
+            $('input.phone_format').attr({ maxLength : 12 });    
+        });
+    };
+    $(phoneFormatter);
+</script>

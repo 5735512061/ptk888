@@ -10,7 +10,8 @@
         <div class="col-md-4">
             <h2 style="text-align: center;">หมายเลขสมาชิก {{$member->member_id}}</h2>
             <h1 style="text-align: center;">{{$member->name}} {{$member->surname}}</h1>
-            <h2 style="text-align: center;">เบอร์โทรศัพท์ {{$member->phone}}</h2>
+            <h2 style="text-align: center;">เบอร์โทรศัพท์ {{$member->phone}}</h2><br>
+            <h4 style="text-align: center;">ที่อยู่ {{$member->address}} ตำบล{{$member->district}} อำเภอ{{$member->amphoe}} จังหวัด{{$member->province}} {{$member->zipcode}}</h4>
         </div>
         <div class="col-md-4"></div>
     </div><br>

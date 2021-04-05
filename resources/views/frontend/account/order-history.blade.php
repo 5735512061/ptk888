@@ -16,6 +16,11 @@
             <div class="col-md-2"></div>
             <div class="col-lg-8">
                 <div class="cart-page-inner">
+                    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                        @if(Session::has('alert-' . $msg))
+                            <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                        @endif
+                    @endforeach
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead class="thead-dark">

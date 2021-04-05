@@ -41,7 +41,7 @@
                 </li>
             </ul>
             <ul class="nav-right">
-                <li class="header-notification">
+                {{-- <li class="header-notification">
                     <a href="#!" class="waves-effect waves-light">
                         <i class="ti-bell"></i>
                         <span class="badge bg-c-red"></span>
@@ -82,7 +82,7 @@
                             </div>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="user-profile header-notification">
                     <a href="#!" class="waves-effect waves-light">
                         <img src="{{ asset('/admin/assets/images/avatar-4.jpg')}}" class="img-radius" alt="User-Profile-Image">
@@ -90,7 +90,7 @@
                         <i class="ti-angle-down"></i>
                     </a>
                     <ul class="show-notification profile-notification">
-                        <li class="waves-effect waves-light">
+                        {{-- <li class="waves-effect waves-light">
                             <a href="#!">
                                 <i class="ti-settings"></i> ตั้งค่า
                             </a>
@@ -104,7 +104,7 @@
                             <a href="#">
                                 <i class="ti-bell"></i> ข้อความแจ้งเตือน
                             </a>
-                        </li>
+                        </li> --}}
                         @if(Auth::guard('store')->user() != NULL)
                             <li class="waves-effect waves-light">
                                 <a href="{{ route('store.logout') }}" 

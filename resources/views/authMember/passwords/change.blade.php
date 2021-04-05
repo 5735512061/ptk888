@@ -22,7 +22,10 @@
                           <label class="col-md-4 col-form-label text-md-right">{{ __('รหัสผ่านเก่า') }}</label>
 
                           <div class="col-md-6">
-                            <input id="oldpassword" type="password" class="form-control{{ $errors->has('oldpassword') ? ' is-invalid' : '' }}"  name="oldpassword" required autofocus>
+                            @if ($errors->has('oldpassword'))
+                              <span class="text-danger" style="font-size: 17px;">({{ $errors->first('oldpassword') }})</span>
+                            @endif
+                            <input id="oldpassword" type="password" class="form-control"  name="oldpassword">
                           </div>
                       </div>
 
@@ -30,7 +33,10 @@
                           <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('รหัสผ่านใหม่') }}</label>
 
                           <div class="col-md-6">
-                            <input id="password" type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required autofocus>
+                            @if ($errors->has('password'))
+                              <span class="text-danger" style="font-size: 17px;">({{ $errors->first('password') }})</span>
+                            @endif
+                            <input id="password" type="password" name="password" class="form-control">
                           </div>
                       </div>
 
@@ -38,7 +44,10 @@
                         <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('ยืนยันรหัสผ่าน') }}</label>
 
                         <div class="col-md-6">
-                          <input id="password-confirm" type="password" name="password_confirmation" class="form-control{{ $errors->has('password-confirm') ? ' is-invalid' : '' }}" required autofocus>
+                          @if ($errors->has('password_confirmation'))
+                              <span class="text-danger" style="font-size: 17px;">({{ $errors->first('password_confirmation') }})</span>
+                          @endif
+                          <input id="password-confirm" type="password" name="password_confirmation" class="form-control">
                         </div>
                     </div>
 

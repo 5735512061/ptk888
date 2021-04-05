@@ -15,7 +15,7 @@
                         $money = number_format(DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->value('money'));
                     @endphp
                     <p style="font-size: 18px;">วันที่ชำระเงิน : {{$payday}} {{$time}}</p>
-                    <p style="font-size: 18px;">จำนวนเงินที่ชำระ : {{$money}}</p>
+                    <p style="font-size: 18px;">จำนวนเงินที่ชำระ : {{$money}} บาท</p>
                 </div>
                 <div class="col-md-6">
                     <h4>ที่อยู่สำหรับจัดส่ง</h4><hr style="border-top:3px solid rgb(214 214 214)">
