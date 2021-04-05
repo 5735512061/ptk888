@@ -94,7 +94,7 @@
                                 @if ($errors->has('date_order'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('date_order') }})</span>
                                 @endif
-                                <input type="text" class="form-control" name="date_order" value="{{ old('date_order') }}">
+                                <input type="text" class="form-control" name="date_order" value="{{ old('date_order') }}" placeholder="ตัวอย่าง เช่น 01/01/2021">
                             </div>
                         </div>
 
@@ -173,7 +173,7 @@
 <script>
     // date
     $('#datepicker').datepicker({
-        format: 'dd/mm/yyyy',
+        format: 'yyyy-mm-dd',
         autoclose: true,
         todayHighlight: true,
     });

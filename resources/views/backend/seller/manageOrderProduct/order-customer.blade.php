@@ -36,7 +36,7 @@
                                     <tr>
                                         <th scope="row">{{$NUM_PAGE*($page-1) + $order+1}}</th>
                                         @php
-                                            $qty = DB::table('product_cart_customers')->groupBy('bill_number')->sum('qty');
+                                            $qty = DB::table('product_cart_customers')->where('bill_number',$value->bill_number)->sum('qty');
                                             $totalPrice = DB::table('product_cart_customers')->where('bill_number',$value->bill_number)
                                                                                              ->sum(DB::raw('price * qty'));
                                             $totalPrice = number_format($totalPrice);

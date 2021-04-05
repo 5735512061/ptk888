@@ -52,11 +52,11 @@
                 <div class="payment-method">
                     <h2>ติดต่อเรา</h2>
                     <div class="social">
-                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.facebook.com/ptkstudio8"><i class="fab fa-facebook-f"></i></a>
                         <a href=""><i class="fab fa-line"></i></a>
                         <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa fa-envelope"></i></a>
-                        <a href=""><i class="fab fa fa-phone"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="ptkstudio8@gmail.com"><i class="fab fa fa-envelope"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="066-113-1689"><i class="fab fa fa-phone"></i></a>
                     </div>
                 </div>
             </div>
@@ -80,3 +80,9 @@
 
 <!-- Back to Top -->
 <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();   
+    });
+</script>

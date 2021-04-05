@@ -804,6 +804,7 @@ class AdminController extends Controller
         if($validator->passes()) {
             $serialnumber = $request->get('serialnumber');
             $film_model_id = Serialnumber::where('serialnumber',$serialnumber)->value('id');
+            $date = Carbon::now()->format('Y-m-d');
             if($film_model_id == null) {
                 $request->session()->flash('alert-danger', 'หมายเลขซีเรียล 16 หลัก ไม่ถูกต้อง');
                 return back();
@@ -811,10 +812,11 @@ class AdminController extends Controller
                 $product_out = new ProductOut;
                 $product_out->film_model_id = $film_model_id;
                 $product_out->serialnumber = $serialnumber;
+                $product_out->date = $date;
                 $product_out->save();
 
                 $serialnumber_status = Serialnumber::findOrFail($film_model_id);
-                $serialnumber_status->status = 'ใช้งานแล้ว';
+                $serialnumber_status->status = 'พร้อมใช้งาน';
                 $serialnumber_status->update();
                 $request->session()->flash('alert-success', 'นำสินค้าออกสำเร็จ');
                 return back();
@@ -827,6 +829,11 @@ class AdminController extends Controller
     }
 
     public function deleteProductOut($id){
+        $film_model_id = ProductOut::where('id',$id)->value('film_model_id');
+        $serialnumber_status = Serialnumber::findOrFail($film_model_id);
+        $serialnumber_status->status = 'ยังไม่ใช้งาน';
+        $serialnumber_status->update();
+
         $product_out = ProductOut::findOrFail($id);
         $product_out->delete();
         return back();
@@ -867,6 +874,12 @@ class AdminController extends Controller
     }
 
     public function deleteDataWarranty($id){
+        $serialnumber = DataWarrantyMember::where('id',$id)->value('serialnumber');
+        $film_model_id = ProductOut::where('serialnumber',$serialnumber)->value('film_model_id');
+        $serialnumber_status = Serialnumber::findOrFail($film_model_id);
+        $serialnumber_status->status = 'พร้อมใช้งาน';
+        $serialnumber_status->update();
+
         $warranty_confirm = WarrantyConfirm::where('warranty_id',$id)->delete();
         $data_warranty = DataWarrantyMember::findOrFail($id);
         $data_warranty->delete();

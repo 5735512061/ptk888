@@ -4,12 +4,12 @@ namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductOut extends Model
+class ProductCartStore extends Model
 {
-	protected $table = 'product_outs';
+	protected $table = 'product_cart_stores';
 
 	protected $fillable = [
-    	'film_model_id', 'serialnumber', 'date'
+    	'store_id', 'product_id', 'bill_number', 'price', 'qty'
     ];
 
     protected $primaryKey = 'id';

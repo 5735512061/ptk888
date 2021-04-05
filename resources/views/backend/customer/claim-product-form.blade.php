@@ -36,8 +36,7 @@
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('image') }})</span>
                                 @endif
                                 <div class="custom-file">
-                                    <input type="file" class="slip custom-file-input" id="inputGroupFile04" name="image">
-                                    <label class="custom-file-label m-text14" for="inputGroupFile04" style="font-size: 14px;">อัพโหลดรูปสินค้าที่ต้องการเคลม</label>
+                                    <input type="file" class="form-control" name="image">
                                 </div>
                             </div>
                         </div>

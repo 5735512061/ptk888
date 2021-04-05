@@ -15,7 +15,7 @@ class Member extends Authenticatable
     protected $guard = 'member';
 
     protected $fillable = [
-        'member_id', 'name', 'surname', 'phone', 'username', 'password'
+        'member_id', 'name', 'surname', 'phone', 'username', 'password', 'address', 'district', 'amphoe', 'province', 'zipcode',
     ];
 
     protected $hidden = [

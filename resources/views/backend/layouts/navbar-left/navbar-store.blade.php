@@ -43,14 +43,21 @@
         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">การสั่งซื้อสินค้า</div>
         <ul class="pcoded-item pcoded-left-item">
             <li>
-                <a href="{{url('/store/product-out')}}" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-shopping-cart"></i></span>
+                <a href="{{url('/store/order-product')}}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="fa fa-cart-plus"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">สั่งซื้อสินค้า</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li>
-                <a href="{{url('/store/product-out')}}" class="waves-effect waves-dark">
+                <a href="{{url('/store/shopping-cart')}}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="fa fa-cart-arrow-down"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">ตะกร้าสินค้า</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{{url('/store/order-history')}}" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="fa fa-shopping-basket"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">ประวัติการสั่งซื้อ</span>
                     <span class="pcoded-mcaret"></span>

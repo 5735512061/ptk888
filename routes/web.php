@@ -192,6 +192,17 @@ Route::group(['prefix' => 'store'], function(){
     Route::get('/contact-us', 'Backend\StoreController@contactUs');
     Route::post('/send-message', 'Backend\StoreController@sendMessage');
     Route::get('/message-history', 'Backend\StoreController@messageHistory');
+    // สั่งซื้อสินค้า
+    Route::get('/order-product', 'Backend\StoreController@orderProduct');
+    Route::post('/add-to-cart','Backend\\StoreController@getAddToCart');
+    Route::get('/shopping-cart','Backend\\StoreController@getCart');
+    Route::get('/remove-shopping-cart/{id}','Backend\\StoreController@removeShoppingCart');
+    Route::get('/checkout','Backend\\StoreController@getCheckout');
+    // การชำระเงิน
+    Route::post('/payment-checkout-store','Backend\\StoreController@paymentCheckoutStore');
+    // ประวัติการสั่งซื้อสินค้า
+    Route::get('/order-history', 'Backend\StoreController@orderHistory');
+    Route::get('/order-history-detail/{id}', 'Backend\StoreController@orderHistoryDetail');
 });
 
 // ลูกค้า

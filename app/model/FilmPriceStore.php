@@ -4,12 +4,12 @@ namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductOut extends Model
+class FilmPriceStore extends Model
 {
-	protected $table = 'product_outs';
+	protected $table = 'film_price_stores';
 
 	protected $fillable = [
-    	'film_model_id', 'serialnumber', 'date'
+    	'film_id', 'price', 'date',
     ];
 
     protected $primaryKey = 'id';

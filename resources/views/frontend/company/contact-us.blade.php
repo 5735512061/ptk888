@@ -18,11 +18,11 @@
                     <h3><i class="fa fa-envelope"></i>ptkstudio8@gmail.com</h3>
                     <h3><i class="fa fa-phone"></i>066-113-1689</h3>
                     <div class="social">
-                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.facebook.com/ptkstudio8"><i class="fab fa-facebook-f"></i></a>
                         <a href=""><i class="fab fa-line"></i></a>
                         <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa fa-envelope"></i></a>
-                        <a href=""><i class="fab fa fa-phone"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="ptkstudio8@gmail.com"><i class="fab fa fa-envelope"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="066-113-1689"><i class="fab fa fa-phone"></i></a>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,9 @@
                         <div class="form-group">
                             <textarea class="form-control" rows="5" placeholder="ข้อความที่ต้องการติดต่อ" name="message"></textarea>
                         </div>
-                        <input type="hidden" name="customer_id" value="{{Auth::guard('member')->user()->id}}">
+                        @if(Auth::guard('member')->user() != NULL)
+                            <input type="hidden" name="customer_id" value="{{Auth::guard('member')->user()->id}}">
+                        @endif
                         <div><button class="btn" type="submit">ส่งข้อความติดต่อ</button></div>
                     </form>
                 </div>

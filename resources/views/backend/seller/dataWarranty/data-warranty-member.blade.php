@@ -6,7 +6,7 @@
         <div class="page-body">
             <div class="card">
                 <div class="card-header">
-                    <h5>ข้อมูลสินค้า</h5>
+                    <h5>ข้อมูลการประกันสินค้า</h5>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -31,6 +31,8 @@
                                     <th>วันที่สั่งซื้อ</th>
                                     <th>จุดที่ใช้บริการ</th>
                                     <th>สถานที่จุดบริการ</th>
+                                    <th>ระยะเวลาเคลม</th>
+                                    <th>เวลาที่เหลือ</th>
                                     <th>สถานะ</th>
                                     <th></th>
                                 </tr>
@@ -53,15 +55,34 @@
                                         <td>{{$value->date_order}}</td>
                                         <td>{{$value->service_point}}</td>
                                         <td>{{$value->address_service}}</td>
-                                        @if($status == "เคลมแล้ว")
-                                            <td style="color:green;">{{$status}}</td>
-                                        @elseif($status == null)
-                                            <td style="color:red;">ยังไม่เคลม</td>
+                                        @php
+                                            $warranty_time = DB::table('warranty_times')->where('film_brand',$value->film_model)->value('time');
+                                            $date_warranty = date('Y-m-d', strtotime($value->date. ' + '.$warranty_time.' days'));
+
+                                            $date_warranty_format = date('Y-m-d',strtotime($value->date));
+
+                                            $date_warranty_start = date_create($date_warranty_format);
+                                            $date_now_end = date_create($date_now);
+                                            $diff = date_diff($date_warranty_start,$date_now_end);
+
+                                            $numberDays = $warranty_time - $diff->format("%a");
+                                        @endphp
+                                        <td>{{$warranty_time}} วัน</td>
+                                        @if($numberDays < 0)
+                                            <td style="color: red;">0 วัน</td>
+                                        @else
+                                            <td style="color: red;">{{$numberDays}} วัน</td>
                                         @endif
-                                        <td>       
-                                            <a href="{{url('/seller/edit-data-warranty')}}/{{$value->id}}">
-                                                <i class="fa fa-pencil-square-o" style="color:blue;"></i>
-                                            </a>        
+                                        <td>
+                                            @if($status == null || $status == "ยังไม่เคลม")
+                                            <p style="color:red; font-size:15px;">ยังไม่เคลม</p> 
+                                            @elseif($status == "รอยืนยัน")
+                                                <p style="color:blue; font-size:15px;">รอยืนยัน</p>
+                                            @elseif($status == "เคลมแล้ว")
+                                                <p style="color:green; font-size:15px;">เคลมสินค้าแล้ว</p>
+                                            @endif
+                                        </td>
+                                        <td>           
                                             <a href="{{url('/seller/delete-data-warranty/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                 <i class="fa fa-trash" style="color:red;"></i>
                                             </a>

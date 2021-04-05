@@ -93,7 +93,7 @@ class MemberController extends Controller
     }
 
     public function claimProductPost(Request $request){
-        $validator = Validator::make($request->all(), $this->rules_warranty(), $this->messages_warranty());
+        $validator = Validator::make($request->all(), $this->rules_claimProductPost(), $this->messages_claimProductPost());
         if($validator->passes()) {
             $claim_product = $request->all();
             $claim_product = WarrantyConfirm::create($claim_product);

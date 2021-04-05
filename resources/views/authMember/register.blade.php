@@ -72,6 +72,58 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('ที่อยู่') }}</label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" placeholder="ที่อยู่ หมู่บ้าน ถนน หรือตรอก/ซอย (ถ้ามี)" name="address">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('ตำบล') }}</label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" placeholder="กรุณากรอกตำบล" name="district">
+
+                                @if ($errors->has('surname'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('surname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('อำเภอ') }}</label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" placeholder="กรุณากรอกอำเภอ" name="amphoe">
+
+                                @if ($errors->has('surname'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('surname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('จังหวัด') }}</label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" placeholder="กรุณากรอกจังหวัด" name="province">
+                                @if ($errors->has('surname'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('surname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('รหัสไปรษณีย์') }}</label>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" placeholder="กรุณากรอกรหัสไปรษณีย์" name="zipcode">
+                                @if ($errors->has('surname'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('surname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ชื่อเข้าใช้งาน (ภาษาอังกฤษ)') }}</label>

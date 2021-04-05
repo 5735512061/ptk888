@@ -6,7 +6,7 @@
         <div class="page-body">
             <div class="card">
                 <div class="card-header">
-                    <h5>ข้อมูลสินค้า</h5>
+                    <h5>ข้อมูลการประกันสินค้า</h5>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -57,7 +57,7 @@
                                         <td>{{$value->address_service}}</td>
                                         @php
                                             $warranty_time = DB::table('warranty_times')->where('film_brand',$value->film_model)->value('time');
-                                            $date_warranty = date('d-m-Y', strtotime($value->date. ' + '.$warranty_time.' days'));
+                                            $date_warranty = date('Y-m-d', strtotime($value->date. ' + '.$warranty_time.' days'));
 
                                             $date_warranty_format = date('Y-m-d',strtotime($value->date));
 

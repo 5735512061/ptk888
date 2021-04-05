@@ -67,6 +67,8 @@
                                     <th>#</th>
                                     <th>ยี่ห้อฟิล์ม</th>
                                     <th>หมายเลขซีเรียล 16 หลัก</th>
+                                    <th>วันที่นำสินค้าออก</th>
+                                    <th>สถานะ</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -76,9 +78,18 @@
                                         <th scope="row">{{$NUM_PAGE*($page-1) + $product_out+1}}</th>
                                         @php
                                             $film_model = DB::table('serialnumbers')->where('id',$value->film_model_id)->value('film_model');
+                                            $status = DB::table('serialnumbers')->where('id',$value->film_model_id)->value('status');
                                         @endphp
                                         <td>{{$film_model}}</td>
                                         <td>{{$value->serialnumber}}</td>
+                                        <td>{{$value->date}}</td>
+                                        @if($status == 'พร้อมใช้งาน')
+                                            <td style="color:blue;">{{$status}}</td>
+                                        @elseif($status == 'ใช้งานแล้ว')
+                                            <td style="color:green;">{{$status}}</td>
+                                        @else 
+                                            <td style="color:red;">{{$status}}</td>
+                                        @endif
                                         <td>       
                                             <a href="{{url('/admin/delete-product-out/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                 <i class="fa fa-trash" style="color:red;"></i>
