@@ -97,6 +97,7 @@
                                 </div>
                                 @endforeach
                             </tbody>
+                            {{$answer_messages->links()}}
                         </table>
                     </div>
                 </div>

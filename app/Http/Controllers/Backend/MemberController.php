@@ -69,7 +69,7 @@ class MemberController extends Controller
     public function claimProductConfirm(Request $request){
         $phone = $request->get('phone');
         $member_id = Member::where('phone',$phone)->value('id');
-        $NUM_PAGE = 20;
+        $NUM_PAGE = 50;
         $data_warrantys = DataWarrantyMember::where('member_id',$member_id)->paginate($NUM_PAGE);
         $date_now = Carbon::now()->format('Y-m-d');
         $page = $request->input('page');
@@ -128,7 +128,7 @@ class MemberController extends Controller
     }
 
     public function answerMessage(Request $request){
-        $NUM_PAGE = 10;
+        $NUM_PAGE = 50;
         $customer_id = Auth::guard('member')->user()->id;
         $answer_messages = MessageCustomer::where('customer_id',$customer_id)->paginate($NUM_PAGE);
         $page = $request->input('page');

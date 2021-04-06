@@ -102,7 +102,8 @@
                                             </button>
                                             </div>
                                             <div class="modal-body">
-                                                {{$value->reason}}
+                                                {{$value->reason}}<br>
+                                                <img src="{{url('/image_upload/image_claim_product')}}/{{$value->image}}" class="img-responsive" width="100%">
                                             </div>
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

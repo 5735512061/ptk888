@@ -24,6 +24,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>รหัสสินค้า</th>
+                                    <th>ยี่ห้อฟิล์ม</th>
+                                    <th>รุ่นโทรศัพท์</th>
                                     <th>ชื่อสินค้า</th>
                                     <th>ราคาล่าสุด</th>
                                     <th>สถานะ</th>
@@ -37,8 +39,11 @@
                                         @php 
                                             $price = DB::table('product_prices')->where('product_id',$value->id)->orderBy('id','desc')->value('price');
                                             $status = DB::table('product_prices')->where('product_id',$value->id)->value('status');
+                                            $phone_model = DB::table('phone_models')->where('id',$value->phone_model_id)->value('model');
                                         @endphp
                                         <td>{{$value->product_code}}</td>
+                                        <td>{{$value->film_model}}</td>
+                                        <td>{{$phone_model}}</td>
                                         <td>{{$value->product_name}}</td>
                                         @if($price == null)
                                             <td style="color: red;">0</td>

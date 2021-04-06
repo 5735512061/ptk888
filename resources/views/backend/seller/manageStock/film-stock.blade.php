@@ -64,6 +64,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+                            {{$stock_films->links()}}
                         </table>
                         <!-- modal delete -->                            
                         <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">

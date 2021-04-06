@@ -51,6 +51,7 @@
                                 </div>
                             </div>
                         @endforeach
+                        {{$messages->links()}}
                     </div>
                 </div>
             </div>

@@ -115,6 +115,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete-stock-film/{id}', 'Backend\AdminController@deleteStockFilm');
     Route::post('/film-stock-out', 'Backend\AdminController@filmStockOut');
     Route::post('/film-stock-add', 'Backend\AdminController@filmStockAdd');
+    Route::get('/edit-stock-film/{id}', 'Backend\AdminController@editStockFilm');
+    Route::post('/update-stock-film', 'Backend\AdminController@updateStockFilm');
     // การสอบถามของลูกค้า และร้านค้า
     Route::get('/message-customer', 'Backend\AdminController@MessageCustomer');
     Route::post('/answer-message-customer', 'Backend\AdminController@answerMessageCustomer');

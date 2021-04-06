@@ -90,6 +90,7 @@
                                     </div>
                                 @endforeach
                             </tbody>
+                            {{$stock_films->links()}}
                         </table>
                     </div>
                 </div>

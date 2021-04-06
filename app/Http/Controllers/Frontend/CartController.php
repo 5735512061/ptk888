@@ -24,13 +24,18 @@ class CartController extends Controller
     }
     
     public function getAddToCart(Request $request, $id, $qty ) {
-        $product = Product::findOrFail($id);
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->add($product, $product->id, $qty);
-        $request->session()->put('cart', $cart);    
+        if($qty == 0) {
+            $request->session()->flash('alert-danger', 'กรุณาเลือกจำนวนสินค้าที่ต้องการซื้อ จำนวนสินค้าต้องไม่เป็น 0');
+            return back();
+        } else {
+            $product = Product::findOrFail($id);
+            $oldCart = Session::has('cart') ? Session::get('cart') : null;
+            $cart = new Cart($oldCart);
+            $cart->add($product, $product->id, $qty);
+            $request->session()->put('cart', $cart);    
 
-        return redirect()->route('cart.index', ['id' => $product->id]);
+            return redirect()->route('cart.index', ['id' => $product->id]);
+        }
     }
 
     public function getCart() {

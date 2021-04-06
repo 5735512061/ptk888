@@ -30,6 +30,7 @@
                                     <th>#</th>
                                     <th>รหัสสินค้า</th>
                                     <th>ผลิตภัณฑ์</th>
+                                    <th>ยี่ห้อฟิล์ม</th>
                                     <th>ยี่ห้อโทรศัพท์</th>
                                     <th>รุ่น</th>
                                     <th>ประเภทสินค้า</th>
@@ -50,6 +51,7 @@
                                         @endphp
                                         <td>{{$value->product_code}}</td>
                                         <td>{{$category}}</td>
+                                        <td>{{$value->film_model}}</td>
                                         <td>{{$brand}}</td>
                                         <td>{{$model}}</td>
                                         <td>{{$value->product_type}}</td>

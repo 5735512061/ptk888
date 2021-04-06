@@ -33,9 +33,10 @@
                                         @php
                                             $status = DB::table('warranty_confirms')->where('warranty_id',$value->id)->value('status');
                                             $warranty_time = DB::table('warranty_times')->where('film_brand',$value->film_model)->value('time');
-                                            $date_warranty = date('Y-m-d', strtotime($value->date. ' + '.$warranty_time.' days'));
+                                            $date_product_out = DB::table('product_outs')->where('serialnumber',$value->serialnumber)->value('date');
+                                            $date_warranty = date('Y-m-d', strtotime($date_product_out. ' + '.$warranty_time.' days'));
 
-                                            $date_warranty_format = date('Y-m-d',strtotime($value->date));
+                                            $date_warranty_format = date('Y-m-d',strtotime($date_product_out));
 
                                             $date_warranty_start = date_create($date_warranty_format);
                                             $date_now_end = date_create($date_now);

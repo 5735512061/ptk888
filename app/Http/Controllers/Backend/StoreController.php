@@ -28,7 +28,7 @@ class StoreController extends Controller
 
     /////////////////////////////// รายการสินค้าออก ///////////////////////////////
     public function productOut(Request $request){
-        $NUM_PAGE = 20;
+        $NUM_PAGE = 50;
         $product_outs = ProductOut::paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -84,7 +84,7 @@ class StoreController extends Controller
     }
 
     public function messageHistory(Request $request){
-        $NUM_PAGE = 20;
+        $NUM_PAGE = 50;
         $messages = MessageStore::where('store_id',Auth::guard('store')->user()->id)->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -95,7 +95,7 @@ class StoreController extends Controller
 
     // สั่งซื้อสินค้า
     public function orderProduct(Request $request){
-        $NUM_PAGE = 20;
+        $NUM_PAGE = 50;
         $stock_films = FilmPriceStore::paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -111,7 +111,7 @@ class StoreController extends Controller
     }
 
     public function getCart(Request $request){
-        $NUM_PAGE = 20;
+        $NUM_PAGE = 50;
         $product_cart_sessions = ProductCartSessionStore::where('store_id',Auth::guard('store')->user()->id)->paginate($NUM_PAGE);
         $count_cart = count($product_cart_sessions);
         $page = $request->input('page');
@@ -224,15 +224,17 @@ class StoreController extends Controller
                 $order_store->date = $date;
                 $order_store->save();
             }
+            
+            for ($i=0; $i < count($product_id) ; $i++) { 
+                $product_cart_session = ProductCartSessionStore::where('product_id',$product_id[$i])
+                                                               ->where('store_id',$store_id)->delete();
 
-            $product_cart_session = ProductCartSessionStore::where('product_id',$product_id)
-                                                            ->where('store_id',$store_id)->delete();
-
-            // $film_id = FilmPriceStore::where('id',$product_id)->value('film_id');
-            // $amount = StockFilm::where('id',$film_id)->value('amount');
-            // $amount_int = (int)$amount;
-            // $amount_int = $amount_int - $qty;
-            // $amount_int = StockFilm::where('id',$film_id)->update(['amount' =>  $amount]);
+                $film_id = FilmPriceStore::where('id',$product_id[$i])->value('film_id');
+                $amount = StockFilm::where('id',$film_id)->value('amount');
+                $amount_int = (int)$amount;
+                $amount_int = $amount_int - (int)$qty[$i];
+                $amount_int = StockFilm::where('id',$film_id)->update(['amount' =>  $amount_int]);
+            }
             $request->session()->flash('alert-success', 'แจ้งชำระเงินสำเร็จ');
             return redirect()->action('Backend\StoreController@orderHistory');
         }

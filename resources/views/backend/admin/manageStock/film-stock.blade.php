@@ -4,6 +4,11 @@
 <div class="main-body">
     <div class="page-wrapper">
         <div class="page-body">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+                    <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                @endif
+            @endforeach
             <div class="card">
                 <div class="card-header">
                     <h5>ข้อมูลสินค้า</h5>
@@ -62,7 +67,10 @@
                                         </td>
                                         
                                         <td>{{$value->comment}}</td>
-                                        <td>       
+                                        <td>   
+                                            <a href="{{url('/admin/edit-stock-film')}}/{{$value->id}}">
+                                                <i class="fa fa-pencil-square-o" style="color:blue;"></i>
+                                            </a>    
                                             <a href="{{url('/admin/delete-stock-film/')}}/{{$value->id}}" onclick="return confirm('Are you sure to delete ?')">
                                                 <i class="fa fa-trash" style="color:red;"></i>
                                             </a>
@@ -70,6 +78,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+                            {{$stock_films->links()}}
                         </table>
                         <!-- modal delete -->                            
                         <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">

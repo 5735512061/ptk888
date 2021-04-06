@@ -9,11 +9,6 @@
     @endphp
     <div class="featured-product product">
         <div class="container-fluid">
-            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                @if(Session::has('alert-' . $msg))
-                    <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-                @endif
-            @endforeach
             <div class="row">
                 <div class="col-lg-5" style="margin-bottom: 2rem;">
                     <div class="product-item">
@@ -34,7 +29,6 @@
                 @php
                     $price = DB::table('product_prices')->where('product_id',$product->id)->orderBy('id','desc')->value('price');
                 @endphp
-                
                 <div class="col-lg-7">
                     <div class="description">
                         <h4 style="font-weight: bold;">{{$product->product_name}}</h4>
@@ -53,21 +47,20 @@
                             <p style="margin-bottom: 0.3rem; font-size:14px;">- {{$value->film_information}}</p>
                         @endforeach
                         <hr>
-                        <div class="product-detail">
+                        {{-- <div class="product-detail">
                             <div class="product-content">
                                 <div class="quantity">
                                     <h4>จำนวน :</h4>
                                     <div class="qty">
-                                        <button class="btn-minus" onclick="minus({{$product->id}})"><i class="fa fa-minus"></i></button>
+                                        <button class="btn-minus" onclick="minus()"><i class="fa fa-minus"></i></button>
                                         <input type="text" value="1" name="qty" id="qty">
-                                        <button class="btn-plus" onclick="plus({{$product->id}})"><i class="fa fa-plus"></i></button>
+                                        <button class="btn-plus" onclick="plus()"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
                             </div>   
-                        </div>
-                        
-                        <p id="number-{{$product->id}}" style="display: none;"></p>
-                        <a onclick="add({{$product->id}})" id="product-{{$product->id}}" class="btn-warranty">หยิบสินค้าใส่ตะกร้า</a>
+                        </div> --}}
+                        <p id="demo"></p>
+                        <a class="btn-warranty" href="{{ url('/member/addToCart', ['id' => $product->id,1]) }}">หยิบสินค้าใส่ตะกร้า</a>   
                         
                     </div>
                 </div>
@@ -75,38 +68,6 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    var qty = 1;
-    document.getElementById(`number-{{$product->id}}`).innerHTML = qty;
-    const url = "{{ url('/member/addToCart/') }}"
-
-    function add(productId) {
-        console.log(qty);  
-        console.log(productId); 
-        document.location = `${url}/${productId}/${qty}`
-    }
-
-    function plus(productId){
-        qty++;
-        console.log(qty);
-        document.getElementById(`number-${productId}`).innerHTML = qty;
-    }
-
-
-    function minus(productId){
-        if (qty > 1) {
-            qty--;
-            console.log(qty);
-            document.getElementById(`number-${productId}`).innerHTML = qty;
-        } else {
-            qty = 0;
-            console.log(qty);
-            document.getElementById(`number-${productId}`).innerHTML = qty;
-        }
-    }
-</script>
 
 <div class="featured-product product">
     <div class="container-fluid">
@@ -148,5 +109,28 @@
             @endforeach
         </div>
     </div>
-</div> 
+</div>  
+<script>
+    var qty = 1;
+    console.log(qty);
+    document.getElementById("demo").innerHTML = qty;
+
+    function plus(){
+        qty++;
+        console.log(qty);
+        document.getElementById("demo").innerHTML = qty;
+    }
+
+    function minus(){
+        if (qty > 1) {
+            qty--;
+            console.log(qty);
+            document.getElementById("demo").innerHTML = qty;
+        } else {
+            qty = 0;
+            console.log(qty);
+            document.getElementById("demo").innerHTML = qty;
+        }
+    }
+</script>
 @endsection
