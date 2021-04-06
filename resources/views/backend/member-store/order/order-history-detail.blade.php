@@ -81,7 +81,8 @@
                                             $totalPrice = number_format($totalPrice);
 						                @endphp
                                         @php
-                                        $product_name = DB::table('products')->where('id',$value->product_id)->value('product_name');
+                                        $film_id = DB::table('film_price_stores')->where('id',$value->product_id)->value('film_id');
+                                        $product_name = DB::table('stock_films')->where('id',$film_id)->value('film_type');
                                         $qty = DB::table('product_cart_stores')->where('id',$value->id)->value('qty');
                                         $price = DB::table('product_cart_stores')->where('id',$value->id)->value('price');
                                         $totalPrice = number_format($qty * $price);

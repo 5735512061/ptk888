@@ -23,7 +23,9 @@ use App\model\ProductOut;
 use App\model\DataWarrantyMember;
 use App\model\WarrantyConfirm;
 use App\model\OrderCustomer;
+use App\model\OrderStore;
 use App\model\OrderCustomerConfirm;
+use App\model\OrderStoreConfirm;
 
 use App\Member;
 use App\Store;
@@ -61,10 +63,18 @@ class AdminController extends Controller
     }
 
     public function updateMemberCustomer(Request $request){
-        $id = $request->get('id');
-        $member = Member::findOrFail($id);
-        $member->update($request->all());
-        return redirect()->action('Backend\\AdminController@dataOfCustomer');
+        $validator = Validator::make($request->all(), $this->rules_updateMemberCustomer(), $this->messages_updateMemberCustomer());
+        if($validator->passes()) {
+            $id = $request->get('id');
+            $member = Member::findOrFail($id);
+            $member->update($request->all());
+            $request->session()->flash('alert-success', 'แก้ไขข้อมูลสมาชิกสำเร็จ');
+            return redirect()->action('Backend\\AdminController@dataOfCustomer');
+        }
+        else {
+            $request->session()->flash('alert-danger', 'แก้ไขข้อมูลสมาชิกไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     /////////////////////////////// จัดการข้อมูลสมาชิกร้านค้า ///////////////////////////////
@@ -87,10 +97,18 @@ class AdminController extends Controller
     }
 
     public function updateMemberStore(Request $request){
-        $id = $request->get('id');
-        $store = Store::findOrFail($id);
-        $store->update($request->all());
-        return redirect()->action('AuthStore\RegisterController@manageMemberStore');
+        $validator = Validator::make($request->all(), $this->rules_updateMemberStore(), $this->messages_updateMemberStore());
+        if($validator->passes()) {
+            $id = $request->get('id');
+            $store = Store::findOrFail($id);
+            $store->update($request->all());
+            $request->session()->flash('alert-success', 'แก้ไขข้อมูลสมาชิกร้านค้าสำเร็จ');
+            return redirect()->action('AuthStore\RegisterController@manageMemberStore');
+        }
+        else {
+            $request->session()->flash('alert-danger', 'แก้ไขข้อมูลสมาชิกร้านค้าไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     /////////////////////////////// จัดการข้อมูลพนักงานขาย ///////////////////////////////
@@ -113,10 +131,18 @@ class AdminController extends Controller
     }
 
     public function updateSeller(Request $request){
-        $id = $request->get('id');
-        $seller = Seller::findOrFail($id);
-        $seller->update($request->all());
-        return redirect()->action('AuthSeller\RegisterController@manageSeller');
+        $validator = Validator::make($request->all(), $this->rules_updateSeller(), $this->messages_updateSeller());
+        if($validator->passes()) {
+            $id = $request->get('id');
+            $seller = Seller::findOrFail($id);
+            $seller->update($request->all());
+            $request->session()->flash('alert-success', 'แก้ไขข้อมูลพนักงานขายสำเร็จ');
+            return redirect()->action('AuthSeller\RegisterController@manageSeller');
+        }
+        else {
+            $request->session()->flash('alert-danger', 'แก้ไขข้อมูลพนักงานขายไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     /////////////////////////////// จัดการรูปภาพหน้าเว็บไซต์ โปรโมชั่น จัดการข้อมูลรูปภาพ และจัดการข้อมูลคุณสมบัติของสินค้า ///////////////////////////////
@@ -351,10 +377,18 @@ class AdminController extends Controller
     }
 
     public function updateCategory(Request $request){
-        $id = $request->get('id');
-        $category = Category::findOrFail($id);
-        $category->update($request->all());
-        return redirect()->action('Backend\AdminController@manageCategory');
+        $validator = Validator::make($request->all(), $this->rules_uploadCategory(), $this->messages_uploadCategory());
+        if($validator->passes()) {
+            $id = $request->get('id');
+            $category = Category::findOrFail($id);
+            $category->update($request->all());
+            $request->session()->flash('alert-success', 'อัพโหลดประเภทผลิตภัณฑ์สำเร็จ');
+            return redirect()->action('Backend\AdminController@manageCategory');
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดประเภทผลิตภัณฑ์ไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     public function manageFilmType(Request $request){
@@ -408,10 +442,18 @@ class AdminController extends Controller
     }
 
     public function updateFilmType(Request $request){
-        $id = $request->get('id');
-        $film_type = FilmType::findOrFail($id);
-        $film_type->update($request->all());
-        return redirect()->action('Backend\AdminController@manageFilmType');
+        $validator = Validator::make($request->all(), $this->rules_uploadFilmType(), $this->messages_uploadFilmType());
+        if($validator->passes()) {
+            $id = $request->get('id');
+            $film_type = FilmType::findOrFail($id);
+            $film_type->update($request->all());
+            $request->session()->flash('alert-success', 'อัพโหลดประเภทฟิล์มสำเร็จ');
+            return redirect()->action('Backend\AdminController@manageFilmType');
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดประเภทฟิล์มไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     /////////////////////////////// จัดการยี่ห้อโทรศัพท์ และรุ่นโทรศัพท์ ///////////////////////////////
@@ -466,19 +508,27 @@ class AdminController extends Controller
     }
 
     public function updateBrand(Request $request){
-        $id = $request->get('id');
-        $brand = Brand::findOrFail($id);
-        $brand->update($request->all());
-        if($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
-            $image->move('image_upload/image_brand/', $filename);
-            $path = 'image_upload/image_brand/'.$filename;
+        $validator = Validator::make($request->all(), $this->rules_updateBrand(), $this->messages_updateBrand());
+        if($validator->passes()) {
+            $id = $request->get('id');
             $brand = Brand::findOrFail($id);
-            $brand->image = $filename;
-            $brand->save();
+            $brand->update($request->all());
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+                $image->move('image_upload/image_brand/', $filename);
+                $path = 'image_upload/image_brand/'.$filename;
+                $brand = Brand::findOrFail($id);
+                $brand->image = $filename;
+                $brand->save();
+            }
+            $request->session()->flash('alert-success', 'อัพโหลดยี่ห้อโทรศัพท์สำเร็จ');
+            return redirect()->action('Backend\AdminController@manageBrand');
         }
-        return redirect()->action('Backend\AdminController@manageBrand');
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดยี่ห้อโทรศัพท์ไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     public function managePhoneModel(Request $request){
@@ -528,10 +578,18 @@ class AdminController extends Controller
     }
 
     public function updatePhoneModel(Request $request){
-        $id = $request->get('id');
-        $phoneModel = PhoneModel::findOrFail($id);
-        $phoneModel->update($request->all());
-        return redirect()->action('Backend\AdminController@managePhoneModel');
+        $validator = Validator::make($request->all(), $this->rules_uploadPhoneModel(), $this->messages_uploadPhoneModel());
+        if($validator->passes()) {
+            $id = $request->get('id');
+            $phoneModel = PhoneModel::findOrFail($id);
+            $phoneModel->update($request->all());
+            $request->session()->flash('alert-success', 'อัพโหลดรุ่นโทรศัพท์สำเร็จ');
+            return redirect()->action('Backend\AdminController@managePhoneModel');
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดรุ่นโทรศัพท์ไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     /////////////////////////////// จัดการคลังสินค้า ///////////////////////////////
@@ -620,10 +678,18 @@ class AdminController extends Controller
     }
 
     public function updateProduct(Request $request){
-        $id = $request->get('id');
-        $product = Product::findOrFail($id);
-        $product->update($request->all());
-        return redirect()->action('Backend\AdminController@listProduct');
+        $validator = Validator::make($request->all(), $this->rules_updateProduct(), $this->messages_updateProduct());
+        if($validator->passes()) {
+            $id = $request->get('id');
+            $product = Product::findOrFail($id);
+            $product->update($request->all());
+            $request->session()->flash('alert-success', 'อัพโหลดสินค้าสำเร็จ');
+            return redirect()->action('Backend\AdminController@listProduct');
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดสินค้าไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
     }
 
     public function listProductPrice(Request $request){
@@ -760,6 +826,7 @@ class AdminController extends Controller
     public function serialnumberPost(Request $request){
         $serialnumber = $request->all();
         $serialnumber = Serialnumber::create($serialnumber);
+        $request->session()->flash('alert-success', 'สร้างหมายเลขสินค้าสำเร็จ');
         return back();
     }
 
@@ -857,6 +924,27 @@ class AdminController extends Controller
     public function updateOrderCustomerStatus(Request $request) {
         $status = $request->all();
         $status = OrderCustomerConfirm::create($status);
+        return back();
+    }
+
+    public function orderStore(Request $request){
+        $NUM_PAGE = 20;
+        $orders = OrderStore::groupBy('bill_number')->paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageOrderProduct/order-store')->with('NUM_PAGE',$NUM_PAGE)
+                                                                   ->with('page',$page)
+                                                                   ->with('orders',$orders);
+    }
+
+    public function orderStoreDetail($id){
+        $order = OrderStore::findOrFail($id);
+        return view('backend/admin/manageOrderProduct/order-store-detail')->with('order',$order);
+    }
+
+    public function updateOrderStoreStatus(Request $request) {
+        $status = $request->all();
+        $status = OrderStoreConfirm::create($status);
         return back();
     }
 
@@ -1009,6 +1097,21 @@ class AdminController extends Controller
         ];
     }
 
+    public function rules_updateBrand() {
+        return [
+            'brand' => 'required',
+            'brand_eng' => 'required',
+        ];
+    }
+
+    public function messages_updateBrand() {
+        return [
+            'brand.required' => 'กรุณากรอกยี่ห้อโทรศัพท์',
+            'brand_eng.required' => 'กรุณากรอกยี่ห้อโทรศัพท์ (ภาษาอังกฤษ)',
+        ];
+    }
+
+
     public function rules_uploadPhoneModel() {
         return [
             'model' => 'required',
@@ -1039,6 +1142,20 @@ class AdminController extends Controller
         ];
     }
 
+    public function rules_updateProduct() {
+        return [
+            'phone_model_id' => 'required',
+            'product_name' => 'required',
+        ];
+    }
+
+    public function messages_updateProduct() {
+        return [
+            'phone_model_id.required' => 'กรุณากรอกรุ่นโทรศัพท์',
+            'product_name.required' => 'กรุณากรอกชื่อสินค้า',
+        ];
+    }
+
     public function rules_updateProductPrice() {
         return [
             'price' => 'required',
@@ -1060,6 +1177,54 @@ class AdminController extends Controller
     public function messages_productOutPost() {
         return [
             'serialnumber.required' => 'กรุณากรอกหมายเลขซีเรียล 16 หลัก',
+        ];
+    }
+
+    public function rules_updateMemberCustomer() {
+        return [
+            'name' => 'required',
+            'surname' => 'required',
+            'phone' => 'required',
+        ];
+    }
+
+    public function messages_updateMemberCustomer() {
+        return [
+            'name.required' => 'กรุณากรอกชื่อ',
+            'surname.required' => 'กรุณากรอกนามสกุล',
+            'phone.required' => 'กรุณากรอกเบอร์โทรศัพท์',
+        ];
+    }
+
+    public function rules_updateSeller() {
+        return [
+            'name' => 'required',
+            'surname' => 'required',
+            'phone' => 'required',
+        ];
+    }
+
+    public function messages_updateSeller() {
+        return [
+            'name.required' => 'กรุณากรอกชื่อ',
+            'surname.required' => 'กรุณากรอกนามสกุล',
+            'phone.required' => 'กรุณากรอกเบอร์โทรศัพท์',
+        ];
+    }
+
+    public function rules_updateMemberStore() {
+        return [
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+        ];
+    }
+
+    public function messages_updateMemberStore() {
+        return [
+            'name.required' => 'กรุณากรอกชื่อ',
+            'phone.required' => 'กรุณากรอกเบอร์โทรศัพท์',
+            'address.required' => 'กรุณากรอกที่อยู่ร้านค้า',
         ];
     }
 }

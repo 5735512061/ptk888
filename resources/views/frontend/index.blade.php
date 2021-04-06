@@ -37,18 +37,6 @@
             </div>
         </div>
         <!-- Brand End -->       
-
-        <!-- Newsletter Start -->
-        {{-- <div class="container-fluid">
-            <div class="newsletter">
-                <div class="row">
-                    <div class="col-md-12">
-                        <center><a href="{{url('/member/register-warranty')}}"><h1>ลงทะเบียนรับประกันฟิล์ม</h1></center></a>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- Newsletter End -->   
         
         <!-- Featured Product Start -->
         <div class="featured-product product">

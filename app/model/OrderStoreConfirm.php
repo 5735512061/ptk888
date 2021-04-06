@@ -4,9 +4,9 @@ namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderCustomerConfirm extends Model
+class OrderStoreConfirm extends Model
 {
-	protected $table = 'order_customer_confirms';
+	protected $table = 'order_store_confirms';
 
 	protected $fillable = [
     	'order_id', 'status'

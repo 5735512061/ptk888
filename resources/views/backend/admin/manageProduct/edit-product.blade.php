@@ -21,6 +21,11 @@
                         </div>
                         <div class="card-block">
                             <form action="{{url('/admin/update-product')}}" enctype="multipart/form-data" method="post">@csrf
+                                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                                    @if(Session::has('alert-' . $msg))
+                                        <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                    @endif
+                                @endforeach
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">รหัสสินค้า</label>
                                     <div class="col-sm-10">
@@ -95,6 +100,9 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ชื่อสินค้า</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('product_name'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('product_name') }})</span>
+                                        @endif
                                         <input type="text" class="form-control" placeholder="กรุณากรอกชื่อสินค้า" name="product_name" value="{{$product->product_name}}">
                                     </div>
                                 </div>

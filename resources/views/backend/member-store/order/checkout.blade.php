@@ -89,12 +89,18 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ชื่อ-นามสกุล</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('name'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('name') }})</span>
+                                        @endif
                                         <input type="text" class="form-control" placeholder="กรุณากรอกชื่อและนามสกุล" name="name">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">เบอร์โทรศัพท์</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('phone'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
+                                        @endif
                                         <input type="text" class="phone_format form-control" placeholder="กรุณากรอกเบอร์โทรศัพท์" name="phone">
                                     </div>
                                 </div>
@@ -107,30 +113,45 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ที่อยู่</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('address'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('address') }})</span>
+                                        @endif
                                         <input type="text" class="form-control" placeholder="กรุณากรอกที่อยู่ หมู่บ้าน ถนน หรือตรอก/ซอย (ถ้ามี)" name="address">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ตำบล</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('district'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('district') }})</span>
+                                        @endif
                                         <input type="text" class="form-control" placeholder="กรุณากรอกตำบล" name="district">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">อำเภอ</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('amphoe'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('amphoe') }})</span>
+                                        @endif
                                         <input type="text" class="form-control" placeholder="กรุณากรอกอำเภอ" name="amphoe">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">จังหวัด</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('province'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('province') }})</span>
+                                        @endif
                                         <input type="text" class="form-control" placeholder="กรุณากรอกจังหวัด" name="province">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">รหัสไปรษณีย์</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('zipcode'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('zipcode') }})</span>
+                                        @endif
                                         <input type="text" class="form-control" placeholder="กรุณากรอกรหัสไปรษณีย์" name="zipcode">
                                     </div>
                                 </div>
@@ -215,10 +236,22 @@
                                                 <h4>เลขที่บัญชี : 123-456-789-0</span></h4><br>
                                                 <h4>ธนาคารไทยพาณิชย์</h4><br>
                                                 <h4>ชื่อบัญชี : บริษัท พีทีเค 888 จำกัด</h4><br>
+                                                @if ($errors->has('money'))
+                                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('money') }})</span>
+                                                @endif
                                                 <input class="form-control" type="text" placeholder="* จำนวนเงิน ตัวอย่าง 790 บาท" style="font-size: 14px;" name="money"><br>
+                                                @if ($errors->has('payday'))
+                                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('payday') }})</span>
+                                                @endif
                                                 <input class="form-control" type="text" placeholder="* วันที่ชำระเงิน ตัวอย่าง 01/01/2564" style="font-size: 14px;" name="payday"><br>
+                                                @if ($errors->has('time'))
+                                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('time') }})</span>
+                                                @endif
                                                 <input class="form-control" type="text" placeholder="* เวลาชำระเงิน ตัวอย่าง 14.30น." style="font-size: 14px;" name="time"><br>
                                                 <label class="col-form-label">แนบหลักฐานการโอนเงิน</label>
+                                                @if ($errors->has('slip'))
+                                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('slip') }})</span>
+                                                @endif
                                                 <input type="file" class="form-control" name="slip">
                                             </div><br>
                                             <div class="cart-btn">

@@ -21,15 +21,26 @@
                         </div>
                         <div class="card-block">
                             <form action="{{url('/admin/update-category')}}" enctype="multipart/form-data" method="post">@csrf
+                                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                                    @if(Session::has('alert-' . $msg))
+                                        <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                    @endif
+                                @endforeach
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ประเภทผลิตภัณฑ์</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('category'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('category') }})</span>
+                                        @endif
                                         <input type="text" class="form-control" name="category" value="{{$category->category}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ประเภทผลิตภัณฑ์ภาษาอังกฤษ</label>
                                     <div class="col-sm-10">
+                                        @if ($errors->has('category_eng'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('category_eng') }})</span>
+                                        @endif
                                         <input type="text" class="form-control" name="category_eng" value="{{$category->category_eng}}">
                                     </div>
                                 </div>

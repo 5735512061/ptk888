@@ -9,6 +9,14 @@
                 <div class="register-form">
                     <h3>ลงทะเบียนสมาชิก</h3><hr>
                     <form action="{{url('/register-member')}}" enctype="multipart/form-data" method="post">@csrf
+                        <div class="flash-message">
+                            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                              @if(Session::has('alert-' . $msg))
+        
+                              <p style="font-size: 16px;" class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                              @endif
+                            @endforeach
+                        </div>
                         @php
                             $random = rand(111111,999999);  
                             $random_format = wordwrap($random , 4 , '-' , true );
@@ -35,13 +43,10 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ชื่อ') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
                                 @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('name') }})</span>
                                 @endif
+                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                             </div>
                         </div>
 
@@ -49,13 +54,10 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('นามสกุล') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" value="{{ old('surname') }}" required autofocus>
-
                                 @if ($errors->has('surname'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('surname') }}</strong>
-                                    </span>
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('surname') }})</span>
                                 @endif
+                                <input type="text" class="form-control" name="surname" value="{{ old('surname') }}">
                             </div>
                         </div>
 
@@ -63,65 +65,55 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('เบอร์โทรศัพท์') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="phone_format form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required autofocus>
-
                                 @if ($errors->has('phone'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
                                 @endif
+                                <input type="text" class="phone_format form-control" name="phone" value="{{ old('phone') }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ที่อยู่') }}</label>
                             <div class="col-md-6">
+                                @if ($errors->has('address'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('address') }})</span>
+                                @endif
                                 <input class="form-control" type="text" placeholder="ที่อยู่ หมู่บ้าน ถนน หรือตรอก/ซอย (ถ้ามี)" name="address">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ตำบล') }}</label>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="กรุณากรอกตำบล" name="district">
-
-                                @if ($errors->has('surname'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('surname') }}</strong>
-                                    </span>
+                                @if ($errors->has('district'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('district') }})</span>
                                 @endif
+                                <input class="form-control" type="text" placeholder="กรุณากรอกตำบล" name="district">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('อำเภอ') }}</label>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="กรุณากรอกอำเภอ" name="amphoe">
-
-                                @if ($errors->has('surname'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('surname') }}</strong>
-                                    </span>
+                                @if ($errors->has('amphoe'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('amphoe') }})</span>
                                 @endif
+                                <input class="form-control" type="text" placeholder="กรุณากรอกอำเภอ" name="amphoe">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('จังหวัด') }}</label>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="กรุณากรอกจังหวัด" name="province">
-                                @if ($errors->has('surname'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('surname') }}</strong>
-                                    </span>
+                                @if ($errors->has('province'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('province') }})</span>
                                 @endif
+                                <input class="form-control" type="text" placeholder="กรุณากรอกจังหวัด" name="province">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('รหัสไปรษณีย์') }}</label>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="กรุณากรอกรหัสไปรษณีย์" name="zipcode">
-                                @if ($errors->has('surname'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('surname') }}</strong>
-                                    </span>
+                                @if ($errors->has('zipcode'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('zipcode') }})</span>
                                 @endif
+                                <input class="form-control" type="text" placeholder="กรุณากรอกรหัสไปรษณีย์" name="zipcode">
                             </div>
                         </div>
 
@@ -129,13 +121,10 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ชื่อเข้าใช้งาน (ภาษาอังกฤษ)') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
-
                                 @if ($errors->has('username'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('username') }})</span>
                                 @endif
+                                <input type="text" class="form-control" name="username" value="{{ old('username') }}">
                             </div>
                         </div>
 
@@ -143,13 +132,10 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('รหัสผ่าน') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
                                 @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('password') }})</span>
                                 @endif
+                                <input id="password" type="password" class="form-control" name="password">
                             </div>
                         </div>
 
@@ -157,7 +143,10 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('ยืนยันรหัสผ่าน') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                @if ($errors->has('password_confirmation'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('password_confirmation') }})</span>
+                                @endif
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                             </div>
                         </div>
                         <div class="form-group row mb-0">

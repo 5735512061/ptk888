@@ -4,6 +4,11 @@
 <div class="main-body">
     <div class="page-wrapper">
         <div class="page-body">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+                    <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                @endif
+            @endforeach
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">

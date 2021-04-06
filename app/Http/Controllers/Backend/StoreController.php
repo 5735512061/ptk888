@@ -136,97 +136,110 @@ class StoreController extends Controller
     }
 
     public function paymentCheckoutStore(Request $request){
-        $store_id = Auth::guard('store')->user()->id;
+        $validator = Validator::make($request->all(), $this->rules_paymentCheckoutStore(), $this->messages_paymentCheckoutStore());
+        if($validator->passes()) {
+            $store_id = Auth::guard('store')->user()->id;
 
-        $name = $request->get('name');
-        $phone = $request->get('phone');
-        $phone_sec = $request->get('phone_sec');
-        $address = $request->get('address');
-        $district = $request->get('district');
-        $amphoe = $request->get('amphoe');
-        $province = $request->get('province');
-        $zipcode = $request->get('zipcode');
+            $name = $request->get('name');
+            $phone = $request->get('phone');
+            $phone_sec = $request->get('phone_sec');
+            $address = $request->get('address');
+            $district = $request->get('district');
+            $amphoe = $request->get('amphoe');
+            $province = $request->get('province');
+            $zipcode = $request->get('zipcode');
 
-        $price = $request->get('price');
-        $qty = $request->get('qty');
-        $product_id = $request->get('product_id');
+            $price = $request->get('price');
+            $qty = $request->get('qty');
+            $product_id = $request->get('product_id');
 
-        $payday = $request->get('payday');
-        $time = $request->get('time');
-        $money = $request->get('money');
-        $slip = $request->file('slip');
-
-        $date = Carbon::now()->format('d/m/Y');
-        
-        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        $charactersLength = strlen($characters);
-        $bill_number = '#S';
-        for ($i = 0; $i < 7; $i++) {
-            $bill_number .= $characters[rand(0, $charactersLength - 1)];
-        }
-
-        $payment_checkout_store = new PaymentCheckoutStore;
-        $payment_checkout_store->store_id = $store_id;
-        $payment_checkout_store->bill_number = $bill_number;
-        $payment_checkout_store->payday = $payday;
-        $payment_checkout_store->time = $time;
-        $payment_checkout_store->money = $money;
-
-        if($request->hasFile('slip')){
+            $payday = $request->get('payday');
+            $time = $request->get('time');
+            $money = $request->get('money');
             $slip = $request->file('slip');
-            $filename = md5(($slip->getClientOriginalName(). time()) . time()) . "_o." . $slip->getClientOriginalExtension();
-            $slip->move('image_upload/payment_store/', $filename);
-            $path = 'image_upload/payment_store/'.$filename;
-            $payment_checkout_store->slip = $filename;
+
+            $date = Carbon::now()->format('d/m/Y');
+            
+            $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            $charactersLength = strlen($characters);
+            $bill_number = '#S';
+            for ($i = 0; $i < 7; $i++) {
+                $bill_number .= $characters[rand(0, $charactersLength - 1)];
+            }
+
+            $payment_checkout_store = new PaymentCheckoutStore;
+            $payment_checkout_store->store_id = $store_id;
+            $payment_checkout_store->bill_number = $bill_number;
+            $payment_checkout_store->payday = $payday;
+            $payment_checkout_store->time = $time;
+            $payment_checkout_store->money = $money;
+
+            if($request->hasFile('slip')){
+                $slip = $request->file('slip');
+                $filename = md5(($slip->getClientOriginalName(). time()) . time()) . "_o." . $slip->getClientOriginalExtension();
+                $slip->move('image_upload/payment_store/', $filename);
+                $path = 'image_upload/payment_store/'.$filename;
+                $payment_checkout_store->slip = $filename;
+                $payment_checkout_store->save();
+            }
+
             $payment_checkout_store->save();
+
+            $shipment_store = new ShipmentStore;
+            $shipment_store->store_id = $store_id;
+            $shipment_store->bill_number = $bill_number;
+            $shipment_store->name = $name;
+            $shipment_store->phone = $phone;
+            $shipment_store->phone_sec = $phone_sec;
+            $shipment_store->address = $address;
+            $shipment_store->district = $district;
+            $shipment_store->amphoe = $amphoe;
+            $shipment_store->province = $province;
+            $shipment_store->zipcode = $zipcode;
+            $shipment_store->save();
+
+            for ($i=0; $i < count($product_id) ; $i++) { 
+                $product_cart_store = new ProductCartStore;
+                $product_cart_store->store_id = $store_id;
+                $product_cart_store->bill_number = $bill_number;
+                $product_cart_store->product_id = $product_id[$i];
+                $product_cart_store->price = $price[$i];
+                $product_cart_store->qty = $qty[$i];
+                $product_cart_store->save();
+            }
+
+            $payment_id = PaymentCheckoutStore::where('bill_number',$bill_number)->value('id');
+            $shipment_id = ShipmentStore::where('bill_number',$bill_number)->value('id');
+            $product_carts = ProductCartStore::where('bill_number',$bill_number)->get();
+
+            $date = Carbon::now()->format('d/m/Y');
+
+            foreach($product_carts as $product_cart => $value) {
+                $order_store = new OrderStore;
+                $order_store->store_id = $store_id;
+                $order_store->bill_number = $bill_number;
+                $order_store->payment_id = $payment_id;
+                $order_store->shipment_id = $shipment_id;
+                $order_store->product_cart_id = $value->id;
+                $order_store->date = $date;
+                $order_store->save();
+            }
+
+            $product_cart_session = ProductCartSessionStore::where('product_id',$product_id)
+                                                            ->where('store_id',$store_id)->delete();
+
+            // $film_id = FilmPriceStore::where('id',$product_id)->value('film_id');
+            // $amount = StockFilm::where('id',$film_id)->value('amount');
+            // $amount_int = (int)$amount;
+            // $amount_int = $amount_int - $qty;
+            // $amount_int = StockFilm::where('id',$film_id)->update(['amount' =>  $amount]);
+            $request->session()->flash('alert-success', 'แจ้งชำระเงินสำเร็จ');
+            return redirect()->action('Backend\StoreController@orderHistory');
         }
-
-        $payment_checkout_store->save();
-
-        $shipment_store = new ShipmentStore;
-        $shipment_store->store_id = $store_id;
-        $shipment_store->bill_number = $bill_number;
-        $shipment_store->name = $name;
-        $shipment_store->phone = $phone;
-        $shipment_store->phone_sec = $phone_sec;
-        $shipment_store->address = $address;
-        $shipment_store->district = $district;
-        $shipment_store->amphoe = $amphoe;
-        $shipment_store->province = $province;
-        $shipment_store->zipcode = $zipcode;
-        $shipment_store->save();
-
-        for ($i=0; $i < count($product_id) ; $i++) { 
-            $product_cart_store = new ProductCartStore;
-            $product_cart_store->store_id = $store_id;
-            $product_cart_store->bill_number = $bill_number;
-            $product_cart_store->product_id = $product_id[$i];
-            $product_cart_store->price = $price[$i];
-            $product_cart_store->qty = $qty[$i];
-            $product_cart_store->save();
+        else {
+            $request->session()->flash('alert-danger', 'แจ้งชำระเงินไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
         }
-
-        $payment_id = PaymentCheckoutStore::where('bill_number',$bill_number)->value('id');
-        $shipment_id = ShipmentStore::where('bill_number',$bill_number)->value('id');
-        $product_carts = ProductCartStore::where('bill_number',$bill_number)->get();
-
-        $date = Carbon::now()->format('d/m/Y');
-
-        foreach($product_carts as $product_cart => $value) {
-            $order_store = new OrderStore;
-            $order_store->store_id = $store_id;
-            $order_store->bill_number = $bill_number;
-            $order_store->payment_id = $payment_id;
-            $order_store->shipment_id = $shipment_id;
-            $order_store->product_cart_id = $value->id;
-            $order_store->date = $date;
-            $order_store->save();
-        }
-
-        $product_cart_session = ProductCartSessionStore::where('product_id',$product_id)
-                                                        ->where('store_id',$store_id)->delete();
-
-        return redirect()->action('Backend\StoreController@orderHistory');
     }
 
     // ประวัติการสั่งซื้อสินค้า
@@ -264,6 +277,38 @@ class StoreController extends Controller
         return [
             'subject.required' => 'กรุณากรอกหัวข้อเรื่อง',
             'message.required' => 'กรุณากรอกข้อความที่ต้องการส่ง',
+        ];
+    }
+
+    public function rules_paymentCheckoutStore() {
+        return [
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'district' => 'required',
+            'amphoe' => 'required',
+            'province' => 'required',
+            'zipcode' => 'required',
+            'payday' => 'required',
+            'time' => 'required',
+            'money' => 'required',
+            'slip' => 'required',
+        ];
+    }
+
+    public function messages_paymentCheckoutStore() {
+        return [
+            'name.required' => 'กรุณากรอกชื่อและนามสกุล',
+            'phone.required' => 'กรุณากรอกเบอร์โทรศัพท์',
+            'address.required' => 'กรุณากรอกที่อยู่',
+            'district.required' => 'กรุณากรอกตำบล',
+            'amphoe.required' => 'กรุณากรอกอำเภอ',
+            'province.required' => 'กรุณากรอกจังหวัด',
+            'zipcode.required' => 'กรุณากรอกรหัสไปรษณีย์',
+            'payday.required' => 'กรุณากรอกวันที่ชำระเงิน',
+            'time.required' => 'กรุณากรอกเวลาที่ชำระเงิน',
+            'money.required' => 'กรุณากรอกจำนวนเงินที่ชำระ',
+            'slip.required' => 'กรุณาแนบหลักฐานการโอนเงิน',
         ];
     }
 }

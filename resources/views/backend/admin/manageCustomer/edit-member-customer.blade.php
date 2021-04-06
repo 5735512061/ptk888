@@ -20,7 +20,12 @@
                             </div>
                         </div>
                         <div class="card-block">
-                            <form action="{{url('admin/update-member-customer')}}" enctype="multipart/form-data" method="post">@csrf  
+                            <form action="{{url('admin/update-member-customer')}}" enctype="multipart/form-data" method="post">@csrf 
+                                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                                    @if(Session::has('alert-' . $msg))
+                                        <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                    @endif
+                                @endforeach 
                                 <div class="form-group row">
                                     <label class="col-md-2 col-form-label">{{ __('รหัสสมาชิก') }}</label>
         
@@ -33,7 +38,10 @@
                                     <label class="col-md-2 col-form-label">{{ __('ชื่อ') }}</label>
         
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" name="name" value="{{$member->name}}" required autofocus>
+                                        @if ($errors->has('name'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('name') }})</span>
+                                        @endif
+                                        <input type="text" class="form-control" name="name" value="{{$member->name}}">
                                     </div>
                                 </div>
         
@@ -41,7 +49,10 @@
                                     <label class="col-md-2 col-form-label">{{ __('นามสกุล') }}</label>
         
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" name="surname" value="{{$member->surname}}" required autofocus>
+                                        @if ($errors->has('surname'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('surname') }})</span>
+                                        @endif
+                                        <input type="text" class="form-control" name="surname" value="{{$member->surname}}">
                                     </div>
                                 </div>
         
@@ -49,7 +60,10 @@
                                     <label class="col-md-2 col-form-label">{{ __('เบอร์โทรศัพท์') }}</label>
         
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" name="phone" value="{{$member->phone}}" required autofocus>
+                                        @if ($errors->has('phone'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
+                                        @endif
+                                        <input type="text" class="form-control" name="phone" value="{{$member->phone}}">
                                     </div>
                                 </div>
                                 <input type="hidden" value="{{$member->id}}" name="id">

@@ -85,7 +85,7 @@
                 </li> --}}
                 <li class="user-profile header-notification">
                     <a href="#!" class="waves-effect waves-light">
-                        <img src="{{ asset('/admin/assets/images/avatar-4.jpg')}}" class="img-radius" alt="User-Profile-Image">
+                        <img src="{{url('img/logo_user/user.png')}}" class="img-radius">
                         <span>{{Auth::guard('admin')->user()->name}} {{Auth::guard('admin')->user()->surname}}</span>
                         <i class="ti-angle-down"></i>
                     </a>

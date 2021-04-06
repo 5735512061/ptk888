@@ -15,7 +15,7 @@
             <div class="col-sm-6"></div>
             <div class="col-sm-6">
                 @if(Auth::guard('member')->user() == NULL)
-                    <a href="{{url('/register-member')}}">สมัครสมาชิก</a> / <a href="{{url('/member/login')}}">เข้าสู่ระบบ</a>
+                    <a href="{{url('/register-member')}}" class="btn cart">สมัครสมาชิก</a> / <a class="btn cart" href="{{url('/member/login')}}">เข้าสู่ระบบ</a>
                 @endif
                 @if(Auth::guard('member')->user() != NULL)
                     สวัสดี! {{Auth::guard('member')->user()->name}} {{Auth::guard('member')->user()->surname}}<br>

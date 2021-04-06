@@ -184,7 +184,7 @@
                                         <td>{{$value->name}} {{$value->surname}}</td>
                                         <td>{{$value->phone}}</td>
                                         <td>{{$value->role}}</td>
-                                        <td>{{$value->username}}</td>
+                                        <td>{{$value->status}}</td>
                                         <td>       
                                             <a href="{{url('/admin/edit-seller')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>

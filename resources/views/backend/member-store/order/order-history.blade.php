@@ -14,6 +14,11 @@
 <div class="main-body">
     <div class="page-wrapper">
         <div class="page-body">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+                    <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                @endif
+            @endforeach
             <div class="card">
                 <div class="card-header">
                     <h5>ประวัติการสั่งซื้อสินค้า</h5>
@@ -83,8 +88,8 @@
                 ไม่มีประวัติการสั่งซื้อสินค้า! 
             </h5><br>
             <center>
-                <a href="{{url('/store/order-product')}}" class="btn-warranty" style="text-decoration: none;" >
-                    เลือกซื้อสินค้า
+                <a href="{{url('/store/order-product')}}" class="btn btn-primary">
+                    สั่งซื้อสินค้า
                 </a>
             </center>
         </div>

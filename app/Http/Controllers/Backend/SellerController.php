@@ -15,6 +15,8 @@ use App\model\DataWarrantyMember;
 use App\model\WarrantyConfirm;
 use App\model\OrderCustomer;
 use App\model\OrderCustomerConfirm;
+use App\model\OrderStore;
+use App\model\OrderStoreConfirm;
 
 use Validator;
 use Carbon\Carbon;
@@ -168,6 +170,27 @@ class SellerController extends Controller
     public function updateOrderCustomerStatus(Request $request) {
         $status = $request->all();
         $status = OrderCustomerConfirm::create($status);
+        return back();
+    }
+
+    public function orderStore(Request $request){
+        $NUM_PAGE = 20;
+        $orders = OrderStore::groupBy('bill_number')->paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/seller/manageOrderProduct/order-store')->with('NUM_PAGE',$NUM_PAGE)
+                                                                    ->with('page',$page)
+                                                                    ->with('orders',$orders);
+    }
+
+    public function orderStoreDetail($id){
+        $order = OrderStore::findOrFail($id);
+        return view('backend/seller/manageOrderProduct/order-store-detail')->with('order',$order);
+    }
+
+    public function updateOrderStoreStatus(Request $request) {
+        $status = $request->all();
+        $status = OrderStoreConfirm::create($status);
         return back();
     }
 

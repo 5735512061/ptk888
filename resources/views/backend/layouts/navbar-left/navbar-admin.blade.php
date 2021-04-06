@@ -3,7 +3,7 @@
     <div class="pcoded-inner-navbar main-menu">
         <div class="">
             <div class="main-menu-header">
-                <img class="img-80 img-radius" src="assets/images/avatar-4.jpg" alt="User-Profile-Image">
+                <img class="img-80 img-radius" src="{{url('img/logo_user/user.png')}}">
                 <div class="user-details">
                     <span id="more-details">{{Auth::guard('admin')->user()->name}} {{Auth::guard('admin')->user()->surname}}<i class="fa fa-caret-down"></i></span>
                 </div>
@@ -198,8 +198,8 @@
                         </ul>
                         <ul class="pcoded-submenu">
                             <li class="">
-                                <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                    <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">การสั่งซื้อของร้านค้า</span>
+                                <a href="{{url('/admin/order-store')}}" class="waves-effect waves-dark">
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">การสั่งซื้อของร้านค้า</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>

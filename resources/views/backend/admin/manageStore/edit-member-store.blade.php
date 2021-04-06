@@ -21,6 +21,11 @@
                         </div>
                         <div class="card-block">
                             <form action="{{url('/admin/update-member-store')}}" enctype="multipart/form-data" method="post">@csrf
+                                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                                    @if(Session::has('alert-' . $msg))
+                                        <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                    @endif
+                                @endforeach
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">{{ __('รหัสสมาชิกร้านค้า') }}</label>
         
@@ -33,13 +38,10 @@
                                     <label class="col-sm-2 col-form-label">{{ __('ชื่อร้านค้า') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{$store->name}}" required autofocus>
-        
                                         @if ($errors->has('name'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('name') }}</strong>
-                                            </span>
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('name') }})</span>
                                         @endif
+                                        <input type="text" class="form-control" name="name" value="{{$store->name}}">
                                     </div>
                                 </div>
 
@@ -47,13 +49,10 @@
                                     <label class="col-sm-2 col-form-label">{{ __('เบอร์โทรศัพท์') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input type="text" class="phone_format form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{$store->phone}}" required autofocus>
-        
                                         @if ($errors->has('phone'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('phone') }}</strong>
-                                            </span>
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
                                         @endif
+                                        <input type="text" class="phone_format form-control" name="phone" value="{{$store->phone}}">
                                     </div>
                                 </div>
 
@@ -61,13 +60,10 @@
                                     <label class="col-sm-2 col-form-label">{{ __('ที่อยู่ตัวแทนจำหน่าย') }}</label>
         
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" value="{{$store->address}}" required autofocus>
-        
                                         @if ($errors->has('address'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('address') }}</strong>
-                                            </span>
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('address') }})</span>
                                         @endif
+                                        <input type="text" class="form-control" name="address" value="{{$store->address}}">
                                     </div>
                                 </div>
 
@@ -79,12 +75,6 @@
                                             <option value="{{$store->role}}">{{$store->role}}</option>
                                             <option value="สมาชิกร้านค้า">สมาชิกร้านค้า</option>
                                         </select>
-        
-                                        @if ($errors->has('role'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('role') }}</strong>
-                                            </span>
-                                        @endif
                                     </div>
                                 </div>
 
@@ -97,12 +87,6 @@
                                             <option value="ใช้งานได้">ใช้งานได้</option>
                                             <option value="ปิดการใช้งาน">ปิดการใช้งาน</option>
                                         </select>
-        
-                                        @if ($errors->has('status'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('status') }}</strong>
-                                            </span>
-                                        @endif
                                     </div>
                                 </div>
 
@@ -110,20 +94,6 @@
                                     <label class="col-sm-2 col-form-label">อัพโหลดรูปภาพโลโก้ร้านค้า (ถ้ามี)</label>
                                     <div class="col-sm-6">
                                         <input type="file" class="form-control" name="image_logo">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">{{ __('ชื่อเข้าใช้งาน') }}</label>
-        
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{$store->username}}" required>
-        
-                                        @if ($errors->has('username'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('username') }}</strong>
-                                            </span>
-                                        @endif
                                     </div>
                                 </div>
 
@@ -166,7 +136,6 @@
                                     <th>เบอร์โทรศัพท์</th>
                                     <th>บทบาท</th>
                                     <th>สถานะ</th>
-                                    <th>ชื่อเข้าใช้งาน</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -179,7 +148,6 @@
                                         <td>{{$value->phone}}</td>
                                         <td>{{$value->role}}</td>
                                         <td>{{$value->status}}</td>
-                                        <td>{{$value->username}}</td>
                                         <td>       
                                             <a href="{{url('/admin/edit-image')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>
