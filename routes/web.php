@@ -110,6 +110,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/update-product-price', 'Backend\AdminController@updateProductPrice');
     Route::get('/product-price-detail/{id}', 'Backend\AdminController@ProductPriceDetail');
     Route::get('/delete-product-price-detail/{id}', 'Backend\AdminController@deleteProductPriceDetail');
+
+    Route::get('/list-product-promotion-price', 'Backend\AdminController@listProductPromotionPrice');
+    Route::get('/edit-product-promotion-price/{id}', 'Backend\AdminController@editProductPromotionPrice');
+    Route::post('/update-product-promotion-price', 'Backend\AdminController@updateProductPromotionPrice');
+    Route::get('/product-promotion-price-detail/{id}', 'Backend\AdminController@ProductPromotionPriceDetail');
+    Route::get('/delete-product-price-detail/{id}', 'Backend\AdminController@deleteProductPromotionPriceDetail');
     // จัดการสต๊อกสินค้า
     Route::get('/manage-film-stock', 'Backend\AdminController@manageFilmStock');
     Route::get('/delete-stock-film/{id}', 'Backend\AdminController@deleteStockFilm');
@@ -164,6 +170,11 @@ Route::group(['prefix' => 'seller'], function(){
     Route::get('/edit-product-price/{id}', 'Backend\SellerController@editProductPrice');
     Route::post('/update-product-price', 'Backend\SellerController@updateProductPrice');
     Route::get('/product-price-detail/{id}', 'Backend\SellerController@ProductPriceDetail');
+
+    Route::get('/list-product-promotion-price', 'Backend\SellerController@listProductPromotionPrice');
+    Route::get('/edit-product-promotion-price/{id}', 'Backend\SellerController@editProductPromotionPrice');
+    Route::post('/update-product-promotion-price', 'Backend\SellerController@updateProductPromotionPrice');
+    Route::get('/product-promotion-price-detail/{id}', 'Backend\SellerController@ProductPromotionPriceDetail');
     // จัดการสต๊อกสินค้า
     Route::get('/manage-film-stock', 'Backend\SellerController@manageFilmStock');
     Route::post('/film-stock-out', 'Backend\SellerController@filmStockOut');

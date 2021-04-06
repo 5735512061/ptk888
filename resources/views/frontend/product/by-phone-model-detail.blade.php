@@ -33,6 +33,7 @@
                 </div>
                 @php
                     $price = DB::table('product_prices')->where('product_id',$product->id)->orderBy('id','desc')->value('price');
+                    $promotion_price = DB::table('product_promotion_prices')->where('product_id',$product->id)->orderBy('id','desc')->value('promotion_price');
                 @endphp
                 
                 <div class="col-lg-7">
@@ -40,9 +41,12 @@
                         <h4 style="font-weight: bold;">{{$product->product_name}}</h4>
                         @if($price == null)
                             <h4 style="font-weight: bold; color:#FF8930;">ราคา 0 บาท</h4><hr>
-                        @else
+                        @elseif($promotion_price == null)
                             <h4 style="font-weight: bold; color:#FF8930;">ราคา {{$price}} บาท</h4><hr>
+                        @else
+                            <h4 style="font-weight: bold; color:#FF8930;"><Del>ราคา {{$price}} บาท</Del> ลดเหลือ {{$promotion_price}} บาท</h4><hr>
                         @endif
+
                         <h5>ข้อมูลและคุณสมบัติของ{{$product->product_type}}</h5>    
                         @foreach ($propertys as $property => $value)
                             <p style="margin-bottom: 0.3rem; font-size:14px;">- {{$value->film_information}}</p>

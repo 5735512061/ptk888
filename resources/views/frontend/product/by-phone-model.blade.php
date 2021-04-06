@@ -23,7 +23,8 @@
                             @php
                                 $brand = DB::table('brands')->where('id',$value->brand_id)->value('brand');
                                 $model = DB::table('phone_models')->where('id',$value->phone_model_id)->value('model');
-                                $price = DB::table('product_prices')->where('product_id',$value->id)->orderBy('id','desc')->value('price');
+                                $price = DB::table('product_prices')->where('product_id',$value->id)->orderBy('id','desc')->value('price'); 
+                                $promotion_price = DB::table('product_promotion_prices')->where('product_id',$value->id)->orderBy('id','desc')->value('promotion_price'); 
                             @endphp
                             <a href="{{url('/product')}}/{{$brand}}/{{$model}}/detail/{{$value->id}}">
                                 <div class="product-image">
@@ -36,8 +37,10 @@
                             <div class="product-price">
                                 @if($price == null)
                                     <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 0 บาท</h5>
-                                @else
+                                @elseif($promotion_price == null)
                                     <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา {{$price}} บาท</h5>
+                                @else 
+                                <h5 style="font-weight: bold; padding-left:0.5rem;"><Del>ราคา {{$price}} บาท</Del> ลดเหลือ {{$promotion_price}} บาท</h5>
                                 @endif
                             </div>
                         </div>

@@ -18,7 +18,18 @@ class Cart
 	}
 
 	public function add($item, $id, $qty) {
-		$product_price = DB::table('product_prices')->where('product_id',$item->id)->value('price');
+		$product_price = DB::table('product_prices')->where('product_id',$item->id)->orderBy('id','desc')->value('price');
+		$promotion_price = DB::table('product_promotion_prices')->where('product_id',$item->id)->orderBy('id','desc')->value('promotion_price');
+
+        if($promotion_price == null) {
+			$product_price = $product_price;
+		}
+			
+        else {
+			$product_price = $promotion_price;
+		}
+			
+
 		$storedItem = ['qty' =>$qty, 'price' => $product_price, 'item' => $item->id];
 		if($this->items) {
 			if(array_key_exists($id, $this->items)) {

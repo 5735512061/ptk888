@@ -27,7 +27,8 @@
                                         $id = $product['item'];
                                         $product_name = DB::table('products')->where('id',$id)->value('product_name'); 
                                         $product_image = DB::table('image_products')->where('product_id',$id)->value('image'); 
-                                        $product_price = DB::table('product_prices')->where('product_id',$id)->value('price'); 
+                                        $product_price = DB::table('product_prices')->where('product_id',$id)->orderBy('id','desc')->value('price'); 
+                                        $promotion_price = DB::table('product_promotion_prices')->where('product_id',$id)->orderBy('id','desc')->value('promotion_price');
 						            @endphp
                                     <td style="width: 30rem;">
                                         <div class="img">
@@ -35,19 +36,12 @@
                                             <p>{{ $product_name }}</p>
                                         </div>
                                     </td>
-                                    <td>{{$product_price}}.-</td>
+                                        @if($promotion_price == null)
+                                            <td>{{$product_price}}.-</td>
+                                        @else
+                                            <td>{{$promotion_price}}.-</td>
+                                        @endif
                                     <td>
-                                        {{-- <div class="product-detail">
-                                            <div class="product-content" style="padding: 0px;">
-                                                <div class="quantity" style="margin-bottom:0px;">
-                                                    <div class="qty">
-                                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                                        <input type="text" value="{{ $product['qty'] }}" name="qty">
-                                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>   
-                                        </div> --}}
                                         {{$product['qty']}}
                                     </td>
                                     <td>{{ number_format($product['price']) }}.-</td>

@@ -9,6 +9,7 @@ use App\model\Product;
 use App\model\StockFilm;
 use App\model\ProductFilmInformation;
 use App\model\ProductPrice;
+use App\model\ProductPromotionPrice;
 use App\model\Serialnumber;
 use App\model\ProductOut;
 use App\model\DataWarrantyMember;
@@ -77,6 +78,47 @@ class SellerController extends Controller
                                                                              ->with('page',$page)
                                                                              ->with('product_prices',$product_prices)
                                                                              ->with('product',$product);
+    }
+
+    public function listProductPromotionPrice(Request $request){
+        $NUM_PAGE = 50;
+        $products = Product::paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/seller/manageProductPrice/list-product-promotion-price')->with('NUM_PAGE',$NUM_PAGE)
+                                                                                     ->with('page',$page)
+                                                                                     ->with('products',$products);
+    }
+
+    public function editProductPromotionPrice($id){
+        $product = Product::findOrFail($id);
+        return view('backend/seller/manageProductPrice/edit-product-promotion-price')->with('product',$product);
+    }
+
+    public function updateProductPromotionPrice(Request $request){
+        $validator = Validator::make($request->all(), $this->rules_updateProductPromotionPrice(), $this->messages_updateProductPromotionPrice());
+        if($validator->passes()) {
+            $price = $request->all();
+            $price = ProductPromotionPrice::create($price);
+            $request->session()->flash('alert-success', 'อัพโหลดโปรโมชั่นสำเร็จ');
+            return redirect()->action('Backend\SellerController@listProductPromotionPrice');
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดโปรโมชั่นไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
+    }
+
+    public function ProductPromotionPriceDetail(Request $request,$id){
+        $NUM_PAGE = 50;
+        $product_prices = ProductPromotionPrice::where('product_id',$id)->orderBy('id','asc')->paginate($NUM_PAGE);
+        $product = Product::where('id',$id)->value('product_name');
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/seller/manageProductPrice/product-promotion-price-detail')->with('NUM_PAGE',$NUM_PAGE)
+                                                                                       ->with('page',$page)
+                                                                                       ->with('product_prices',$product_prices)
+                                                                                       ->with('product',$product);
     }
 
     /////////////////////////////// จัดการสต๊อกสินค้า ///////////////////////////////
@@ -279,6 +321,18 @@ class SellerController extends Controller
     public function messages_productOutPost() {
         return [
             'serialnumber.required' => 'กรุณากรอกหมายเลขซีเรียล 16 หลัก',
+        ];
+    }
+
+    public function rules_updateProductPromotionPrice() {
+        return [
+            'promotion_price' => 'required',
+        ];
+    }
+
+    public function messages_updateProductPromotionPrice() {
+        return [
+            'promotion_price.required' => 'กรุณากรอกราคาโปรโมชั่น',
         ];
     }
 }
