@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Member;
 use Validator;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -18,7 +19,9 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), $this->rules_registerMember(), $this->messages_registerMember());
         if($validator->passes()) {
             $member = $request->all();
+            $date = Carbon::now()->format('Y-m-d');
             $member['password'] = bcrypt($member['password']);
+            $member['date'] = $date;
             $member = Member::create($member);
             $request->session()->flash('alert-success', 'สมัครสมาชิกสำเร็จ');
             return redirect()->intended(route('member.home'));
@@ -34,7 +37,7 @@ class RegisterController extends Controller
         return [
             'name' => 'required',
             'surname' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|unique:members',
             'username' => 'required',
             'address' => 'required',
             'district' => 'required',
@@ -51,6 +54,7 @@ class RegisterController extends Controller
             'name.required' => 'กรุณากรอกขื่อ',
             'surname.required' => 'กรุณากรอกนามสกุล',
             'phone.required' => 'กรุณากรอกเบอร์โทรศัพท์',
+            'phone.unique' => 'เบอร์โทรศัพท์ใช้ในการสมัครสมาชิกแล้ว',
             'username.required' => 'กรุณากรอกชื่อเข้าใช้งาน (เป็นภาษาอังกฤษ)',
             'address.required' => 'กรุณากรอกที่อยู่ติดต่อ',
             'district.required' => 'กรุณากรอกตำบล',

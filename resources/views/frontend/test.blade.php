@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 @php
-                    $price = DB::table('product_prices')->where('product_id',$product->id)->orderBy('id','desc')->value('price');
+                    $price = DB::table('product_prices')->where('product_id',$product->id)->where('status','เปิด')->orderBy('id','desc')->value('price');
                 @endphp
                 <div class="col-lg-7">
                     <div class="description">
@@ -76,7 +76,7 @@
             @foreach ($products as $product => $value)
                 @php
                     $image = DB::table('image_products')->where('product_id',$value->id)->value('image');
-                    $price = DB::table('product_prices')->where('product_id',$value->id)->orderBy('id','desc')->value('price');
+                    $price = DB::table('product_prices')->where('product_id',$value->id)->where('status','เปิด')->orderBy('id','desc')->value('price');
                 @endphp
                 <div class="col-lg-3">
                     <div class="product-item">

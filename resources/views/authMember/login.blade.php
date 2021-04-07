@@ -42,9 +42,17 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
+                                <p style="color:#ff8930;">* กรณีที่ยังไม่สมัครสมาชิก ให้สมัครสมาชิกก่อน</p>
                                 <button type="submit" class="btn">
                                     {{ __('เข้าสู่ระบบสมาชิก') }}
                                 </button>
+                                <a href="{{url('/register-member')}}" class="btn cart">สมัครสมาชิก</a>
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <br><a href="{{url('/member/ForgetPassword')}}">ลืมรหัสผ่าน ?</a>
                             </div>
                         </div>
                     </form>

@@ -25,8 +25,10 @@ use App\model\DataWarrantyMember;
 use App\model\WarrantyConfirm;
 use App\model\OrderCustomer;
 use App\model\OrderStore;
+use App\model\OrderStoreFilmBrand;
 use App\model\OrderCustomerConfirm;
 use App\model\OrderStoreConfirm;
+use App\model\OrderStoreConfirmFilmBrand;
 
 use App\Member;
 use App\Store;
@@ -44,7 +46,7 @@ class AdminController extends Controller
     /////////////////////////////// จัดการข้อมูลลูกค้า ///////////////////////////////
     public function dataOfCustomer(Request $request){
         $NUM_PAGE = 50;
-        $customers = Member::paginate($NUM_PAGE);
+        $customers = Member::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageCustomer/data-of-customer')->with('NUM_PAGE',$NUM_PAGE)
@@ -88,7 +90,7 @@ class AdminController extends Controller
     public function editMemberStore(Request $request, $id){
         $NUM_PAGE = 50;
         $store = Store::findOrFail($id);
-        $members = Store::paginate($NUM_PAGE);
+        $members = Store::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageStore/edit-member-store')->with('NUM_PAGE',$NUM_PAGE)
@@ -122,7 +124,7 @@ class AdminController extends Controller
     public function editSeller(Request $request, $id){
         $NUM_PAGE = 50;
         $seller = Seller::findOrFail($id);
-        $sellers = Seller::paginate($NUM_PAGE);
+        $sellers = Seller::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageSeller/edit-seller')->with('NUM_PAGE',$NUM_PAGE)
@@ -215,7 +217,7 @@ class AdminController extends Controller
 
     public function managePromotion(Request $request){
         $NUM_PAGE = 50;
-        $promotions = Promotion::paginate($NUM_PAGE);
+        $promotions = Promotion::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageImageWebsite/manage-promotion')->with('NUM_PAGE',$NUM_PAGE)
@@ -254,7 +256,7 @@ class AdminController extends Controller
     public function editPromotion(Request $request, $id){
         $NUM_PAGE = 50;
         $promotion = Promotion::findOrFail($id);
-        $promotions = Promotion::paginate($NUM_PAGE);
+        $promotions = Promotion::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageImageWebsite/edit-promotion')->with('NUM_PAGE',$NUM_PAGE)
@@ -281,7 +283,7 @@ class AdminController extends Controller
 
     public function manageFilmInformation(Request $request){
         $NUM_PAGE = 50;
-        $product_film_informations = ProductFilmInformation::paginate($NUM_PAGE);
+        $product_film_informations = ProductFilmInformation::orderBy('id','asc')->paginate($NUM_PAGE);
         $film_types = FilmType::get();
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -315,7 +317,7 @@ class AdminController extends Controller
     public function editFilmInformation(Request $request, $id){
         $NUM_PAGE = 50;
         $product_film_information = ProductFilmInformation::findOrFail($id);
-        $product_film_informations = ProductFilmInformation::paginate($NUM_PAGE);
+        $product_film_informations = ProductFilmInformation::orderBy('id','asc')->paginate($NUM_PAGE);
         $film_types = FilmType::get();
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -336,7 +338,7 @@ class AdminController extends Controller
     /////////////////////////////// จัดการประเภทผลิตภัณฑ์ และประเภทฟิล์ม /////////////////////////////// 
     public function manageCategory(Request $request){
         $NUM_PAGE = 50;
-        $categorys = Category::paginate($NUM_PAGE);
+        $categorys = Category::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageCategory/manage-category')->with('NUM_PAGE',$NUM_PAGE)
@@ -368,7 +370,7 @@ class AdminController extends Controller
     public function editCategory(Request $request, $id){
         $NUM_PAGE = 50;
         $category = Category::findOrFail($id);
-        $categorys = Category::paginate($NUM_PAGE);
+        $categorys = Category::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageCategory/edit-category')->with('NUM_PAGE',$NUM_PAGE)
@@ -394,7 +396,7 @@ class AdminController extends Controller
 
     public function manageFilmType(Request $request){
         $NUM_PAGE = 50;
-        $film_types = FilmType::paginate($NUM_PAGE);
+        $film_types = FilmType::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageFilmType/manage-film-type')->with('NUM_PAGE',$NUM_PAGE)
@@ -433,7 +435,7 @@ class AdminController extends Controller
     public function editFilmType(Request $request, $id){
         $NUM_PAGE = 50;
         $film_type = FilmType::findOrFail($id);
-        $film_types = FilmType::paginate($NUM_PAGE);
+        $film_types = FilmType::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageFilmType/edit-film-type')->with('NUM_PAGE',$NUM_PAGE)
@@ -460,7 +462,7 @@ class AdminController extends Controller
     /////////////////////////////// จัดการยี่ห้อโทรศัพท์ และรุ่นโทรศัพท์ ///////////////////////////////
     public function manageBrand(Request $request){
         $NUM_PAGE = 50;
-        $brands = Brand::paginate($NUM_PAGE);
+        $brands = Brand::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageBrand/manage-brand')->with('NUM_PAGE',$NUM_PAGE)
@@ -499,7 +501,7 @@ class AdminController extends Controller
     public function editBrand(Request $request, $id){
         $NUM_PAGE = 50;
         $brand = Brand::findOrFail($id);
-        $brands = Brand::paginate($NUM_PAGE);
+        $brands = Brand::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageBrand/edit-brand')->with('NUM_PAGE',$NUM_PAGE)
@@ -534,7 +536,7 @@ class AdminController extends Controller
 
     public function managePhoneModel(Request $request){
         $NUM_PAGE = 50;
-        $phoneModels = PhoneModel::paginate($NUM_PAGE);
+        $phoneModels = PhoneModel::orderBy('id','asc')->paginate($NUM_PAGE);
         $brands = Brand::get();
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -567,7 +569,7 @@ class AdminController extends Controller
     public function editPhoneModel(Request $request, $id){
         $NUM_PAGE = 50;
         $phoneModel = PhoneModel::findOrFail($id);
-        $phoneModels = PhoneModel::paginate($NUM_PAGE);
+        $phoneModels = PhoneModel::orderBy('id','asc')->paginate($NUM_PAGE);
         $brands = Brand::get();
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -596,7 +598,7 @@ class AdminController extends Controller
     /////////////////////////////// จัดการคลังสินค้า ///////////////////////////////
     public function uploadProductForm(Request $request){
         $NUM_PAGE = 50;
-        $products = Product::paginate($NUM_PAGE);
+        $products = Product::orderBy('id','asc')->paginate($NUM_PAGE);
         $categorys = Category::get();
         $brands = Brand::get();
         $phone_models = PhoneModel::get();
@@ -645,7 +647,7 @@ class AdminController extends Controller
 
     public function listProduct(Request $request){
         $NUM_PAGE = 50;
-        $products = Product::paginate($NUM_PAGE);
+        $products = Product::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageProduct/list-product')->with('NUM_PAGE',$NUM_PAGE)
@@ -695,7 +697,7 @@ class AdminController extends Controller
 
     public function listProductPrice(Request $request){
         $NUM_PAGE = 50;
-        $products = Product::paginate($NUM_PAGE);
+        $products = Product::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageProductPrice/list-product-price')->with('NUM_PAGE',$NUM_PAGE)
@@ -742,7 +744,7 @@ class AdminController extends Controller
 
     public function listProductPromotionPrice(Request $request){
         $NUM_PAGE = 50;
-        $products = Product::paginate($NUM_PAGE);
+        $products = Product::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageProductPrice/list-product-promotion-price')->with('NUM_PAGE',$NUM_PAGE)
@@ -790,7 +792,7 @@ class AdminController extends Controller
     /////////////////////////////// การสอบถามของลูกค้า ///////////////////////////////
     public function MessageCustomer(Request $request){
         $NUM_PAGE = 50;
-        $messages = MessageCustomer::paginate($NUM_PAGE);
+        $messages = MessageCustomer::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/message/message-customer')->with('NUM_PAGE',$NUM_PAGE)
@@ -800,7 +802,7 @@ class AdminController extends Controller
 
     public function MessageStore(Request $request){
         $NUM_PAGE = 50;
-        $messages = MessageStore::paginate($NUM_PAGE);
+        $messages = MessageStore::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/message/message-store')->with('NUM_PAGE',$NUM_PAGE)
@@ -829,7 +831,7 @@ class AdminController extends Controller
     /////////////////////////////// จัดการสต๊อกสินค้า ///////////////////////////////
     public function manageFilmStock(Request $request){
         $NUM_PAGE = 50;
-        $stock_films = StockFilm::paginate($NUM_PAGE);
+        $stock_films = StockFilm::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageStock/film-stock')->with('NUM_PAGE',$NUM_PAGE)
@@ -885,7 +887,7 @@ class AdminController extends Controller
     /////////////////////////////// สร้าง serialnumber บาร์โค้ด ///////////////////////////////
     public function serialnumber(Request $request){
         $NUM_PAGE = 50;
-        $serialnumbers = Serialnumber::paginate($NUM_PAGE);
+        $serialnumbers = Serialnumber::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageSerialnumber/list-serialnumber')->with('NUM_PAGE',$NUM_PAGE)
@@ -909,7 +911,7 @@ class AdminController extends Controller
     public function editSerialnumber(Request $request, $id){
         $NUM_PAGE = 50;
         $serialnumber = Serialnumber::findOrFail($id);
-        $serialnumbers = Serialnumber::paginate($NUM_PAGE);
+        $serialnumbers = Serialnumber::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageSerialnumber/edit-serialnumber')->with('NUM_PAGE',$NUM_PAGE)
@@ -928,7 +930,7 @@ class AdminController extends Controller
     /////////////////////////////// จัดการออเดอร์ การสั่งซื้อ รายการสินค้าออก และข้อมูลการชำระเงิน ///////////////////////////////
     public function productOut(Request $request){
         $NUM_PAGE = 50;
-        $product_outs = ProductOut::paginate($NUM_PAGE);
+        $product_outs = ProductOut::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageOrderProduct/product-out')->with('NUM_PAGE',$NUM_PAGE)
@@ -978,7 +980,7 @@ class AdminController extends Controller
 
     public function orderCustomer(Request $request){
         $NUM_PAGE = 50;
-        $orders = OrderCustomer::groupBy('bill_number')->paginate($NUM_PAGE);
+        $orders = OrderCustomer::groupBy('bill_number')->orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageOrderProduct/order-customer')->with('NUM_PAGE',$NUM_PAGE)
@@ -999,7 +1001,7 @@ class AdminController extends Controller
 
     public function orderStore(Request $request){
         $NUM_PAGE = 50;
-        $orders = OrderStore::groupBy('bill_number')->paginate($NUM_PAGE);
+        $orders = OrderStore::groupBy('bill_number')->orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageOrderProduct/order-store')->with('NUM_PAGE',$NUM_PAGE)
@@ -1018,10 +1020,31 @@ class AdminController extends Controller
         return back();
     }
 
+    public function orderStoreFilmBrand(Request $request){
+        $NUM_PAGE = 50;
+        $orders = OrderStoreFilmBrand::groupBy('bill_number')->orderBy('id','asc')->paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/manageOrderProduct/order-store-film-brand')->with('NUM_PAGE',$NUM_PAGE)
+                                                                              ->with('page',$page)
+                                                                              ->with('orders',$orders);
+    }
+
+    public function orderStoreDetailFilmBrand($id){
+        $order = OrderStoreFilmBrand::findOrFail($id);
+        return view('backend/admin/manageOrderProduct/order-store-detail-film-brand')->with('order',$order);
+    }
+
+    public function updateOrderStoreStatusFilmBrand(Request $request) {
+        $status = $request->all();
+        $status = OrderStoreConfirmFilmBrand::create($status);
+        return back();
+    }
+
     /////////////////////////////// ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า ///////////////////////////////
     public function dataWarranty(Request $request){
         $NUM_PAGE = 50;
-        $data_warrantys = DataWarrantyMember::paginate($NUM_PAGE);
+        $data_warrantys = DataWarrantyMember::orderBy('id','asc')->paginate($NUM_PAGE);
         $date_now = Carbon::now()->format('Y-m-d');
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -1047,7 +1070,7 @@ class AdminController extends Controller
     public function editDataWarranty(Request $request, $id){
         $NUM_PAGE = 50;
         $data_warranty = DataWarrantyMember::findOrFail($id);
-        $data_warrantys = DataWarrantyMember::paginate($NUM_PAGE);
+        $data_warrantys = DataWarrantyMember::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/dataWarranty/edit-data-warranty')->with('NUM_PAGE',$NUM_PAGE)
@@ -1066,7 +1089,7 @@ class AdminController extends Controller
 
     public function claimProduct(Request $request){
         $NUM_PAGE = 50;
-        $claim_products = WarrantyConfirm::paginate($NUM_PAGE);
+        $claim_products = WarrantyConfirm::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/dataWarranty/claim-product')->with('NUM_PAGE',$NUM_PAGE)
@@ -1076,7 +1099,7 @@ class AdminController extends Controller
 
     public function editClaimStatus(Request $request, $id){
         $NUM_PAGE = 50;
-        $claim_products = WarrantyConfirm::paginate($NUM_PAGE);
+        $claim_products = WarrantyConfirm::orderBy('id','asc')->paginate($NUM_PAGE);
         $claim_status = WarrantyConfirm::findOrFail($id);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;

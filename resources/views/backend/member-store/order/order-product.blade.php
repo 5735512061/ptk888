@@ -68,6 +68,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
+                                                @if($order_product_store_film_brand == 0)
                                                 <form action="{{url('/store/add-to-cart')}}" enctype="multipart/form-data" method="post">@csrf
                                                     <div class="modal-body">
                                                         <div class="form-group row">
@@ -85,6 +86,13 @@
                                                         <button type="submit" class="btn btn-primary">สั่งซื้อสินค้า</button>
                                                     </div>
                                                 </form>
+                                                @else 
+                                                    <div class="modal-body">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-12 col-form-label" style="text-align: center;">กรุณาชำระเงินค่าสินค้าพร้อมแพ็คเกจก่อนสั่งซื้อสินค้าแผ่นฟิล์ม</label>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

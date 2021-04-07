@@ -210,6 +210,14 @@
                                 </a>
                             </li>
                         </ul>
+                        <ul class="pcoded-submenu">
+                            <li class="">
+                                <a href="{{url('/admin/order-store/film-brand')}}" class="waves-effect waves-dark">
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">การสั่งซื้อแพ็คเกจ</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>

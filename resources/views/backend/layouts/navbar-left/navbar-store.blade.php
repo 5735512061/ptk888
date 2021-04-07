@@ -64,6 +64,30 @@
                 </a>
             </li>
         </ul>
+        <div class="pcoded-navigation-label" data-i18n="nav.category.forms">การสั่งซื้อสินค้าพร้อมแพ็คเกจ</div>
+        <ul class="pcoded-item pcoded-left-item">
+            <li>
+                <a href="{{url('/store/order-product/film-brand')}}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="fa fa-cart-plus"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">สั่งซื้อสินค้าพร้อมแพ็คเกจ</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{{url('/store/shopping-cart/film-brand')}}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="fa fa-cart-arrow-down"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">ตะกร้าสินค้าแพ็คเกจ</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{{url('/store/order-history/film-brand')}}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="fa fa-shopping-basket"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">ประวัติการสั่งซื้อแพ็คเกจ</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+        </ul>
         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">ติดต่อสอบถาม</div>
         <ul class="pcoded-item pcoded-left-item">
             <li>

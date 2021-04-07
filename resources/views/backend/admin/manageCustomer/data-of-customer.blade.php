@@ -31,8 +31,10 @@
                                         <tr>
                                             <th>#</th>
                                             <th>รหัสสมาชิก</th>
+                                            <th>วันที่สมัครสมาชิก</th>
                                             <th>ชื่อ-นามสกุล</th>
                                             <th>เบอร์โทรศัพท์</th>
+                                            <th>ที่อยู่</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -40,15 +42,15 @@
                                         @foreach ($customers as $customer => $value)
                                             <tr>
                                                 <th scope="row">{{$NUM_PAGE*($page-1) + $customer+1}}</th>
-                                                <td>
-                                                    @if($value->member_id == NULL) 
-                                                        <a href="{{url('/admin/manage-member-customer/')}}/{{$value->id}}" style="color: red;">ตรวจสอบการสมัครสมาชิก</a>
-                                                    @else 
-                                                        {{$value->member_id}}
-                                                    @endif
-                                                </td>
+                                                <td>{{$value->member_id}}</td>
+                                                <td>{{$value->date}}</td>
                                                 <td>{{$value->name}} {{$value->surname}}</td>
                                                 <td>{{$value->phone}}</td>
+                                                <td>
+                                                    <a type="button" data-toggle="modal" data-target="#ModalAddress{{$value->id}}" style="color:blue;">
+                                                        ดูที่อยู่
+                                                    </a>
+                                                </td>
                                                 <td>       
                                                     <a href="{{url('/admin/edit-member-customer')}}/{{$value->id}}">
                                                         <i class="fa fa-pencil-square-o" style="color:blue;"></i>
@@ -58,6 +60,29 @@
                                                     </a>
                                                 </td>
                                             </tr>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="ModalAddress{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">ที่อยู่ลูกค้า</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-12">
+                                                                    <textarea cols="50" rows="5" class="form-control">{{$value->address}} {{$value->district}} {{$value->amphoe}} {{$value->province}} {{$value->zipcode}}</textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     </tbody>
                                 </table>

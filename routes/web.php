@@ -147,6 +147,10 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/order-store', 'Backend\AdminController@orderStore');
     Route::get('/order-store-detail/{id}', 'Backend\AdminController@orderStoreDetail');
     Route::post('/update-order-store-status', 'Backend\AdminController@updateOrderStoreStatus');
+
+    Route::get('/order-store/film-brand', 'Backend\AdminController@orderStoreFilmBrand');
+    Route::get('/order-store-detail/film-brand/{id}', 'Backend\AdminController@orderStoreDetailFilmBrand');
+    Route::post('/update-order-store-status/film-brand', 'Backend\AdminController@updateOrderStoreStatusFilmBrand');
     // ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า
     Route::get('/data-warranty', 'Backend\AdminController@dataWarranty');
     Route::get('/delete-data-warranty/{id}', 'Backend\AdminController@deleteDataWarranty');
@@ -219,11 +223,18 @@ Route::group(['prefix' => 'store'], function(){
     Route::get('/shopping-cart','Backend\\StoreController@getCart');
     Route::get('/remove-shopping-cart/{id}','Backend\\StoreController@removeShoppingCart');
     Route::get('/checkout','Backend\\StoreController@getCheckout');
+    // สั่งซื้อสินค้าพร้อมแพ็คเกจ
+    Route::get('/order-product/film-brand', 'Backend\StoreController@orderProductFilmBrand');
+    Route::post('/add-to-cart/film-brand','Backend\\StoreController@getAddToCartFilmBrand');
+    Route::get('/shopping-cart/film-brand','Backend\\StoreController@getCartFilmBrand');
+    Route::get('/remove-shopping-cart/film-brand/{id}','Backend\\StoreController@removeShoppingCartFilmBrand');
+    Route::get('/checkout/film-brand','Backend\\StoreController@getCheckoutFilmBrand');
     // การชำระเงิน
     Route::post('/payment-checkout-store','Backend\\StoreController@paymentCheckoutStore');
+    Route::post('/payment-checkout-store/film-brand','Backend\\StoreController@paymentCheckoutStoreFilmBrand');
     // ประวัติการสั่งซื้อสินค้า
-    Route::get('/order-history', 'Backend\StoreController@orderHistory');
-    Route::get('/order-history-detail/{id}', 'Backend\StoreController@orderHistoryDetail');
+    Route::get('/order-history/film-brand', 'Backend\StoreController@orderHistoryFilmBrand');
+    Route::get('/order-history-detail/film-brand/{id}', 'Backend\StoreController@orderHistoryDetailFilmBrand');
 });
 
 // ลูกค้า
@@ -235,6 +246,12 @@ Route::group(['prefix' => 'member'], function(){
     // เปลี่ยนรหัสผ่าน
     Route::get('/change-password', 'AuthMember\ChangePasswordController@index')->name('password.change');
     Route::post('/change-password', 'AuthMember\ChangePasswordController@changePassword')->name('password.update');
+    // ลืมรหัสผ่าน
+    Route::get('/ForgetPassword', 'AuthMember\ForgetPasswordController@index')->name('password.forget');
+    Route::post('/ForgetPasswordForm', 'AuthMember\ForgetPasswordController@forgetForm')->name('password.forget.form');
+    Route::post('/Password-Confirm', 'AuthMember\ForgetPasswordController@confirm')->name('password.confirm');
+    Route::post('/ForgetPassword', 'AuthMember\ForgetPasswordController@UpdatePassword')->name('password.updateForget');
+
     // ตะกร้าสินค้า
     Route::get('addToCart/{id}/{qty}','Frontend\\CartController@getAddToCart');
     Route::get('/shopping-cart','Frontend\\CartController@getCart')->name('cart.index');

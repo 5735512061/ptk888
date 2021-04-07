@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
-        '\App\Console\Commands\ChangeStatusSerialnumberToExpire'
+        '\App\Console\Commands\ChangeStatusSerialnumberToExpire',
+        '\App\Console\Commands\DeleteProductCartSessionStore'
     ];
 
     /**
@@ -27,6 +28,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('ChangeStatusSerialnumberToExpire')
                  ->daily();
+        $schedule->command('DeleteProductCartSessionStore')
+                 ->cron('0 */4 * * *');
     }
 
     /**

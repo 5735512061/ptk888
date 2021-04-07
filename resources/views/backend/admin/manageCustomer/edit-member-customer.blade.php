@@ -66,6 +66,53 @@
                                         <input type="text" class="form-control" name="phone" value="{{$member->phone}}">
                                     </div>
                                 </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">{{ __('ที่อยู่') }}</label>
+                                    <div class="col-md-6">
+                                        @if ($errors->has('address'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('address') }})</span>
+                                        @endif
+                                        <input class="form-control" type="text" value="{{$member->address}}" name="address">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">{{ __('ตำบล') }}</label>
+                                    <div class="col-md-6">
+                                        @if ($errors->has('district'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('district') }})</span>
+                                        @endif
+                                        <input class="form-control" type="text" value="{{$member->district}}" name="district">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">{{ __('อำเภอ') }}</label>
+                                    <div class="col-md-6">
+                                        @if ($errors->has('amphoe'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('amphoe') }})</span>
+                                        @endif
+                                        <input class="form-control" type="text" value="{{$member->amphoe}}" name="amphoe">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">{{ __('จังหวัด') }}</label>
+                                    <div class="col-md-6">
+                                        @if ($errors->has('province'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('province') }})</span>
+                                        @endif
+                                        <input class="form-control" type="text" value="{{$member->province}}" name="province">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">{{ __('รหัสไปรษณีย์') }}</label>
+                                    <div class="col-md-6">
+                                        @if ($errors->has('zipcode'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('zipcode') }})</span>
+                                        @endif
+                                        <input class="form-control" type="text" value="{{$member->zipcode}}" name="zipcode">
+                                    </div>
+                                </div>
+
                                 <input type="hidden" value="{{$member->id}}" name="id">
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-2">

@@ -31,7 +31,7 @@ class SellerController extends Controller
     /////////////////////////////// จัดการคลังสินค้า ///////////////////////////////
     public function listProduct(Request $request){
         $NUM_PAGE = 50;
-        $products = Product::paginate($NUM_PAGE);
+        $products = Product::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/manageProduct/list-product')->with('NUM_PAGE',$NUM_PAGE)
@@ -41,7 +41,7 @@ class SellerController extends Controller
 
     public function listProductPrice(Request $request){
         $NUM_PAGE = 50;
-        $products = Product::paginate($NUM_PAGE);
+        $products = Product::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/manageProductPrice/list-product-price')->with('NUM_PAGE',$NUM_PAGE)
@@ -70,7 +70,7 @@ class SellerController extends Controller
 
     public function ProductPriceDetail(Request $request,$id){
         $NUM_PAGE = 50;
-        $product_prices = ProductPrice::where('product_id',$id)->orderBy('id','asc')->paginate($NUM_PAGE);
+        $product_prices = ProductPrice::where('product_id',$id)->orderBy('id','asc')->orderBy('id','asc')->paginate($NUM_PAGE);
         $product = Product::where('id',$id)->value('product_name');
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -82,7 +82,7 @@ class SellerController extends Controller
 
     public function listProductPromotionPrice(Request $request){
         $NUM_PAGE = 50;
-        $products = Product::paginate($NUM_PAGE);
+        $products = Product::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/manageProductPrice/list-product-promotion-price')->with('NUM_PAGE',$NUM_PAGE)
@@ -124,7 +124,7 @@ class SellerController extends Controller
     /////////////////////////////// จัดการสต๊อกสินค้า ///////////////////////////////
     public function manageFilmStock(Request $request){
         $NUM_PAGE = 50;
-        $stock_films = StockFilm::paginate($NUM_PAGE);
+        $stock_films = StockFilm::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/manageStock/film-stock')->with('NUM_PAGE',$NUM_PAGE)
@@ -153,7 +153,7 @@ class SellerController extends Controller
     /////////////////////////////// จัดการออเดอร์ การสั่งซื้อ รายการสินค้าออก ///////////////////////////////
     public function productOut(Request $request){
         $NUM_PAGE = 50;
-        $product_outs = ProductOut::paginate($NUM_PAGE);
+        $product_outs = ProductOut::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/manageOrderProduct/product-out')->with('NUM_PAGE',$NUM_PAGE)
@@ -196,7 +196,7 @@ class SellerController extends Controller
 
     public function orderCustomer(Request $request){
         $NUM_PAGE = 50;
-        $orders = OrderCustomer::groupBy('bill_number')->paginate($NUM_PAGE);
+        $orders = OrderCustomer::groupBy('bill_number')->orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/manageOrderProduct/order-customer')->with('NUM_PAGE',$NUM_PAGE)
@@ -217,7 +217,7 @@ class SellerController extends Controller
 
     public function orderStore(Request $request){
         $NUM_PAGE = 50;
-        $orders = OrderStore::groupBy('bill_number')->paginate($NUM_PAGE);
+        $orders = OrderStore::groupBy('bill_number')->orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/manageOrderProduct/order-store')->with('NUM_PAGE',$NUM_PAGE)
@@ -239,7 +239,7 @@ class SellerController extends Controller
     /////////////////////////////// ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า ///////////////////////////////
     public function dataWarranty(Request $request){
         $NUM_PAGE = 50;
-        $data_warrantys = DataWarrantyMember::paginate($NUM_PAGE);
+        $data_warrantys = DataWarrantyMember::orderBy('id','asc')->paginate($NUM_PAGE);
         $date_now = Carbon::now()->format('Y-m-d');
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -259,7 +259,7 @@ class SellerController extends Controller
     public function editDataWarranty(Request $request, $id){
         $NUM_PAGE = 50;
         $data_warranty = DataWarrantyMember::findOrFail($id);
-        $data_warrantys = DataWarrantyMember::paginate($NUM_PAGE);
+        $data_warrantys = DataWarrantyMember::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/dataWarranty/edit-data-warranty')->with('NUM_PAGE',$NUM_PAGE)
@@ -280,7 +280,7 @@ class SellerController extends Controller
 
     public function claimProduct(Request $request){
         $NUM_PAGE = 50;
-        $claim_products = WarrantyConfirm::paginate($NUM_PAGE);
+        $claim_products = WarrantyConfirm::orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/dataWarranty/claim-product')->with('NUM_PAGE',$NUM_PAGE)
@@ -290,7 +290,7 @@ class SellerController extends Controller
 
     public function editClaimStatus(Request $request, $id){
         $NUM_PAGE = 50;
-        $claim_products = WarrantyConfirm::paginate($NUM_PAGE);
+        $claim_products = WarrantyConfirm::orderBy('id','asc')->paginate($NUM_PAGE);
         $claim_status = WarrantyConfirm::findOrFail($id);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;

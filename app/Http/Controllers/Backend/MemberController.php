@@ -70,7 +70,7 @@ class MemberController extends Controller
         $phone = $request->get('phone');
         $member_id = Member::where('phone',$phone)->value('id');
         $NUM_PAGE = 50;
-        $data_warrantys = DataWarrantyMember::where('member_id',$member_id)->paginate($NUM_PAGE);
+        $data_warrantys = DataWarrantyMember::where('member_id',$member_id)->orderBy('id','asc')->paginate($NUM_PAGE);
         $date_now = Carbon::now()->format('Y-m-d');
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -130,7 +130,7 @@ class MemberController extends Controller
     public function answerMessage(Request $request){
         $NUM_PAGE = 50;
         $customer_id = Auth::guard('member')->user()->id;
-        $answer_messages = MessageCustomer::where('customer_id',$customer_id)->paginate($NUM_PAGE);
+        $answer_messages = MessageCustomer::where('customer_id',$customer_id)->orderBy('id','asc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('frontend/account/answer-message')->with('NUM_PAGE',$NUM_PAGE)
@@ -165,7 +165,7 @@ class MemberController extends Controller
 
     public function orderHistory(){
         $customer_id = Auth::guard('member')->user()->id;
-        $orders = OrderCustomer::where('customer_id',$customer_id)->groupBY('bill_number')->get();
+        $orders = OrderCustomer::where('customer_id',$customer_id)->groupBY('bill_number')->orderBy('id','asc')->get();
         $productRecommends = Product::where('product_recommend','ใช่')->get();
         return view('frontend/account/order-history')->with('orders',$orders)
                                                      ->with('productRecommends',$productRecommends);

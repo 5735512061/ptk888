@@ -126,7 +126,7 @@
                                 $image = DB::table('image_products')->where('product_id',$value->id)->value('image');
                                 $brand = DB::table('brands')->where('id',$value->brand_id)->value('brand');
                                 $model = DB::table('phone_models')->where('id',$value->phone_model_id)->value('model');
-                                $price = DB::table('product_prices')->where('product_id',$value->id)->orderBy('id','desc')->value('price');
+                                $price = DB::table('product_prices')->where('product_id',$value->id)->where('status','เปิด')->orderBy('id','desc')->value('price');
                             @endphp
                             <a href="{{url('/product')}}/{{$brand}}/{{$model}}/detail/{{$value->id}}">
                                 <div class="product-image">

@@ -168,8 +168,8 @@ class CartController extends Controller
             Session::forget('cart');
             $request->session()->flash('alert-success', 'แจ้งชำระเงินสำเร็จ');
             $customer_id = Auth::guard('member')->user()->id;
-            $orders = OrderCustomer::where('customer_id',$customer_id)->groupBY('bill_number')->get();
-            $productRecommends = Product::where('product_recommend','ใช่')->get();
+            $orders = OrderCustomer::where('customer_id',$customer_id)->groupBY('bill_number')->orderBy('id','asc')->get();
+            $productRecommends = Product::where('product_recommend','ใช่')->orderBy('id','asc')->get();
             return view('/frontend/account/order-history')->with('orders',$orders)
                                                           ->with('productRecommends',$productRecommends);
         } else {

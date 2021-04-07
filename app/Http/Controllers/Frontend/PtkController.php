@@ -71,7 +71,8 @@ class PtkController extends Controller
         $brand_id = Brand::where('brand',$brand)->value('id');
         $model_id = PhoneModel::where('model',$model)->value('id');
         $products = Product::where('brand_id',$brand_id)
-                           ->where('phone_model_id',$model_id)->get();
+                           ->where('phone_model_id',$model_id)
+                           ->where('status','แสดงสินค้า')->get();
         return view('frontend/product/by-phone-model')->with('products',$products);
     }
 
@@ -81,6 +82,7 @@ class PtkController extends Controller
         $model_id = PhoneModel::where('model',$model)->value('id');
         $products = Product::where('brand_id',$brand_id)
                            ->where('phone_model_id',$model_id)
+                           ->where('status','แสดงสินค้า')
                            ->where('id',"!=",$product->id)->get();
         $film_type_id = FilmType::where('film_type',$product->product_type)->value('id');
         $propertys = ProductFilmInformation::where('film_type_id',$film_type_id)->where('type_information',"ข้อมูลและคุณสมบัติสินค้า")->get();
