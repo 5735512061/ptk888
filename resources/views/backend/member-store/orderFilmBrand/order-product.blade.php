@@ -34,7 +34,7 @@
                                         <th scope="row">{{$NUM_PAGE*($page-1) + $film_brand+1}}</th>
                                         @php
                                             $film_type = DB::table('film_types')->where('id',$value->film_type_id)->value('film_type');
-                                            $price = DB::table('product_store_film_brand_prices')->where('product_id',$value->id)->value('price');
+                                            $price = DB::table('product_store_film_brand_prices')->where('product_id',$value->id)->orderBy('id','desc')->value('price');
                                         @endphp
                                         <td>{{$value->film_brand}} {{$film_type}}</td>
                                         <td>{{$price}} บาท</td>

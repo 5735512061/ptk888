@@ -50,7 +50,7 @@
                                                     $film_brand = DB::table('product_store_film_brands')->where('id',$value->product_id)->value('film_brand');
                                                     $film_type_id = DB::table('product_store_film_brands')->where('id',$value->product_id)->value('film_type_id');
                                                     $film_type = DB::table('film_types')->where('id',$film_type_id)->value('film_type');
-                                                    $price = DB::table('product_store_film_brand_prices')->where('product_id',$value->product_id)->value('price');
+                                                    $price = DB::table('product_store_film_brand_prices')->where('product_id',$value->product_id)->orderBy('id','desc')->value('price');
                                                     $sumPrice = $value->qty * $price;
                                                     $sumPriceFormat = number_format($sumPrice);
                                                     $totalPrice += $sumPrice;
@@ -188,7 +188,7 @@
                                             <div class="cart-content">
                                                 @foreach($product_cart_sessions as $product_cart_session => $value)
                                                     @php 
-                                                        $price = DB::table('product_store_film_brand_prices')->where('product_id',$value->product_id)->value('price'); 
+                                                        $price = DB::table('product_store_film_brand_prices')->where('product_id',$value->product_id)->orderBy('id','desc')->value('price'); 
                                                     @endphp
                                                     <input type="hidden" value="{{ $value->product_id }}" name="product_id[]">
                                                     <input type="hidden" value="{{ $price }}" name="price[]">
@@ -198,10 +198,10 @@
                                                     $totalPriceFormat = number_format($totalPrice);
                                                 @endphp
                                                 <h4>ยอดสินค้า<span> {{$totalPriceFormat}} บาท</span></h4><br>
-                                                <h4>ส่วนลดสินค้า<span> 1000 บาท</span></h4><br>
+                                                <h4>ส่วนลดสินค้า<span> 0 บาท</span></h4><br>
                                                 <h4>ค่าจัดส่ง<span> 0 บาท</span></h4><br>
                                                 @php
-                                                    $totalPrice = number_format($totalPrice - 1000);
+                                                    $totalPrice = number_format($totalPrice - 0);
                                                 @endphp
                                                 <h3>รวมทั้งสิ้น<span> {{$totalPrice}} บาท</span></h3>
                                             </div>

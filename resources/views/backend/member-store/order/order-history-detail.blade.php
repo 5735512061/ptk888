@@ -68,6 +68,8 @@
                                     <td>ราคาขายต่อหน่วย</td>
                                     <td>จำนวน</td>
                                     <td>ราคารวม</td>
+                                    <td>ส่วนลดรวม</td>
+                                    <td>ราคาทั้งหมด</td>
                                     <td>สถานะ</td>
                                 </tr>
                             </thead>
@@ -75,36 +77,57 @@
                                 @foreach ($product_ids as $product_id => $value)
                                     <tr>
                                         @php 
-                                            $qty = DB::table('product_cart_stores')->where('bill_number',$value->bill_number)->sum('qty');
                                             $totalPrice = DB::table('product_cart_stores')->where('bill_number',$value->bill_number)
-                                                                                            ->sum(DB::raw('price * qty'));
-                                            $totalPrice = number_format($totalPrice);
+                                                                                          ->sum(DB::raw('price * qty'));
+                                            $totalPriceFormat = number_format($totalPrice);
+
+                                            $qtyCartStoreTotal = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
+                                                                                                 ->where('product_id','!=','11')
+                                                                                                 ->sum('qty');
 						                @endphp
                                         @php
-                                        $film_id = DB::table('film_price_stores')->where('id',$value->product_id)->value('film_id');
-                                        $product_name = DB::table('stock_films')->where('id',$film_id)->value('film_type');
-                                        $qty = DB::table('product_cart_stores')->where('id',$value->id)->value('qty');
-                                        $price = DB::table('product_cart_stores')->where('id',$value->id)->value('price');
-                                        $totalPrice = number_format($qty * $price);
-                                    @endphp
-                                    <td scope="row">{{$NUM_PAGE*($page-1) + $product_id+1}}</td>
-                                    <td>{{$product_name}}</td>
-                                    <td>{{$price}}.-</td>
-                                    <td>{{$qty}}</td>
-                                    <td>{{$totalPrice}}.-</td>
-                                    <td>
-                                        @php
-                                            $order_id = DB::table('order_stores')->where('product_cart_id',$value->id)->value('id');
-                                            $status = DB::table('order_store_confirms')->where('order_id',$order_id)->orderBy('id','desc')->value('status');
+                                            $film_id = DB::table('film_price_stores')->where('id',$value->product_id)->value('film_id');
+                                            $product_name = DB::table('stock_films')->where('id',$film_id)->value('film_type');
+                                            $qty = DB::table('product_cart_stores')->where('id',$value->id)->value('qty');
+                                            $price = DB::table('product_cart_stores')->where('id',$value->id)->value('price');
                                         @endphp
-                                        @if($status == null || $status == 'รอยืนยัน')
-                                            <p style="color: red; font-size:15px;">รอยืนยัน</p>
-                                        @elseif($status == 'กำลังจัดส่ง')
-                                            <p style="color:blue; font-size:15px;">กำลังจัดส่ง</p>
-                                        @else
-                                            <p style="color:green; font-size:15px;">จัดส่งแล้ว</p>
-                                        @endif
-                                    </td>
+                                        <td scope="row">{{$NUM_PAGE*($page-1) + $product_id+1}}</td>
+                                        <td>{{$product_name}}</td>
+                                        <td>{{$price}}.-</td>
+                                        <td>{{$qty}}</td>
+                                        <td>{{$totalPriceFormat}}.-</td>
+                                        @php
+                                            if($qtyCartStoreTotal < 1001 || $qtyCartStoreTotal > 1)  
+                                                $discount = $qty * 70;
+                                            elseif($qtyCartStoreTotal < 5001 || $qtyCartStoreTotal > 1001)
+                                                $discount = $qty * 68;
+                                            elseif($qtyCartStoreTotal > 5001)
+                                                $discount = $qty * 65;
+                                        @endphp
+
+                                        @php
+                                            $totalDiscount =  $totalPrice - $discount;
+                                            $totalDiscountFormat = number_format($totalDiscount);
+                                        @endphp
+
+                                        <td>{{$totalDiscountFormat}} บาท</td>
+                                        @php
+                                            $totalPrice = number_format($totalPrice - $totalDiscount);
+                                        @endphp
+                                        <td>{{$totalPrice}} บาท</td>
+                                        <td>
+                                            @php
+                                                $order_id = DB::table('order_stores')->where('product_cart_id',$value->id)->value('id');
+                                                $status = DB::table('order_store_confirms')->where('order_id',$order_id)->orderBy('id','desc')->value('status');
+                                            @endphp
+                                            @if($status == null || $status == 'รอยืนยัน')
+                                                <p style="color: red; font-size:15px;">รอยืนยัน</p>
+                                            @elseif($status == 'กำลังจัดส่ง')
+                                                <p style="color:blue; font-size:15px;">กำลังจัดส่ง</p>
+                                            @else
+                                                <p style="color:green; font-size:15px;">จัดส่งแล้ว</p>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

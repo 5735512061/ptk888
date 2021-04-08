@@ -103,7 +103,7 @@ class StoreController extends Controller
     public function orderProduct(Request $request){
         $NUM_PAGE = 50;
         $store_id = Auth::guard('store')->user()->id;
-        $stock_films = FilmPriceStore::orderBy('id','asc')->paginate($NUM_PAGE);
+        $stock_films = FilmPriceStore::orderBy('id','desc')->paginate($NUM_PAGE);
         $order_product_store_film_brand = count(ProductCartSessionStoreFilmBrand::where('store_id',$store_id)->get());
         $page = $request->input('page');
         $page = ($page != null)?$page:1;

@@ -6,7 +6,7 @@
         <div class="page-body">
             <div class="card">
                 <div class="card-header">
-                    <h5>ข้อมูลราคาสินค้าโปรโมชั่น</h5>
+                    <h5>ข้อมูลราคาสินค้าพร้อมแพ็คเกจของร้านค้า</h5>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -23,55 +23,37 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>รหัสสินค้า</th>
-                                    <th>ยี่ห้อฟิล์ม</th>
-                                    <th>รุ่นโทรศัพท์</th>
                                     <th>ชื่อสินค้า</th>
-                                    <th>โปรโมชั่นล่าสุด</th>
-                                    <th>สถานะ</th>
+                                    <th>ราคาล่าสุด</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product => $value)
+                                @foreach ($product_store_film_brands as $product_store_film_brand => $value)
                                     <tr>
-                                        <th scope="row">{{$NUM_PAGE*($page-1) + $product+1}}</th>
-                                        @php 
-                                            $price = DB::table('product_promotion_prices')->where('product_id',$value->id)->orderBy('id','desc')->value('promotion_price');
-                                            $status = DB::table('product_promotion_prices')->where('product_id',$value->id)->value('status');
-                                            $phone_model = DB::table('phone_models')->where('id',$value->phone_model_id)->value('model');
+                                        <th scope="row">{{$NUM_PAGE*($page-1) + $product_store_film_brand+1}}</th>
+                                        @php
+                                            $price = number_format(DB::table('product_store_film_brand_prices')->where('product_id',$value->id)->orderBy('id','desc')->value('price'));
+                                            $film_type = DB::table('film_types')->where('id',$value->film_type_id)->value('film_type');
                                         @endphp
-                                        <td>{{$value->product_code}}</td>
-                                        <td>{{$value->film_model}}</td>
-                                        <td>{{$phone_model}}</td>
-                                        <td>{{$value->product_name}}</td>
+                                        <td>{{$value->film_brand}} {{$film_type}}</td>
                                         @if($price == null)
                                             <td style="color: red;">0</td>
                                         @else 
                                             <td>{{$price}}.-</td>
                                         @endif
-
-                                        @if($status == null)
-                                            <td style="color: green;">เปิด</td>
-                                        @else
-                                            @if($status == 'เปิด')
-                                                <td style="color: green;">{{$status}}</td>
-                                            @else 
-                                                <td style="color:red;">{{$status}}</td>
-                                            @endif
-                                        @endif
                                         <td>       
-                                            <a href="{{url('/admin/edit-product-promotion-price')}}/{{$value->id}}">
+                                            <a href="{{url('/admin/edit-product-price-store-film-brand')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>
                                             </a> 
-                                            <a href="{{url('/admin/product-promotion-price-detail')}}/{{$value->id}}">
+                                            <a href="{{url('/admin/product-price-detail-store-film-brand')}}/{{$value->id}}">
                                                 <i class="fa fa-folder" style="color:blue;"></i>
                                             </a>        
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
-                            {{$products->links()}}
+                            {{$product_store_film_brands->links()}}
                         </table>
                     </div>
                 </div>

@@ -195,12 +195,31 @@
                                                 @endforeach
                                                 @php
                                                     $totalPriceFormat = number_format($totalPrice);
+                                                    $qtyCartStoreTotal = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
+                                                                                                         ->where('product_id','!=','11')
+                                                                                                         ->sum('qty');
+
                                                 @endphp
                                                 <h4>ยอดสินค้า<span> {{$totalPriceFormat}} บาท</span></h4><br>
-                                                <h4>ส่วนลดสินค้า<span> 1000 บาท</span></h4><br>
+
+                                                @php
+                                                    if($qtyCartStoreTotal < 1001 || $qtyCartStoreTotal > 1)  
+                                                        $discount = $value->qty * 70;
+                                                    elseif($qtyCartStoreTotal < 5001 || $qtyCartStoreTotal > 1001)
+                                                        $discount = $value->qty * 68;
+                                                    elseif($qtyCartStoreTotal > 5001)
+                                                        $discount = $value->qty * 65;
+                                                @endphp
+
+                                                @php
+                                                    $totalDiscount =  $totalPrice - $discount;
+                                                    $totalDiscountFormat = number_format($totalDiscount);
+                                                @endphp
+
+                                                <h4>ส่วนลดสินค้า<span> {{$totalDiscountFormat}} บาท</span></h4><br>
                                                 <h4>ค่าจัดส่ง<span> 0 บาท</span></h4><br>
                                                 @php
-                                                    $totalPrice = number_format($totalPrice - 1000);
+                                                    $totalPrice = number_format($totalPrice - $totalDiscount);
                                                 @endphp
                                                 <h3>รวมทั้งสิ้น<span> {{$totalPrice}} บาท</span></h3>
                                             </div>

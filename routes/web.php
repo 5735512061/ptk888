@@ -158,6 +158,18 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/update-data-warranty', 'Backend\AdminController@updateDataWarranty');
     Route::get('/claim-product', 'Backend\AdminController@claimProduct');
     Route::get('/edit-claim-status/{id}', 'Backend\AdminController@editClaimStatus');
+    // จัดการราคาของร้านค้า
+    Route::get('/list-product-price-store', 'Backend\AdminController@listProductPriceStore');
+    Route::get('/edit-product-price-store/{id}', 'Backend\AdminController@editProductPriceStore');
+    Route::post('/update-product-price-store', 'Backend\AdminController@updateProductPriceStore');
+    Route::get('/product-price-detail-store/{id}', 'Backend\AdminController@ProductPriceDetailStore');
+    Route::get('/delete-product-price-detail-store/{id}', 'Backend\AdminController@deleteProductPriceDetailStore');
+
+    Route::get('/list-product-price-store-film-brand', 'Backend\AdminController@listProductPriceStoreFilmBrand');
+    Route::get('/edit-product-price-store-film-brand/{id}', 'Backend\AdminController@editProductPriceStoreFilmBrand');
+    Route::post('/update-product-price-store-film-brand', 'Backend\AdminController@updateProductPriceStoreFilmBrand');
+    Route::get('/product-price-detail-store-film-brand/{id}', 'Backend\AdminController@ProductPriceDetailStoreFilmBrand');
+    Route::get('/delete-product-price-detail-store-film-brand/{id}', 'Backend\AdminController@deleteProductPriceDetailStoreFilmBrand');
 });
 
 // พนักงานขาย
@@ -237,6 +249,8 @@ Route::group(['prefix' => 'store'], function(){
     Route::post('/payment-checkout-store','Backend\\StoreController@paymentCheckoutStore');
     Route::post('/payment-checkout-store/film-brand','Backend\\StoreController@paymentCheckoutStoreFilmBrand');
     // ประวัติการสั่งซื้อสินค้า
+    Route::get('/order-history', 'Backend\StoreController@orderHistory');
+    Route::get('/order-history-detail/{id}', 'Backend\StoreController@orderHistoryDetail');
     Route::get('/order-history/film-brand', 'Backend\StoreController@orderHistoryFilmBrand');
     Route::get('/order-history-detail/film-brand/{id}', 'Backend\StoreController@orderHistoryDetailFilmBrand');
 });

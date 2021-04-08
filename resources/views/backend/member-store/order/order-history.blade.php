@@ -41,6 +41,8 @@
                                     <td>วันที่ทำรายการ</td>
                                     <td>จำนวน</td>
                                     <td>ราคารวม</td>
+                                    <td>ส่วนลดรวม</td>
+                                    <td>ราคาทั้งหมด</td>
                                     <td>สถานะ</td>
                                     <td></td>
                                 </tr>
@@ -52,12 +54,37 @@
                                             $qty = DB::table('product_cart_stores')->where('bill_number',$value->bill_number)->sum('qty');
                                             $totalPrice = DB::table('product_cart_stores')->where('bill_number',$value->bill_number)
                                                                                             ->sum(DB::raw('price * qty'));
-                                            $totalPrice = number_format($totalPrice);
+                                            $totalPriceFormat = number_format($totalPrice);
+
+                                            $qtyCartStoreTotal = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
+                                                                                                 ->where('product_id','!=','11')
+                                                                                                 ->sum('qty');
 						                @endphp
+
                                         <td><a href="{{url('/store/order-history-detail/')}}/{{$value->id}}" style="color: blue;">{{$value->bill_number}}</a></td>
                                         <td>{{$value->date}}</td>
                                         <td>{{$qty}} ชิ้น</td>
-                                        <td>{{$totalPrice}}.-</td>
+                                        <td>{{$totalPriceFormat}} บาท</td>
+                                        @php
+                                            if($qtyCartStoreTotal < 1001 || $qtyCartStoreTotal > 1)  
+                                                $discount = $qty * 70;
+                                            elseif($qtyCartStoreTotal < 5001 || $qtyCartStoreTotal > 1001)
+                                                $discount = $qty * 68;
+                                            elseif($qtyCartStoreTotal > 5001)
+                                                $discount = $qty * 65;
+                                        @endphp
+
+                                        @php
+                                            $totalDiscount =  $totalPrice - $discount;
+                                            $totalDiscountFormat = number_format($totalDiscount);
+                                        @endphp
+
+                                        <td>{{$totalDiscountFormat}} บาท</td>
+                                        @php
+                                            $totalPrice = number_format($totalPrice - $totalDiscount);
+                                        @endphp
+                                        <td>{{$totalPrice}} บาท</td>
+
                                         @php
                                             $status = DB::table('order_store_confirms')->where('order_id',$value->id)->value('status');
                                         @endphp

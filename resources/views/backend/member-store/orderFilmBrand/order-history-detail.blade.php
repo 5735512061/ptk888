@@ -78,7 +78,7 @@
                                             $film_brand = DB::table('product_store_film_brands')->where('id',$value->product_id)->value('film_brand');
                                             $film_type_id = DB::table('product_store_film_brands')->where('id',$value->product_id)->value('film_type_id');
                                             $film_type = DB::table('film_types')->where('id',$film_type_id)->value('film_type');
-                                            $price = DB::table('product_store_film_brand_prices')->where('product_id',$value->product_id)->value('price');
+                                            $price = DB::table('product_store_film_brand_prices')->where('product_id',$value->product_id)->orderBy('id','desc')->value('price');
                                             $sumPrice = $value->qty * $price;
                                             $sumPriceFormat = number_format($sumPrice);
                                         @endphp

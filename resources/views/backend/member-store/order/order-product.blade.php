@@ -24,13 +24,13 @@
                                 <tr>
                                     <th>#</th>
                                     <th>ประเภทฟิล์ม</th>
-                                    <th style="text-align: center;">จำนวนแผ่นฟิล์ม</th>
-                                    <th>ราคาต่อแผ่น</th>
+                                    <th style="text-align: center;">จำนวนสินค้า</th>
+                                    <th>ราคาต่อหน่วย</th>
                                     <th>สั่งซื้อสินค้า</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($stock_films as $stock_film => $value)
+                                @foreach ($stock_films->unique('film_id') as $stock_film => $value)
                                     <tr>
                                         <th scope="row">{{$NUM_PAGE*($page-1) + $stock_film+1}}</th>
                                         @php
@@ -43,11 +43,14 @@
                                                 @if($amount == 0)
                                                     <div style="color: red;">สินค้าหมด</div> 
                                                 @else
-                                                    {{$amount}} แผ่น
+                                                    {{$amount}} ชิ้น
                                                 @endif
                                             </h6>
                                         </td>
-                                        <td>{{$value->price}} บาท</td>
+                                        @php
+                                            $priceFormat = number_format($value->price);
+                                        @endphp
+                                        <td>{{$priceFormat}} บาท</td>
                                         <td>  
                                             @if($amount == 0)
                                                 <div style="color: red;">สินค้าหมด</div> 
