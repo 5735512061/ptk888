@@ -17,7 +17,9 @@ use App\model\WarrantyConfirm;
 use App\model\OrderCustomer;
 use App\model\OrderCustomerConfirm;
 use App\model\OrderStore;
+use App\model\OrderStoreFilmBrand;
 use App\model\OrderStoreConfirm;
+use App\model\OrderStoreConfirmFilmBrand;
 
 use Validator;
 use Carbon\Carbon;
@@ -233,6 +235,27 @@ class SellerController extends Controller
     public function updateOrderStoreStatus(Request $request) {
         $status = $request->all();
         $status = OrderStoreConfirm::create($status);
+        return back();
+    }
+
+    public function orderStoreFilmBrand(Request $request){
+        $NUM_PAGE = 50;
+        $orders = OrderStoreFilmBrand::groupBy('bill_number')->orderBy('id','asc')->paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/seller/manageOrderProduct/order-store-film-brand')->with('NUM_PAGE',$NUM_PAGE)
+                                                                              ->with('page',$page)
+                                                                              ->with('orders',$orders);
+    }
+
+    public function orderStoreDetailFilmBrand($id){
+        $order = OrderStoreFilmBrand::findOrFail($id);
+        return view('backend/seller/manageOrderProduct/order-store-detail-film-brand')->with('order',$order);
+    }
+
+    public function updateOrderStoreStatusFilmBrand(Request $request) {
+        $status = $request->all();
+        $status = OrderStoreConfirmFilmBrand::create($status);
         return back();
     }
 

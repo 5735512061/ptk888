@@ -195,6 +195,10 @@ Route::group(['prefix' => 'seller'], function(){
     Route::get('/order-store', 'Backend\SellerController@orderStore');
     Route::get('/order-store-detail/{id}', 'Backend\SellerController@orderStoreDetail');
     Route::post('/update-order-store-status', 'Backend\SellerController@updateOrderStoreStatus');
+
+    Route::get('/order-store/film-brand', 'Backend\SellerController@orderStoreFilmBrand');
+    Route::get('/order-store-detail/film-brand/{id}', 'Backend\SellerController@orderStoreDetailFilmBrand');
+    Route::post('/update-order-store-status/film-brand', 'Backend\SellerController@updateOrderStoreStatusFilmBrand');
     // ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า
     Route::get('/data-warranty', 'Backend\SellerController@dataWarranty');
     Route::get('/delete-data-warranty/{id}', 'Backend\SellerController@deleteDataWarranty');
