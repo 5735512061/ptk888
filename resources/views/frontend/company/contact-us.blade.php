@@ -19,8 +19,8 @@
                     <h3><i class="fa fa-phone"></i>066-113-1689</h3>
                     <div class="social">
                         <a href="https://www.facebook.com/ptkstudio8"><i class="fab fa-facebook-f"></i></a>
-                        <a href=""><i class="fab fa-line"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href="http://line.me/ti/p/~@499zvsgh"><i class="fab fa-line"></i></a>
+                        <a href="https://instagram.com/ptk888.th?igshid=w2w4fz2js4k9"><i class="fab fa-instagram"></i></a>
                         <a href="#" data-toggle="tooltip" data-placement="top" title="ptkstudio8@gmail.com"><i class="fab fa fa-envelope"></i></a>
                         <a href="#" data-toggle="tooltip" data-placement="top" title="066-113-1689"><i class="fab fa fa-phone"></i></a>
                     </div>
