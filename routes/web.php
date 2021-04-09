@@ -170,6 +170,21 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/update-product-price-store-film-brand', 'Backend\AdminController@updateProductPriceStoreFilmBrand');
     Route::get('/product-price-detail-store-film-brand/{id}', 'Backend\AdminController@ProductPriceDetailStoreFilmBrand');
     Route::get('/delete-product-price-detail-store-film-brand/{id}', 'Backend\AdminController@deleteProductPriceDetailStoreFilmBrand');
+    // ค้นหาข้อมูล
+    Route::post('/search-customer', 'Backend\AdminSearchController@searchCustomer');
+    Route::post('/search-store', 'Backend\AdminSearchController@searchStore');
+    Route::post('/search-seller', 'Backend\AdminSearchController@searchSeller');
+    Route::post('/search-data-warranty', 'Backend\AdminSearchController@searchDataWarranty');
+    Route::post('/search-claim-product', 'Backend\AdminSearchController@searchClaimProduct');
+    Route::post('/search-list-product', 'Backend\AdminSearchController@searchListProduct');
+    Route::post('/search-list-product-price', 'Backend\AdminSearchController@searchListProductPrice');
+    Route::post('/search-list-product-promotion-price', 'Backend\AdminSearchController@searchListProductPromotionPrice');
+    Route::post('/search-phone-model', 'Backend\AdminSearchController@searchPhoneModel');
+    Route::post('/search-serialnumber', 'Backend\AdminSearchController@searchSerialnumber');
+    Route::post('/search-product-out', 'Backend\AdminSearchController@searchProductOut');
+    Route::post('/search-order-customer', 'Backend\AdminSearchController@searchOrderCustomer');
+    Route::post('/search-order-store', 'Backend\AdminSearchController@searchOrderStore');
+    Route::post('/search-order-store-film-brand', 'Backend\AdminSearchController@searchOrderStoreFilmBrand');
 });
 
 // พนักงานขาย
@@ -228,6 +243,17 @@ Route::group(['prefix' => 'seller'], function(){
     Route::get('/edit-product-price-store-film-brand/{id}', 'Backend\SellerController@editProductPriceStoreFilmBrand');
     Route::post('/update-product-price-store-film-brand', 'Backend\SellerController@updateProductPriceStoreFilmBrand');
     Route::get('/product-price-detail-store-film-brand/{id}', 'Backend\SellerController@ProductPriceDetailStoreFilmBrand');
+
+    // ค้นหาข้อมูล
+    Route::post('/search-data-warranty', 'Backend\SellerSearchController@searchDataWarranty');
+    Route::post('/search-claim-product', 'Backend\SellerSearchController@searchClaimProduct');
+    Route::post('/search-list-product', 'Backend\SellerSearchController@searchListProduct');
+    Route::post('/search-list-product-price', 'Backend\SellerSearchController@searchListProductPrice');
+    Route::post('/search-list-product-promotion-price', 'Backend\SellerSearchController@searchListProductPromotionPrice');
+    Route::post('/search-product-out', 'Backend\SellerSearchController@searchProductOut');
+    Route::post('/search-order-customer', 'Backend\SellerSearchController@searchOrderCustomer');
+    Route::post('/search-order-store', 'Backend\SellerSearchController@searchOrderStore');
+    Route::post('/search-order-store-film-brand', 'Backend\SellerSearchController@searchOrderStoreFilmBrand');
 });
 
 // สมาชิกร้านค้า

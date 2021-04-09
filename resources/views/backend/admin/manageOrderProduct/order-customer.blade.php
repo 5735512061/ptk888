@@ -4,6 +4,25 @@
 <div class="main-body">
     <div class="page-wrapper">
         <div class="page-body">
+            <div class="card table-card">
+                <div class="card-header">
+                    <h5>ค้นหาคำสั่งซื้อของลูกค้า</h5>
+                </div><br>
+                <div class="card-block">
+                    <form action="{{url('/admin/search-order-customer')}}" enctype="multipart/form-data" method="post">@csrf
+                        <div class="row" style="margin-left: 5px; margin-right: 5px;">
+                            <div class="col-md-3">
+                                <input type="text" name="member_id" class="form-control" placeholder="ค้นหาหมายเลขสมาชิก"><br>
+                                <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาหมายเลขสมาชิก</button>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="bill_number" class="form-control" placeholder="ค้นหาเลขที่บิล"><br>
+                                <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาเลขที่บิล</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-header">
                     <h5>ข้อมูลการสั่งซื้อของลูกค้า</h5>

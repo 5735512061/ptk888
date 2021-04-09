@@ -6,6 +6,30 @@
         <div class="page-body">
             <div class="row">
                 <div class="col-sm-12">
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <h5>ค้นหาข้อมูลสมาชิกร้านค้า</h5>
+                        </div><br>
+                        <div class="card-block">
+                            <form action="{{url('/admin/search-store')}}" enctype="multipart/form-data" method="post">@csrf
+                                <div class="row" style="margin-left: 5px;">
+                                    <div class="col-md-3">
+                                        <input type="text" name="store_id" class="form-control" placeholder="ค้นหารหัสสมาชิก"><br>
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหารหัสสมาชิก</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" name="phone" class="form-control" placeholder="ค้นหาเบอร์โทรศัพท์"><br>
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาเบอร์โทรศัพท์</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" name="name" class="form-control" placeholder="ค้นหาชื่อร้านค้า"><br>
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาชื่อร้านค้า</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                     <div class="card">
                         <div class="card-header">
                             <h5>ลงทะเบียนสมาชิกร้านค้า</h5>

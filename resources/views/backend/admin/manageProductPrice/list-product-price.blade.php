@@ -4,6 +4,29 @@
 <div class="main-body">
     <div class="page-wrapper">
         <div class="page-body">
+            <div class="card table-card">
+                <div class="card-header">
+                    <h5>ค้นหารายการราคาสินค้า</h5>
+                </div><br>
+                <div class="card-block">
+                    <form action="{{url('/admin/search-list-product-price')}}" enctype="multipart/form-data" method="post">@csrf
+                        <div class="row" style="margin-left: 5px; margin-right: 5px;">
+                            <div class="col-md-3">
+                                <input type="text" name="product_code" class="form-control" placeholder="ค้นหารหัสสินค้า"><br>
+                                <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหารหัสสินค้า</button>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="product_name" class="form-control" placeholder="ค้นหาชื่อสินค้า"><br>
+                                <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาชื่อสินค้า</button>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="film_model" class="form-control" placeholder="ค้นหายี่ห้อฟิล์ม"><br>
+                                <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหายี่ห้อฟิล์ม</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-header">
                     <h5>จัดการราคาสินค้า</h5>

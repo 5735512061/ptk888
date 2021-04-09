@@ -4,6 +4,25 @@
 <div class="main-body">
     <div class="page-wrapper">
         <div class="page-body">
+            <div class="card table-card">
+                <div class="card-header">
+                    <h5>ค้นหาข้อมูลการประกันสินค้า</h5>
+                </div><br>
+                <div class="card-block">
+                    <form action="{{url('/seller/search-data-warranty')}}" enctype="multipart/form-data" method="post">@csrf
+                        <div class="row" style="margin-left: 5px;">
+                            <div class="col-md-3">
+                                <input type="text" name="member_id" class="form-control" placeholder="ค้นหารหัสสมาชิก"><br>
+                                <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหารหัสสมาชิก</button>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="serialnumber" class="form-control" placeholder="ค้นหาหมายเลขซีเรียล"><br>
+                                <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาหมายเลขซีเรียล</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-header">
                     <h5>ข้อมูลการประกันสินค้า</h5>
@@ -23,6 +42,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>รหัสสมาชิก</th>
                                     <th>ชื่อ-นามสกุล</th>
                                     <th>เบอร์โทรศัพท์</th>
                                     <th>ยี่ห้อโทรศัพท์</th>
@@ -45,8 +65,10 @@
                                             $name = DB::table('members')->where('id',$value->member_id)->value('name');
                                             $surname = DB::table('members')->where('id',$value->member_id)->value('surname');
                                             $phone = DB::table('members')->where('id',$value->member_id)->value('phone');
+                                            $member_id = DB::table('members')->where('id',$value->member_id)->value('member_id');
                                             $status = DB::table('warranty_confirms')->where('warranty_id',$value->id)->value('status');
                                         @endphp
+                                        <td>{{$member_id}}</td>
                                         <td>{{$name}} {{$surname}}</td>
                                         <td>{{$phone}}</td>
                                         <td>{{$value->phone_model}}</td>

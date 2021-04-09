@@ -11,6 +11,21 @@
             @endforeach
             <div class="row">
                 <div class="col-sm-12">
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <h5>ค้นหาหมายเลขสินค้า</h5>
+                        </div><br>
+                        <div class="card-block">
+                            <form action="{{url('/admin/search-serialnumber')}}" enctype="multipart/form-data" method="post">@csrf
+                                <div class="row" style="margin-left: 5px; margin-right: 5px;">
+                                    <div class="col-md-3">
+                                        <input type="text" name="serialnumber" class="form-control" placeholder="ค้นหาหมายเลขสินค้า"><br>
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาหมายเลขสินค้า</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <h5>สร้างหมายเลขสินค้า</h5>

@@ -6,6 +6,29 @@
         <div class="page-body">
             <div class="row">
                 <div class="col-sm-12">
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <h5>ค้นหาข้อมูลพนักงานขาย</h5>
+                        </div><br>
+                        <div class="card-block">
+                            <form action="{{url('/admin/search-seller')}}" enctype="multipart/form-data" method="post">@csrf
+                                <div class="row" style="margin-left: 5px;">
+                                    <div class="col-md-3">
+                                        <input type="text" name="seller_id" class="form-control" placeholder="ค้นหารหัสพนักงาน"><br>
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหารหัสพนักงาน</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" name="phone" class="form-control" placeholder="ค้นหาเบอร์โทรศัพท์"><br>
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาเบอร์โทรศัพท์</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" name="name" class="form-control" placeholder="ค้นหาชื่อพนักงาน"><br>
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาชื่อพนักงาน</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <h5>ลงทะเบียนพนักงานขาย</h5>

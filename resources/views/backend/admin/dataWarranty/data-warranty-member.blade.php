@@ -4,6 +4,25 @@
 <div class="main-body">
     <div class="page-wrapper">
         <div class="page-body">
+            <div class="card table-card">
+                <div class="card-header">
+                    <h5>ค้นหาข้อมูลการประกันสินค้า</h5>
+                </div><br>
+                <div class="card-block">
+                    <form action="{{url('/admin/search-data-warranty')}}" enctype="multipart/form-data" method="post">@csrf
+                        <div class="row" style="margin-left: 5px;">
+                            <div class="col-md-3">
+                                <input type="text" name="member_id" class="form-control" placeholder="ค้นหารหัสสมาชิก"><br>
+                                <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหารหัสสมาชิก</button>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="serialnumber" class="form-control" placeholder="ค้นหาหมายเลขซีเรียล"><br>
+                                <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาหมายเลขซีเรียล</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-header">
                     <h5>ข้อมูลการประกันสินค้า</h5>
