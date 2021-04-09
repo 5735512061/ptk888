@@ -23,10 +23,13 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>หมายเลขสมาชิกร้านค้า</th>
                                     <th>บิลเลขที่</th>
                                     <th>วันที่สั่งซื้อ</th>
                                     <th>จำนวน</th>
-                                    <th>ราคารวม</th>
+                                    <td>ราคารวม</td>
+                                    <td>ส่วนลดรวม</td>
+                                    <td>ราคาทั้งหมด</td>
                                     <th>สถานะ</th>
                                     <th></th>
                                 </tr>
@@ -39,12 +42,38 @@
                                             $qty = DB::table('product_cart_stores')->where('bill_number',$value->bill_number)->sum('qty');
                                             $totalPrice = DB::table('product_cart_stores')->where('bill_number',$value->bill_number)
                                                                                           ->sum(DB::raw('price * qty'));
-                                            $totalPrice = number_format($totalPrice);
+                                            $totalPriceFormat = number_format($totalPrice);
+
+                                            $qtyCartStoreTotal = DB::table('product_cart_stores')->where('store_id',$value->store_id)
+                                                                                                 ->where('product_id','!=','11')
+                                                                                                 ->sum('qty');
+
+                                            $store_id = DB::table('stores')->where('id',$value->store_id)->value('store_id')
                                         @endphp
+                                        <td>{{$store_id}}</td>
                                         <td><a href="{{url('/admin/order-store-detail/')}}/{{$value->id}}" style="color: blue;">{{$value->bill_number}}</a></td>
                                         <td>{{$value->date}}</td>
                                         <td>{{$qty}}</td>
-                                        <td>{{$totalPrice}}.-</td>
+                                        <td>{{$totalPriceFormat}} บาท</td>
+                                        @php
+                                            if($qtyCartStoreTotal < 1001 || $qtyCartStoreTotal > 1)  
+                                                $discount = $qty * 70;
+                                            elseif($qtyCartStoreTotal < 5001 || $qtyCartStoreTotal > 1001)
+                                                $discount = $qty * 68;
+                                            elseif($qtyCartStoreTotal > 5001)
+                                                $discount = $qty * 65;
+                                        @endphp
+
+                                        @php
+                                            $totalDiscount =  $totalPrice - $discount;
+                                            $totalDiscountFormat = number_format($totalDiscount);
+                                        @endphp
+
+                                        <td>{{$totalDiscountFormat}} บาท</td>
+                                        @php
+                                            $totalPrice = number_format($totalPrice - $totalDiscount);
+                                        @endphp
+                                        <td>{{$totalPrice}} บาท</td>
                                         <td>
                                             @php
                                                 $status = DB::table('order_store_confirms')->where('order_id',$value->id)->value('status');

@@ -23,6 +23,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>รหัสสมาชิก</th>
                                     <th>ชื่อ-นามสกุล</th>
                                     <th>เบอร์โทรศัพท์</th>
                                     <th>ยี่ห้อโทรศัพท์</th>
@@ -46,6 +47,7 @@
                                             $name = DB::table('members')->where('id',$value->member_id)->value('name');
                                             $surname = DB::table('members')->where('id',$value->member_id)->value('surname');
                                             $phone = DB::table('members')->where('id',$value->member_id)->value('phone');
+                                            $member_id = DB::table('members')->where('id',$value->member_id)->value('member_id');
                                             $phone_model = DB::table('data_warranty_members')->where('id',$value->warranty_id)->value('phone_model');
                                             $film_model = DB::table('data_warranty_members')->where('id',$value->warranty_id)->value('film_model');
                                             $serialnumber = DB::table('data_warranty_members')->where('id',$value->warranty_id)->value('serialnumber');
@@ -53,6 +55,7 @@
                                             $service_point = DB::table('data_warranty_members')->where('id',$value->warranty_id)->value('service_point');
                                             $address_service = DB::table('data_warranty_members')->where('id',$value->warranty_id)->value('address_service');
                                         @endphp
+                                        <td>{{$member_id}}</td>
                                         <td>{{$name}} {{$surname}}</td>
                                         <td>{{$phone}}</td>
                                         <td>{{$phone_model}}</td>

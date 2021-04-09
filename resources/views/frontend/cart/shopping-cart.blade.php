@@ -20,6 +20,9 @@
                                     <th>ลบสินค้า</th>
                                 </tr>
                             </thead>
+                            @php
+                                $price = 0;
+                            @endphp
                             <tbody class="align-middle">
                                 @foreach($products as $product)
                                 <tr>
@@ -29,6 +32,7 @@
                                         $product_image = DB::table('image_products')->where('product_id',$id)->value('image'); 
                                         $product_price = DB::table('product_prices')->where('product_id',$id)->orderBy('id','desc')->value('price'); 
                                         $promotion_price = DB::table('product_promotion_prices')->where('product_id',$id)->orderBy('id','desc')->value('promotion_price');
+                                        $price += $product['price'];
 						            @endphp
                                     <td style="width: 30rem;">
                                         <div class="img">
@@ -66,9 +70,9 @@
                             <div class="cart-summary">
                                 <div class="cart-content">
                                     <h1>สรุปยอดการสั่งซื้อสินค้า</h1>
-                                    <p>ยอดสินค้า<span>{{ number_format($totalPrice) }} บาท</span></p>
+                                    <p>ยอดสินค้า<span>{{ number_format($price) }} บาท</span></p>
                                     <p>ค่าจัดส่ง<span>0 บาท</span></p>
-                                    <h2>รวมทั้งสิ้น<span>{{ number_format($totalPrice) }} บาท</span></h2>
+                                    <h2>รวมทั้งสิ้น<span>{{ number_format($price) }} บาท</span></h2>
                                 </div>
                                 <div class="cart-btn">
                                     <a style="text-decoration: none;" href="{{ route('checkout') }}">

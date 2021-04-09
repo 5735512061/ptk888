@@ -23,6 +23,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>หมายเลขสมาชิกร้านค้า</th>
                                     <th>บิลเลขที่</th>
                                     <th>วันที่สั่งซื้อ</th>
                                     <th>จำนวน</th>
@@ -40,7 +41,9 @@
                                             $totalPrice = DB::table('product_cart_store_film_brands')->where('bill_number',$value->bill_number)
                                                                                                      ->sum(DB::raw('price * qty'));
                                             $totalPrice = number_format($totalPrice);
+                                            $store_id = DB::table('stores')->where('id',$value->store_id)->value('store_id')
                                         @endphp
+                                        <td>{{$store_id}}</td>
                                         <td><a href="{{url('/admin/order-store-detail/film-brand')}}/{{$value->id}}" style="color: blue;">{{$value->bill_number}}</a></td>
                                         <td>{{$value->date}}</td>
                                         <td>{{$qty}}</td>

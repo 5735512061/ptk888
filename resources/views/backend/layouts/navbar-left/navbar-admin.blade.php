@@ -38,19 +38,11 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
-                    <li class="pcoded-hasmenu">
-                        <a href="javascript:void(0)" class="waves-effect waves-dark">
-                            <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">บัญชีของลูกค้า</span>
+                    <li class=" ">
+                        <a href="{{url('/admin/data-of-customer')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">บัญชีของลูกค้า</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
-                        <ul class="pcoded-submenu">
-                            <li class=" ">
-                                <a href="{{url('/admin/data-of-customer')}}" class="waves-effect waves-dark">
-                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">ข้อมูลลูกค้า</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li class=" ">
                         <a href="{{url('/admin/manage-member-store')}}" class="waves-effect waves-dark">

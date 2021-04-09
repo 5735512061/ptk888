@@ -871,20 +871,13 @@ class AdminController extends Controller
     }
 
     public function updateStockFilm(Request $request){
-        $validator = Validator::make($request->all(), $this->rules_updateStockFilm(), $this->messages_updateStockFilm());
-        if($validator->passes()) {
-            $id = $request->get('id');
-            $comment = $request->get('comment');
-            $stock_film = StockFilm::findOrFail($id);
-            $stock_film->comment = $comment;
-            $stock_film->update();
-            $request->session()->flash('alert-success', 'อัพเดตหมายเหตุสำเร็จ');
-            return redirect()->action('Backend\AdminController@manageFilmStock');
-        }
-        else {
-            $request->session()->flash('alert-danger', 'อัพเดตหมายเหตุไม่สำเร็จ');
-            return back()->withErrors($validator)->withInput();
-        }
+        $id = $request->get('id');
+        $comment = $request->get('comment');
+        $stock_film = StockFilm::findOrFail($id);
+        $stock_film->comment = $comment;
+        $stock_film->update();
+        $request->session()->flash('alert-success', 'อัพเดตหมายเหตุสำเร็จ');
+        return redirect()->action('Backend\AdminController@manageFilmStock');
     }
 
     /////////////////////////////// สร้าง serialnumber บาร์โค้ด ///////////////////////////////
@@ -1471,18 +1464,6 @@ class AdminController extends Controller
             'name.required' => 'กรุณากรอกชื่อ',
             'phone.required' => 'กรุณากรอกเบอร์โทรศัพท์',
             'address.required' => 'กรุณากรอกที่อยู่ร้านค้า',
-        ];
-    }
-
-    public function rules_updateStockFilm() {
-        return [
-            'comment' => 'required',
-        ];
-    }
-
-    public function messages_updateStockFilm() {
-        return [
-            'comment.required' => 'กรุณาระบุหมายเหตุ',
         ];
     }
 }

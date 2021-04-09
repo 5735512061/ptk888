@@ -23,6 +23,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>รหัสสมาชิก</th>
                                     <th>ชื่อ-นามสกุล</th>
                                     <th>เบอร์โทรศัพท์</th>
                                     <th>ยี่ห้อโทรศัพท์</th>
@@ -45,8 +46,10 @@
                                             $name = DB::table('members')->where('id',$value->member_id)->value('name');
                                             $surname = DB::table('members')->where('id',$value->member_id)->value('surname');
                                             $phone = DB::table('members')->where('id',$value->member_id)->value('phone');
+                                            $member_id = DB::table('members')->where('id',$value->member_id)->value('member_id');
                                             $status = DB::table('warranty_confirms')->where('warranty_id',$value->id)->value('status');
                                         @endphp
+                                        <td>{{$member_id}}</td>
                                         <td>{{$name}} {{$surname}}</td>
                                         <td>{{$phone}}</td>
                                         <td>{{$value->phone_model}}</td>

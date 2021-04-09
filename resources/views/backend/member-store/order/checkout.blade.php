@@ -204,11 +204,11 @@
 
                                                 @php
                                                     if($qtyCartStoreTotal < 1001 || $qtyCartStoreTotal > 1)  
-                                                        $discount = $value->qty * 70;
+                                                        $discount = $qty * 70;
                                                     elseif($qtyCartStoreTotal < 5001 || $qtyCartStoreTotal > 1001)
-                                                        $discount = $value->qty * 68;
+                                                        $discount = $qty * 68;
                                                     elseif($qtyCartStoreTotal > 5001)
-                                                        $discount = $value->qty * 65;
+                                                        $discount = $qty * 65;
                                                 @endphp
 
                                                 @php

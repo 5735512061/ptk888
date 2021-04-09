@@ -24,7 +24,7 @@ class RegisterController extends Controller
             $member['date'] = $date;
             $member = Member::create($member);
             $request->session()->flash('alert-success', 'สมัครสมาชิกสำเร็จ');
-            return redirect()->intended(route('member.home'));
+            return redirect()->intended(route('member.login'));
         }
         else {
             $request->session()->flash('alert-danger', 'สมัครสมาชิกไม่สำเร็จ กรุณากรอกข้อมูลให้ครบถ้วน');

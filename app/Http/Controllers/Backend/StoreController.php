@@ -122,13 +122,15 @@ class StoreController extends Controller
     public function getCart(Request $request){
         $NUM_PAGE = 50;
         $product_cart_sessions = ProductCartSessionStore::where('store_id',Auth::guard('store')->user()->id)->orderBy('id','asc')->paginate($NUM_PAGE);
+        $qty = ProductCartSessionStore::where('store_id',Auth::guard('store')->user()->id)->sum('qty');
         $count_cart = count($product_cart_sessions);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/member-store/order/shopping-cart')->with('NUM_PAGE',$NUM_PAGE)
                                                                ->with('page',$page)
                                                                ->with('product_cart_sessions',$product_cart_sessions)
-                                                               ->with('count_cart',$count_cart);
+                                                               ->with('count_cart',$count_cart)
+                                                               ->with('qty',$qty);
     }
 
     public function removeShoppingCart($id){
@@ -139,9 +141,11 @@ class StoreController extends Controller
 
     public function getCheckout(){
         $product_cart_sessions = ProductCartSessionStore::where('store_id',Auth::guard('store')->user()->id)->get();
+        $qty = ProductCartSessionStore::where('store_id',Auth::guard('store')->user()->id)->sum('qty');
         $count_cart = count($product_cart_sessions);
         return view('backend/member-store/order/checkout')->with('product_cart_sessions',$product_cart_sessions)
-                                                          ->with('count_cart',$count_cart);
+                                                          ->with('count_cart',$count_cart)
+                                                          ->with('qty',$qty);
     }
 
     public function paymentCheckoutStore(Request $request){

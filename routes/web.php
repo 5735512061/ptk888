@@ -115,7 +115,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/edit-product-promotion-price/{id}', 'Backend\AdminController@editProductPromotionPrice');
     Route::post('/update-product-promotion-price', 'Backend\AdminController@updateProductPromotionPrice');
     Route::get('/product-promotion-price-detail/{id}', 'Backend\AdminController@ProductPromotionPriceDetail');
-    Route::get('/delete-product-price-detail/{id}', 'Backend\AdminController@deleteProductPromotionPriceDetail');
+    Route::get('/delete-product-promotion-price-detail/{id}', 'Backend\AdminController@deleteProductPromotionPriceDetail');
     // จัดการสต๊อกสินค้า
     Route::get('/manage-film-stock', 'Backend\AdminController@manageFilmStock');
     Route::get('/delete-stock-film/{id}', 'Backend\AdminController@deleteStockFilm');
@@ -218,6 +218,16 @@ Route::group(['prefix' => 'seller'], function(){
     Route::post('/update-data-warranty', 'Backend\SellerController@updateDataWarranty');
     Route::get('/claim-product', 'Backend\SellerController@claimProduct');
     Route::get('/edit-claim-status/{id}', 'Backend\SellerController@editClaimStatus');
+    // จัดการราคาของร้านค้า
+    Route::get('/list-product-price-store', 'Backend\SellerController@listProductPriceStore');
+    Route::get('/edit-product-price-store/{id}', 'Backend\SellerController@editProductPriceStore');
+    Route::post('/update-product-price-store', 'Backend\SellerController@updateProductPriceStore');
+    Route::get('/product-price-detail-store/{id}', 'Backend\SellerController@ProductPriceDetailStore');
+
+    Route::get('/list-product-price-store-film-brand', 'Backend\SellerController@listProductPriceStoreFilmBrand');
+    Route::get('/edit-product-price-store-film-brand/{id}', 'Backend\SellerController@editProductPriceStoreFilmBrand');
+    Route::post('/update-product-price-store-film-brand', 'Backend\SellerController@updateProductPriceStoreFilmBrand');
+    Route::get('/product-price-detail-store-film-brand/{id}', 'Backend\SellerController@ProductPriceDetailStoreFilmBrand');
 });
 
 // สมาชิกร้านค้า

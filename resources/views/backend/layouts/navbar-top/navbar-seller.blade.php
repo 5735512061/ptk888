@@ -4,7 +4,7 @@
             <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
                 <i class="ti-menu"></i>
             </a>
-            <div class="mobile-search waves-effect waves-light">
+            {{-- <div class="mobile-search waves-effect waves-light">
                 <div class="header-search">
                     <div class="main-search morphsearch-search">
                         <div class="input-group">
@@ -14,7 +14,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <a class="mobile-options waves-effect waves-light">
                 <i class="ti-more"></i>
             </a>
@@ -25,7 +25,7 @@
                 <li>
                     <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                 </li>
-                <li class="header-search">
+                {{-- <li class="header-search">
                     <div class="main-search morphsearch-search">
                         <div class="input-group">
                             <span class="input-group-addon search-close"><i class="ti-close"></i></span>
@@ -33,7 +33,7 @@
                             <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
                         </div>
                     </div>
-                </li>
+                </li> --}}
                 <li>
                     <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                         <i class="ti-fullscreen"></i>

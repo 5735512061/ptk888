@@ -23,6 +23,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>หมายเลขสมาชิก</th>
                                     <th>บิลเลขที่</th>
                                     <th>วันที่สั่งซื้อ</th>
                                     <th>จำนวน</th>
@@ -40,14 +41,16 @@
                                             $totalPrice = DB::table('product_cart_customers')->where('bill_number',$value->bill_number)
                                                                                              ->sum(DB::raw('price * qty'));
                                             $totalPrice = number_format($totalPrice);
+                                            $member_id = DB::table('members')->where('id',$value->customer_id)->orderBy('id','desc')->value('member_id');
                                         @endphp
+                                        <td>{{$member_id}}</td>
                                         <td><a href="{{url('/admin/order-customer-detail/')}}/{{$value->id}}" style="color: blue;">{{$value->bill_number}}</a></td>
                                         <td>{{$value->date}}</td>
                                         <td>{{$qty}}</td>
                                         <td>{{$totalPrice}}.-</td>
                                         <td>
                                             @php
-                                                $status = DB::table('order_customer_confirms')->where('order_id',$value->id)->value('status');
+                                                $status = DB::table('order_customer_confirms')->where('order_id',$value->id)->orderBy('id','desc')->value('status');
                                             @endphp
                                             @if($status == null || $status == 'รอยืนยัน')
                                                 <p style="color: red; font-size:15px;">รอยืนยัน</p>

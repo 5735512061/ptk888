@@ -32,26 +32,26 @@
                         <div class="col-md-4">
                             <h4>ข้อมูลการชำระเงิน</h4><hr style="border-top:3px solid rgb(214 214 214)">
                             @php
-                                $payday = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->value('payday');
-                                $time = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->value('time');
-                                $money = number_format(DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->value('money'));
-                                $slip = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->value('slip');
+                                $payday = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('payday');
+                                $time = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('time');
+                                $money = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('money');
+                                $slip = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('slip');
                             @endphp
                             <p style="font-size: 18px;">วันที่ชำระเงิน : {{$payday}} {{$time}}</p>
                             <p style="font-size: 18px;">จำนวนเงินที่ชำระ : {{$money}}</p>
-                            <a href=""><p style="font-size: 18px;">ดาวน์โหลดหลักฐานการโอนเงิน</p></a>
+                            <a href="{{url('/image_upload/payment_customer')}}/{{$slip}}" target="_blank"><p style="font-size: 18px;">หลักฐานการโอนเงิน</p></a>
                         </div>
                         <div class="col-md-4">
                             <h4>ที่อยู่สำหรับจัดส่ง</h4><hr style="border-top:3px solid rgb(214 214 214)">
                             @php
-                                $name = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->value('name');
-                                $phone = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->value('phone');
-                                $phone_sec = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->value('phone_sec');
-                                $address = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->value('address');
-                                $district = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->value('district');
-                                $amphoe = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->value('amphoe');
-                                $province = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->value('province');
-                                $zipcode = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->value('zipcode');
+                                $name = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('name');
+                                $phone = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('phone');
+                                $phone_sec = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('phone_sec');
+                                $address = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('address');
+                                $district = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('district');
+                                $amphoe = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('amphoe');
+                                $province = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('province');
+                                $zipcode = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('zipcode');
                             @endphp
                             <p style="font-size: 16px;">{{$name}} {{$phone}},{{$phone_sec}}</p>
                             <p style="font-size: 16px;">ที่อยู่ {{$address}} ตำบล {{$district}} อำเภอ {{$amphoe}} จังหวัด {{$province}} {{$zipcode}}</p>

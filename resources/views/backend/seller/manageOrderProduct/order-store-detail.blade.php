@@ -31,26 +31,26 @@
                         <div class="col-md-4">
                             <h4>ข้อมูลการชำระเงิน</h4><hr style="border-top:3px solid rgb(214 214 214)">
                             @php
-                                $payday = DB::table('payment_checkout_stores')->where('store_id',$order->store_id)->value('payday');
-                                $time = DB::table('payment_checkout_stores')->where('store_id',$order->store_id)->value('time');
-                                $money = number_format(DB::table('payment_checkout_stores')->where('store_id',$order->store_id)->value('money'));
-                                $slip = DB::table('payment_checkout_stores')->where('store_id',$order->store_id)->value('slip');
+                                $payday = DB::table('payment_checkout_stores')->where('store_id',$order->store_id)->where('bill_number',$order->bill_number)->value('payday');
+                                $time = DB::table('payment_checkout_stores')->where('store_id',$order->store_id)->where('bill_number',$order->bill_number)->value('time');
+                                $money = DB::table('payment_checkout_stores')->where('store_id',$order->store_id)->where('bill_number',$order->bill_number)->value('money');
+                                $slip = DB::table('payment_checkout_stores')->where('store_id',$order->store_id)->where('bill_number',$order->bill_number)->value('slip');
                             @endphp
                             <p style="font-size: 18px;">วันที่ชำระเงิน : {{$payday}} {{$time}}</p>
                             <p style="font-size: 18px;">จำนวนเงินที่ชำระ : {{$money}}</p>
-                            <a href=""><p style="font-size: 18px;">ดาวน์โหลดหลักฐานการโอนเงิน</p></a>
+                            <a href="{{url('/image_upload/payment_store')}}/{{$slip}}" target="_blank"><p style="font-size: 18px;">หลักฐานการโอนเงิน</p></a>
                         </div>
                         <div class="col-md-4">
                             <h4>ที่อยู่สำหรับจัดส่ง</h4><hr style="border-top:3px solid rgb(214 214 214)">
                             @php
-                                $name = DB::table('shipment_stores')->where('store_id',$order->store_id)->value('name');
-                                $phone = DB::table('shipment_stores')->where('store_id',$order->store_id)->value('phone');
-                                $phone_sec = DB::table('shipment_stores')->where('store_id',$order->store_id)->value('phone_sec');
-                                $address = DB::table('shipment_stores')->where('store_id',$order->store_id)->value('address');
-                                $district = DB::table('shipment_stores')->where('store_id',$order->store_id)->value('district');
-                                $amphoe = DB::table('shipment_stores')->where('store_id',$order->store_id)->value('amphoe');
-                                $province = DB::table('shipment_stores')->where('store_id',$order->store_id)->value('province');
-                                $zipcode = DB::table('shipment_stores')->where('store_id',$order->store_id)->value('zipcode');
+                                $name = DB::table('shipment_stores')->where('store_id',$order->store_id)->where('bill_number',$order->bill_number)->value('name');
+                                $phone = DB::table('shipment_stores')->where('store_id',$order->store_id)->where('bill_number',$order->bill_number)->value('phone');
+                                $phone_sec = DB::table('shipment_stores')->where('store_id',$order->store_id)->where('bill_number',$order->bill_number)->value('phone_sec');
+                                $address = DB::table('shipment_stores')->where('store_id',$order->store_id)->where('bill_number',$order->bill_number)->value('address');
+                                $district = DB::table('shipment_stores')->where('store_id',$order->store_id)->where('bill_number',$order->bill_number)->value('district');
+                                $amphoe = DB::table('shipment_stores')->where('store_id',$order->store_id)->where('bill_number',$order->bill_number)->value('amphoe');
+                                $province = DB::table('shipment_stores')->where('store_id',$order->store_id)->where('bill_number',$order->bill_number)->value('province');
+                                $zipcode = DB::table('shipment_stores')->where('store_id',$order->store_id)->where('bill_number',$order->bill_number)->value('zipcode');
                             @endphp
                             <p style="font-size: 16px;">{{$name}} {{$phone}},{{$phone_sec}}</p>
                             <p style="font-size: 16px;">ที่อยู่ {{$address}} ตำบล {{$district}} อำเภอ {{$amphoe}} จังหวัด {{$province}} {{$zipcode}}</p>
@@ -72,7 +72,9 @@
                                     <th>ชื่อสินค้า</th>
                                     <th>ราคาขายต่อหน่วย</th>
                                     <th>จำนวน</th>
-                                    <th>ราคารวม</th>
+                                    <td>ราคารวม</td>
+                                    <td>ส่วนลดรวม</td>
+                                    <td>ราคาทั้งหมด</td>
                                     <th>สถานะ</th>
                                     <th></th>
                                 </tr>
@@ -86,12 +88,36 @@
                                             $product_name = DB::table('stock_films')->where('id',$film_id)->value('film_type');
                                             $qty = DB::table('product_cart_stores')->where('id',$value->id)->value('qty');
                                             $price = DB::table('product_cart_stores')->where('id',$value->id)->value('price');
-                                            $totalPrice = number_format($qty * $price);
+                                            $totalPrice = $qty * $price;
+                                            $totalPriceFormat = number_format($totalPrice);
+
+                                            $qtyCartStoreTotal = DB::table('product_cart_stores')->where('store_id',$value->store_id)
+                                                                                                 ->where('product_id','!=','11')
+                                                                                                 ->sum('qty');
                                         @endphp
                                         <td>{{$product_name}}</td>
                                         <td>{{$price}}.-</td>
                                         <td>{{$qty}}</td>
-                                        <td>{{$totalPrice}}.-</td>
+                                        <td>{{$totalPriceFormat}}.-</td>
+                                        @php
+                                            if($qtyCartStoreTotal < 1001 || $qtyCartStoreTotal > 1)  
+                                                $discount = $qty * 70;
+                                            elseif($qtyCartStoreTotal < 5001 || $qtyCartStoreTotal > 1001)
+                                                $discount = $qty * 68;
+                                            elseif($qtyCartStoreTotal > 5001)
+                                                $discount = $qty * 65;
+                                        @endphp
+
+                                        @php
+                                            $totalDiscount =  $totalPrice - $discount;
+                                            $totalDiscountFormat = number_format($totalDiscount);
+                                        @endphp
+
+                                        <td>{{$totalDiscountFormat}} บาท</td>
+                                        @php
+                                            $totalPrice = number_format($totalPrice - $totalDiscount);
+                                        @endphp
+                                        <td>{{$totalPrice}} บาท</td>
                                         <td>
                                             @php
                                                 $order_id = DB::table('order_stores')->where('product_cart_id',$value->id)->value('id');

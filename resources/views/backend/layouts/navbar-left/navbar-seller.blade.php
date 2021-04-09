@@ -89,6 +89,27 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
+            <li class="pcoded-hasmenu">
+                <a href="javascript:void(0)" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-archive"></i></span>
+                    <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">จัดการราคาของร้านค้า</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li class=" ">
+                        <a href="{{url('/seller/list-product-price-store')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">ราคาสินค้าแบบแผ่น</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{url('/seller/list-product-price-store-film-brand')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">ราคาสินค้าพร้อมแพ็คเกจ</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
         <div class="pcoded-navigation-label" data-i18n="nav.category.other">จัดการ Order การสั่งซื้อ</div>
@@ -124,6 +145,14 @@
                             <li class="">
                                 <a href="{{url('/seller/order-store')}}" class="waves-effect waves-dark">
                                     <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">การสั่งซื้อของร้านค้า</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="pcoded-submenu">
+                            <li class="">
+                                <a href="{{url('/seller/order-store/film-brand')}}" class="waves-effect waves-dark">
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">การสั่งซื้อแพ็คเกจ</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>

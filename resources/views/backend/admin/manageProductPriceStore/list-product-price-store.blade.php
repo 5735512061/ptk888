@@ -6,7 +6,7 @@
         <div class="page-body">
             <div class="card">
                 <div class="card-header">
-                    <h5>ข้อมูลราคาสินค้าของร้านค้า</h5>
+                    <h5>จัดการราคาของร้านค้า สินค้าแบบแผ่น</h5> 
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="fa fa fa-wrench open-card-option"></i></li>

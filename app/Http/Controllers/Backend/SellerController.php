@@ -20,6 +20,10 @@ use App\model\OrderStore;
 use App\model\OrderStoreFilmBrand;
 use App\model\OrderStoreConfirm;
 use App\model\OrderStoreConfirmFilmBrand;
+use App\model\FilmPriceStore;
+use App\model\ProductStoreFilmBrand;
+use App\model\ProductStoreFilmBrandPrice;
+use App\model\FilmType;
 
 use Validator;
 use Carbon\Carbon;
@@ -323,6 +327,109 @@ class SellerController extends Controller
                                                                     ->with('claim_status',$claim_status);
     }
 
+    // จัดการราคาของร้านค้า
+    public function listProductPriceStore(Request $request){
+        $NUM_PAGE = 50;
+        $stock_films = StockFilm::orderBy('id','asc')->paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/seller/manageProductPriceStore/list-product-price-store')->with('NUM_PAGE',$NUM_PAGE)
+                                                                                     ->with('page',$page)
+                                                                                     ->with('stock_films',$stock_films);
+    }
+
+    public function editProductPriceStore($id){
+        $stock_film = StockFilm::findOrFail($id);
+        return view('backend/seller/manageProductPriceStore/edit-product-price-store')->with('stock_film',$stock_film);
+    }
+
+    public function updateProductPriceStore(Request $request){
+        $validator = Validator::make($request->all(), $this->rules_updateProductPriceStore(), $this->messages_updateProductPriceStore());
+        if($validator->passes()) {
+
+            $date = Carbon::now()->format('Y-m-d');
+            $film_id = $request->get('film_id');
+            $price = $request->get('price');
+
+            $film_price_store = new FilmPriceStore;
+            $film_price_store->film_id = $film_id;
+            $film_price_store->date = $date;
+            $film_price_store->price = $price;
+            $film_price_store->save();
+            
+            $request->session()->flash('alert-success', 'อัพโหลดราคาสำเร็จ');
+            return redirect()->action('Backend\SellerController@listProductPriceStore');
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดราคาไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
+    }
+
+    public function ProductPriceDetailStore(Request $request,$id){
+        $NUM_PAGE = 50;
+        $film_price_stores = FilmPriceStore::where('film_id',$id)->orderBy('id','asc')->paginate($NUM_PAGE);
+        $film_type = StockFilm::where('id',$id)->value('film_type');
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/seller/manageProductPriceStore/product-price-detail-store')->with('NUM_PAGE',$NUM_PAGE)
+                                                                                       ->with('page',$page)
+                                                                                       ->with('film_price_stores',$film_price_stores)
+                                                                                       ->with('film_type',$film_type);
+    }
+
+    public function listProductPriceStoreFilmBrand(Request $request){
+        $NUM_PAGE = 50;
+        $product_store_film_brands = ProductStoreFilmBrand::orderBy('id','asc')->paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/seller/manageProductPriceStore/list-product-price-store-film-brand')->with('NUM_PAGE',$NUM_PAGE)
+                                                                                                ->with('page',$page)
+                                                                                                ->with('product_store_film_brands',$product_store_film_brands);
+    }
+
+    public function editProductPriceStoreFilmBrand($id){
+        $product_store_film_brand = ProductStoreFilmBrand::findOrFail($id);
+        return view('backend/seller/manageProductPriceStore/edit-product-price-store-film-brand')->with('product_store_film_brand',$product_store_film_brand);
+    }
+
+    public function updateProductPriceStoreFilmBrand(Request $request){
+        $validator = Validator::make($request->all(), $this->rules_updateProductPriceStoreFilmBrand(), $this->messages_updateProductPriceStoreFilmBrand());
+        if($validator->passes()) {
+
+            $product_id = $request->get('product_id');
+            $price = $request->get('price');
+
+            $product_store_film_brand_price = new ProductStoreFilmBrandPrice;
+            $product_store_film_brand_price->product_id = $product_id;
+            $product_store_film_brand_price->price = $price;
+            $product_store_film_brand_price->save();
+            
+            $request->session()->flash('alert-success', 'อัพโหลดราคาสำเร็จ');
+            return redirect()->action('Backend\SellerController@listProductPriceStoreFilmBrand');
+        }
+        else {
+            $request->session()->flash('alert-danger', 'อัพโหลดราคาไม่สำเร็จ');
+            return back()->withErrors($validator)->withInput();
+        }
+    }
+
+    public function ProductPriceDetailStoreFilmBrand(Request $request,$id){
+        $NUM_PAGE = 50;
+        $product_store_film_brand_prices = ProductStoreFilmBrandPrice::where('product_id',$id)->orderBy('id','asc')->paginate($NUM_PAGE);
+        $film_brand = ProductStoreFilmBrand::where('id',$id)->value('film_brand');
+        $film_type_id = ProductStoreFilmBrand::where('id',$id)->value('film_type_id');
+        $film_type = FilmType::where('id',$film_type_id)->value('film_type');
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/seller/manageProductPriceStore/product-price-detail-store-film-brand')->with('NUM_PAGE',$NUM_PAGE)
+                                                                                                  ->with('page',$page)
+                                                                                                  ->with('product_store_film_brand_prices',$product_store_film_brand_prices)
+                                                                                                  ->with('film_brand',$film_brand)
+                                                                                                  ->with('film_type',$film_type);
+    }
+
+
     public function rules_updateProductPrice() {
         return [
             'price' => 'required',
@@ -356,6 +463,30 @@ class SellerController extends Controller
     public function messages_updateProductPromotionPrice() {
         return [
             'promotion_price.required' => 'กรุณากรอกราคาโปรโมชั่น',
+        ];
+    }
+
+    public function rules_updateProductPriceStore() {
+        return [
+            'price' => 'required',
+        ];
+    }
+
+    public function messages_updateProductPriceStore() {
+        return [
+            'price.required' => 'กรุณากรอกราคาสินค้าปัจจุบัน',
+        ];
+    }
+
+    public function rules_updateProductPriceStoreFilmBrand() {
+        return [
+            'price' => 'required',
+        ];
+    }
+
+    public function messages_updateProductPriceStoreFilmBrand() {
+        return [
+            'price.required' => 'กรุณากรอกราคาสินค้าปัจจุบัน',
         ];
     }
 }

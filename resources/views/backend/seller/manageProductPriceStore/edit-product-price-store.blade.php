@@ -1,4 +1,4 @@
-@extends("/backend/layouts/template/template-admin")
+@extends("/backend/layouts/template/template-seller")
 
 @section("content")
 <div class="main-body">
@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>แก้ไขหมายเหตุ สต๊อกสินค้า</h5>
+                            <h5>แก้ไขราคาล่าสุด</h5>
                             <div class="card-header-right">
                                 <ul class="list-unstyled card-option">
                                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -20,22 +20,31 @@
                             </div>
                         </div>
                         <div class="card-block">
-                            <form action="{{url('/admin/update-stock-film')}}" enctype="multipart/form-data" method="post">@csrf
+                            <form action="{{url('/seller/update-product-price-store')}}" enctype="multipart/form-data" method="post">@csrf
                                 @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                                     @if(Session::has('alert-' . $msg))
                                         <p class="alertdesign alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                                     @endif
                                 @endforeach
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">หมายเหตุ</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" value="{{$stock_film->comment}}" name="comment">
+                                    <label class="col-sm-2 col-form-label">ชื่อสินค้า</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" value="{{$stock_film->film_type}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">ราคาปัจจุบัน</label>
+                                    <div class="col-sm-10">
+                                        @if ($errors->has('price'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('price') }})</span>
+                                        @endif
+                                        <input type="text" class="form-control" placeholder="กรุณากรอกราคาปัจจุบัน (ไม่ต้องใส่ , )" name="price">
                                     </div>
                                 </div>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-4 offset-md-2">
-                                        <input type="hidden" name="id" value="{{$stock_film->id}}">
-                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพเดตหมายเหตุ</button>
+                                        <input type="hidden" name="film_id" value="{{$stock_film->id}}">
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">อัพโหลดราคาปัจจุบัน</button>
                                     </div>
                                 </div>
                             </form>

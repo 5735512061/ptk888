@@ -47,7 +47,7 @@
                                     <td>{{$qty}}</td>
                                     <td>{{$totalPrice}}.-</td>
                                     @php
-                                        $status = DB::table('order_customer_confirms')->where('order_id',$value->id)->value('status');
+                                        $status = DB::table('order_customer_confirms')->where('order_id',$value->id)->orderBy('id','desc')->value('status');
                                     @endphp
                                     @if($status == null || $status == 'รอยืนยัน')
                                         <td style="color:red; font-size:15px;">รอยืนยัน</td> 

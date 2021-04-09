@@ -1,4 +1,4 @@
-@extends("/backend/layouts/template/template-admin")
+@extends("/backend/layouts/template/template-seller")
 
 @section("content")
 <div class="main-body">
@@ -6,7 +6,7 @@
         <div class="page-body">
             <div class="card">
                 <div class="card-header">
-                    <h5>จัดการราคาสินค้า</h5>
+                    <h5>จัดการราคาของร้านค้า สินค้าแบบแผ่น</h5> 
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -23,55 +23,37 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>รหัสสินค้า</th>
-                                    <th>ยี่ห้อฟิล์ม</th>
-                                    <th>รุ่นโทรศัพท์</th>
                                     <th>ชื่อสินค้า</th>
                                     <th>ราคาล่าสุด</th>
-                                    <th>สถานะ</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product => $value)
+                                @foreach ($stock_films as $stock_film => $value)
                                     <tr>
-                                        <th scope="row">{{$NUM_PAGE*($page-1) + $product+1}}</th>
+                                        <th scope="row">{{$NUM_PAGE*($page-1) + $stock_film+1}}</th>
                                         @php 
-                                            $price = DB::table('product_prices')->where('product_id',$value->id)->orderBy('id','desc')->value('price');
+                                            $price = number_format(DB::table('film_price_stores')->where('film_id',$value->id)->orderBy('id','desc')->value('price'));
                                             $status = DB::table('product_prices')->where('product_id',$value->id)->value('status');
-                                            $phone_model = DB::table('phone_models')->where('id',$value->phone_model_id)->value('model');
                                         @endphp
-                                        <td>{{$value->product_code}}</td>
-                                        <td>{{$value->film_model}}</td>
-                                        <td>{{$phone_model}}</td>
-                                        <td>{{$value->product_name}}</td>
+                                        <td>{{$value->film_type}}</td>
                                         @if($price == null)
                                             <td style="color: red;">0</td>
                                         @else 
                                             <td>{{$price}}.-</td>
                                         @endif
-
-                                        @if($status == null)
-                                            <td style="color: green;">เปิด</td>
-                                        @else
-                                            @if($status == 'เปิด')
-                                                <td style="color: green;">{{$status}}</td>
-                                            @else 
-                                                <td style="color:red;">{{$status}}</td>
-                                            @endif
-                                        @endif
                                         <td>       
-                                            <a href="{{url('/admin/edit-product-price')}}/{{$value->id}}">
+                                            <a href="{{url('/seller/edit-product-price-store')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>
                                             </a> 
-                                            <a href="{{url('/admin/product-price-detail')}}/{{$value->id}}">
+                                            <a href="{{url('/seller/product-price-detail-store')}}/{{$value->id}}">
                                                 <i class="fa fa-folder" style="color:blue;"></i>
                                             </a>        
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
-                            {{$products->links()}}
+                            {{$stock_films->links()}}
                         </table>
                     </div>
                 </div>
