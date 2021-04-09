@@ -234,9 +234,9 @@
                                         <div class="cart-summary" style="text-align: center;">
                                             <div class="cart-content">
                                                 <h3>รายละเอียดการชำระเงิน</h3><br>
-                                                <h4>เลขที่บัญชี : 123-456-789-0</span></h4><br>
-                                                <h4>ธนาคารไทยพาณิชย์</h4><br>
-                                                <h4>ชื่อบัญชี : บริษัท พีทีเค 888 จำกัด</h4><br>
+                                                <h4>ธนาคารกสิกรไทย</h4><br>
+                                                <h4>เลขที่บัญชี : 072-2-27925-5</h4><br>
+                                                <h4>ชื่อบัญชี : บจก. พี ที เค 888</h4><br>
                                                 @if ($errors->has('money'))
                                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('money') }})</span>
                                                 @endif
