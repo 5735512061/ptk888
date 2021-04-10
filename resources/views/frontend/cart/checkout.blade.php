@@ -85,7 +85,7 @@
                             @php 
                                 $id = $product['item'];
                                 $name = DB::table('products')->where('id',$id)->value('product_name'); 
-                                $price = DB::table('product_prices')->where('product_id',$id)->orderBy('id','desc')->value('price'); 
+                                $price = $product['price']/$product['qty'];
                                 $totalPrice += $product['price'];
                             @endphp
                             <input type="hidden" value="{{ $name }}" name="product[]">
