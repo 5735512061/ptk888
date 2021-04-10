@@ -72,6 +72,7 @@ class PtkController extends Controller
         $model_id = PhoneModel::where('model',$model)->value('id');
         $products = Product::where('brand_id',$brand_id)
                            ->where('phone_model_id',$model_id)
+                           ->where('product_recommend','ไม่ใช่')
                            ->where('status','แสดงสินค้า')->get();
         return view('frontend/product/by-phone-model')->with('products',$products);
     }
