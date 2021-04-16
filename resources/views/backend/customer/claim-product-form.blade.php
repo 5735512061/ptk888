@@ -58,6 +58,9 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
+                                @if ($errors->has('warranty_id'))
+                                    <span class="text-danger" style="font-size: 17px;">({{ $errors->first('warranty_id') }})</span>
+                                @endif
                                 <button type="submit" class="btn">
                                     {{ __('เคลมสินค้า') }}
                                 </button>

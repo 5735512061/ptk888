@@ -99,7 +99,7 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-5">
-                        <img src="{{url('img/logo_film/high_clear.jpg')}}" class="img-responsive">
+                        <img src="{{url('img/logo_film/wolverineSelfRepair.png')}}" class="img-responsive">
                     </div>
                     <div class="col-md-7" style="margin-top: 5em;">
                         <strong>ฟิล์มไฮโดรเจลวูล์ฟเวอรีน-ฟื้นฟูตัวเอง (Wolverine Self Repair Hydrogel Film)</strong>
@@ -110,7 +110,7 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-5">
-                        <img src="{{url('img/logo_film/high_clear.jpg')}}" class="img-responsive">
+                        <img src="{{url('img/logo_film/privacy.png')}}" class="img-responsive">
                     </div>
                     <div class="col-md-7" style="margin-top: 5em;">
                         <strong>ฟิล์มไฮโดรเจลกันรอยแบบป้องกันความเป็นส่วนตัว (Privacy Screen Hydrogel Film)</strong>
@@ -123,7 +123,7 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-5">
-                        <img src="{{url('img/logo_film/high_clear.jpg')}}" class="img-responsive">
+                        <img src="{{url('img/logo_film/antiBlue.png')}}" class="img-responsive">
                     </div>
                     <div class="col-md-7" style="margin-top: 5em;">
                         <strong>ฟิล์มไฮโดรเจลกันรอยแบบป้องกันสายตา (Anti-Blue Light Hydrogel Film)</strong>
@@ -134,7 +134,7 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-5">
-                        <img src="{{url('img/logo_film/high_clear.jpg')}}" class="img-responsive">
+                        <img src="{{url('img/logo_film/matte.png')}}" class="img-responsive">
                     </div>
                     <div class="col-md-7" style="margin-top: 5em;">
                         <strong>ฟิล์มไฮโดรเจลกันรอยแบบด้าน (Hydrogel Matte Film)</strong>
@@ -147,7 +147,7 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-5">
-                        <img src="{{url('img/logo_film/high_clear.jpg')}}" class="img-responsive">
+                        <img src="{{url('img/logo_film/high_clear.png')}}" class="img-responsive">
                     </div>
                     <div class="col-md-7" style="margin-top: 5em;">
                         <strong>ฟิล์มไฮโดรเจลกันรอยแบบใส (High Clear Hydrogel Film)</strong>

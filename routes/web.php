@@ -158,6 +158,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/update-data-warranty', 'Backend\AdminController@updateDataWarranty');
     Route::get('/claim-product', 'Backend\AdminController@claimProduct');
     Route::get('/edit-claim-status/{id}', 'Backend\AdminController@editClaimStatus');
+    Route::get('/delete-claim-warranty/{id}', 'Backend\AdminController@deleteClaimWarranty');
     // จัดการราคาของร้านค้า
     Route::get('/list-product-price-store', 'Backend\AdminController@listProductPriceStore');
     Route::get('/edit-product-price-store/{id}', 'Backend\AdminController@editProductPriceStore');

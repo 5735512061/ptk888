@@ -1105,6 +1105,12 @@ class AdminController extends Controller
                                                                    ->with('claim_status',$claim_status);
     }
 
+    public function deleteClaimWarranty($id){
+        $claim_warranty = WarrantyConfirm::findOrFail($id);
+        $claim_warranty->delete();
+        return back();
+    }
+
     // จัดการราคาของร้านค้า
     public function listProductPriceStore(Request $request){
         $NUM_PAGE = 50;

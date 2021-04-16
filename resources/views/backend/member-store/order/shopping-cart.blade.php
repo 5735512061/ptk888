@@ -56,11 +56,6 @@
                                                     $sumPrice = $value->qty * $price;
                                                     $sumPriceFormat = number_format($sumPrice);
                                                     $totalPrice += $sumPrice;
-
-                                                    $qtyCartStoreTotal = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
-                                                                                                         ->where('product_id','!=','11')
-                                                                                                         ->sum('qty');
-
                                                 @endphp
                                                 <td>{{$film}}</td>
                                                 <td>{{$value->qty}} แผ่น</td>
@@ -121,15 +116,57 @@
                                                 @endphp
                                                 <h4>ยอดสินค้า<span> {{$totalPriceFormat}} บาท</span></h4><br>
                                                 @php
-                                                    if($qtyCartStoreTotal < 1001 || $qtyCartStoreTotal > 1)  
-                                                        $discount = $qty * 70;
-                                                    elseif($qtyCartStoreTotal < 5001 || $qtyCartStoreTotal > 1001)
-                                                        $discount = $qty * 68;
-                                                    elseif($qtyCartStoreTotal > 5001)
-                                                        $discount = $qty * 65;
+                                                    $qtywolverineSelfRepair = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
+                                                                                                              ->where('product_id','20')
+                                                                                                              ->sum('qty');
+                                                    $qtyprivacy = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
+                                                                                                  ->where('product_id','21')
+                                                                                                  ->sum('qty');
+                                                    $qtyhighClear = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
+                                                                                                    ->where('product_id','3')
+                                                                                                    ->sum('qty');
+                                                    $qtymatte = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
+                                                                                                ->where('product_id','4')
+                                                                                                ->sum('qty');
+                                                    $qtyantiBlue = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
+                                                                                                   ->where('product_id','5')
+                                                                                                   ->sum('qty');
+
+                                                    if($qtywolverineSelfRepair < 3001 && $qtywolverineSelfRepair > 1500)  
+                                                        $discount = 5/100;
+                                                    elseif($qtywolverineSelfRepair < 4501 && $qtywolverineSelfRepair > 3000)
+                                                        $discount = 7/100;
+                                                    elseif($qtywolverineSelfRepair > 4500)
+                                                        $discount = 10/100;
+                                                    elseif($qtyprivacy < 3001 && $qtyprivacy > 1500)  
+                                                        $discount = 5/100;
+                                                    elseif($qtyprivacy < 4501 && $qtyprivacy > 3000)
+                                                        $discount = 7/100;
+                                                    elseif($qtyprivacy > 4500)
+                                                        $discount = 10/100;
+                                                    elseif($qtyhighClear < 3001 && $qtyhighClear > 1500)  
+                                                        $discount = 5/100;
+                                                    elseif($qtyhighClear < 4501 && $qtyhighClear > 3000)
+                                                        $discount = 7/100;
+                                                    elseif($qtyhighClear > 4500)
+                                                        $discount = 10/100;
+                                                    elseif($qtymatte < 3001 && $qtymatte > 1500)  
+                                                        $discount = 5/100;
+                                                    elseif($qtymatte < 4501 && $qtymatte > 3000)
+                                                        $discount = 7/100;
+                                                    elseif($qtymatte > 4500)
+                                                        $discount = 10/100;
+                                                    elseif($qtyantiBlue < 3001 && $qtyantiBlue > 1500)  
+                                                        $discount = 5/100;
+                                                    elseif($qtyantiBlue < 4501 && $qtyantiBlue > 3000)
+                                                        $discount = 7/100;
+                                                    elseif($qtyantiBlue > 4500)
+                                                        $discount = 10/100;
+                                                    else 
+                                                        $discount = 0;
                                                 @endphp
                                                 @php
-                                                    $totalDiscount =  $totalPrice - $discount;
+                                                    $totalDiscount =  $sumPrice * $discount;
                                                     $totalDiscountFormat = number_format($totalDiscount);
                                                 @endphp
                                                 <h4>ส่วนลดสินค้า<span> {{$totalDiscountFormat}} บาท</span></h4><br>

@@ -205,6 +205,7 @@ class MemberController extends Controller
             'reason' => 'required',
             'image' => 'required',
             'address' => 'required',
+            'warranty_id' => 'unique:warranty_confirms',
         ];
     }
 
@@ -213,6 +214,7 @@ class MemberController extends Controller
             'reason.required' => 'กรุณากรอกสาเหตุการเคลมสินค้า',
             'image.required' => 'กรุณาเลือกไฟล์รูปภาพ 1 รูป',
             'address.required' => 'กรุณากรอกที่อยู่จัดส่งสินค้า',
+            'warranty_id.unique' => 'รายการนี้เคยใช้สิทธิ์เคลมสินค้าแล้ว',
         ];
     }  
     
