@@ -38,10 +38,12 @@
                                             <th>จำนวน</th>
                                             <th>ราคาต่อแผ่น</th>
                                             <th>ราคารวม (ไม่รวมส่วนลด)</th>
+                                            <th>ส่วนลด</th>
                                         </tr>
                                     </thead>
                                     @php
                                         $totalPrice = 0;
+                                        $sumDiscount = 0;
                                     @endphp
                                     <tbody>
                                         @foreach ($product_cart_sessions as $product_cart_session => $value)
@@ -54,10 +56,41 @@
                                                     $sumPriceFormat = number_format($sumPrice);
                                                     $totalPrice += $sumPrice;
                                                 @endphp
+                                                @php
+                                                    $film_id = DB::table('stock_films')->where('film_type',$film)->value('id');
+                                                    $product_id = DB::table('film_price_stores')->where('film_id',$film_id)->orderBy('id','desc')->value('id');
+
+                                                    $qtyCart = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
+                                                                                               ->where('product_id',$product_id)
+                                                                                               ->sum('qty');
+                                                    $qtySession = DB::table('product_cart_session_stores')->where('store_id',Auth::guard('store')->user()->id)
+                                                                                                          ->where('product_id',$product_id)
+                                                                                                          ->sum('qty');
+                                                    // เอาค่านี้ไปคำนวณ 
+                                                    $qty = $qtyCart + $qtySession;
+
+                                                    if($qty < 3001 && $qty > 1500)  
+                                                        $discount = 5/100;
+                                                    elseif($qty < 4501 && $qty > 3000)
+                                                        $discount = 7/100;
+                                                    elseif($qty > 4500)
+                                                        $discount = 10/100;
+                                                    else
+                                                        $discount = 0;
+
+                                                @endphp
+                                                @php
+                                                    $totalDiscount =  $sumPrice * $discount;
+                                                    $sumDiscount += $totalDiscount;
+                                                    $sumDiscountRound = round($sumDiscount,0);
+                                                    $totalDiscountFormat = number_format($totalDiscount);
+                                                    $sumDiscountFormat = number_format($sumDiscountRound);
+                                                @endphp
                                                 <td>{{$film}}</td>
                                                 <td>{{$value->qty}} แผ่น</td>
                                                 <td>{{$price}} บาท</td>
                                                 <td>{{$sumPriceFormat}} บาท</td>
+                                                <td>{{$totalDiscountFormat}} บาท</td>
                                             </tr>
                                         @endforeach
                                     </tbody> 
@@ -195,31 +228,12 @@
                                                 @endforeach
                                                 @php
                                                     $totalPriceFormat = number_format($totalPrice);
-                                                    $qtyCartStoreTotal = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
-                                                                                                         ->where('product_id','!=','11')
-                                                                                                         ->sum('qty');
-
                                                 @endphp
                                                 <h4>ยอดสินค้า<span> {{$totalPriceFormat}} บาท</span></h4><br>
-
-                                                @php
-                                                    if($qtyCartStoreTotal < 1001 || $qtyCartStoreTotal > 1)  
-                                                        $discount = $qty * 70;
-                                                    elseif($qtyCartStoreTotal < 5001 || $qtyCartStoreTotal > 1001)
-                                                        $discount = $qty * 68;
-                                                    elseif($qtyCartStoreTotal > 5001)
-                                                        $discount = $qty * 65;
-                                                @endphp
-
-                                                @php
-                                                    $totalDiscount =  $totalPrice - $discount;
-                                                    $totalDiscountFormat = number_format($totalDiscount);
-                                                @endphp
-
-                                                <h4>ส่วนลดสินค้า<span> {{$totalDiscountFormat}} บาท</span></h4><br>
+                                                <h4>ส่วนลดสินค้า<span> {{$sumDiscountFormat}} บาท</span></h4><br>
                                                 <h4>ค่าจัดส่ง<span> 0 บาท</span></h4><br>
                                                 @php
-                                                    $totalPrice = number_format($totalPrice - $totalDiscount);
+                                                    $totalPrice = number_format($totalPrice - $sumDiscountRound);
                                                 @endphp
                                                 <h3>รวมทั้งสิ้น<span> {{$totalPrice}} บาท</span></h3>
                                             </div>

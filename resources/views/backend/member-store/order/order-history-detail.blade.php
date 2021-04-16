@@ -74,47 +74,55 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $sumDiscount = 0;
+                                    $totalPrice = 0;
+                                @endphp
                                 @foreach ($product_ids as $product_id => $value)
                                     <tr>
-                                        @php 
-                                            $totalPrice = DB::table('product_cart_stores')->where('bill_number',$value->bill_number)
-                                                                                          ->sum(DB::raw('price * qty'));
-                                            $totalPriceFormat = number_format($totalPrice);
-
-                                            $qtyCartStoreTotal = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
-                                                                                                 ->where('product_id','!=','11')
-                                                                                                 ->sum('qty');
-						                @endphp
                                         @php
                                             $film_id = DB::table('film_price_stores')->where('id',$value->product_id)->value('film_id');
                                             $product_name = DB::table('stock_films')->where('id',$film_id)->value('film_type');
                                             $qty = DB::table('product_cart_stores')->where('id',$value->id)->value('qty');
                                             $price = DB::table('product_cart_stores')->where('id',$value->id)->value('price');
+                                            $sumPrice = $qty * $price;
+                                            $totalPrice += $sumPrice;
+                                            $sumPriceFormat = number_format($sumPrice);
                                         @endphp
                                         <td scope="row">{{$NUM_PAGE*($page-1) + $product_id+1}}</td>
                                         <td>{{$product_name}}</td>
                                         <td>{{$price}}.-</td>
                                         <td>{{$qty}}</td>
-                                        <td>{{$totalPriceFormat}}.-</td>
+                                        <td>{{$sumPriceFormat}}.-</td>
                                         @php
-                                            if($qtyCartStoreTotal < 1001 || $qtyCartStoreTotal > 1)  
-                                                $discount = $qty * 70;
-                                            elseif($qtyCartStoreTotal < 5001 || $qtyCartStoreTotal > 1001)
-                                                $discount = $qty * 68;
-                                            elseif($qtyCartStoreTotal > 5001)
-                                                $discount = $qty * 65;
-                                        @endphp
+                                            $film_id = DB::table('stock_films')->where('film_type',$product_name)->value('id');
+                                            $product_id = DB::table('film_price_stores')->where('film_id',$film_id)->orderBy('id','desc')->value('id');
 
+                                            $qty = DB::table('product_cart_stores')->where('store_id',Auth::guard('store')->user()->id)
+                                                                                   ->where('product_id',$product_id)
+                                                                                   ->sum('qty');
+                                                                                   echo $qty;
+                                            
+                                            if($qty < 3001 && $qty > 1500)  
+                                                $discount = 5/100;
+                                            elseif($qty < 4501 && $qty > 3000)
+                                                $discount = 7/100;
+                                            elseif($qty > 4500)
+                                                $discount = 10/100;
+                                            else
+                                                $discount = 0;
+                                        @endphp
                                         @php
-                                            $totalDiscount =  $totalPrice - $discount;
+                                            $totalDiscount =  $sumPrice * $discount;
+                                            $sumDiscountRound = round($totalDiscount,0);
                                             $totalDiscountFormat = number_format($totalDiscount);
                                         @endphp
 
                                         <td>{{$totalDiscountFormat}} บาท</td>
                                         @php
-                                            $totalPrice = number_format($totalPrice - $totalDiscount);
+                                            $totalPriceFormat = number_format($sumPrice - $sumDiscountRound);
                                         @endphp
-                                        <td>{{$totalPrice}} บาท</td>
+                                        <td>{{$totalPriceFormat}} บาท</td>
                                         <td>
                                             @php
                                                 $order_id = DB::table('order_stores')->where('product_cart_id',$value->id)->value('id');
