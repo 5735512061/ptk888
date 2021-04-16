@@ -119,9 +119,9 @@
                                         @endphp
 
                                         <td>{{$totalDiscountFormat}} บาท</td>
-                                        @php
-                                            $totalPriceFormat = number_format($sumPrice - $sumDiscountRound);
-                                        @endphp
+                                            @php
+                                                $totalPriceFormat = number_format($sumPrice - $sumDiscountRound);
+                                            @endphp
                                         <td>{{$totalPriceFormat}} บาท</td>
                                         <td>
                                             @php

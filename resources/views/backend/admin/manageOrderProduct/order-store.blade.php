@@ -54,43 +54,57 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $sumDiscount = 0;
+                                @endphp
                                 @foreach ($orders as $order => $value)
                                     <tr>
                                         <th scope="row">{{$NUM_PAGE*($page-1) + $order+1}}</th>
                                         @php
                                             $qty = DB::table('product_cart_stores')->where('bill_number',$value->bill_number)->sum('qty');
-                                            $totalPrice = DB::table('product_cart_stores')->where('bill_number',$value->bill_number)
+                                            $sumPrice = DB::table('product_cart_stores')->where('bill_number',$value->bill_number)
                                                                                           ->sum(DB::raw('price * qty'));
-                                            $totalPriceFormat = number_format($totalPrice);
+                                            $totalPriceFormat = number_format($sumPrice);
 
                                             $qtyCartStoreTotal = DB::table('product_cart_stores')->where('store_id',$value->store_id)
                                                                                                  ->where('product_id','!=','11')
                                                                                                  ->sum('qty');
 
-                                            $store_id = DB::table('stores')->where('id',$value->store_id)->value('store_id')
+                                            $store_id = DB::table('stores')->where('id',$value->store_id)->value('store_id');
+                                            $id = DB::table('stores')->where('id',$value->store_id)->value('id');
+                                            $product_ids = DB::table('product_cart_stores')->where('bill_number',$value->bill_number)->get();
                                         @endphp
                                         <td>{{$store_id}}</td>
                                         <td><a href="{{url('/admin/order-store-detail/')}}/{{$value->id}}" style="color: blue;">{{$value->bill_number}}</a></td>
                                         <td>{{$value->date}}</td>
                                         <td>{{$qty}}</td>
                                         <td>{{$totalPriceFormat}} บาท</td>
-                                        @php
-                                            if($qtyCartStoreTotal < 1001 || $qtyCartStoreTotal > 1)  
-                                                $discount = $qty * 70;
-                                            elseif($qtyCartStoreTotal < 5001 || $qtyCartStoreTotal > 1001)
-                                                $discount = $qty * 68;
-                                            elseif($qtyCartStoreTotal > 5001)
-                                                $discount = $qty * 65;
-                                        @endphp
+                                        @foreach ($product_ids as $product_id => $value)
+                                            @php
+                                                $qty = DB::table('product_cart_stores')->where('store_id',$id)
+                                                                                       ->where('product_id',$value->product_id)
+                                                                                       ->sum('qty');
+                                                if($qty < 3001 && $qty > 1500)  
+                                                    $discount = 5/100;
+                                                elseif($qty < 4501 && $qty > 3000)
+                                                    $discount = 7/100;
+                                                elseif($qty > 4500)
+                                                    $discount = 10/100;
+                                                else
+                                                    $discount = 0;
+                                            @endphp
+                                        @endforeach
 
                                         @php
-                                            $totalDiscount =  $totalPrice - $discount;
+                                            $totalDiscount =  $sumPrice * $discount;
+                                            $sumDiscountRound = round($totalDiscount,0);
                                             $totalDiscountFormat = number_format($totalDiscount);
+                                            $sumDiscountFormat = number_format($sumDiscountRound);
                                         @endphp
 
                                         <td>{{$totalDiscountFormat}} บาท</td>
                                         @php
-                                            $totalPrice = number_format($totalPrice - $totalDiscount);
+                                            $totalPrice = number_format($sumPrice - $sumDiscountRound);
                                         @endphp
                                         <td>{{$totalPrice}} บาท</td>
                                         <td>
