@@ -631,7 +631,7 @@ class AdminController extends Controller
                     $path = 'image_upload/image_product/'.$filename;
                     $image[]=$filename;
                 }
-            }
+            }   
 
             for ($i=0; $i < count($image) ; $i++) { 
                 $imageUpload = new ImageProduct;
