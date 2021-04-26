@@ -687,8 +687,24 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), $this->rules_updateProduct(), $this->messages_updateProduct());
         if($validator->passes()) {
             $id = $request->get('id');
+            $image_product_id = ImageProduct::where('product_id',$id)->value('id');
             $product = Product::findOrFail($id);
             $product->update($request->all());
+            $image=array();
+            if($files=$request->file('image')){
+                foreach($files as $file){
+                    $filename = md5(($file->getClientOriginalName(). time()) . time()) . "_o." . $file->getClientOriginalExtension();
+                    $file->move('image_upload/image_product/', $filename);
+                    $path = 'image_upload/image_product/'.$filename;
+                    $image[]=$filename;
+                }
+            }   
+
+            for ($i=0; $i < count($image) ; $i++) { 
+                $imageUpload = ImageProduct::findOrFail($image_product_id);
+                $imageUpload->image = $image[$i];
+                $imageUpload->save();
+            }
             $request->session()->flash('alert-success', 'อัพโหลดสินค้าสำเร็จ');
             return redirect()->action('Backend\AdminController@listProduct');
         }
