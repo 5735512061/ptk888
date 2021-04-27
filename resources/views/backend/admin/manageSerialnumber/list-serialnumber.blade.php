@@ -19,7 +19,7 @@
                             <form action="{{url('/admin/search-serialnumber')}}" enctype="multipart/form-data" method="post">@csrf
                                 <div class="row" style="margin-left: 5px; margin-right: 5px;">
                                     <div class="col-md-3">
-                                        <input type="text" name="serialnumber" class="form-control" placeholder="ค้นหาหมายเลขสินค้า"><br>
+                                        <input id="ssn" maxlength="19" minlength="19" type="text" name="serialnumber" class="form-control" placeholder="ค้นหาหมายเลขสินค้า"><br>
                                         <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาหมายเลขสินค้า</button>
                                     </div>
                                 </div>
@@ -139,4 +139,18 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="{{asset('https://code.jquery.com/jquery-3.2.1.min.js')}}"></script>
+<script>
+    // serial number
+    $('#ssn').keyup(function() {
+        var val = this.value.replace(/\D/g, '');
+        var newVal = '';
+        while (val.length > 4) {
+          newVal += val.substr(0, 4) + ' ';
+          val = val.substr(4);
+        }
+        newVal += val;
+        this.value = newVal;
+    });
+</script>
 @endsection

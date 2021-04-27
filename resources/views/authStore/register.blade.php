@@ -18,7 +18,7 @@
                                         <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหารหัสสมาชิก</button>
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="text" name="phone" class="form-control" placeholder="ค้นหาเบอร์โทรศัพท์"><br>
+                                        <input type="text" name="phone" class="form-control phone_format" placeholder="ค้นหาเบอร์โทรศัพท์"><br>
                                         <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาเบอร์โทรศัพท์</button>
                                     </div>
                                     <div class="col-md-3">

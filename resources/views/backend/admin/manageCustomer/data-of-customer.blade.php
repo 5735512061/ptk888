@@ -23,7 +23,7 @@
                                         <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหารหัสสมาชิก</button>
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="text" name="phone" class="form-control" placeholder="ค้นหาเบอร์โทรศัพท์"><br>
+                                        <input type="text" name="phone" class="form-control phone_format" placeholder="ค้นหาเบอร์โทรศัพท์"><br>
                                         <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาเบอร์โทรศัพท์</button>
                                     </div>
                                     <div class="col-md-3">
@@ -121,4 +121,19 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="{{asset('https://code.jquery.com/jquery-3.2.1.min.js')}}"></script>
+<script>
+   // number phone
+   function phoneFormatter() {
+        $('input.phone_format').on('input', function() {
+            var number = $(this).val().replace(/[^\d]/g, '')
+                if (number.length >= 5 && number.length < 10) { number = number.replace(/(\d{3})(\d{2})/, "$1-$2"); } else if (number.length >= 10) {
+                    number = number.replace(/(\d{3})(\d{3})(\d{3})/, "$1-$2-$3"); 
+                }
+            $(this).val(number)
+            $('input.phone_format').attr({ maxLength : 12 });    
+        });
+    };
+    $(phoneFormatter);
+</script>
 @endsection
