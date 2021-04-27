@@ -108,6 +108,15 @@ class AdminController extends Controller
             $id = $request->get('id');
             $store = Store::findOrFail($id);
             $store->update($request->all());
+            if($request->hasFile('image_logo')) {
+                $image = $request->file('image_logo');
+                $filename = md5(($image->getClientOriginalName(). time()) . time()) . "_o." . $image->getClientOriginalExtension();
+                $image->move('image_upload/image_logo_store/', $filename);
+                $path = 'image_upload/image_logo_store/'.$filename;
+                $store = Store::findOrFail($id);
+                $store->image_logo = $filename;
+                $store->save();
+            }
             $request->session()->flash('alert-success', 'แก้ไขข้อมูลสมาชิกร้านค้าสำเร็จ');
             return redirect()->action('AuthStore\RegisterController@manageMemberStore');
         }

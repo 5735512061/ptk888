@@ -136,7 +136,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">อัพโหลดรูปภาพโลโก้ร้านค้า (ถ้ามี)</label>
+                                    <label class="col-sm-2 col-form-label">อัพโหลดรูปภาพโลโก้ร้านค้า<br>(ขนาด 220px * 220px)</label>
                                     <div class="col-sm-6">
                                         <input type="file" class="form-control" name="image_logo">
                                     </div>

@@ -6,10 +6,10 @@
     <div class="card" style="margin-bottom: 2rem;">
         <div class="container-fliud">
             <div class="wrapper row">
-                <div class="preview col-md-6">
+                <div class="preview col-md-3">
                     <div class="preview-pic tab-content">
                         <div class="tab-pane active">
-                            <img src="{{url('/image_upload/image_logo_store')}}/{{$value->image_logo}}" class="img-responsive" width="100%"/>
+                            <img src="{{url('/image_upload/image_logo_store')}}/{{$value->image_logo}}" width="220px;" height="220px;"/>
                         </div>
                     </div>
                 </div>
