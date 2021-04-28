@@ -56,6 +56,11 @@ class PtkController extends Controller
                                                          ->with('productRecommends',$productRecommends);
     }
 
+    public function allBrand() {
+        $brands = Brand::get();
+        return view('frontend/brand/all-brand')->with('brands',$brands);
+    }
+
     public function brand($brand) {
         $brand_id = Brand::where('brand',$brand)->value('id');
         $phone_models = PhoneModel::where('brand_id',$brand_id)->where('status',"เปิด")->get();

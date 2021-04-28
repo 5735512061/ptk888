@@ -62,7 +62,7 @@
                             @foreach ($brands as $brand => $value)
                                 <a href="{{url('/brand')}}/{{$value->brand_eng}}" class="dropdown-item">{{$value->brand_eng}}</a>
                             @endforeach
-                                <a href="{{url('/brand')}}" class="dropdown-item">All Brand</a>
+                                <a href="{{url('/all-brand')}}" class="dropdown-item">All Brand</a>
                         </div>
                     </div>
                     <a href="{{url('/dealer-shop')}}" class="nav-item nav-link">ตัวแทนจำหน่าย</a>
