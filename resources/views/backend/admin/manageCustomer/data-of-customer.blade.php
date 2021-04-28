@@ -17,7 +17,7 @@
                         </div><br>
                         <div class="card-block">
                             <form action="{{url('/admin/search-customer')}}" enctype="multipart/form-data" method="post">@csrf
-                                <div class="row" style="margin-left: 5px;">
+                                <div class="row" style="margin-left: 5px; margin-right: 5px;">
                                     <div class="col-md-3">
                                         <input type="text" name="member_id" class="form-control" placeholder="ค้นหารหัสสมาชิก"><br>
                                         <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหารหัสสมาชิก</button>
@@ -29,6 +29,10 @@
                                     <div class="col-md-3">
                                         <input type="text" name="name" class="form-control" placeholder="ค้นหาชื่อลูกค้า"><br>
                                         <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหาชื่อลูกค้า</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" name="surname" class="form-control" placeholder="ค้นหานามสกุลลูกค้า"><br>
+                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-primary">ค้นหานามสกุลลูกค้า</button>
                                     </div>
                                 </div>
                             </form>
