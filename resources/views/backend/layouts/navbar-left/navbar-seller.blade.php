@@ -121,42 +121,30 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
-            <li class="pcoded-hasmenu ">
+            <li class="pcoded-hasmenu">
                 <a href="javascript:void(0)" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-shopping-cart"></i></span>
-                    <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">การสั่งซื้อ</span>
+                    <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">ข้อมูลการสั่งซื้อ</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
-                    <li class="pcoded-hasmenu ">
-                        <a href="javascript:void(0)" class="waves-effect waves-dark">
-                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">ข้อมูลการสั่งซื้อ</span>
+                    <li class=" ">
+                        <a href="{{url('/seller/order-customer')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">การสั่งซื้อของลูกค้า</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
-                        <ul class="pcoded-submenu">
-                            <li class=" ">
-                                <a href="{{url('/seller/order-customer')}}" class="waves-effect waves-dark">
-                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">การสั่งซื้อของลูกค้า</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="pcoded-submenu">
-                            <li class="">
-                                <a href="{{url('/seller/order-store')}}" class="waves-effect waves-dark">
-                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">การสั่งซื้อของร้านค้า</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="pcoded-submenu">
-                            <li class="">
-                                <a href="{{url('/seller/order-store/film-brand')}}" class="waves-effect waves-dark">
-                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">การสั่งซื้อแพ็คเกจ</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
+                    </li>
+                    <li class=" ">
+                        <a href="{{url('/seller/order-store')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">การสั่งซื้อของร้านค้า</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{url('/seller/order-store/film-brand')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">การสั่งซื้อแพ็คเกจ</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
                     </li>
                 </ul>
             </li>

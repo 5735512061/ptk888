@@ -45,7 +45,7 @@ class PtkController extends Controller
     }
 
     public function dealerShop() {
-        $stores = Store::get();
+        $stores = Store::where('status','ใช้งานได้')->get();
         return view('frontend/company/dealer-shop')->with('stores',$stores);
     }
 
