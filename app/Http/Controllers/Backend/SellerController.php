@@ -168,7 +168,7 @@ class SellerController extends Controller
     /////////////////////////////// จัดการออเดอร์ การสั่งซื้อ รายการสินค้าออก ///////////////////////////////
     public function productOut(Request $request){
         $NUM_PAGE = 50;
-        $product_outs = ProductOut::orderBy('id','asc')->paginate($NUM_PAGE);
+        $product_outs = ProductOut::orderBy('id','desc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/manageOrderProduct/product-out')->with('NUM_PAGE',$NUM_PAGE)
@@ -211,7 +211,7 @@ class SellerController extends Controller
 
     public function orderCustomer(Request $request){
         $NUM_PAGE = 50;
-        $orders = OrderCustomer::groupBy('bill_number')->orderBy('id','asc')->paginate($NUM_PAGE);
+        $orders = OrderCustomer::groupBy('bill_number')->orderBy('id','desc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/manageOrderProduct/order-customer')->with('NUM_PAGE',$NUM_PAGE)
@@ -248,7 +248,7 @@ class SellerController extends Controller
 
     public function orderStore(Request $request){
         $NUM_PAGE = 50;
-        $orders = OrderStore::groupBy('bill_number')->orderBy('id','asc')->paginate($NUM_PAGE);
+        $orders = OrderStore::groupBy('bill_number')->orderBy('id','desc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/manageOrderProduct/order-store')->with('NUM_PAGE',$NUM_PAGE)
@@ -285,7 +285,7 @@ class SellerController extends Controller
 
     public function orderStoreFilmBrand(Request $request){
         $NUM_PAGE = 50;
-        $orders = OrderStoreFilmBrand::groupBy('bill_number')->orderBy('id','asc')->paginate($NUM_PAGE);
+        $orders = OrderStoreFilmBrand::groupBy('bill_number')->orderBy('id','desc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/manageOrderProduct/order-store-film-brand')->with('NUM_PAGE',$NUM_PAGE)
@@ -365,7 +365,7 @@ class SellerController extends Controller
 
     public function claimProduct(Request $request){
         $NUM_PAGE = 50;
-        $claim_products = WarrantyConfirm::orderBy('id','asc')->paginate($NUM_PAGE);
+        $claim_products = WarrantyConfirm::orderBy('id','desc')->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/seller/dataWarranty/claim-product')->with('NUM_PAGE',$NUM_PAGE)
@@ -502,13 +502,14 @@ class SellerController extends Controller
 
     public function rules_productOutPost() {
         return [
-            'serialnumber' => 'required',
+            'serialnumber' => 'required|unique:product_outs',
         ];
     }
 
     public function messages_productOutPost() {
         return [
             'serialnumber.required' => 'กรุณากรอกหมายเลขซีเรียล 16 หลัก',
+            'serialnumber.unique' => 'หมายเลขซีเรียลนี้ได้นำออกแล้ว',
         ];
     }
 

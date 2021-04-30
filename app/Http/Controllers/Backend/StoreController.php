@@ -409,7 +409,7 @@ class StoreController extends Controller
     // ประวัติการสั่งซื้อสินค้า
     public function orderHistory(){
         $store_id = Auth::guard('store')->user()->id;   
-        $orders = OrderStore::where('store_id',$store_id)->groupBY('bill_number')->orderBy('id','asc')->get();
+        $orders = OrderStore::where('store_id',$store_id)->groupBY('bill_number')->orderBy('id','desc')->get();
         return view('backend/member-store/order/order-history')->with('orders',$orders);
     }
 
@@ -420,7 +420,7 @@ class StoreController extends Controller
 
     public function orderHistoryFilmBrand(){
         $store_id = Auth::guard('store')->user()->id;
-        $orders = OrderStoreFilmBrand::where('store_id',$store_id)->groupBY('bill_number')->orderBy('id','asc')->get();
+        $orders = OrderStoreFilmBrand::where('store_id',$store_id)->groupBY('bill_number')->orderBy('id','desc')->get();
         return view('backend/member-store/orderFilmBrand/order-history')->with('orders',$orders);
     }
 

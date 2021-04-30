@@ -165,7 +165,7 @@ class MemberController extends Controller
 
     public function orderHistory(){
         $customer_id = Auth::guard('member')->user()->id;
-        $orders = OrderCustomer::where('customer_id',$customer_id)->groupBY('bill_number')->orderBy('id','asc')->get();
+        $orders = OrderCustomer::where('customer_id',$customer_id)->groupBY('bill_number')->orderBy('id','desc')->get();
         $productRecommends = Product::where('product_recommend','ใช่')->get();
         return view('frontend/account/order-history')->with('orders',$orders)
                                                      ->with('productRecommends',$productRecommends);
