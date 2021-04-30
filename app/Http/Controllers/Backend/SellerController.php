@@ -246,6 +246,15 @@ class SellerController extends Controller
             return redirect()->action('Backend\SellerController@orderCustomer');
     }
 
+    public function updateAddressCustomer(Request $request){
+        $id = $request->get('id');
+        $bill_number = OrderCustomer::where('id',$id)->value('bill_number');
+        $shipment_id = ShipmentCustomer::where('bill_number',$bill_number)->value('id');
+        $shipment = ShipmentCustomer::findOrFail($shipment_id);
+        $shipment->update($request->all());
+        return redirect()->action('Backend\SellerController@orderCustomer');
+    }
+
     public function orderStore(Request $request){
         $NUM_PAGE = 50;
         $orders = OrderStore::groupBy('bill_number')->orderBy('id','desc')->paginate($NUM_PAGE);
@@ -281,6 +290,15 @@ class SellerController extends Controller
             }
 
             return redirect()->action('Backend\SellerController@orderStore');
+    }
+
+    public function updateAddressStore(Request $request){
+        $id = $request->get('id');
+        $bill_number = OrderStore::where('id',$id)->value('bill_number');
+        $shipment_id = ShipmentStore::where('bill_number',$bill_number)->value('id');
+        $shipment = ShipmentStore::findOrFail($shipment_id);
+        $shipment->update($request->all()); 
+        return redirect()->action('Backend\SellerController@orderStore');
     }
 
     public function orderStoreFilmBrand(Request $request){
@@ -319,6 +337,15 @@ class SellerController extends Controller
             }
 
             return redirect()->action('Backend\SellerController@orderStoreFilmBrand');
+    }
+
+    public function updateAddressStoreFilmBrand(Request $request){
+        $id = $request->get('id');
+        $bill_number = OrderStoreFilmBrand::where('id',$id)->value('bill_number');
+        $shipment_id = ShipmentStoreFilmBrand::where('bill_number',$bill_number)->value('id');
+        $shipment = ShipmentStoreFilmBrand::findOrFail($shipment_id);
+        $shipment->update($request->all()); 
+        return redirect()->action('Backend\SellerController@orderStoreFilmBrand');
     }
 
     /////////////////////////////// ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า ///////////////////////////////

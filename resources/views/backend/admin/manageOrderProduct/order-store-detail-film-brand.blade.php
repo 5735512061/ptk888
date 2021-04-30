@@ -75,6 +75,7 @@
                                     <th>ราคารวม</th>
                                     <th>สถานะ</th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -111,6 +112,17 @@
                                                 <i class="fa fa-pencil-square-o" style="color:blue; font-family: 'Mitr','FontAwesome';"> สถานะการจัดส่ง</i>
                                             </a>
                                         </td>
+                                        <td>
+                                            @if($status == null || $status == 'รอยืนยัน')
+                                                <a type="button" data-toggle="modal" data-target="#ModalAddress{{$value->id}}">
+                                                    <i class="fa fa-pencil-square-o" style="color:blue; font-family: 'Mitr','FontAwesome';"> แก้ไขที่อยู่จัดส่ง</i>
+                                                </a>
+                                            @elseif($status == 'กำลังจัดส่ง')
+                                                <p style="color:red; font-size:15px;">ไม่สามารถแก้ไขที่อยู่จัดส่งได้</p>
+                                            @else
+                                                <p style="color:red; font-size:15px;">ไม่สามารถแก้ไขที่อยู่จัดส่งได้</p>
+                                            @endif
+                                        </td>
                                     </tr>
                                     <!-- Modal -->
                                     <div class="modal fade" id="ModalStatus{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -145,6 +157,58 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Modal Address-->
+                                    <div class="modal fade" id="ModalAddress{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">แก้ไขที่อยู่จัดส่ง</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{{url('/admin/update-address-store-film-brand')}}" enctype="multipart/form-data" method="post">@csrf
+                                                    <div class="modal-body">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 col-form-label">ชื่อลูกค้า</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="name" class="form-control" value="{{$name}}"><br>
+                                                            </div>
+                                                            <label class="col-sm-4 col-form-label">หมายเลขโทรศัพท์</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="phone" class="phone_format form-control" value="{{$phone}}"><br>
+                                                            </div>
+                                                            <label class="col-sm-4 col-form-label">ที่อยู่</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="address" class="form-control" value="{{$address}}"><br>
+                                                            </div>
+                                                            <label class="col-sm-4 col-form-label">ตำบล</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="district" class="form-control" value="{{$district}}"><br>
+                                                            </div>    
+                                                            <label class="col-sm-4 col-form-label">อำเภอ</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="amphoe" class="form-control" value="{{$amphoe}}"><br>
+                                                            </div>   
+                                                            <label class="col-sm-4 col-form-label">จังหวัด</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="province" class="form-control" value="{{$province}}"><br>
+                                                            </div> 
+                                                            <label class="col-sm-4 col-form-label">รหัสไปรษณีย์</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="zipcode" class="form-control" value="{{$zipcode}}"><br>
+                                                            </div>    
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="hidden" name="id" value="{{$order_id}}">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                                        <button type="submit" class="btn btn-primary">อัพเดตที่อยู่การจัดส่ง</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </tbody>
                             {{$product_ids->links()}}
@@ -155,4 +219,19 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="{{asset('https://code.jquery.com/jquery-3.2.1.min.js')}}"></script>
+<script>
+   // number phone
+   function phoneFormatter() {
+        $('input.phone_format').on('input', function() {
+            var number = $(this).val().replace(/[^\d]/g, '')
+                if (number.length >= 5 && number.length < 10) { number = number.replace(/(\d{3})(\d{2})/, "$1-$2"); } else if (number.length >= 10) {
+                    number = number.replace(/(\d{3})(\d{3})(\d{3})/, "$1-$2-$3"); 
+                }
+            $(this).val(number)
+            $('input.phone_format').attr({ maxLength : 12 });    
+        });
+    };
+    $(phoneFormatter);
+</script>
 @endsection
