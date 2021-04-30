@@ -39,7 +39,7 @@
                                         <td>{{$value->film_brand}} {{$film_type}}</td>
                                         <td>{{$price}} บาท</td>
                                         <td>  
-                                            <a type="button" data-toggle="modal" data-target="#ModalOrder{{$value->id}}" style="color:blue;">
+                                            <a href="#" data-toggle="modal" data-target="#ModalOrder{{$value->id}}" style="color:blue;">
                                                 กดสั่งซื้อสินค้า
                                             </a>
                                         </td>

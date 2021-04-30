@@ -55,7 +55,7 @@
                                             @if($amount == 0)
                                                 <div style="color: red;">สินค้าหมด</div> 
                                             @else
-                                                <a type="button" data-toggle="modal" data-target="#ModalOrder{{$value->id}}" style="color:blue;">
+                                                <a href="#" data-toggle="modal" data-target="#ModalOrder{{$value->id}}" style="color:blue;">
                                                     กดสั่งซื้อ{{$film_type}}
                                                 </a>
                                             @endif
