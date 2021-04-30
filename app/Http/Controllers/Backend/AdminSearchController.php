@@ -92,7 +92,7 @@ class AdminSearchController extends Controller
         $customer_id = Member::where('member_id','LIKE',"%{$member_id}")->value('id'); 
         $data_warrantys = DataWarrantyMember::where([
             ['member_id', $customer_id],
-            ['serialnumber','LIKE', $serialnumber],
+            ['serialnumber','LIKE', "%{$serialnumber}%"],
         ])->paginate($NUM_PAGE);
         $date_now = Carbon::now()->format('Y-m-d');
         $page = $request->input('page');
@@ -108,7 +108,7 @@ class AdminSearchController extends Controller
         $NUM_PAGE = 50;
         $member_id = $request->get('member_id');
         $serialnumber = $request->get('serialnumber');
-        $warranty_id = DataWarrantyMember::where('serialnumber',$serialnumber)->value('id');
+        $warranty_id = DataWarrantyMember::where('serialnumber','LIKE', "%{$serialnumber}%")->value('id');
         $customer_id = Member::where('member_id','LIKE', "%{$member_id}")->value('id');
         $claim_products = WarrantyConfirm::where([
             ['member_id', $customer_id],
@@ -132,8 +132,8 @@ class AdminSearchController extends Controller
         $products = Product::where([
             ['product_code','LIKE', "%{$product_code}"],
             ['product_name','LIKE', "%{$product_name}%"],
-            ['product_type','LIKE', $product_type],
-            ['film_model','LIKE', $film_model],
+            ['product_type','LIKE', "%{$product_type}%"],
+            ['film_model','LIKE', "%{$film_model}%"],
         ])->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -152,7 +152,7 @@ class AdminSearchController extends Controller
         $products = Product::where([
             ['product_code','LIKE', "%{$product_code}"],
             ['product_name','LIKE', "%{$product_name}%"],
-            ['film_model','LIKE', $film_model],
+            ['film_model','LIKE', "%{$film_model}%"],
         ])->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
@@ -170,7 +170,7 @@ class AdminSearchController extends Controller
         $products = Product::where([
             ['product_code','LIKE', "%{$product_code}"],
             ['product_name','LIKE', "%{$product_name}%"],
-            ['film_model','LIKE', $film_model],
+            ['film_model','LIKE', "%{$film_model}%"],
         ])->paginate($NUM_PAGE);
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
