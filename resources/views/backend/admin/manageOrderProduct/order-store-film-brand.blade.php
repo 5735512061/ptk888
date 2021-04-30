@@ -49,6 +49,7 @@
                                     <th>ราคารวม</th>
                                     <th>สถานะ</th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -83,6 +84,18 @@
                                             <a href="{{url('/admin/order-store-detail/film-brand')}}/{{$value->id}}" style="color: blue;">
                                                 ตรวจสอบการสั่งซื้อ
                                             </a>
+                                        </td>
+                                        <td>
+                                            @if($status == null || $status == 'รอยืนยัน')
+                                                <a href="{{url('/admin/delete-order-store-film-brand/')}}/{{$value->id}}" style="color: red;" onclick="return confirm('ต้องการยกเลิกคำสั่งซื้อ ?')">
+                                                    ยกเลิกการสั่งซื้อ
+                                                </a>
+                                            @elseif($status == 'กำลังจัดส่ง')
+                                                <p style="color:red; font-size:15px;">ไม่สามารถยกเลิกคำสั่งซื้อได้</p>
+                                            @else
+                                                <p style="color:red; font-size:15px;">ไม่สามารถยกเลิกคำสั่งซื้อได้</p>
+                                            @endif
+                                            
                                         </td>
                                     </tr>
                                 @endforeach

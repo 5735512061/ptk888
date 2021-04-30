@@ -32,6 +32,15 @@ use App\model\OrderStoreConfirm;
 use App\model\OrderStoreConfirmFilmBrand;
 use App\model\ProductStoreFilmBrand;
 use App\model\ProductStoreFilmBrandPrice;
+use App\model\PaymentCheckoutCustomer;
+use App\model\PaymentCheckoutStore;
+use App\model\PaymentCheckoutStoreFilmBrand;
+use App\model\ShipmentCustomer;
+use App\model\ShipmentStore;
+use App\model\ShipmentStoreFilmBrand;
+use App\model\ProductCartCustomer;
+use App\model\ProductCartStore;
+use App\model\ProductCartStoreFilmBrand;
 
 use App\Member;
 use App\Store;
@@ -1020,6 +1029,22 @@ class AdminController extends Controller
         return back();
     }
 
+    public function deleteOrderCustomer($id){
+        $order_customer = OrderCustomer::findOrFail($id);
+        $products = OrderCustomer::where('bill_number',$order_customer->bill_number)->get();
+
+            foreach($products as $product => $value) {
+                $order_confirm = OrderCustomerConfirm::where('order_id',$value->id)->delete();
+                $product = OrderCustomer::where('bill_number',$value->bill_number)->delete();
+                $payment = PaymentCheckoutCustomer::where('bill_number',$value->bill_number)->delete();
+                $shipment = ShipmentCustomer::where('bill_number',$value->bill_number)->delete();
+                $product_cart = ProductCartCustomer::where('bill_number',$value->bill_number)->delete();
+                $order_customer = OrderCustomer::where('bill_number',$value->bill_number)->delete();
+            }
+
+            return redirect()->action('Backend\AdminController@orderCustomer');
+    }
+
     public function orderStore(Request $request){
         $NUM_PAGE = 50;
         $orders = OrderStore::groupBy('bill_number')->orderBy('id','asc')->paginate($NUM_PAGE);
@@ -1041,6 +1066,22 @@ class AdminController extends Controller
         return back();
     }
 
+    public function deleteOrderStore($id){
+        $order_store = OrderStore::findOrFail($id);
+        $products = OrderStore::where('bill_number',$order_store->bill_number)->get();
+
+            foreach($products as $product => $value) {
+                $order_confirm = OrderStoreConfirm::where('order_id',$value->id)->delete();
+                $product = OrderStore::where('bill_number',$value->bill_number)->delete();
+                $payment = PaymentCheckoutStore::where('bill_number',$value->bill_number)->delete();
+                $shipment = ShipmentStore::where('bill_number',$value->bill_number)->delete();
+                $product_cart = ProductCartStore::where('bill_number',$value->bill_number)->delete();
+                $order_store = OrderStore::where('bill_number',$value->bill_number)->delete();
+            }
+
+            return redirect()->action('Backend\AdminController@orderStore');
+    }
+
     public function orderStoreFilmBrand(Request $request){
         $NUM_PAGE = 50;
         $orders = OrderStoreFilmBrand::groupBy('bill_number')->orderBy('id','asc')->paginate($NUM_PAGE);
@@ -1060,6 +1101,23 @@ class AdminController extends Controller
         $status = $request->all();
         $status = OrderStoreConfirmFilmBrand::create($status);
         return back();
+    }
+    
+    public function deleteOrderStoreFilmBrand($id){
+        $order_store = OrderStoreFilmBrand::findOrFail($id);
+        
+        $products = OrderStoreFilmBrand::where('bill_number',$order_store->bill_number)->get();
+
+            foreach($products as $product => $value) {
+                $order_confirm = OrderStoreConfirmFilmBrand::where('order_id',$value->id)->delete();
+                $product = OrderStoreFilmBrand::where('bill_number',$value->bill_number)->delete();
+                $payment = PaymentCheckoutStoreFilmBrand::where('bill_number',$value->bill_number)->delete();
+                $shipment = ShipmentStoreFilmBrand::where('bill_number',$value->bill_number)->delete();
+                $product_cart = ProductCartStoreFilmBrand::where('bill_number',$value->bill_number)->delete();
+                $order_store = OrderStoreFilmBrand::where('bill_number',$value->bill_number)->delete();
+            }
+
+            return redirect()->action('Backend\AdminController@orderStoreFilmBrand');
     }
 
     /////////////////////////////// ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า ///////////////////////////////

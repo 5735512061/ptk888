@@ -144,14 +144,17 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/order-customer', 'Backend\AdminController@orderCustomer');
     Route::get('/order-customer-detail/{id}', 'Backend\AdminController@orderCustomerDetail');
     Route::post('/update-order-customer-status', 'Backend\AdminController@updateOrderCustomerStatus');
+    Route::get('/delete-order-customer/{id}', 'Backend\AdminController@deleteOrderCustomer');
 
     Route::get('/order-store', 'Backend\AdminController@orderStore');
     Route::get('/order-store-detail/{id}', 'Backend\AdminController@orderStoreDetail');
     Route::post('/update-order-store-status', 'Backend\AdminController@updateOrderStoreStatus');
+    Route::get('/delete-order-store/{id}', 'Backend\AdminController@deleteOrderStore');
 
     Route::get('/order-store/film-brand', 'Backend\AdminController@orderStoreFilmBrand');
     Route::get('/order-store-detail/film-brand/{id}', 'Backend\AdminController@orderStoreDetailFilmBrand');
     Route::post('/update-order-store-status/film-brand', 'Backend\AdminController@updateOrderStoreStatusFilmBrand');
+    Route::get('/delete-order-store-film-brand/{id}', 'Backend\AdminController@deleteOrderStoreFilmBrand');
     // ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า
     Route::get('/data-warranty', 'Backend\AdminController@dataWarranty');
     Route::get('/delete-data-warranty/{id}', 'Backend\AdminController@deleteDataWarranty');
@@ -220,14 +223,17 @@ Route::group(['prefix' => 'seller'], function(){
     Route::get('/order-customer', 'Backend\SellerController@orderCustomer');
     Route::get('/order-customer-detail/{id}', 'Backend\SellerController@orderCustomerDetail');
     Route::post('/update-order-customer-status', 'Backend\SellerController@updateOrderCustomerStatus');
+    Route::get('/delete-order-customer/{id}', 'Backend\SellerController@deleteOrderCustomer');
 
     Route::get('/order-store', 'Backend\SellerController@orderStore');
     Route::get('/order-store-detail/{id}', 'Backend\SellerController@orderStoreDetail');
     Route::post('/update-order-store-status', 'Backend\SellerController@updateOrderStoreStatus');
+    Route::get('/delete-order-store/{id}', 'Backend\SellerController@deleteOrderStore');
 
     Route::get('/order-store/film-brand', 'Backend\SellerController@orderStoreFilmBrand');
     Route::get('/order-store-detail/film-brand/{id}', 'Backend\SellerController@orderStoreDetailFilmBrand');
     Route::post('/update-order-store-status/film-brand', 'Backend\SellerController@updateOrderStoreStatusFilmBrand');
+    Route::get('/delete-order-store-film-brand/{id}', 'Backend\SellerController@deleteOrderStoreFilmBrand');
     // ข้อมูลการลงทะเบียน และข้อมูลการเคลมสินค้า
     Route::get('/data-warranty', 'Backend\SellerController@dataWarranty');
     Route::get('/delete-data-warranty/{id}', 'Backend\SellerController@deleteDataWarranty');
