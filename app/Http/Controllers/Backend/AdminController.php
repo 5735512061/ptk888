@@ -684,8 +684,11 @@ class AdminController extends Controller
                 $image_product = ImageProduct::where('product_id',$value->product_id)->delete();
             }
 
+        $price = ProductPrice::where('product_id',$product->id)->delete();
+        $price_promotion = ProductPromotionPrice::where('product_id',$product->id)->delete();
+
         $product->delete();
-        return back();
+        return redirect()->action('Backend\AdminController@listProduct');
     }
 
     public function editProduct(Request $request, $id){
