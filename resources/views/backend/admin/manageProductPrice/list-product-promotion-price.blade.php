@@ -67,7 +67,7 @@
                                         <td>{{$value->product_code}}</td>
                                         <td>{{$value->film_model}}</td>
                                         <td>{{$phone_model}}</td>
-                                        <td>{{$value->product_name}}</td>
+                                        <td>{{$value->product_name_th}}</td>
                                         @if($price == null)
                                             <td style="color: red;">0</td>
                                         @else 

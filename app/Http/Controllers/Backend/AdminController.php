@@ -767,7 +767,7 @@ class AdminController extends Controller
     public function ProductPriceDetail(Request $request,$id){
         $NUM_PAGE = 50;
         $product_prices = ProductPrice::where('product_id',$id)->orderBy('id','asc')->paginate($NUM_PAGE);
-        $product = Product::where('id',$id)->value('product_name');
+        $product = Product::where('id',$id)->value('product_name_th');
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageProductPrice/product-price-detail')->with('NUM_PAGE',$NUM_PAGE)
@@ -814,7 +814,7 @@ class AdminController extends Controller
     public function ProductPromotionPriceDetail(Request $request,$id){
         $NUM_PAGE = 50;
         $product_prices = ProductPromotionPrice::where('product_id',$id)->orderBy('id','asc')->paginate($NUM_PAGE);
-        $product = Product::where('id',$id)->value('product_name');
+        $product = Product::where('id',$id)->value('product_name_th');
         $page = $request->input('page');
         $page = ($page != null)?$page:1;
         return view('backend/admin/manageProductPrice/product-promotion-price-detail')->with('NUM_PAGE',$NUM_PAGE)
