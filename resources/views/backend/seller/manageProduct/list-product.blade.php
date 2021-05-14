@@ -55,7 +55,8 @@
                                     <th>ยี่ห้อโทรศัพท์</th>
                                     <th>รุ่น</th>
                                     <th>ประเภทสินค้า</th>
-                                    <th>ชื่อสินค้า</th>
+                                    <th>ชื่อสินค้า (ภาษาไทย)</th>
+                                    <th>ชื่อสินค้า (ภาษาอังกฤษ)</th>
                                     <th>สถานะ</th>
                                     <th>แนะนำ</th>
                                 </tr>
@@ -74,7 +75,8 @@
                                         <td>{{$brand}}</td>
                                         <td>{{$model}}</td>
                                         <td>{{$value->product_type}}</td>
-                                        <td>{{$value->product_name}}</td>
+                                        <td>{{$value->product_name_th}}</td>
+                                        <td>{{$value->product_name_en}}</td>
                                         <td>{{$value->status}}</td>
                                         @if($value->product_recommend == 'ใช่')
                                             <td><i class="fa fa-check" style="color: green !important;"></i></td>

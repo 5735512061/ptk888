@@ -62,7 +62,7 @@
                                             $status = DB::table('product_prices')->where('product_id',$value->id)->value('status');
                                         @endphp
                                         <td>{{$value->product_code}}</td>
-                                        <td>{{$value->product_name}}</td>
+                                        <td>{{$value->product_name_th}}</td>
                                         @if($price == null)
                                             <td style="color: red;">0</td>
                                         @else 

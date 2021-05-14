@@ -131,7 +131,7 @@ class AdminSearchController extends Controller
         $film_model = $request->get('film_model');
         $products = Product::where([
             ['product_code','LIKE', "%{$product_code}"],
-            ['product_name','LIKE', "%{$product_name}%"],
+            ['product_name_th','LIKE', "%{$product_name}%"],
             ['product_type','LIKE', "%{$product_type}%"],
             ['film_model','LIKE', "%{$film_model}%"],
         ])->paginate($NUM_PAGE);
@@ -151,7 +151,7 @@ class AdminSearchController extends Controller
         $film_model = $request->get('film_model');
         $products = Product::where([
             ['product_code','LIKE', "%{$product_code}"],
-            ['product_name','LIKE', "%{$product_name}%"],
+            ['product_name_th','LIKE', "%{$product_name}%"],
             ['film_model','LIKE', "%{$film_model}%"],
         ])->paginate($NUM_PAGE);
         $page = $request->input('page');
@@ -169,7 +169,7 @@ class AdminSearchController extends Controller
         $film_model = $request->get('film_model');
         $products = Product::where([
             ['product_code','LIKE', "%{$product_code}"],
-            ['product_name','LIKE', "%{$product_name}%"],
+            ['product_name_th','LIKE', "%{$product_name}%"],
             ['film_model','LIKE', "%{$film_model}%"],
         ])->paginate($NUM_PAGE);
         $page = $request->input('page');

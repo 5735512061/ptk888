@@ -35,7 +35,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">ชื่อสินค้า</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" value="{{$product->product_name}}" readonly>
+                                        <input type="text" class="form-control" value="{{$product->product_name_th}}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
