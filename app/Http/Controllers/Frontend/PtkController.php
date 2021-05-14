@@ -93,10 +93,8 @@ class PtkController extends Controller
                            ->where('id',"!=",$product->id)->get();
         $film_type_id = FilmType::where('film_type',$product->product_type)->value('id');
         $propertys = ProductFilmInformation::where('film_type_id',$film_type_id)->where('type_information',"ข้อมูลและคุณสมบัติสินค้า")->get();
-        $positives = ProductFilmInformation::where('film_type_id',$film_type_id)->where('type_information',"จุดเด่นของสินค้า")->get();
         return view('frontend/product/by-phone-model-detail')->with('product',$product)
                                                              ->with('products',$products)
-                                                             ->with('propertys',$propertys)
-                                                             ->with('positives',$positives);
+                                                             ->with('propertys',$propertys);
     }
 }
