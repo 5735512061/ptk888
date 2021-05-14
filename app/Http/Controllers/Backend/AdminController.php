@@ -1365,13 +1365,15 @@ class AdminController extends Controller
 
     public function rules_uploadFilmInformation() {
         return [
-            'film_information' => 'required',
+            'film_information_th' => 'required',
+            'film_information_en' => 'required',
         ];
     }
 
     public function messages_uploadFilmInformation() {
         return [
-            'film_information.required' => 'กรุณากรอกรายละเอียด',
+            'film_information_th.required' => 'กรุณากรอกรายละเอียด (ภาษาไทย)',
+            'film_information_en.required' => 'กรุณากรอกรายละเอียด (ภาษาอังกฤษ)',
         ];
     }
 

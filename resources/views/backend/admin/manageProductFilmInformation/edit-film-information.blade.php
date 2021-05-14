@@ -42,14 +42,19 @@
                                         <select name="type_information" class="form-control">
                                             <option value="{{$product_film_information->type_information}}">{{$product_film_information->type_information}}</option>
                                             <option value="ข้อมูลและคุณสมบัติสินค้า">ข้อมูลและคุณสมบัติสินค้า</option>
-                                            <option value="จุดเด่นของสินค้า">จุดเด่นของสินค้า</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">รายละเอียด</label>
+                                    <label class="col-sm-2 col-form-label">รายละเอียด (ภาษาไทย)</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกรายละเอียด" name="film_information" value="{{$product_film_information->film_information}}">
+                                        <input type="text" class="form-control" placeholder="กรุณากรอกรายละเอียด (ภาษาไทย)" name="film_information_th" value="{{$product_film_information->film_information_th}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">รายละเอียด (ภาษาอังกฤษ)</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" placeholder="กรุณากรอกรายละเอียด (ภาษาอังกฤษ)" name="film_information_en" value="{{$product_film_information->film_information_en}}">
                                     </div>
                                 </div>
                                 <div class="form-group row mb-0">
