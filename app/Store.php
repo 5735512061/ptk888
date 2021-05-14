@@ -15,7 +15,7 @@ class Store extends Authenticatable
     protected $guard = 'store';
 
     protected $fillable = [
-        'admin_id', 'store_id', 'name', 'phone', 'password', 'role', 'status', 'image_logo', 'address'
+        'admin_id', 'store_id', 'name', 'phone', 'password', 'role', 'status', 'image_logo', 'address', 'province'
     ];
 
     protected $hidden = [

@@ -49,6 +49,7 @@ class RegisterController extends Controller
             'name' => 'required',
             'password' => 'required',
             'address' => 'required',
+            'province' => 'required',
             'password_confirmation' => 'required',
         ];
     }
@@ -59,6 +60,7 @@ class RegisterController extends Controller
             'password.required' => 'กรุณากรอกรหัสผ่าน',
             'password_confirmation.required' => 'กรุณายืนยันรหัสผ่าน',
             'address.required' => 'กรุณากรอกที่อยู่ตัวแทนจำหน่าย',
+            'province.required' => 'กรุณากรอกจังหวัดที่ตั้งของร้านค้า',
         ];
     }
 }

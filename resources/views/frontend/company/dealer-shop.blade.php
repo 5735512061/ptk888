@@ -15,7 +15,7 @@
                 </div>
                 <div class="details col-md-6">
                     <h4 class="product-title">@lang('dealerShop.agency') {{$value->name}}</h4>
-                    <p><strong>@lang('dealerShop.address')</strong> {{$value->address}}</p>
+                    <p><strong>@lang('dealerShop.province')</strong> {{$value->province}}</p>
                     <p><strong>@lang('dealerShop.mobile')</strong> {{$value->phone}}</p>
                 </div>
             </div>

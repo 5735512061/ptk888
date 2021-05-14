@@ -2,6 +2,6 @@
 
 return [
     'agency' => 'Agency',
-    'address' => 'Address',
+    'province' => 'province',
     'mobile' => 'Mobile',
 ];

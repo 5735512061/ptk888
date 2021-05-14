@@ -1582,6 +1582,7 @@ class AdminController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'address' => 'required',
+            'province' => 'required',
         ];
     }
 
@@ -1590,6 +1591,7 @@ class AdminController extends Controller
             'name.required' => 'กรุณากรอกชื่อ',
             'phone.required' => 'กรุณากรอกเบอร์โทรศัพท์',
             'address.required' => 'กรุณากรอกที่อยู่ร้านค้า',
+            'province.required' => 'กรุณากรอกจังหวัดที่ตั้งของร้านค้า',
         ];
     }
 }

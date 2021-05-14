@@ -103,6 +103,17 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">{{ __('จังหวัดที่ตั้งร้านค้า') }}</label>
+        
+                                    <div class="col-sm-6">
+                                        @if ($errors->has('province'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('province') }})</span>
+                                        @endif
+                                        <input type="text" class="form-control" name="province" value="{{ old('province') }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">{{ __('บทบาท') }}</label>
         
                                     <div class="col-sm-6">
