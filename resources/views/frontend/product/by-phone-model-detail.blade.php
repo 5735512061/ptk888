@@ -49,7 +49,11 @@
 
                         <h5>@lang('byPhoneModelDetail.informationAndFeaturesOf') {{$product->product_type}}</h5>    
                         @foreach ($propertys as $property => $value)
-                            <p style="margin-bottom: 0.3rem; font-size:14px;">- {{$value->film_information}}</p>
+                            @if(\Session::get('locale') == "th")
+                                <p style="margin-bottom: 0.3rem; font-size:14px;">- {{$value->film_information_th}}</p>
+                            @elseif(\Session::get('locale') == "en")
+                                <p style="margin-bottom: 0.3rem; font-size:14px;">- {{$value->film_information_en}}</p>
+                            @endif
                         @endforeach
                         <hr>
                         {{-- <h5>@lang('byPhoneModelDetail.prominentPointOf') {{$product->product_type}}</h5>    

@@ -9,7 +9,7 @@ class Category extends Model
 	protected $table = 'categorys';
 
 	protected $fillable = [
-    	'category', 'category_eng'
+    	'category_th', 'category_en'
     ];
 
     protected $primaryKey = 'id';

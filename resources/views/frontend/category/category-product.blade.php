@@ -1,14 +1,14 @@
 @extends("/frontend/layouts/template/template")
 
 @section("content")
-@if($category == "กระจกกันรอย" || $category == "หูฟังไร้สาย" || $category == "POWER BANK")
+@if($category_th == "กระจกกันรอย" || $category_th == "หูฟังไร้สาย" || $category_th == "POWER BANK")
     <div class="featured-product product">
         <div class="container-fluid">
-            @if($category == "กระจกกันรอย")
+            @if($category_th == "กระจกกันรอย")
                 <center><h2>@lang('categoryProduct.glassProtect')<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
-            @elseif($category == "หูฟังไร้สาย")
+            @elseif($category_th == "หูฟังไร้สาย")
                 <center><h2>@lang('categoryProduct.wirelessHeadphones')<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
-            @elseif($category == "POWER BANK")
+            @elseif($category_th == "POWER BANK")
                 <center><h2>POWER BANK<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
             @endif
             <h5 style="text-align: center;">-- @lang('categoryProduct.notAvailable') --</h5><hr>
@@ -65,7 +65,7 @@
         </div>
     </div>
     <!-- Featured Product End -->
-@elseif($category == "ฟิล์มไฮโดรเจล")
+@elseif($category_th == "ฟิล์มไฮโดรเจล")
 <div class="featured-product product">
     <div class="container-fluid">
         <center><h2>@lang('categoryProduct.hydrogelProtectorFilm')<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>

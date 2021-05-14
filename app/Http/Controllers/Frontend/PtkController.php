@@ -51,9 +51,9 @@ class PtkController extends Controller
     }
 
     public function category($category) {
-        $category = Category::where('category_eng',$category)->value('category');
+        $category_th = Category::where('category_en',$category)->value('category_th');
         $productRecommends = Product::where('product_recommend','ใช่')->get();
-        return view('frontend/category/category-product')->with('category',$category)
+        return view('frontend/category/category-product')->with('category_th',$category_th)
                                                          ->with('productRecommends',$productRecommends);
     }
 
@@ -92,7 +92,10 @@ class PtkController extends Controller
                            ->where('status','แสดงสินค้า')
                            ->where('id',"!=",$product->id)->get();
         $film_type_id = FilmType::where('film_type',$product->product_type)->value('id');
-        $propertys = ProductFilmInformation::where('film_type_id',$film_type_id)->where('type_information',"ข้อมูลและคุณสมบัติสินค้า")->get();
+        // $propertys = ProductFilmInformation::where('film_type_id',$film_type_id)->where('type_information',"ข้อมูลและคุณสมบัติสินค้า")->get();
+        $propertys = ProductFilmInformation::where('film_type_id',$film_type_id)
+                                            ->where('type_information',"ข้อมูลและคุณสมบัติสินค้า")
+                                            ->select('id','film_information_'.\Session::get('locale'))->get();
         return view('frontend/product/by-phone-model-detail')->with('product',$product)
                                                              ->with('products',$products)
                                                              ->with('propertys',$propertys);

@@ -33,7 +33,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             @php
-                $categorys = DB::table('categorys')->get();
+                $categorys = DB::table('categorys')->select('category_en','category_'.\Session::get('locale'))->get();
                 $brands = DB::table('brands')->paginate('7');
             @endphp
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
@@ -43,7 +43,11 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: #000 !important;">@lang('navbar.product')</a>
                         <div class="dropdown-menu">
                             @foreach ($categorys as $category => $value)
-                                <a href="{{url('/category')}}/{{$value->category_eng}}" class="dropdown-item">{{$value->category}}</a>
+                                @if(\Session::get('locale') == "th")
+                                    <a href="{{url('/category')}}/{{$value->category_en}}" class="dropdown-item">{{$value->category_th}}</a>
+                                @elseif(\Session::get('locale') == "en")
+                                    <a href="{{url('/category')}}/{{$value->category_en}}" class="dropdown-item">{{$value->category_en}}</a>
+                                @endif
                             @endforeach
                         </div>
                     </div>
