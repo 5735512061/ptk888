@@ -33,6 +33,8 @@
                                             $product_name = DB::table('products')->where('id',$id)->value('product_name_th'); 
                                         elseif(\Session::get('locale') == "en")
                                             $product_name = DB::table('products')->where('id',$id)->value('product_name_en'); 
+                                        else
+                                            $product_name = DB::table('products')->where('id',$id)->value('product_name_th'); 
 
                                         $product_image = DB::table('image_products')->where('product_id',$id)->value('image'); 
                                         $product_price = DB::table('product_prices')->where('product_id',$id)->orderBy('id','desc')->value('price'); 
@@ -146,6 +148,8 @@
                                         <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_th}}</h5>
                                     @elseif(\Session::get('locale') == "en")
                                         <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_en}}</h5>
+                                    @else
+                                        <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_th}}</h5>
                                     @endif
                                 </div>
                             </a>

@@ -77,6 +77,8 @@
                                             <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_th}}</h5>
                                         @elseif(\Session::get('locale') == "en")
                                             <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_en}}</h5>
+                                        @else 
+                                            <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_th}}</h5>
                                         @endif
                                     </div>
                                 </a>

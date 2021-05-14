@@ -89,6 +89,8 @@
                                     $name = DB::table('products')->where('id',$id)->value('product_name_th'); 
                                 elseif(\Session::get('locale') == "en")
                                     $name = DB::table('products')->where('id',$id)->value('product_name_en'); 
+                                else
+                                    $name = DB::table('products')->where('id',$id)->value('product_name_th');
                                 $price = $product['price']/$product['qty'];
                                 $totalPrice += $product['price'];
                             @endphp

@@ -23,7 +23,13 @@
                 </div>
             </div>
             @php
-                $categorys = DB::table('categorys')->select('category_en','category_'.\Session::get('locale'))->get();
+                if(\Session::get('locale') == null) {
+                    $categorys = DB::table('categorys')->get();
+                }
+                
+                elseif(\Session::get('locale') != null) {
+                    $categorys = DB::table('categorys')->select('category_en','category_'.\Session::get('locale'))->get();
+                }
             @endphp
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
@@ -34,6 +40,8 @@
                                 <li><a href="{{url('/category')}}/{{$value->category_en}}">{{$value->category_th}}</a></li>
                             @elseif(\Session::get('locale') == "en")
                                 <li><a href="{{url('/category')}}/{{$value->category_en}}">{{$value->category_en}}</a></li>
+                            @else 
+                                <li><a href="{{url('/category')}}/{{$value->category_en}}">{{$value->category_th}}</a></li>
                             @endif
                         @endforeach
                     </ul>

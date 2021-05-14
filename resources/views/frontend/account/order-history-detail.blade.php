@@ -72,6 +72,8 @@
                                                 $product_name = DB::table('products')->where('id',$value->product_id)->value('product_name_th');
                                             elseif(\Session::get('locale') == "en")
                                                 $product_name = DB::table('products')->where('id',$value->product_id)->value('product_name_en');
+                                            else 
+                                                $product_name = DB::table('products')->where('id',$value->product_id)->value('product_name_th');
 
                                             $qty = DB::table('product_cart_customers')->where('id',$value->id)->value('qty');
                                             $price = DB::table('product_cart_customers')->where('id',$value->id)->value('price');

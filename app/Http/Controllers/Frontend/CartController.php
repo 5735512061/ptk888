@@ -41,8 +41,12 @@ class CartController extends Controller
     public function getCart() {
 
         if (!Session::has('cart')) {
-            $productRecommends = Product::where('product_recommend','ใช่')->where('status','แสดงสินค้า')->select('id','brand_id','phone_model_id','product_name_'.\Session::get('locale'))->get();
-            return view('/frontend/cart/shopping-cart',['products' => 'null','productRecommends' => $productRecommends]);
+            if(\Session::get('locale') == null)
+                $productRecommends = Product::where('product_recommend','ใช่')->where('status','แสดงสินค้า')->get();
+            else 
+                $productRecommends = Product::where('product_recommend','ใช่')->where('status','แสดงสินค้า')->select('id','brand_id','phone_model_id','product_name_'.\Session::get('locale'))->get();
+
+                return view('/frontend/cart/shopping-cart',['products' => 'null','productRecommends' => $productRecommends]);
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);

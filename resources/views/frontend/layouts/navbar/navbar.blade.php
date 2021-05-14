@@ -43,8 +43,15 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             @php
-                $categorys = DB::table('categorys')->select('category_en','category_'.\Session::get('locale'))->get();
-                $brands = DB::table('brands')->paginate('7');
+                if(\Session::get('locale') == null) {
+                    $categorys = DB::table('categorys')->get();
+                    $brands = DB::table('brands')->paginate('7');
+                }
+                
+                elseif(\Session::get('locale') != null) {
+                    $categorys = DB::table('categorys')->select('category_en','category_'.\Session::get('locale'))->get();
+                    $brands = DB::table('brands')->paginate('7');
+                }
             @endphp
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
@@ -57,6 +64,8 @@
                                     <a href="{{url('/category')}}/{{$value->category_en}}" class="dropdown-item">{{$value->category_th}}</a>
                                 @elseif(\Session::get('locale') == "en")
                                     <a href="{{url('/category')}}/{{$value->category_en}}" class="dropdown-item">{{$value->category_en}}</a>
+                                @else 
+                                    <a href="{{url('/category')}}/{{$value->category_en}}" class="dropdown-item">{{$value->category_th}}</a>
                                 @endif
                             @endforeach
                         </div>

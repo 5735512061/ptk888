@@ -42,6 +42,8 @@
                             <h4 style="font-weight: bold;">{{$product->product_name_th}}</h4>
                         @elseif(\Session::get('locale') == "en")
                             <h4 style="font-weight: bold;">{{$product->product_name_en}}</h4>
+                        @else
+                            <h4 style="font-weight: bold;">{{$product->product_name_th}}</h4>
                         @endif
                         
                         @if($price == null)
@@ -58,6 +60,8 @@
                                 <p style="margin-bottom: 0.3rem; font-size:14px;">- {{$value->film_information_th}}</p>
                             @elseif(\Session::get('locale') == "en")
                                 <p style="margin-bottom: 0.3rem; font-size:14px;">- {{$value->film_information_en}}</p>
+                            @else
+                                <p style="margin-bottom: 0.3rem; font-size:14px;">- {{$value->film_information_th}}</p>
                             @endif
                         @endforeach
                         <hr>
@@ -150,6 +154,8 @@
                                     <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_th}}</h5>
                                 @elseif(\Session::get('locale') == "en")
                                     <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_en}}</h5>
+                                @else
+                                    <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_th}}</h5>
                                 @endif
                             </div>
                         </a>
