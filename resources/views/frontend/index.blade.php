@@ -78,11 +78,11 @@
                                 </a>
                                 <div class="product-price">
                                     @if($price == null)
-                                        <h5 style="font-weight: bold; padding-left:0.5rem;">@lang('byPhoneModelDetail.amount') 0 @lang('byPhoneModelDetail.thb')</h5>
+                                        <h5 style="font-weight: bold; padding-left:0.5rem; font-size:17px;">@lang('byPhoneModelDetail.amount') 0 @lang('byPhoneModelDetail.thb')</h5>
                                     @elseif($promotion_price == null)
-                                        <h5 style="font-weight: bold; padding-left:0.5rem;">@lang('byPhoneModelDetail.amount') {{$price}} @lang('byPhoneModelDetail.thb')</h5>
+                                        <h5 style="font-weight: bold; padding-left:0.5rem; font-size:17px;">@lang('byPhoneModelDetail.amount') {{$price}} @lang('byPhoneModelDetail.thb')</h5>
                                     @else 
-                                    <h5 style="font-weight: bold; padding-left:0.5rem;"><Del>@lang('byPhoneModelDetail.amount') {{$price}} @lang('byPhoneModelDetail.thb')</Del> @lang('byPhoneModelDetail.reduceTo') {{$promotion_price}} @lang('byPhoneModelDetail.thb')</h5>
+                                    <h5 style="font-weight: bold; padding-left:0.5rem; font-size:17px;"><Del>@lang('byPhoneModelDetail.amount') {{$price}} @lang('byPhoneModelDetail.thb')</Del> @lang('byPhoneModelDetail.reduceTo') {{$promotion_price}} @lang('byPhoneModelDetail.thb')</h5>
                                     @endif
                                 </div>
                             </div>

@@ -21,53 +21,53 @@
                                 @if ($errors->has('name'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('name') }})</span>
                                 @endif
-                                <input class="form-control" type="text" placeholder="กรุณากรอกชื่อและนามสกุล" name="name">
+                                <input class="form-control" type="text" placeholder="@lang('placeholder.fname_lname')" name="name">
                             </div>
                             <div class="col-md-6">
                                 <label>@lang('checkout.mobile')</label>
                                 @if ($errors->has('phone'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
                                 @endif
-                                <input class="phone_format form-control" type="text" placeholder="กรุณากรอกเบอร์โทรศัพท์" name="phone">
+                                <input class="phone_format form-control" type="text" placeholder="@lang('placeholder.mobile')" name="phone">
                             </div>
                             <div class="col-md-6">
                                 <label>@lang('checkout.mobile_2')</label>
-                                <input class="phone_format form-control" type="text" placeholder="กรุณากรอกเบอร์โทรศัพท์สำรอง (ถ้ามี)" name="phone_sec">
+                                <input class="phone_format form-control" type="text" placeholder="@lang('placeholder.mobile_2')" name="phone_sec">
                             </div>
                             <div class="col-md-12">
                                 <label>@lang('checkout.address')</label>
                                 @if ($errors->has('address'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('address') }})</span>
                                 @endif
-                                <input class="form-control" type="text" placeholder="กรุณากรอกที่อยู่ หมู่บ้าน ถนน หรือตรอก/ซอย (ถ้ามี)" name="address">
+                                <input class="form-control" type="text" placeholder="@lang('placeholder.address')" name="address">
                             </div>
                             <div class="col-md-6">
                                 <label>@lang('checkout.sub_district')</label>
                                 @if ($errors->has('district'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('district') }})</span>
                                 @endif
-                                <input class="form-control" type="text" placeholder="กรุณากรอกตำบล" name="district">
+                                <input class="form-control" type="text" placeholder="@lang('placeholder.subDistrict')" name="district">
                             </div>
                             <div class="col-md-6">
                                 <label>@lang('checkout.district')</label>
                                 @if ($errors->has('amphoe'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('amphoe') }})</span>
                                 @endif
-                                <input class="form-control" type="text" placeholder="กรุณากรอกอำเภอ" name="amphoe">
+                                <input class="form-control" type="text" placeholder="@lang('placeholder.district')" name="amphoe">
                             </div>
                             <div class="col-md-6">
                                 <label>@lang('checkout.province')</label>
                                 @if ($errors->has('province'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('province') }})</span>
                                 @endif
-                                <input class="form-control" type="text" placeholder="กรุณากรอกจังหวัด" name="province">
+                                <input class="form-control" type="text" placeholder="@lang('placeholder.province')" name="province">
                             </div>
                             <div class="col-md-6">
                                 <label>@lang('checkout.zipcode')</label>
                                 @if ($errors->has('zipcode'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('zipcode') }})</span>
                                 @endif
-                                <input class="form-control" type="text" placeholder="กรุณากรอกรหัสไปรษณีย์" name="zipcode">
+                                <input class="form-control" type="text" placeholder="@lang('placeholder.zipcode')" name="zipcode">
                             </div>
                         </div>
                     </div>
@@ -106,15 +106,15 @@
                             @if ($errors->has('money'))
                                 <span class="text-danger" style="font-size: 17px;">({{ $errors->first('money') }})</span>
                             @endif
-                            <input class="form-control" type="text" placeholder="* จำนวนเงิน ตัวอย่าง 790 บาท" style="font-size: 14px;" name="money">
+                            <input class="form-control" type="text" placeholder="* @lang('placeholder.money')" style="font-size: 14px;" name="money">
                             @if ($errors->has('payday'))
                                 <span class="text-danger" style="font-size: 17px;">({{ $errors->first('payday') }})</span>
                             @endif
-                            <input class="form-control" type="text" placeholder="* วันที่ชำระเงิน ตัวอย่าง 01/01/2564" style="font-size: 14px;" name="payday">
+                            <input class="form-control" type="text" placeholder="* @lang('placeholder.payday')" style="font-size: 14px;" name="payday">
                             @if ($errors->has('time'))
                                 <span class="text-danger" style="font-size: 17px;">({{ $errors->first('time') }})</span>
                             @endif
-                            <input class="form-control" type="text" placeholder="* เวลาชำระเงิน ตัวอย่าง 14.30น." style="font-size: 14px;" name="time">
+                            <input class="form-control" type="text" placeholder="* @lang('placeholder.time')" style="font-size: 14px;" name="time">
                             <label class="col-form-label">@lang('checkout.attachPaymentSlip')</label>
                             @if ($errors->has('slip'))
                                 <span class="text-danger" style="font-size: 17px;">({{ $errors->first('slip') }})</span>

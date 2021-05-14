@@ -23,12 +23,12 @@
                                 @if ($errors->has('phone'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
                                 @endif
-                                <input type="text" class="phone_format form-control" name="phone" value="{{ old('phone') }}" placeholder="กรอกเบอร์โทรศัพท์ เพื่อตรวจสอบข้อมูลการลงทะเบียน">
+                                <input type="text" class="phone_format form-control" name="phone" value="{{ old('phone') }}" placeholder="@lang('placeholder.enterMobile')">
                             </div>
 
                             <div class="col-md-3">
                                 <button type="submit" class="btn">
-                                    {{ __('ตรวจสอบข้อมูล') }}
+                                    @lang('warrantyInformation.check_info')
                                 </button>
                             </div>
                         </div>

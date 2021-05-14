@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'amount' => 'Amount',
+    'amount' => 'Price',
     'thb' => 'THB',
     'reduceTo' => 'Reduce to',
     'informationAndFeaturesOf' => 'Information and features of',

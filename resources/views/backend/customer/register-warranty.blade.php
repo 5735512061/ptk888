@@ -94,7 +94,7 @@
                                 @if ($errors->has('date_order'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('date_order') }})</span>
                                 @endif
-                                <input type="text" class="form-control" name="date_order" value="{{ old('date_order') }}" placeholder="ตัวอย่าง เช่น 01/01/2021">
+                                <input type="text" class="form-control" name="date_order" value="{{ old('date_order') }}" placeholder="@lang('placeholder.suchAsdate')">
                             </div>
                         </div>
 
@@ -119,7 +119,7 @@
                                 @if ($errors->has('address_service'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('address_service') }})</span>
                                 @endif
-                                <input type="text" class="form-control" placeholder="เช่น ร้านติดฟิล์มภูเก็ตหรือร้านค้าออนไลน์" name="address_service" value="{{ old('address_service') }}">
+                                <input type="text" class="form-control" placeholder="@lang('placeholder.suchAs')" name="address_service" value="{{ old('address_service') }}">
                             </div>
                         </div>
                         <input type="hidden" name="date" id="datepicker">

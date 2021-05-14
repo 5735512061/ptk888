@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="coupon">
-                                <input type="text" placeholder="กรอกโค้ดส่วนลด">
+                                <input type="text" placeholder="@lang('placeholder.discountCode')">
                                 <button>@lang('shoppingCart.discountCode')</button>
                             </div>
                         </div>

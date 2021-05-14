@@ -75,7 +75,7 @@
                                 @if ($errors->has('address'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('address') }})</span>
                                 @endif
-                                <input class="form-control" type="text" placeholder="ที่อยู่ หมู่บ้าน ถนน หรือตรอก/ซอย (ถ้ามี)" name="address">
+                                <input class="form-control" type="text" placeholder="@lang('placeholder.address')" name="address">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -84,7 +84,7 @@
                                 @if ($errors->has('district'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('district') }})</span>
                                 @endif
-                                <input class="form-control" type="text" placeholder="กรุณากรอกตำบล" name="district">
+                                <input class="form-control" type="text" placeholder="@lang('placeholder.subDistrict')" name="district">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -93,7 +93,7 @@
                                 @if ($errors->has('amphoe'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('amphoe') }})</span>
                                 @endif
-                                <input class="form-control" type="text" placeholder="กรุณากรอกอำเภอ" name="amphoe">
+                                <input class="form-control" type="text" placeholder="@lang('placeholder.district')" name="amphoe">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -102,7 +102,7 @@
                                 @if ($errors->has('province'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('province') }})</span>
                                 @endif
-                                <input class="form-control" type="text" placeholder="กรุณากรอกจังหวัด" name="province">
+                                <input class="form-control" type="text" placeholder="@lang('placeholder.province')" name="province">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -111,7 +111,7 @@
                                 @if ($errors->has('zipcode'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('zipcode') }})</span>
                                 @endif
-                                <input class="form-control" type="text" placeholder="กรุณากรอกรหัสไปรษณีย์" name="zipcode">
+                                <input class="form-control" type="text" placeholder="@lang('placeholder.zipcode')" name="zipcode">
                             </div>
                         </div>
 

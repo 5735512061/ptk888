@@ -16,4 +16,5 @@ return [
     'register' => 'Register via our website',
     'claim_1' => 'Click to Claim',
     'claim_2' => 'here',
+    'check_info' => 'Check Information',
 ];

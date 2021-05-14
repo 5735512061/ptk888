@@ -39,26 +39,26 @@
                                 @if ($errors->has('name'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('name') }})</span>
                                 @endif
-                                <input type="text" class="form-control" placeholder="ชื่อ-นามสกุลผู้ติดต่อ" name="name"/>
+                                <input type="text" class="form-control" placeholder="@lang('placeholder.fname_lname')" name="name"/>
                             </div>
                             <div class="col-md-6">
                                 @if ($errors->has('phone'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('phone') }})</span>
                                 @endif
-                                <input type="text" class="phone_format form-control" placeholder="เบอร์โทรศัพท์" name="phone"/>
+                                <input type="text" class="phone_format form-control" placeholder="@lang('placeholder.mobile')" name="phone"/>
                             </div>
                         </div>
                         <div class="form-group">
                             @if ($errors->has('subject'))
                                 <span class="text-danger" style="font-size: 17px;">({{ $errors->first('subject') }})</span>
                             @endif
-                            <input type="text" class="form-control" placeholder="หัวข้อเรื่อง" name="subject"/>
+                            <input type="text" class="form-control" placeholder="@lang('placeholder.subject')" name="subject"/>
                         </div>
                         <div class="form-group">
                             @if ($errors->has('message'))
                                 <span class="text-danger" style="font-size: 17px;">({{ $errors->first('message') }})</span>
                             @endif
-                            <textarea class="form-control" rows="5" placeholder="ข้อความที่ต้องการติดต่อ" name="message"></textarea>
+                            <textarea class="form-control" rows="5" placeholder="@lang('placeholder.message')" name="message"></textarea>
                         </div>
                         @if(Auth::guard('member')->user() != NULL)
                             <input type="hidden" name="customer_id" value="{{Auth::guard('member')->user()->id}}">
