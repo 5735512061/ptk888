@@ -10,7 +10,7 @@ return [
     'province' => 'Province',
     'orderHistory' => 'Order History',
     'inquiryHistory' => 'Inquiry History',
-    'cart' => 'Cart',
+    'cart' => 'Product Cart',
     'editPersonalInformation' => 'Edit personal information',
     'changePassword' => 'Change Password',
     'logOut' => 'Log out',
