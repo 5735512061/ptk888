@@ -20,7 +20,7 @@ class PtkController extends Controller
 {
     public function index() {
         $images = ImageWebsite::where('image_type','รูปภาพสไลด์หลัก หน้าแรก')->get();
-        $products = Product::where('product_recommend','ใช่')->get();
+        $products = Product::where('product_recommend','ใช่')->where('status','แสดงสินค้า')->select('id','brand_id','phone_model_id','product_name_'.\Session::get('locale'))->get();
         return view('frontend/index')->with('images',$images)
                                      ->with('products',$products);
     }
@@ -79,7 +79,7 @@ class PtkController extends Controller
         $products = Product::where('brand_id',$brand_id)
                            ->where('phone_model_id',$model_id)
                            ->where('product_recommend','ไม่ใช่')
-                           ->where('status','แสดงสินค้า')->get();
+                           ->where('status','แสดงสินค้า')->select('id','brand_id','phone_model_id','product_name_'.\Session::get('locale'))->get();
         return view('frontend/product/by-phone-model')->with('products',$products);
     }
 
@@ -90,7 +90,8 @@ class PtkController extends Controller
         $products = Product::where('brand_id',$brand_id)
                            ->where('phone_model_id',$model_id)
                            ->where('status','แสดงสินค้า')
-                           ->where('id',"!=",$product->id)->get();
+                           ->where('id',"!=",$product->id)
+                           ->select('id','product_name_'.\Session::get('locale'))->get();
         $film_type_id = FilmType::where('film_type',$product->product_type)->value('id');
         // $propertys = ProductFilmInformation::where('film_type_id',$film_type_id)->where('type_information',"ข้อมูลและคุณสมบัติสินค้า")->get();
         $propertys = ProductFilmInformation::where('film_type_id',$film_type_id)

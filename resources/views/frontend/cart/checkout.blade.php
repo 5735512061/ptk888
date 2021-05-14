@@ -84,7 +84,11 @@
                         @foreach($products as $product)
                             @php 
                                 $id = $product['item'];
-                                $name = DB::table('products')->where('id',$id)->value('product_name'); 
+                                
+                                if(\Session::get('locale') == "th")
+                                    $name = DB::table('products')->where('id',$id)->value('product_name_th'); 
+                                elseif(\Session::get('locale') == "en")
+                                    $name = DB::table('products')->where('id',$id)->value('product_name_en'); 
                                 $price = $product['price']/$product['qty'];
                                 $totalPrice += $product['price'];
                             @endphp

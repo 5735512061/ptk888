@@ -38,7 +38,12 @@
                 
                 <div class="col-lg-7">
                     <div class="description">
-                        <h4 style="font-weight: bold;">{{$product->product_name}}</h4>
+                        @if(\Session::get('locale') == "th")
+                            <h4 style="font-weight: bold;">{{$product->product_name_th}}</h4>
+                        @elseif(\Session::get('locale') == "en")
+                            <h4 style="font-weight: bold;">{{$product->product_name_en}}</h4>
+                        @endif
+                        
                         @if($price == null)
                             <h4 style="font-weight: bold; color:#FF8930;">@lang('byPhoneModelDetail.amount') 0 @lang('byPhoneModelDetail.thb')</h4><hr>
                         @elseif($promotion_price == null)
@@ -141,7 +146,11 @@
                                 <img src="{{url('/image_upload/image_product')}}/{{$image}}" width="100%">
                             </div>
                             <div class="text-intro">
-                                <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name}}</h5>
+                                @if(\Session::get('locale') == "th")
+                                    <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_th}}</h5>
+                                @elseif(\Session::get('locale') == "en")
+                                    <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_en}}</h5>
+                                @endif
                             </div>
                         </a>
                         <div class="product-price">

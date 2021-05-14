@@ -3,7 +3,7 @@
 return [
     'product' => 'สินค้า',
     'pricePerUnit' => 'ราคาต่อหน่วย',
-    'unit' => 'จำนวน' 
+    'unit' => 'จำนวน',
     'subTotalPrice' => 'ราคารวม',
     'delete' => 'ลบสินค้า',
     'discountCode' => 'ใช้โค้ดส่วนลด',

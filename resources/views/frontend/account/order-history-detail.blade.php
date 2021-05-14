@@ -68,7 +68,11 @@
                                     <tr>
                                         <th scope="row">{{$NUM_PAGE*($page-1) + $product_id+1}}</th>
                                         @php
-                                            $product_name = DB::table('products')->where('id',$value->product_id)->value('product_name');
+                                            if(\Session::get('locale') == "th")
+                                                $product_name = DB::table('products')->where('id',$value->product_id)->value('product_name_th');
+                                            elseif(\Session::get('locale') == "en")
+                                                $product_name = DB::table('products')->where('id',$value->product_id)->value('product_name_en');
+
                                             $qty = DB::table('product_cart_customers')->where('id',$value->id)->value('qty');
                                             $price = DB::table('product_cart_customers')->where('id',$value->id)->value('price');
                                             $totalPrice = number_format($qty * $price);

@@ -31,7 +31,11 @@
                                     <img src="{{url('/image_upload/image_product')}}/{{$image}}" width="100%">
                                 </div>
                                 <div class="text-intro">
-                                    <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name}}</h5>
+                                    @if(\Session::get('locale') == "th")
+                                        <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_th}}</h5>
+                                    @elseif(\Session::get('locale') == "en")
+                                        <h5 style="font-weight: bold; padding:1.5rem;">{{$value->product_name_en}}</h5>
+                                    @endif
                                 </div>
                             </a>
                             <div class="product-price">

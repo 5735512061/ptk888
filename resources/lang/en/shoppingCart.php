@@ -6,7 +6,7 @@ return [
     'unit' => 'Unit',
     'subTotalPrice' => 'Sub Total',
     'delete' => 'Delete',
-    'discountCode' => 'Use discount code',
+    'discountCode' => 'Discount code',
     'orderSummary' => 'Order summary',
     'thb' => 'THB',
     'total' => 'Total',

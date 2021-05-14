@@ -12,7 +12,7 @@ return [
     'zipcode' => 'Zipcode',
     'orderTotal' => 'Order Total',
     'total' => 'Total',
-    'thb' => 'thb',
+    'thb' => 'THB',
     'subTotal' => 'Sub Total',
     'paymentDetail' => 'Payment Detail',
     'kasikornBank' => 'Kasikorn Bank',
