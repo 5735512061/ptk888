@@ -4,7 +4,7 @@ return [
     'amount' => 'ราคา',
     'thb' => 'บาท',
     'reduceTo' => 'ลดเหลือ',
-    'informationAndFeaturesOf' => 'ข้อมูลและคุณสมบัติของ',
+    'informationAndFeaturesOf' => 'ข้อมูลและคุณสมบัติ',
     'prominentPointOf' => 'จุดเด่นของ',
     'unit' => 'จำนวน',
     'addToCard' => 'หยิบสินค้าใส่ตะกร้า',
