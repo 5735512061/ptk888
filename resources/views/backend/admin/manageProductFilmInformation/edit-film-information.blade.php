@@ -90,7 +90,8 @@
                                     <th>#</th>
                                     <th>ประเภทฟิล์ม</th>
                                     <th>ประเภทของข้อมูล</th>
-                                    <th>รายละเอียด</th>
+                                    <th>รายละเอียด (ภาษาไทย)</th>
+                                    <th>รายละเอียด (ภาษาอังกฤษ)</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -103,7 +104,8 @@
                                         @endphp
                                         <td>{{$film_type}}</td>
                                         <td>{{$value->type_information}}</td>
-                                        <td>{{$value->film_information}}</td>
+                                        <td>{{$value->film_information_th}}</td>
+                                        <td>{{$value->film_information_en}}</td>
                                         <td>       
                                             <a href="{{url('/admin/edit-film-information')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>

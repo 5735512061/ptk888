@@ -27,21 +27,21 @@
                                     @endif
                                 @endforeach
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ประเภทผลิตภัณฑ์</label>
+                                    <label class="col-sm-2 col-form-label">ประเภทผลิตภัณฑ์ (ภาษาไทย)</label>
                                     <div class="col-sm-10">
-                                        @if ($errors->has('category'))
-                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('category') }})</span>
+                                        @if ($errors->has('category_th'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('category_th') }})</span>
                                         @endif
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกประเภทผลิตภัณฑ์" name="category">
+                                        <input type="text" class="form-control" placeholder="กรุณากรอกประเภทผลิตภัณฑ์ (ภาษาไทย)" name="category_th">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ประเภทผลิตภัณฑ์ภาษาอังกฤษ</label>
+                                    <label class="col-sm-2 col-form-label">ประเภทผลิตภัณฑ์ (ภาษาอังกฤษ)</label>
                                     <div class="col-sm-10">
-                                        @if ($errors->has('category_eng'))
-                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('category_eng') }})</span>
+                                        @if ($errors->has('category_en'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('category_en') }})</span>
                                         @endif
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกประเภทผลิตภัณฑ์เป็นภาษาอังกฤษ เท่านั้น" name="category_eng">
+                                        <input type="text" class="form-control" placeholder="กรุณากรอกประเภทผลิตภัณฑ์เป็นภาษาอังกฤษ เท่านั้น" name="category_en">
                                     </div>
                                 </div>
                                 <div class="form-group row mb-0">
@@ -74,7 +74,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>ประเภทผลิตภัณฑ์</th>
+                                    <th>ประเภทผลิตภัณฑ์ (ภาษาไทย)</th>
                                     <th>ประเภทผลิตภัณฑ์ (ภาษาอังกฤษ)</th>
                                     <th></th>
                                 </tr>
@@ -83,8 +83,8 @@
                                 @foreach ($categorys as $category => $value)
                                     <tr>
                                         <th scope="row">{{$NUM_PAGE*($page-1) + $category+1}}</th>
-                                        <td>{{$value->category}}</td>
-                                        <td>{{$value->category_eng}}</td>
+                                        <td>{{$value->category_th}}</td>
+                                        <td>{{$value->category_en}}</td>
                                         <td>       
                                             <a href="{{url('/admin/edit-category')}}/{{$value->id}}">
                                                 <i class="fa fa-pencil-square-o" style="color:blue;"></i>

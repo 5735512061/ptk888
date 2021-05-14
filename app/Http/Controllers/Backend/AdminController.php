@@ -1379,15 +1379,15 @@ class AdminController extends Controller
 
     public function rules_uploadCategory() {
         return [
-            'category' => 'required',
-            'category_eng' => 'required',
+            'category_th' => 'required',
+            'category_en' => 'required',
         ];
     }
 
     public function messages_uploadCategory() {
         return [
-            'category.required' => 'กรุณากรอกประเภทผลิตภัณฑ์',
-            'category_eng.required' => 'กรุณากรอกประเภทผลิตภัณฑ์ (ภาษาอังกฤษ)',
+            'category_th.required' => 'กรุณากรอกประเภทผลิตภัณฑ์ (ภาษาไทย)',
+            'category_en.required' => 'กรุณากรอกประเภทผลิตภัณฑ์ (ภาษาอังกฤษ)',
         ];
     }
 
