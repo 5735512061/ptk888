@@ -43,7 +43,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-2 col-12 section-header" style="text-align: center;">
-                        <h2>สินค้าแนะนำ<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
+                        <h2>@lang('byPhoneModelDetail.recommendProduct')<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
                     </div>
                     <div class="col-md-5"></div>
                 </div>
@@ -78,11 +78,11 @@
                                 </a>
                                 <div class="product-price">
                                     @if($price == null)
-                                        <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 0 บาท</h5>
+                                        <h5 style="font-weight: bold; padding-left:0.5rem;">@lang('byPhoneModelDetail.amount') 0 @lang('byPhoneModelDetail.thb')</h5>
                                     @elseif($promotion_price == null)
-                                        <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา {{$price}} บาท</h5>
+                                        <h5 style="font-weight: bold; padding-left:0.5rem;">@lang('byPhoneModelDetail.amount') {{$price}} @lang('byPhoneModelDetail.thb')</h5>
                                     @else 
-                                    <h5 style="font-weight: bold; padding-left:0.5rem;"><Del>ราคา {{$price}} บาท</Del> ลดเหลือ {{$promotion_price}} บาท</h5>
+                                    <h5 style="font-weight: bold; padding-left:0.5rem;"><Del>@lang('byPhoneModelDetail.amount') {{$price}} @lang('byPhoneModelDetail.thb')</Del> @lang('byPhoneModelDetail.reduceTo') {{$promotion_price}} @lang('byPhoneModelDetail.thb')</h5>
                                     @endif
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class=" col-md-2 col-12 section-header" style="text-align: center;">
-                        <h2>สินค้าใหม่<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
+                        <h2>@lang('byPhoneModelDetail.newProduct')<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
                     </div>
                     <div class="col-md-5"></div>
                 </div>

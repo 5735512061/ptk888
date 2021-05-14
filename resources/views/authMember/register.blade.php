@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">    
                 <div class="register-form">
-                    <h3>ลงทะเบียนสมาชิก</h3><hr>
+                    <h3>@lang('registerMember.register_member')</h3><hr>
                     <form action="{{url('/register-member')}}" enctype="multipart/form-data" method="post">@csrf
                         <div class="flash-message">
                             @foreach (['danger', 'warning', 'success', 'info'] as $msg)
@@ -32,15 +32,13 @@
                                 }
                         @endphp     
                         <div class="form-group row">
-                            {{-- <label class="col-md-4 col-form-label text-md-right">{{ __('รหัสสมาชิก') }}</label> --}}
-
                             <div class="col-md-6">
                                 <input type="hidden" class="form-control" name="member_id" value="{{$id_gen}}" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('ชื่อ') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerMember.first_name')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('name'))
@@ -51,7 +49,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('นามสกุล') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerMember.last_name')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('surname'))
@@ -62,7 +60,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('เบอร์โทรศัพท์') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerMember.mobile')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('phone'))
@@ -72,7 +70,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('ที่อยู่') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerMember.address')</label>
                             <div class="col-md-6">
                                 @if ($errors->has('address'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('address') }})</span>
@@ -81,7 +79,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('ตำบล') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerMember.sub_district')</label>
                             <div class="col-md-6">
                                 @if ($errors->has('district'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('district') }})</span>
@@ -90,7 +88,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('อำเภอ') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerMember.district')</label>
                             <div class="col-md-6">
                                 @if ($errors->has('amphoe'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('amphoe') }})</span>
@@ -99,7 +97,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('จังหวัด') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerMember.province')</label>
                             <div class="col-md-6">
                                 @if ($errors->has('province'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('province') }})</span>
@@ -108,7 +106,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('รหัสไปรษณีย์') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerMember.zipcode')</label>
                             <div class="col-md-6">
                                 @if ($errors->has('zipcode'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('zipcode') }})</span>
@@ -118,7 +116,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('ชื่อเข้าใช้งาน (ภาษาอังกฤษ)') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerMember.username')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('username'))
@@ -129,7 +127,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('รหัสผ่าน') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">@lang('registerMember.password')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('password'))
@@ -140,7 +138,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('ยืนยันรหัสผ่าน') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">@lang('registerMember.confirm_password')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('password_confirmation'))
@@ -152,7 +150,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn">
-                                    {{ __('ลงทะเบียนสมาชิก') }}
+                                    @lang('registerMember.submit')
                                 </button>
                             </div>
                         </div>

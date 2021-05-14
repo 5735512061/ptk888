@@ -5,20 +5,20 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-lg-8">
-            <h3>รายละเอียดการสั่งซื้อ หมายเลขบิล {{$order->bill_number}}</h3><br>
+            <h3>@lang('orderHistoryDetail.orderDetails') @lang('orderHistoryDetail.billNumber') {{$order->bill_number}}</h3><br>
             <div class="row">
                 <div class="col-md-6">
-                    <h4>ข้อมูลการชำระเงิน</h4><hr style="border-top:3px solid rgb(214 214 214)">
+                    <h4>@lang('orderHistoryDetail.paymentInformation')</h4><hr style="border-top:3px solid rgb(214 214 214)">
                     @php
                         $payday = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('payday');
                         $time = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('time');
                         $money = DB::table('payment_checkout_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('money');
                     @endphp
-                    <p style="font-size: 18px;">วันที่ชำระเงิน : {{$payday}} {{$time}}</p>
-                    <p style="font-size: 18px;">จำนวนเงินที่ชำระ : {{$money}} บาท</p>
+                    <p style="font-size: 18px;">@lang('orderHistoryDetail.paymentDate') : {{$payday}} {{$time}}</p>
+                    <p style="font-size: 18px;">@lang('orderHistoryDetail.total') : {{$money}} @lang('orderHistoryDetail.thb')</p>
                 </div>
                 <div class="col-md-6">
-                    <h4>ที่อยู่สำหรับจัดส่ง</h4><hr style="border-top:3px solid rgb(214 214 214)">
+                    <h4>@lang('orderHistoryDetail.deliveryAddress')</h4><hr style="border-top:3px solid rgb(214 214 214)">
                     @php
                         $name = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('name');
                         $phone = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('phone');
@@ -30,7 +30,7 @@
                         $zipcode = DB::table('shipment_customers')->where('customer_id',$order->customer_id)->where('bill_number',$order->bill_number)->value('zipcode');
                     @endphp
                     <p style="font-size: 16px;">{{$name}} {{$phone}},{{$phone_sec}}</p>
-                    <p style="font-size: 16px;">ที่อยู่ {{$address}} ตำบล {{$district}} อำเภอ {{$amphoe}} จังหวัด {{$province}} {{$zipcode}}</p>
+                    <p style="font-size: 16px;">@lang('orderHistoryDetail.address') {{$address}} @lang('orderHistoryDetail.sub_district') {{$district}} @lang('orderHistoryDetail.district') {{$amphoe}} @lang('orderHistoryDetail.province') {{$province}} {{$zipcode}}</p>
                 </div>
             </div>
         </div>
@@ -56,11 +56,11 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>
-                                    <th>ชื่อสินค้า</th>
-                                    <th>ราคาขายต่อหน่วย</th>
-                                    <th>จำนวน</th>
-                                    <th>ราคารวม</th>
-                                    <th>สถานะ</th>
+                                    <th>@lang('orderHistoryDetail.productName')</th>
+                                    <th>@lang('orderHistoryDetail.pricePerUnit')</th>
+                                    <th>@lang('orderHistoryDetail.unit')</th>
+                                    <th>@lang('orderHistoryDetail.subTotal')</th>
+                                    <th>@lang('orderHistoryDetail.status')</th>
                                 </tr>
                             </thead>
                             <tbody class="align-middle">
@@ -83,11 +83,11 @@
                                                 $status = DB::table('order_customer_confirms')->where('order_id',$order_id)->orderBy('id','desc')->value('status');
                                             @endphp
                                             @if($status == null || $status == 'รอยืนยัน')
-                                                <p style="color: red; font-size:17px;">รอยืนยัน</p>
+                                                <p style="color: red; font-size:17px;">@lang('orderHistoryDetail.waitingToConfirm')</p>
                                             @elseif($status == 'กำลังจัดส่ง')
-                                                <p style="color:blue; font-size:17px;">กำลังจัดส่ง</p>
+                                                <p style="color:blue; font-size:17px;">@lang('orderHistoryDetail.shipping')</p>
                                             @else
-                                                <p style="color:green; font-size:17px;">จัดส่งแล้ว</p>
+                                                <p style="color:green; font-size:17px;">@lang('orderHistoryDetail.delivered')</p>
                                             @endif
                                         </td>
                                     </tr>

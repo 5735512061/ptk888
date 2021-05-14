@@ -6,7 +6,7 @@
 </style>
 @section("content")
 <div class="container-fluid">
-    <center><h2>ประวัติการสั่งซื้อสินค้า<hr width="70px;" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
+    <center><h2>@lang('orderHistory.orderHistory')<hr width="70px;" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
 </div><br>
 @if(count($orders) != 0)
 <!-- Cart Start -->
@@ -25,11 +25,11 @@
                         <table class="table table-bordered">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>บิลเลขที่</th>
-                                    <th>วันที่ทำรายการ</th>
-                                    <th>จำนวน</th>
-                                    <th>ราคารวม</th>
-                                    <th>สถานะ</th>
+                                    <th>@lang('orderHistory.billNumber')</th>
+                                    <th>@lang('orderHistory.processDate')</th>
+                                    <th>@lang('orderHistory.unit')</th>
+                                    <th>@lang('orderHistory.subTotal')</th>
+                                    <th>@lang('orderHistory.status')</th>
                                     <td></td>
                                 </tr>
                             </thead>
@@ -50,13 +50,13 @@
                                         $status = DB::table('order_customer_confirms')->where('order_id',$value->id)->orderBy('id','desc')->value('status');
                                     @endphp
                                     @if($status == null || $status == 'รอยืนยัน')
-                                        <td style="color:red; font-size:15px;">รอยืนยัน</td> 
+                                        <td style="color:red; font-size:15px;">@lang('orderHistory.waitingToConfirm')</td> 
                                     @elseif($status == 'กำลังจัดส่ง')
-                                        <td style="color:blue; font-size:15px;">กำลังจัดส่ง</td> 
+                                        <td style="color:blue; font-size:15px;">@lang('orderHistory.shipping')</td> 
                                     @else
-                                        <td style="color:green; font-size:15px;">จัดส่งแล้ว</td>
+                                        <td style="color:green; font-size:15px;">@lang('orderHistory.delivered')</td>
                                     @endif
-                                    <td><a href="{{url('/member/order-history-detail/')}}/{{$value->id}}" style="color: blue;">ตรวจสอบการสั่งซื้อ</a></td>
+                                    <td><a href="{{url('/member/order-history-detail/')}}/{{$value->id}}" style="color: blue;">@lang('orderHistory.orderChecks')</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -74,11 +74,11 @@
         <div class="container-fluid">
             <!-- Cart item -->
             <h5 class="m-text20 p-b-24" style="text-align: center;">
-                ไม่มีประวัติการสั่งซื้อสินค้า! 
+                @lang('orderHistory.notFound')! 
             </h5><br>
             <center>
                 <a href="{{url('/')}}" class="btn-warranty" style="text-decoration: none;" >
-                    เลือกซื้อสินค้า
+                    @lang('orderHistory.startOrder')
                 </a>
             </center>
         </div>
@@ -89,7 +89,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 col-12 section-header" style="text-align: center;">
-                    <h2>สินค้าแนะนำ<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
+                    <h2>@lang('orderHistory.recommendedProducts')<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
                 </div>
                 <div class="col-md-5"></div>
             </div>
@@ -123,9 +123,9 @@
                             </a>
                             <div class="product-price">
                                 @if($price == null)
-                                    <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 0 บาท</h5>
+                                    <h5 style="font-weight: bold; padding-left:0.5rem;">@lang('orderHistory.amount') 0 @lang('orderHistory.thb')</h5>
                                 @else
-                                    <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา {{$price}} บาท</h5>
+                                    <h5 style="font-weight: bold; padding-left:0.5rem;">@lang('orderHistory.amount') {{$price}} @lang('orderHistory.thb')</h5>
                                 @endif
                             </div>
                         </div>

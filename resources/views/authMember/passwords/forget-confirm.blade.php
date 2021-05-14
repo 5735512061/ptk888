@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="login-form">
-                    <h3>เปลี่ยนรหัสผ่าน</h3><hr>
+                    <h3>@lang('changePassword.changePassword')</h3><hr>
                     <form method="POST" action="{{ route('password.updateForget') }}">@csrf
                         @csrf
                         <div class="flash-message">
@@ -20,7 +20,7 @@
                         </div>
                         <input type="hidden" name="phone" value="{{$phone}}">
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('รหัสผ่านใหม่') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('changePassword.newpassword')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('password'))
@@ -32,7 +32,7 @@
 
                         <div class="form-group row">
                             <input type="hidden" name="phone" value="{{$phone}}">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('ยืนยันรหัสผ่าน') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('changePassword.password_confirmation')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('password_confirmation'))
@@ -45,7 +45,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn">
-                                    {{ __('เปลี่ยนรหัสผ่าน') }}
+                                    @lang('changePassword.changePassword')
                                 </button>
                             </div>
                         </div>

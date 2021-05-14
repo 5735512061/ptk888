@@ -36,11 +36,11 @@
                             </a>
                             <div class="product-price">
                                 @if($price == null)
-                                    <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 0 บาท</h5>
+                                    <h5 style="font-weight: bold; padding-left:0.5rem;">@lang('byPhoneModelDetail.amount') 0 @lang('byPhoneModelDetail.thb')</h5>
                                 @elseif($promotion_price == null)
-                                    <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา {{$price}} บาท</h5>
+                                    <h5 style="font-weight: bold; padding-left:0.5rem;">@lang('byPhoneModelDetail.amount') {{$price}} @lang('byPhoneModelDetail.thb')</h5>
                                 @else 
-                                <h5 style="font-weight: bold; padding-left:0.5rem;"><Del>ราคา {{$price}} บาท</Del> ลดเหลือ {{$promotion_price}} บาท</h5>
+                                <h5 style="font-weight: bold; padding-left:0.5rem;"><Del>@lang('byPhoneModelDetail.amount') {{$price}} @lang('byPhoneModelDetail.thb')</Del> @lang('byPhoneModelDetail.reduceTo') {{$promotion_price}} @lang('byPhoneModelDetail.thb')</h5>
                                 @endif
                             </div>
                         </div>

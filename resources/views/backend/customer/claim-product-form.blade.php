@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-lg-6">    
                 <div class="register-form">
-                    <h3>เคลมสินค้า</h3><hr>
+                    <h3>@lang('claimProduct.claimProduct')</h3><hr>
                     <form action="{{url('member/claim-product')}}" enctype="multipart/form-data" method="post">@csrf
                         @csrf
                         <div class="flash-message">
@@ -19,7 +19,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('สาเหตุการเคลมสินค้า') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('claimProduct.reasonsToClaim')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('reason'))
@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('รูปสินค้าที่ต้องการเคลม') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('claimProduct.photo')</label>
                             <div class="col-md-6">
                                 @if ($errors->has('image'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('image') }})</span>
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('ที่อยู่จัดส่งสินค้า') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('claimProduct.deliveryAddress')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('address'))
@@ -62,7 +62,7 @@
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('warranty_id') }})</span>
                                 @endif
                                 <button type="submit" class="btn">
-                                    {{ __('เคลมสินค้า') }}
+                                    @lang('claimProduct.claimProduct')
                                 </button>
                             </div>
                         </div>
@@ -71,11 +71,11 @@
             </div>
             <div class="col-md-6">
                 <div class="register-form">
-                    <h4>เงื่อนไขการเคลมสินค้า</h4><hr>
-                    <p><i class="fa fa-caret-right"></i> ระบุสาเหตุการเคลมสินค้า</p> 
-                    <p><i class="fa fa-caret-right"></i> รอยืนยันการเคลมสินค้าจากระบบ</p> 
-                    <p><i class="fa fa-caret-right"></i> ถ่ายรูปยืนยันสินค้าที่ต้องการเคลม และส่งสินค้าคืนทางบริษัทฯ</p> 
-                    <p><i class="fa fa-caret-right"></i> ทางบริษัทฯ จัดส่งสินค้าใหม่ให้กับคุณลูกค้า</p>
+                    <h4>@lang('claimProduct.claimsCondition')</h4><hr>
+                    <p><i class="fa fa-caret-right"></i> @lang('claimProduct.claimsCondition_1')</p> 
+                    <p><i class="fa fa-caret-right"></i> @lang('claimProduct.claimsCondition_2')</p> 
+                    <p><i class="fa fa-caret-right"></i> @lang('claimProduct.claimsCondition_3')</p> 
+                    <p><i class="fa fa-caret-right"></i> @lang('claimProduct.claimsCondition_4')</p>
                 </div>
             </div>
         </div>

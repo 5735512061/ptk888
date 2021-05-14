@@ -7,14 +7,14 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="contact-info">
-                    <h2>ติดต่อเรา</h2>
-                    <h3><i class="fa fa-map-marker"></i>169/24 หมู่ที่ 3 ตำบลคูคต อำเภอลำลูกกา จังหวัดปทุมธานี 12130 (สาขาใหญ่)</h3>
-                    <h3><i class="fa fa-map-marker"></i>25/1 หมู่ที่ 4 ถนนเจ้าฟ้า ตำบลฉลอง อำเภอเมือง จังหวัดภูเก็ต 83130 (สาขาภูเก็ต)</h3>
+                    <h2>@lang('contactUs.contactUs')</h2>
+                    <h3><i class="fa fa-map-marker"></i>@lang('contactUs.headOffical')</h3>
+                    <h3><i class="fa fa-map-marker"></i>@lang('contactUs.phuketOffice')</h3>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="contact-info">
-                    <h2>ติดต่อเรา</h2>
+                    <h2>@lang('contactUs.contactUs')</h2>
                     <h3><i class="fa fa-envelope"></i>ptkstudio8@gmail.com</h3>
                     <h3><i class="fa fa-phone"></i>066-113-1689</h3>
                     <div class="social">
@@ -63,7 +63,7 @@
                         @if(Auth::guard('member')->user() != NULL)
                             <input type="hidden" name="customer_id" value="{{Auth::guard('member')->user()->id}}">
                         @endif
-                        <div><button class="btn" type="submit">ส่งข้อความติดต่อ</button></div>
+                        <div><button class="btn" type="submit">@lang('contactUs.sendMessage')</button></div>
                     </form>
                 </div>
             </div>

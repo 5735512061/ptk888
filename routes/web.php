@@ -7,6 +7,11 @@ Route::get('/clear-cache', function() {
     return 'DONE';
 });
 
+Route::get('locale/{locale}',function($locale) {
+    Session::put('locale',$locale);
+    return redirect()->back();
+});
+
 // ลงทะเบียนแอดมิน
 Route::get('/register','Auth\RegisterController@ShowRegisterForm');
 Route::post('/register','Auth\RegisterController@register');

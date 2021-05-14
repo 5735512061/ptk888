@@ -14,6 +14,7 @@ use App\model\FilmType;
 use App\model\ProductFilmInformation;
 
 use App\Store;
+use Session;
 
 class PtkController extends Controller
 {

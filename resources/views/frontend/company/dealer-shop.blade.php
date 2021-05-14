@@ -14,9 +14,9 @@
                     </div>
                 </div>
                 <div class="details col-md-6">
-                    <h4 class="product-title">ตัวแทนจำหน่าย {{$value->name}}</h4>
-                    <p><strong>ที่อยู่</strong> {{$value->address}}</p>
-                    <p><strong>เบอร์โทรศัพท์</strong> {{$value->phone}}</p>
+                    <h4 class="product-title">@lang('dealerShop.agency') {{$value->name}}</h4>
+                    <p><strong>@lang('dealerShop.address')</strong> {{$value->address}}</p>
+                    <p><strong>@lang('dealerShop.mobile')</strong> {{$value->phone}}</p>
                 </div>
             </div>
         </div>

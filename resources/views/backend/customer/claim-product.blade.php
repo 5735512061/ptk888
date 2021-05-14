@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="container-fluid">
-    <center><h2>เคลมสินค้า<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
+    <center><h2>@lang('warrantyInformation.cliam_product')<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
 </div><br>
 <div class="login">
     <div class="container-fluid">
@@ -33,16 +33,13 @@
                             </div>
                         </div>
                     </form>
-                    <h4>เงื่อนไขการรับประกัน</h4><hr>
-                    <p><i class="fa fa-caret-right"></i> สินค้ายี่ห้อ Madam Film รับประกัน 365 วัน ทุกกรณี นับจากวันที่ซื้อสินค้า</p> 
-                    <p><i class="fa fa-caret-right"></i> สินค้ายี่ห้อ Dora Shield รับประกัน 60 วัน ทุกกรณี นับจากวันที่ซื้อสินค้า </p> 
-                    <p><i class="fa fa-caret-right"></i> รับประกันฟิล์มไฮโดรเจล 1 ชิ้น / ใบรับประกัน เพียง 1 ครั้งเท่านั้น</p>
-                    <p><i class="fa fa-caret-right"></i> กรุณาลงทะเบียนรับประกันสินค้า ภายใน 7 วัน นับจากวันที่ซื้อสินค้า</p>
-                    <p><i class="fa fa-caret-right"></i> ในกรณีไม่ได้ลงทะเบียนประกัน บริษัทฯ ขอสงวนสิทธิในการเคลมสินค้า</p>
-                    <p><i class="fa fa-caret-right"></i> ไม่สามารถรับคืนหรือเปลี่ยนสินค้าได้ ในกรณีที่เกิดความเสียหายในระหว่างขั้นตอนการติดตั้งที่ไม่ถูกวิธี</p>
-                    <br><h4>วิธีการเคลมสินค้า</h4><hr>
-                    <p><i class="fa fa-caret-right"></i> ลงทะเบียนรับประกันสินค้าผ่านเว็บไซต์</p>
-                    <p><i class="fa fa-caret-right"></i> แจ้งเรื่องผ่านเว็บไซต์ในหัวข้อ <a href="{{url('/member/claim-product')}}">ใช้สิทธิ์เคลมสินค้า</a></p>
+                    <h4>@lang('warrantyInformation.condition')</h4><hr>
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.condition_1')</p> 
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.condition_2')</p> 
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.condition_3')</p>
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.condition_4')</p>
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.condition_5')</p>
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.condition_6')</p>
                 </div>
             </div>
             <div class="col-md-2"></div>

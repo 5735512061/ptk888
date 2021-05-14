@@ -2,16 +2,16 @@
 
 @section("content")
 <div class="container-fluid">
-    <center><h2>ข้อมูลส่วนตัว<hr width="70px;" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
+    <center><h2>@lang('profile.personalInformation')<hr width="70px;" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
 </div><br>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <h2 style="text-align: center;">หมายเลขสมาชิก {{$member->member_id}}</h2>
+            <h2 style="text-align: center;">@lang('profile.customerID') {{$member->member_id}}</h2>
             <h1 style="text-align: center;">{{$member->name}} {{$member->surname}}</h1>
-            <h2 style="text-align: center;">เบอร์โทรศัพท์ {{$member->phone}}</h2><br>
-            <h4 style="text-align: center;">ที่อยู่ {{$member->address}} ตำบล{{$member->district}} อำเภอ{{$member->amphoe}} จังหวัด{{$member->province}} {{$member->zipcode}}</h4>
+            <h2 style="text-align: center;">@lang('profile.mobile') {{$member->phone}}</h2><br>
+            <h4 style="text-align: center;">@lang('profile.address') {{$member->address}} @lang('profile.sub_district'){{$member->district}} @lang('profile.district'){{$member->amphoe}} @lang('profile.province'){{$member->province}} {{$member->zipcode}}</h4>
         </div>
         <div class="col-md-4"></div>
     </div><br>
@@ -21,34 +21,34 @@
             <div class="row">
                 <a class="col-md-6" href="{{url('/member/order-history')}}">
                     <button type="submit" class="btn" style="height: 70px; width: 20em; margin-bottom: 20px;">
-                        <h4>ประวัติการสั่งซื้อสินค้า</h4> 
+                        <h4>@lang('profile.orderHistory')</h4> 
                     </button>
                 </a>
                 <a class="col-md-6" href="{{url('/member/answer-message')}}">
                     <button type="submit" class="btn" style="height: 70px; width: 20em; margin-bottom: 20px;">
-                        <h4>ประวัติการติดต่อสอบถาม</h4> 
+                        <h4>@lang('profile.inquiryHistory')</h4> 
                     </button>
                 </a>
                 <a class="col-md-6" href="{{url('/member/shopping-cart')}}">
                     <button type="submit" class="btn" style="height: 70px; width: 20em; margin-bottom: 20px;">
-                        <h4>ตะกร้าสินค้า</h4> 
+                        <h4>@lang('profile.cart')</h4> 
                     </button>
                 </a>
                 <a class="col-md-6" href="{{url('/member/edit-profile')}}/{{$member->id}}">
                     <button type="submit" class="btn" style="height: 70px; width: 20em; margin-bottom: 20px;">
-                        <h4>แก้ไขข้อมูลส่วนตัว</h4> 
+                        <h4>@lang('profile.editPersonalInformation')</h4> 
                     </button>
                 </a>
                 <a class="col-md-6" href="{{url('/member/change-password')}}">
                     <button type="submit" class="btn" style="height: 70px; width: 20em; margin-bottom: 20px;">
-                        <h4>เปลี่ยนรหัสผ่าน</h4> 
+                        <h4>@lang('profile.changePassword')</h4> 
                     </button>
                 </a>
                 <a class="col-md-6" href="{{ route('member.logout') }}" 
                     onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                     <button type="submit" class="btn" style="height: 70px; width: 20em; margin-bottom: 20px;">
-                        <h4>ออกจากระบบ</h4> 
+                        <h4>@lang('profile.logOut')</h4> 
                     </button>
                 </a>
                 <form id="logout-form" action="{{ 'App\Member' == Auth::getProvider()->getModel() ? route('member.logout') : route('member.logout') }}" method="POST" style="display: none;">@csrf</form>

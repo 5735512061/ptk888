@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="container-fluid">
-    <center><h2>ข้อมูลการเคลมสินค้า<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
+    <center><h2>@lang('claimProductConfirm.productClaimInformation')<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
 </div><br>
 <div class="login">
     <div class="container-fluid">
@@ -14,12 +14,12 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>รุ่นฟิล์ม</th>
-                                    <th>รุ่นโทรศัพท์</th>
-                                    <th>วันที่ลงทะเบียน</th>
-                                    <th>ระยะเวลาเคลม</th>
-                                    <th>เวลาที่เหลือ</th>
-                                    <th>สถานะ</th>
+                                    <th>@lang('claimProductConfirm.filmVersion')</th>
+                                    <th>@lang('claimProductConfirm.mobileModel')</th>
+                                    <th>@lang('claimProductConfirm.registerDate')</th>
+                                    <th>@lang('claimProductConfirm.periodOfClaim')</th>
+                                    <th>@lang('claimProductConfirm.timeLeft')</th>
+                                    <th>@lang('claimProductConfirm.status')</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -44,34 +44,34 @@
 
                                             $numberDays = $warranty_time - $diff->format("%a");
                                         @endphp
-                                        <td>{{$warranty_time}} วัน</td>
+                                        <td>{{$warranty_time}} @lang('claimProductConfirm.days')</td>
                                         @if($numberDays < 0)
-                                            <td style="color: red;">0 วัน</td>
+                                            <td style="color: red;">0 @lang('claimProductConfirm.days')</td>
                                         @else
-                                            <td style="color: red;">{{$numberDays}} วัน</td>
+                                            <td style="color: red;">{{$numberDays}} @lang('claimProductConfirm.days')</td>
                                         @endif
                                         <td>
                                             @if($status == null || $status == 'ยังไม่เคลม')
-                                                <p style="color: red;">ยังไม่เคลม</p>
+                                                <p style="color: red;">@lang('claimProductConfirm.notYetClaiming')</p>
                                             @elseif($status == 'รอยืนยัน')
-                                                <p style="color:blue;">รอยืนยัน</p>
+                                                <p style="color:blue;">@lang('claimProductConfirm.waitingToConfirm')</p>
                                             @else
-                                                <p style="color:green;">เคลมแล้ว</p>
+                                                <p style="color:green;">@lang('claimProductConfirm.claimed')</p>
                                             @endif
                                         </td>
                                         <td>   
                                             @if($numberDays != 0)
                                                 @if($status == null || $status == 'ยังไม่เคลม')
                                                     <a href="{{url('/member/claim-product-form')}}/{{$value->id}}">
-                                                        <p style="color:blue; font-family:'Mitr';">กดเคลมสินค้า</p>
+                                                        <p style="color:blue; font-family:'Mitr';">@lang('claimProductConfirm.submitYourClaim')</p>
                                                     </a> 
                                                 @elseif($status == 'รอยืนยัน')
-                                                    <p style="color:blue;">กำลังรอยืนยัน</p>
+                                                    <p style="color:blue;">@lang('claimProductConfirm.waitingForConfirmation')</p>
                                                 @else
-                                                    <p style="color:green;">เคลมสินค้าแล้ว</p>
+                                                    <p style="color:green;">@lang('claimProductConfirm.claimed_product')</p>
                                                 @endif
                                             @elseif($numberDays == 0) 
-                                                <p style="color:red;">หมดเวลาเคลมสินค้า</p>
+                                                <p style="color:red;">@lang('claimProductConfirm.timeOutToClaim')</p>
                                             @endif
                                         </td>
                                     </tr>
@@ -80,11 +80,11 @@
                             {{$data_warrantys->links()}}
                         </table>
                     </div>
-                    <h4>เงื่อนไขการเคลมสินค้า</h4><hr>
-                    <p><i class="fa fa-caret-right"></i> ระบุสาเหตุการเคลมสินค้า</p> 
-                    <p><i class="fa fa-caret-right"></i> รอยืนยันการเคลมสินค้าจากระบบ</p> 
-                    <p><i class="fa fa-caret-right"></i> ถ่ายรูปยืนยันสินค้าที่ต้องการเคลม และส่งสินค้าคืนทางบริษัทฯ</p> 
-                    <p><i class="fa fa-caret-right"></i> ทางบริษัทฯ จัดส่งสินค้าใหม่ให้กับคุณลูกค้า</p>
+                    <h4>@lang('claimProductConfirm.claimsCondition')</h4><hr>
+                    <p><i class="fa fa-caret-right"></i> @lang('claimProductConfirm.claimsCondition_1')</p> 
+                    <p><i class="fa fa-caret-right"></i> @lang('claimProductConfirm.claimsCondition_2')</p> 
+                    <p><i class="fa fa-caret-right"></i> @lang('claimProductConfirm.claimsCondition_3')</p> 
+                    <p><i class="fa fa-caret-right"></i> @lang('claimProductConfirm.claimsCondition_4')</p>
                 </div>
             </div>
         </div>

@@ -14,10 +14,10 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
-                    <h2>ศูนย์ช่วยเหลือ</h2>
+                    <h2>@lang('footer.help')</h2>
                     <ul>
-                        <li><a href="{{url('/warranty-information')}}">ข้อมูลการรับประกัน</a></li>
-                        <li><a href="{{url('/howto-install')}}">วิธีติดตั้ง</a></li>
+                        <li><a href="{{url('/warranty-information')}}">@lang('footer.insurance_information')</a></li>
+                        <li><a href="{{url('/howto-install')}}">@lang('footer.install_procedure')</a></li>
                         <li><a href="{{url('/faq')}}">FAQ</a></li>
                     </ul>
                 </div>
@@ -27,7 +27,7 @@
             @endphp
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
-                    <h2>ผลิตภัณฑ์</h2>
+                    <h2>@lang('footer.product')</h2>
                     <ul>
                         @foreach ($categorys as $category => $value)
                             <li><a href="{{url('/category')}}/{{$value->category_eng}}">{{$value->category}}</a></li>
@@ -38,10 +38,10 @@
 
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
-                    <h2>ตัวแทนจำหน่าย</h2>
+                    <h2>@lang('footer.agency')</h2>
                     <ul>
-                        <li><a href="{{url('/dealer-shop')}}">ค้นหาร้านค้าตัวแทนจำหน่าย</a></li>
-                        <li><a href="{{url('/store/login')}}">สำหรับร้านค้าตัวแทนจำหน่าย</a></li>
+                        <li><a href="{{url('/dealer-shop')}}">@lang('footer.searching_agency')</a></li>
+                        <li><a href="{{url('/store/login')}}">@lang('footer.agency_member')</a></li>
                     </ul>
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-6">
                 <div class="payment-method">
-                    <h2>ติดต่อเรา</h2>
+                    <h2>@lang('footer.contact_us')</h2>
                     <div class="social">
                         <a href="https://www.facebook.com/ptkstudio8"><i class="fab fa-facebook-f"></i></a>
                         <a href="http://line.me/ti/p/~@499zvsgh"><i class="fab fa-line"></i></a>

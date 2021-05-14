@@ -5,13 +5,13 @@
     <div class="featured-product product">
         <div class="container-fluid">
             @if($category == "กระจกกันรอย")
-                <center><h2>กระจกกันรอย<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
+                <center><h2>@lang('categoryProduct.glassProtect')<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
             @elseif($category == "หูฟังไร้สาย")
-                <center><h2>หูฟังไร้สาย<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
+                <center><h2>@lang('categoryProduct.wirelessHeadphones')<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
             @elseif($category == "POWER BANK")
                 <center><h2>POWER BANK<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
             @endif
-            <h5 style="text-align: center;">-- สินค้ายังไม่มีจำหน่าย กรุณาติดตามสินค้าได้ที่เว็บไซต์ --</h5><hr>
+            <h5 style="text-align: center;">-- @lang('categoryProduct.notAvailable') --</h5><hr>
         </div>
     </div>
     <!-- Featured Product Start -->
@@ -19,7 +19,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3 col-12 section-header" style="text-align: center;">
-                    <h2>สินค้าแนะนำอื่นๆ<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
+                    <h2>@lang('categoryProduct.recommendProducts')<hr class="col-md-1 col-1" style="border-top:5px solid rgba(0,0,0,36%);"></h2>
                 </div>
                 <div class="col-md-5"></div>
             </div>
@@ -53,9 +53,9 @@
                             </a>
                             <div class="product-price">
                                 @if($price == null)
-                                    <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา 0 บาท</h5>
+                                    <h5 style="font-weight: bold; padding-left:0.5rem;">@lang('categoryProduct.amount') 0 @lang('categoryProduct.thb')</h5>
                                 @else
-                                    <h5 style="font-weight: bold; padding-left:0.5rem;">ราคา {{$price}} บาท</h5>
+                                    <h5 style="font-weight: bold; padding-left:0.5rem;">@lang('categoryProduct.amount') {{$price}} @lang('categoryProduct.thb')</h5>
                                 @endif
                             </div>
                         </div>
@@ -68,12 +68,11 @@
 @elseif($category == "ฟิล์มไฮโดรเจล")
 <div class="featured-product product">
     <div class="container-fluid">
-        <center><h2>ฟิล์มไฮโดรเจล<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
+        <center><h2>@lang('categoryProduct.hydrogelProtectorFilm')<hr class="col-md-1 col-1" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <h5 style="line-height: 1.7;"><strong>ฟิล์มไฮโดรเจล</strong> เป็นฟิล์มกันรอยรูปแบบใหม่ที่มีจุดเด่นเป็นความบางเฉียบที่แข็งแรงทนทาน ติดเคลือบป้องกันได้ทั้งตัว ติดแน่นหนึบ อีกทั้งยังไม่บดบังความคมชัด 
-                    หรือสีสันของหน้าจอ พร้อมความแข็งแรง ทนทานที่สามารถรับแรงกระแทกได้ในระดับหนึ่ง โดยติดใช้งานได้ไม่ยาก พร้อมไม่ทิ้งฟองอากาศ หรือคราบกาว</h5>
+                <h5 style="line-height: 1.7;"><strong>@lang('categoryProduct.hydrogelProtectorFilm')</strong> @lang('categoryProduct.hydrogelProtectorFilm_info')</h5>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -102,8 +101,8 @@
                         <img src="{{url('img/logo_film/wolverineSelfRepair.png')}}" class="img-responsive">
                     </div>
                     <div class="col-md-7" style="margin-top: 5em;">
-                        <strong>ฟิล์มไฮโดรเจลวูล์ฟเวอรีน-ฟื้นฟูตัวเอง (Wolverine Self Repair Hydrogel Film)</strong>
-                        <p>ฟิล์มกันกระแทก ที่มีคุณสมบัติพิเศษที่ไม่เหมือนใคร คือการซ่อมแซมตัวเอง หลังจากเกิดรอยขีดข่วนหรือรอยพับ ให้กลับมาใสดังเดิม ภายใน 24 ชั่วโมง</p>
+                        <strong>@lang('categoryProduct.wolverineSelfRepairHydrogelFilm')</strong>
+                        <p>@lang('categoryProduct.wolverineSelfRepairHydrogelFilm_info')</p>
                     </div>
                 </div>
             </div>
@@ -113,8 +112,8 @@
                         <img src="{{url('img/logo_film/privacy.png')}}" class="img-responsive">
                     </div>
                     <div class="col-md-7" style="margin-top: 5em;">
-                        <strong>ฟิล์มไฮโดรเจลกันรอยแบบป้องกันความเป็นส่วนตัว (Privacy Screen Hydrogel Film)</strong>
-                        <p>ฟิล์มกันกระแทก ที่มีคุณสมบัติพิเศษคือ ผู้อื่นไม่สามารถมองเห็นหน้าจอของเราได้ ผู้ใช้จะสามารถมองจากมุมด้านหน้าตรง ๆ เท่านั้น เพื่อความเป็นส่วนตัว</p>
+                        <strong>@lang('categoryProduct.privacyScreenHydrogelFilm')</strong>
+                        <p>@lang('categoryProduct.privacyScreenHydrogelFilm_info')</p>
                     </div>
                 </div>
             </div>
@@ -126,8 +125,8 @@
                         <img src="{{url('img/logo_film/antiBlue.png')}}" class="img-responsive">
                     </div>
                     <div class="col-md-7" style="margin-top: 5em;">
-                        <strong>ฟิล์มไฮโดรเจลกันรอยแบบป้องกันสายตา (Anti-Blue Light Hydrogel Film)</strong>
-                        <p>ฟิล์มกันกระแทก ที่มีคุณสมบัติพิเศษคือป้องกันสายตา ตัดแสงสีฟ้าจากหน้าจอมือถือ</p>
+                        <strong>@lang('categoryProduct.antiBlueLight')</strong>
+                        <p>@lang('categoryProduct.antiBlueLight_info')</p>
                     </div>
                 </div>
             </div>
@@ -137,8 +136,8 @@
                         <img src="{{url('img/logo_film/matte.png')}}" class="img-responsive">
                     </div>
                     <div class="col-md-7" style="margin-top: 5em;">
-                        <strong>ฟิล์มไฮโดรเจลกันรอยแบบด้าน (Hydrogel Matte Film)</strong>
-                        <p>ฟิล์มกันกระแทก ที่มีคุณสมบัติของฟิล์มชนิดนี้คือ ไม่ทิ้งคราบรอยนิ้วมือ และคราบเหงื่อ เหมาะสำหรับผู้ที่ชอบเล่นเกมส์ การสัมผัสหน้าจอและทัชสกรีนลื่นไหล ไม่สะดุด</p>
+                        <strong>@lang('categoryProduct.hydrogelMatteFilm')</strong>
+                        <p>@lang('categoryProduct.hydrogelMatteFilm_info')</p>
                     </div>
                 </div>
             </div>
@@ -150,8 +149,8 @@
                         <img src="{{url('img/logo_film/high_clear.png')}}" class="img-responsive">
                     </div>
                     <div class="col-md-7" style="margin-top: 5em;">
-                        <strong>ฟิล์มไฮโดรเจลกันรอยแบบใส (High Clear Hydrogel Film)</strong>
-                        <p>ฟิล์มกันกระแทก ที่มีคุณสมบัติพิเศษคือแสงจอไม่ดรอปลง หน้าจอคงความสดใสได้ดังเดิมเสมือนไม่ได้ติดฟิล์มมาเลยทีเดียว</p>
+                        <strong>@lang('categoryProduct.highClearHydrogelFilm')</strong>
+                        <p>@lang('categoryProduct.highClearHydrogelFilm_info')</p>
                     </div>
                 </div>
             </div>

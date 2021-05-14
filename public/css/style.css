@@ -297,7 +297,7 @@ h2 {
     .nav .navbar-dark a.nav-link {
         color: #000000;
         font-size: 16px;
-        text-transform: uppercase;
+        /* text-transform: uppercase; */
         font-weight: bold;
     }
     

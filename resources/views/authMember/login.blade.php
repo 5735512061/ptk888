@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="login-form">
-                    <h3>เข้าสู่ระบบสมาชิก</h3><hr>
+                    <h3>@lang('loginMember.member_login')</h3><hr>
                     <form action="{{url('/member/login')}}" enctype="multipart/form-data" method="post">@csrf
                         @csrf
                         <div class="flash-message">
@@ -19,7 +19,7 @@
                             @endforeach
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('ชื่อเข้าใช้งาน') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('loginMember.username')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('username'))
@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('รหัสผ่าน') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">@lang('loginMember.password')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('password'))
@@ -42,17 +42,17 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <p style="color:#ff8930;">* กรณีที่ยังไม่สมัครสมาชิก ให้สมัครสมาชิกก่อน</p>
+                                <p style="color:#ff8930;">@lang('loginMember.condition')</p>
                                 <button type="submit" class="btn">
-                                    {{ __('เข้าสู่ระบบสมาชิก') }}
+                                    @lang('loginMember.login')
                                 </button>
-                                <a href="{{url('/register-member')}}" class="btn cart">สมัครสมาชิก</a>
+                                <a href="{{url('/register-member')}}" class="btn cart">@lang('loginMember.register')</a>
                                 
                             </div>
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <br><a href="{{url('/member/ForgetPassword')}}">ลืมรหัสผ่าน ?</a>
+                                <br><a href="{{url('/member/ForgetPassword')}}">@lang('loginMember.forgot_password')</a>
                             </div>
                         </div>
                     </form>

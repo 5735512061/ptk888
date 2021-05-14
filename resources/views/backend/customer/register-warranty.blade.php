@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-lg-6">    
                 <div class="register-form">
-                    <h3>ลงทะเบียนรับประกันฟิล์ม</h3><hr>
+                    <h3>@lang('registerWarranty.filmWarrantyRegistration')</h3><hr>
                     <form action="{{url('member/register-warranty')}}" enctype="multipart/form-data" method="post">@csrf
                         @csrf
                         <div class="flash-message">
@@ -19,7 +19,7 @@
                         </div>
                         <div class="form-group row">
                             
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('ชื่อ') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerWarranty.first_name')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('name'))
@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('นามสกุล') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerWarranty.last_name')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('surname'))
@@ -41,7 +41,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('เบอร์โทรศัพท์') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerWarranty.mobile')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('phone'))
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('ประเภทฟิล์มของรุ่นที่ลงทะเบียน') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerWarranty.typeOfHydrogelFilm')</label>
                             <div class="col-md-6">
                                 @if ($errors->has('film_model'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('film_model') }})</span>
@@ -60,13 +60,13 @@
                                 <select name="film_model" class="form-control">
                                     <option value="Madam Film">Madam Film</option>
                                     <option value="Dora Shield">Dora Shield</option>
-                                    <option value="บูธ PTK888">บูธ PTK888</option>
+                                    <option value="บูธ PTK888">@lang('registerWarranty.booth')</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('หมายเลขซีเรียล 16 หลัก') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerWarranty.serialnumber')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('serialnumber'))
@@ -77,7 +77,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('ยี่ห้อ/รุ่นมือถือ') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerWarranty.brand')/@lang('registerWarranty.mobileModel')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('phone_model'))
@@ -88,7 +88,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('วันที่สั่งซื้อ') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerWarranty.orderDate')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('date_order'))
@@ -99,21 +99,21 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('จุดที่ใช้บริการ') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerWarranty.servicePoint')</label>
                             <div class="col-md-6">
                                 @if ($errors->has('service_point'))
                                     <span class="text-danger" style="font-size: 17px;">({{ $errors->first('service_point') }})</span>
                                 @endif
                                 <select name="service_point" class="form-control">
-                                    <option value="ตัวแทนจำหน่าย">ตัวแทนจำหน่าย</option>
-                                    <option value="เว็บไซต์ออนไลน์">เว็บไซต์ออนไลน์</option>
-                                    <option value="บูธ PTK888">บูธ PTK888</option>
+                                    <option value="ตัวแทนจำหน่าย">@lang('registerWarranty.agency')</option>
+                                    <option value="เว็บไซต์ออนไลน์">@lang('registerWarranty.website')</option>
+                                    <option value="บูธ PTK888">@lang('registerWarranty.booth')</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('สถานที่จุดบริการ') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">@lang('registerWarranty.location')</label>
 
                             <div class="col-md-6">
                                 @if ($errors->has('address_service'))
@@ -128,7 +128,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn">
-                                    {{ __('ลงทะเบียนรับประกันฟิล์ม') }}
+                                    @lang('registerWarranty.film_insurance_registration')
                                 </button>
                             </div>
                         </div>
@@ -137,16 +137,16 @@
             </div>
             <div class="col-md-6">
                 <div class="register-form">
-                    <h6>เงื่อนไขการรับประกัน</h6><hr>
-                    <p><i class="fa fa-caret-right"></i> สินค้ายี่ห้อ Madam Film รับประกัน 365 วัน ทุกกรณี นับจากวันที่ซื้อสินค้า</p> 
-                    <p><i class="fa fa-caret-right"></i> สินค้ายี่ห้อ Dora Shield รับประกัน 60 วัน ทุกกรณี นับจากวันที่ซื้อสินค้า </p> 
-                    <p><i class="fa fa-caret-right"></i> รับประกันฟิล์มไฮโดรเจล 1 ชิ้น / ใบรับประกัน เพียง 1 ครั้งเท่านั้น</p>
-                    <p><i class="fa fa-caret-right"></i> กรุณาลงทะเบียนรับประกันสินค้า ภายใน 7 วัน นับจากวันที่ซื้อสินค้า</p>
-                    <p><i class="fa fa-caret-right"></i> ในกรณีไม่ได้ลงทะเบียนประกัน บริษัทฯ ขอสงวนสิทธิในการเคลมสินค้า</p>
-                    <p><i class="fa fa-caret-right"></i> ไม่สามารถรับคืนหรือเปลี่ยนสินค้าได้ ในกรณีที่เกิดความเสียหายในระหว่างขั้นตอนการติดตั้งที่ไม่ถูกวิธี</p>
-                    <br><h6>วิธีการเคลมสินค้า</h6><hr>
-                    <p><i class="fa fa-caret-right"></i> ลงทะเบียนรับประกันสินค้าผ่านเว็บไซต์</p>
-                    <p><i class="fa fa-caret-right"></i> สามารถแจ้งเคลมสินค้าได้ที่ <a href="{{url('/member/claim-product')}}">ใช้สิทธิ์เคลมสินค้า</a></p>
+                    <h6>@lang('warrantyInformation.condition')</h6><hr>
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.condition_1')</p> 
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.condition_2')</p> 
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.condition_3')</p>
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.condition_4')</p>
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.condition_5')</p>
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.condition_6')</p>
+                    <br><h6>@lang('warrantyInformation.cliam_product')</h6><hr>
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.register')</p>
+                    <p><i class="fa fa-caret-right"></i> @lang('warrantyInformation.claim_1') <a href="{{url('/member/claim-product')}}">@lang('warrantyInformation.claim_2')</a></p>
                 </div>
             </div>
         </div>

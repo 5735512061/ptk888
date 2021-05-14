@@ -6,7 +6,7 @@
 </style>
 @section("content")
 <div class="container-fluid">
-    <center><h2>ประวัติการติดต่อสอบถาม<hr width="70px;" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
+    <center><h2>@lang('answerMessage.history')<hr width="70px;" style="border-top:5px solid rgb(255 194 49 / 47%)"></h2></center>
 </div><br>
 @if(count($answer_messages) != 0)
 <!-- Cart Start -->
@@ -20,11 +20,11 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>
-                                    <th>วันที่ติดต่อ</th>
-                                    <th>หัวข้อเรื่อง</th>
-                                    <th>ข้อความติดต่อ</th>
-                                    <th>ข้อความตอบกลับ</th>
-                                    <th>สถานะ</th>
+                                    <th>@lang('answerMessage.contact_date')</th>
+                                    <th>@lang('answerMessage.title')</th>
+                                    <th>@lang('answerMessage.contact_message')</th>
+                                    <th>@lang('answerMessage.reply')</th>
+                                    <th>@lang('answerMessage.status')</th>
                                 </tr>
                             </thead>
                             <tbody class="align-middle">
@@ -35,18 +35,18 @@
                                     <td>{{$value->subject}}</td>
                                     <td>
                                         <a type="button" data-toggle="modal" data-target="#ModalMessage{{$value->id}}">
-                                            <i class="fa fa-pencil-square-o" style="color:blue; font-family: 'Mitr','FontAwesome';"> ดูข้อความ</i>
+                                            <i class="fa fa-pencil-square-o" style="color:blue; font-family: 'Mitr','FontAwesome';"> @lang('answerMessage.openMessage')</i>
                                         </a>
                                     </td>
                                     <td>
                                         <a type="button" data-toggle="modal" data-target="#ModalAnswer{{$value->id}}">
-                                            <i class="fa fa-pencil-square-o" style="color:blue; font-family: 'Mitr','FontAwesome';"> ดูข้อความตอบกลับ</i>
+                                            <i class="fa fa-pencil-square-o" style="color:blue; font-family: 'Mitr','FontAwesome';"> @lang('answerMessage.openReply')</i>
                                         </a>
                                     </td>
                                     @if($value->answer_message == null)
-                                        <td style="color:red; font-size:15px;">รอการตอบกลับ</td> 
+                                        <td style="color:red; font-size:15px;">@lang('answerMessage.waiting')</td> 
                                     @else
-                                        <td style="color:green; font-size:15px;">ตอบแล้ว</td>
+                                        <td style="color:green; font-size:15px;">@lang('answerMessage.replied')</td>
                                     @endif
                                 </tr>
                                 <!-- Modal -->
@@ -54,7 +54,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">ข้อความที่ติดต่อ</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">@lang('answerMessage.contactMessage')</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -67,7 +67,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('answerMessage.close')</button>
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">ข้อความตอบกลับ</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">@lang('answerMessage.replyMessage')</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -90,7 +90,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('answerMessage.close')</button>
                                             </div>
                                         </div>
                                     </div>
@@ -111,11 +111,11 @@
         <div class="container-fluid">
             <!-- Cart item -->
             <h5 class="m-text20 p-b-24" style="text-align: center;">
-                ไม่มีประวัติการติดต่อสอบถาม !
+                @lang('answerMessage.noInquiryHistory') !
             </h5><br>
             <center>
                 <a href="{{url('/contact-us')}}" class="btn-warranty" style="text-decoration: none;" >
-                    ติดต่อสอบถาม
+                    @lang('answerMessage.contactUs')
                 </a>
             </center>
         </div>
