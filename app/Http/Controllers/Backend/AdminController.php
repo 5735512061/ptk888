@@ -1453,7 +1453,8 @@ class AdminController extends Controller
     public function rules_uploadProduct() {
         return [
             'phone_model_id' => 'required',
-            'product_name' => 'required',
+            'product_name_th' => 'required',
+            'product_name_en' => 'required',
             'image' => 'required',
         ];
     }
@@ -1461,7 +1462,8 @@ class AdminController extends Controller
     public function messages_uploadProduct() {
         return [
             'phone_model_id.required' => 'กรุณากรอกรุ่นโทรศัพท์',
-            'product_name.required' => 'กรุณากรอกชื่อสินค้า',
+            'product_name_th.required' => 'กรุณากรอกชื่อสินค้า (ภาษาไทย)',
+            'product_name_en.required' => 'กรุณากรอกชื่อสินค้า (ภาษาอังกฤษ)',
             'image.required' => 'กรุณาเลือกไฟล์รูปภาพ 1 รูป',
         ];
     }
@@ -1469,14 +1471,16 @@ class AdminController extends Controller
     public function rules_updateProduct() {
         return [
             'phone_model_id' => 'required',
-            'product_name' => 'required',
+            'product_name_th' => 'required',
+            'product_name_en' => 'required',
         ];
     }
 
     public function messages_updateProduct() {
         return [
             'phone_model_id.required' => 'กรุณากรอกรุ่นโทรศัพท์',
-            'product_name.required' => 'กรุณากรอกชื่อสินค้า',
+            'product_name_th.required' => 'กรุณากรอกชื่อสินค้า (ภาษาไทย)',
+            'product_name_en.required' => 'กรุณากรอกชื่อสินค้า (ภาษาอังกฤษ)',
         ];
     }
 

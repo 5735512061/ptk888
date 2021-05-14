@@ -37,7 +37,7 @@
                                     <div class="col-sm-10">
                                         <select name="category_id" class="form-control">
                                                 @php
-                                                    $category = DB::table('categorys')->where('id',$product->category_id)->value('category');
+                                                    $category = DB::table('categorys')->where('id',$product->category_id)->value('category_th');
                                                     $category_id = DB::table('categorys')->where('id',$product->category_id)->value('id');
                                                 @endphp
                                                 <option value="{{$category_id}}">{{$category}}</option>
@@ -98,12 +98,21 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">ชื่อสินค้า</label>
+                                    <label class="col-sm-2 col-form-label">ชื่อสินค้า (ภาษาไทย)</label>
                                     <div class="col-sm-10">
-                                        @if ($errors->has('product_name'))
-                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('product_name') }})</span>
+                                        @if ($errors->has('product_name_th'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('product_name_th') }})</span>
                                         @endif
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกชื่อสินค้า" name="product_name" value="{{$product->product_name}}">
+                                        <input type="text" class="form-control" placeholder="กรุณากรอกชื่อสินค้า (ภาษาไทย)" name="product_name_th" value="{{$product->product_name_th}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">ชื่อสินค้า (ภาษาอังกฤษ)</label>
+                                    <div class="col-sm-10">
+                                        @if ($errors->has('product_name_en'))
+                                            <span class="text-danger" style="font-size: 17px;">({{ $errors->first('product_name_en') }})</span>
+                                        @endif
+                                        <input type="text" class="form-control" placeholder="กรุณากรอกชื่อสินค้า (ภาษาอังกฤษ)" name="product_name_en" value="{{$product->product_name_en}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">

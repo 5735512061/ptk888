@@ -61,7 +61,8 @@
                                     <th>ยี่ห้อโทรศัพท์</th>
                                     <th>รุ่น</th>
                                     <th>ประเภทสินค้า</th>
-                                    <th>ชื่อสินค้า</th>
+                                    <th>ชื่อสินค้า (ภาษาไทย)</th>
+                                    <th>ชื่อสินค้า (ภาษาอังกฤษ)</th>
                                     <th>สถานะ</th>
                                     <th>แนะนำ</th>
                                     <th></th>
@@ -72,7 +73,7 @@
                                     <tr>
                                         <th scope="row">{{$NUM_PAGE*($page-1) + $product+1}}</th>
                                         @php
-                                            $category = DB::table('categorys')->where('id',$value->category_id)->value('category');
+                                            $category = DB::table('categorys')->where('id',$value->category_id)->value('category_th');
                                             $brand = DB::table('brands')->where('id',$value->brand_id)->value('brand');
                                             $model = DB::table('phone_models')->where('id',$value->phone_model_id)->value('model');
                                         @endphp
@@ -82,7 +83,8 @@
                                         <td>{{$brand}}</td>
                                         <td>{{$model}}</td>
                                         <td>{{$value->product_type}}</td>
-                                        <td>{{$value->product_name}}</td>
+                                        <td>{{$value->product_name_th}}</td>
+                                        <td>{{$value->product_name_en}}</td>
                                         <td>{{$value->status}}</td>
                                         @if($value->product_recommend == 'ใช่')
                                             <td><i class="fa fa-check" style="color: green !important;"></i></td>
