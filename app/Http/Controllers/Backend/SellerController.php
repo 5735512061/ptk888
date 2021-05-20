@@ -243,7 +243,7 @@ class SellerController extends Controller
                 $order_customer = OrderCustomer::where('bill_number',$value->bill_number)->delete();
             }
 
-            return redirect()->action('Backend\SellerController@orderCustomer');
+            return back();
     }
 
     public function updateAddressCustomer(Request $request){
@@ -289,7 +289,7 @@ class SellerController extends Controller
                 $order_store = OrderStore::where('bill_number',$value->bill_number)->delete();
             }
 
-            return redirect()->action('Backend\SellerController@orderStore');
+            return back();
     }
 
     public function updateAddressStore(Request $request){
@@ -336,7 +336,7 @@ class SellerController extends Controller
                 $order_store = OrderStoreFilmBrand::where('bill_number',$value->bill_number)->delete();
             }
 
-            return redirect()->action('Backend\SellerController@orderStoreFilmBrand');
+            return back();
     }
 
     public function updateAddressStoreFilmBrand(Request $request){
