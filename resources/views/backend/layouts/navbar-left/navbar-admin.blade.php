@@ -25,6 +25,7 @@
                             <form id="logout-form" action="{{ 'App\Admin' == Auth::getProvider()->getModel() ? route('admin.logout') : route('admin.logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
+                            <a href="{{ route('admin.password.change') }}"><i class="ti-key"></i>เปลี่ยนรหัสผ่าน</a>
                         @endif
                     </li>
                 </ul>

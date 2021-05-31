@@ -14,7 +14,14 @@
                     <h3>เข้าสู่ระบบแอดมิน</h3><hr>
                     <form action="{{url('/admin/login')}}" enctype="multipart/form-data" method="post">@csrf
                         @csrf
-
+                        <div class="flash-message">
+                            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                              @if(Session::has('alert-' . $msg))
+        
+                              <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                              @endif
+                            @endforeach
+                        </div>  
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('ชื่อเข้าใช้งาน') }}</label>
 

@@ -44,6 +44,9 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/login','Auth\LoginController@ShowLoginForm')->name('admin.login');
     Route::post('/login','Auth\LoginController@login')->name('admin.login.submit');
     Route::post('/logout', 'Auth\LoginController@logout')->name('admin.logout');
+    // เปลี่ยนรหัสผ่าน
+    Route::get('/change-password', 'Auth\ChangePasswordController@index')->name('admin.password.change');
+    Route::post('/change-password', 'Auth\ChangePasswordController@changePassword')->name('admin.password.update');
     // จัดการข้อมูลลูกค้า
     Route::get('/data-of-customer', 'Backend\AdminController@dataOfCustomer')->name('admin.home');
     Route::get('/delete-member-customer/{id}', 'Backend\AdminController@deleteMemberCustomer');

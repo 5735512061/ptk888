@@ -117,6 +117,12 @@
                                     @csrf
                                 </form>
                             </li>
+                            <li class="waves-effect waves-light">
+                                <a href="{{ route('admin.password.change') }}">
+                                    <i class="ti-key"></i>
+                                    เปลี่ยนรหัสผ่าน
+                                </a>
+                            </li>
                         @endif
                     </ul>
                 </li>
