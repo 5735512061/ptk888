@@ -4,7 +4,8 @@
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('cache:clear');
     $exitCode = Artisan::call('config:cache');
-    return 'DONE';
+    return 'DONE';    
+    // 
 });
 
 Route::get('locale/{locale}',function($locale) {
